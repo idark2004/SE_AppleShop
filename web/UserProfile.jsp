@@ -175,6 +175,7 @@
                             <input type="hidden"  name="userID" value="${sessionScope.user.userID}" >
                             <input type="hidden"  name="action" value="UpdateProfile" >
                         <input class="button-update" type="submit"  value="Update Profile">
+                        <a href="changePass.jsp">Change Password</a>
                     </form>  
                         ${requestScope.UpSuccess}
                 </div>

@@ -149,6 +149,36 @@ public class UserDAO {
         return false;
     }
     
+    public boolean UpdateUserPassword(UserDTO u) throws NamingException, SQLException{
+        Connection c= null;
+        PreparedStatement ps = null;
+        String sql= "UPDATE tblUsers SET password=? WHERE userID=?";
+        try{
+            c = DBConnect.makeConnection();
+            
+            if (c!=null){
+                ps=c.prepareStatement(sql);
+                
+                ps.setString(1, u.getPassword());
+                ps.setString(2, u.getUserID());
+                
+                ps.executeUpdate();
+                return true;
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+            return false;
+        } finally {
+            if (ps!=null){
+                ps.close();
+            }
+            if (c!=null) {
+                c.close();
+            }
+        }
+        return false;
+    }
+    
     public void insert(UserDTO user) throws SQLException{
         Connection conn = null;
         PreparedStatement stm = null;

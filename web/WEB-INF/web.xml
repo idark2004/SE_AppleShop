@@ -68,8 +68,6 @@
         <servlet-name>CreateSpecController</servlet-name>
         <servlet-class>controller.CreateSpecController</servlet-class>
     </servlet>
-    
-    
     <servlet>
         <servlet-name>OrderListController</servlet-name>
         <servlet-class>controller.OrderListController</servlet-class>
@@ -78,18 +76,18 @@
         <servlet-name>OrderDetailController</servlet-name>
         <servlet-class>controller.OrderDetailController</servlet-class>
     </servlet>
-    
-    
     <servlet>
         <servlet-name>AddCommentController</servlet-name>
         <servlet-class>controller.AddCommentController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangePasswordController</servlet-name>
+        <servlet-class>controller.ChangePasswordController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AddCommentController</servlet-name>
         <url-pattern>/AddCommentController</url-pattern>
     </servlet-mapping>
-    
-    
     <servlet-mapping>
         <servlet-name>OrderListController</servlet-name>
         <url-pattern>/OrderListController</url-pattern>
@@ -98,7 +96,6 @@
         <servlet-name>OrderDetailController</servlet-name>
         <url-pattern>/OrderDetailController</url-pattern>
     </servlet-mapping>
-    
     <servlet-mapping>
         <servlet-name>UserDetailController</servlet-name>
         <url-pattern>/UserDetailController</url-pattern>
@@ -171,6 +168,10 @@
     <servlet-mapping>
         <servlet-name>CreateSpecController</servlet-name>
         <url-pattern>/CreateSpecController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangePasswordController</servlet-name>
+        <url-pattern>/ChangePasswordController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
