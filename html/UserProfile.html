@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+    <link rel="stylesheet" href="css/mainPhuc.css">
+    <link rel="stylesheet" href="css/mainHoang.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link href="fonts/fontawesome-free-5.15.3-web/css/all.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>UserProfile</title>
+    </head>
+
+    <body>
+        <div class="page__user-profile">
+            <header>
+                <div class="shop-logo" >
+                    <section class="header_item" id="shopLogo">
+                        <img style="max-width: 15rem" src="images/shop_logo.png">
+                    </section>
+                    <section class="header_item" id="shopName">
+                        <h1>SE15 Apple Store</h1>
+                    </section>
+                </div>
+
+                <div class="login">
+                    <ul class="header_item_list">
+                        <!-- If user logged in suscessfully , the item below wil showup and hide item other li item  -->
+                        <c:if test="${requestScope.success != null }">
+                        <li class="header_item header__navbar-user">
+                                <span class="header_item_user-name">Hello,${requestScope.username}</span>
+                                <ul class="header__navbar-user--menu">
+                                    <li class="header__navbar-user--item">
+                                        <a href="">User detail</a>
+                                    </li>
+                                    <li class="header__navbar-user--item">
+                                        <a href="">Order detail</a>
+                                    </li>
+                                    <li class="header__navbar-user--item">
+                                        <a href="">Sign out</a>
+                                    </li>
+                                </ul>
+                        </li>
+                        </c:if>
+                        <c:if test="${requestScope.success == null }">
+                        <li class="header_item">
+                            <a href="loginForm.jsp" class="header_item-link">Login</a>
+                        </li>
+                        <li class="header_item">
+                            <a href="signup.jsp" class="header_item-link">Signup</a>
+                        </li>
+                        </c:if>
+                        
+                        
+                    </ul>
+
+                </div> 
+            </header>
+
+
+            <div class="container__user-profile">
+                <div class="frame__user-profile">
+                    <h2 class="tittle__user-profile">User profile</h2>
+                    <form class="form__user-profile">
+                        <div class="user-infor full-name">
+                            <span class="user-infor__tittle full-name__tittle">Fullname</span>
+                            <input type="text" class="input__user-profile full-name__input" value="" readonly>
+                        </div>
+                        <div class="user-infor email">
+                            <span class="user-infor__tittle email__tittle">Email</span>
+                            <input type="text" class="input__user-profile email__input" value=""  readonly>
+                        </div>
+                        <div class="user-infor address">
+                            <span class="user-infor__tittle adress__tittle">Address</span>
+                            <input type="text" class="input__user-profile address__input" value="" >
+                        </div>
+                        <div class="user-infor phonenumber">
+                            <span class="user-infor__tittle phonenumber__tittle">Phonenumber</span>
+                            <input type="text" class="input__user-profile phonenumber__input" value="" >
+                        </div>
+                        <input class="button-update" type="submit" value="Update Profile">
+                    </form>  
+                   
+                </div>
+            </div>
+
+            <footer>
+                <div class="grid footer-border">
+                        
+                    <h2 class="foot-tittle">Contact us</h2>
+                    <div class="foot-info">    
+                        <div class="foot-left-info">
+                            <div class="foot-left-info__mail">
+                                <i class="fas fa-envelope"></i>
+                                <span class="foot-left-info__mail-addres">SE15AppleStore@gmail.com</span>
+                            </div>
+                            <div class="foot-left-info__phonenumber">
+                                <i class="fas fa-phone-square-alt"></i>
+                                <span class="foot-left-info__phonenumber-number">0839440343</span>
+                            </div>
+                            <div class="foot-left-info__shop-address">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span class="foot-left-info__shop-address-text">Cupertino, California,America</span>
+                            </div>
+                        </div>
+                        <div class="foot-right-info">
+                            <div class="foot-right-info__apple-icon"><i class="fab fa-apple"></i></div>
+                            <div class="foot-right-info__link">
+                                <div class="foot-right-info__product">
+                                    <a href="" class="foot-right-info__product-link">Iphone</a>
+                                    <a href="" class="foot-right-info__product-link">Ipad</a>
+                                    <a href="" class="foot-right-info__product-link">Mac</a>
+                                    <a href="" class="foot-right-info__product-link">Others</a>
+                            </div>
+                            <div class="foot-right-info__policy">
+                                    <a href="" class="foot-right-info__policy-link">Privacy Policies</a>
+                                    <a href="" class="foot-right-info__policy-link">Sale and refund</a>
+                            </div>
+                            </div>
+                        </div>      
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </body>
+</html>

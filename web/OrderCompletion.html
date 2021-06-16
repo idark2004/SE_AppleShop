@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Order Completion</title>
+        <link rel="stylesheet" href="css/ordercompletion.css">
+        <link rel="stylesheet" href="css/mainHoang.css">
+        <link rel="stylesheet" href="css/base.css">
+        <link rel="stylesheet" href="css/footer.css">
+        <link href="fonts/fontawesome-free-5.15.3-web/css/all.css" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="js/main.js"></script>
+    </head>
+    <body>
+        <div class="page__order-complete">
+            <header>
+                <div class="shop-logo" >
+                    <section class="header_item" id="shopLogo">
+                        <img style="max-width: 15rem" src="images/shop_logo.png">
+                    </section>
+                    <section class="header_item" id="shopName">
+                        <h1>SE15 Apple Store</h1>
+                    </section>
+                </div>
+    
+                <div class="login">
+                    <ul class="header_item_list">
+                        <!-- If user logged in suscessfully , the item below wil showup and hide item other li item  -->
+                        <c:if test="${sessionScope.user != null }">
+                        <li class="header_item header__navbar-user">
+                                <span class="header_item_user-name">Hello,${requestScope.username}</span>
+                                <ul class="header__navbar-user--menu">
+                                    <li class="header__navbar-user--item">
+                                        <a href="">User detail</a>
+                                    </li>
+                                    <li class="header__navbar-user--item">
+                                        <a href="">Order detail</a>
+                                    </li>
+                                    <li class="header__navbar-user--item">
+                                        <a href="">Sign out</a>
+                                    </li>
+                                </ul>
+                        </li>
+                        </c:if>
+                        <c:if test="${sessionScope.user == null }">
+                        <li class="header_item">
+                            <a href="loginForm.jsp" class="header_item-link">Login</a>
+                        </li>
+                        <li class="header_item">
+                            <a href="signup.jsp" class="header_item-link">Signup</a>
+                        </li>
+                        </c:if>
+                        
+                        
+                    </ul>
+    
+                </div> 
+            </header>
+            <div class="nav">
+                <div class="topnav">
+                    <a href="" class="header-nav__item-active">All</a>
+                    <a href="">Mac</a>
+                    <a href="">iPad</a>
+                    <a href="">iPhone</a>
+                    <a href="">Apple Watch</a>
+                    <a href="">Accessories</a>
+    
+                    <div class="cart">
+                        <a href=""><i class="carft-icon fas fa-shopping-cart"></i></a>
+                    </div>
+    
+                    <div class="search-container">
+                        <form action="">
+                            <input type="text" placeholder="Search.." name="search">
+                            <button type="submit"><i class="fa fa-search"></i></button>
+                        </form>
+                    </div>
+    
+                </div>
+            </div>
+            <div class="order-complete__container">
+
+                <h2 class="order-complete__tittle">
+                    Order Recieved
+                </h2>
+                <span class="order-complete__msg">
+                    <i class="far fa-check-circle"></i>
+                    THank you.Your order has been received
+                </span>
+                <div class="order-detail">
+                    <div class="order-detail__item orderid">
+                        <span class="tittle orderid__title">
+                            Order ID:
+                        </span>
+                        <span class="detail orderid-detail">
+                            011
+                        </span>
+                    </div>
+                    <div class="order-detail__item orderid">
+                        <span class="tittle address__address">
+                            Address:
+                        </span>
+                        <span class="detail orderid-detail">
+                            PaosanPalay,Cupertino, California,America
+                        </span>
+                    </div>
+                    <div class="order-detail__item order-date">
+                        <span class="tittle order-date__title">Date:</span>
+                        <span class="detail order-date__detail">May 4 2021</span>
+                    </div>
+                    <div class="order-detail__item order-price">
+                        <span class="tittle order-price__title">Total:</span>
+                        <span class="detail order-price__detail">5000$</span>
+                    </div>
+                    <div class="order-detail__item order-pmethod">
+                        <span class="tittle order-pmethod__title">Payment Method:</span>
+                        <span class="detail order-pmethod__detail">Cod</span>
+                    </div>
+                </div>
+                <!-- <table class="table__order-detail">
+                    <thead class="table-head__order-detail">
+                        <tr class="tittle">
+                            <td class="orderid__title">Order ID:</td>
+                            <td class="address__address">Address:</td>
+                            <td class="order-date__title">Date:</td>
+                            <td class="order-pmethod__title">Payment Method:</td>
+                            <td class="order-price__title">Total:</td>
+                        </tr>
+                    </thead>
+                    <tbody class="table-body__order-detail">
+                        <tr class="detail">
+                            <td class="orderid-detail" >011</td>
+                            <td class="address-detail">PaosanPalay,Cupertino, California,America</td>
+                            <td class="order-date__detail">May 4 2021</td>
+                            <td class="order-pmethod__detail">Cod</td>
+                            <td class="order-price__detail">5000$</td>
+                        </tr>
+                    </tbody>        
+                </table> -->
+            </div>
+                
+            <footer>
+                <div class="grid footer-border">
+                        
+                    <h2 class="foot-tittle">Contact us</h2>
+                    <div class="foot-info">    
+                        <div class="foot-left-info">
+                            <div class="foot-left-info__mail">
+                                <i class="fas fa-envelope"></i>
+                                <span class="foot-left-info__mail-addres">SE15AppleStore@gmail.com</span>
+                            </div>
+                            <div class="foot-left-info__phonenumber">
+                                <i class="fas fa-phone-square-alt"></i>
+                                <span class="foot-left-info__phonenumber-number">0839440343</span>
+                            </div>
+                            <div class="foot-left-info__shop-address">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span class="foot-left-info__shop-address-text">Cupertino, California,America</span>
+                            </div>
+                        </div>
+                        <div class="foot-right-info">
+                            <div class="foot-right-info__apple-icon"><i class="fab fa-apple"></i></div>
+                            <div class="foot-right-info__link">
+                                <div class="foot-right-info__product">
+                                    <a href="" class="foot-right-info__product-link">Iphone</a>
+                                    <a href="" class="foot-right-info__product-link">Ipad</a>
+                                    <a href="" class="foot-right-info__product-link">Mac</a>
+                                    <a href="" class="foot-right-info__product-link">Others</a>
+                            </div>
+                            <div class="foot-right-info__policy">
+                                    <a href="" class="foot-right-info__policy-link">Privacy Policies</a>
+                                    <a href="" class="foot-right-info__policy-link">Sale and refund</a>
+                            </div>
+                            </div>
+                        </div>      
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </body>
+</html>

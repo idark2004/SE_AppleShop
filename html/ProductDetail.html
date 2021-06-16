@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+    <link rel="stylesheet" href="css/mainPhuc.css">
+    <link rel="stylesheet" href="css/mainHoang.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link href="fonts/fontawesome-free-5.15.3-web/css/all.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="js/main.js"></script>
+    <title>ProductDetail</title>
+    </head>
+
+    <body>
+      
+
+
+
+        <div class="page__product-detail">
+            <header>
+                <div class="shop-logo" >
+                    <section class="header_item" id="shopLogo">
+                        <img style="max-width: 15rem" src="images/shop_logo.png">
+                    </section>
+                    <section class="header_item" id="shopName">
+                        <h1>SE15 Apple Store</h1>
+                    </section>
+                </div>
+    
+                <div class="login">
+                    <ul class="header_item_list">
+                        <!-- If user logged in suscessfully , the item below wil showup and hide item other li item  -->
+                        <c:if test="${requestScope.success != null }">
+                        <li class="header_item header__navbar-user">
+                                <span class="header_item_user-name">Hello,${requestScope.username}</span>
+                                <ul class="header__navbar-user--menu">
+                                    <li class="header__navbar-user--item">
+                                        <a href="">User detail</a>
+                                    </li>
+                                    <li class="header__navbar-user--item">
+                                        <a href="">Order detail</a>
+                                    </li>
+                                    <li class="header__navbar-user--item">
+                                        <a href="">Sign out</a>
+                                    </li>
+                                </ul>
+                        </li>
+                        </c:if>
+                        <c:if test="${requestScope.success == null }">
+                        <li class="header_item">
+                            <a href="loginForm.jsp" class="header_item-link">Login</a>
+                        </li>
+                        <li class="header_item">
+                            <a href="signup.jsp" class="header_item-link">Signup</a>
+                        </li>
+                        </c:if>
+                        
+                        
+                    </ul>
+    
+                </div> 
+            </header>
+            <div class="nav">
+                <div class="topnav">
+                    <a href="" class="header-nav__item-active">All</a>
+                    <a href="">Mac</a>
+                    <a href="">iPad</a>
+                    <a href="">iPhone</a>
+                    <a href="">Apple Watch</a>
+                    <a href="">Accessories</a>
+    
+                    <div class="cart">
+                        <a href=""><i class="carft-icon fas fa-shopping-cart"></i></a>
+                    </div>
+    
+                    <div class="search-container">
+                        <form action="">
+                            <input type="text" placeholder="Search.." name="search">
+                            <button type="submit"><i class="fa fa-search"></i></button>
+                        </form>
+                    </div>
+    
+                </div>
+            </div>
+            <div class="page__product-detail__body">
+                <div class="product-detail">
+                    <div class="grid__row">
+                        <div class="grid__column-6 product__left-info">
+                            <div class="img__product-container">
+                                <img class="img__product" src="images/macbook.jpg" alt="iphone12">
+                            </div>  
+                        </div>
+                        <div class="grid__column-6 product__right-info">
+                            <form  action="" class="form-option" method="POST">  
+                                <div class="info__product">
+                                    <h4 class="tittle__product">Apple MacBook Pro 13 Touch Bar M1 256GB 2020 I Chính hãng Apple Việt Nam</h4>
+                                    <div class="color__product-option">
+                                        <div class="color-option__container">
+                                            <div class="option-color">
+                                              <input type="radio" class="input__radio-color" id="color-1" name="color" value="color-1" checked>
+                                              <label class="label-color" for="color-1" >
+                                                <span class="img-span" style="background-color: red" >
+                                                    <i class="icon-check fas fa-check"></i>                                               
+                                                 </span>
+                                              </label>
+                                            </div>
+                                            
+                                            <div class="option-color">
+                                              <input type="radio" class="input__radio-color" id="color-2" name="color" value="color-2">
+                                              <label class="label-color" for="color-2">
+                                                <span class="img-span" style="background-color: black" >
+                                                    <i class="icon-check fas fa-check"></i>                                                
+                                                </span>
+                                              </label>
+                                            </div>
+                                            
+                                            <div class="option-color">
+                                              <input type="radio" class="input__radio-color" id="color-3" name="color" value="color-3">
+                                              <label class="label-color" for="color-3">
+                                                <span class="img-span" style="background-color: blue" >
+                                                    <i class="icon-check fas fa-check"></i>                                                
+                                                </span>
+                                              </label>
+                                            </div>
+                                          
+                                            <div class="option-color">
+                                              <input type="radio" class="input__radio-color" id="color-4" name="color" value="color-4">
+                                              <label class="label-color" for="color-4">
+                                                <span class="img-span" style="background-color: white" >
+                                                    <i class="icon-check fas fa-check"></i>                                                
+                                                </span>
+                                              </label>
+                                            </div>
+                                          </div>
+                                    </div>
+                                    
+                                        <ul class="list-hardware-option">
+                                            <li class="hardware-item">
+                                                <input class="input__radio-hardware" type="radio" name="hardware" id="hardware__option-1"checked>
+                                                <label class="hardware__lable" for="hardware__option-1">
+                                                    <span class="hardwar__span"><p>4gb-128gb</p></span>
+                                                </label>
+                                            </li>
+                                            
+                                            <li class="hardware-item">
+                                            <input class="input__radio-hardware" type="radio" name="hardware" id="hardware__option-2" >
+                                            <label class="hardware__lable" for="hardware__option-2">
+                                            <span class="hardwar__span"><p>8gb-256gb</p></span>
+                                            </label>
+                                            </li>
+                                        
+                                            <li class="hardware-item">
+                                                <input class="input__radio-hardware" type="radio" name="hardware" id="hardware__option-3" >
+                                                <label class="hardware__lable" for="hardware__option-3">
+                                                <span class="hardwar__span"><p>16gb-256gb</p></span>
+                                                </label>
+                                            </li>
+                                        
+                                            <li class="hardware-item">
+                                                <input class="input__radio-hardware" type="radio" name="hardware" id="hardware__option-4" >
+                                                <label class="hardware__lable" for="hardware__option-4">
+                                                <span class="hardwar__span"><p>16gb-512gb</p></span>
+                                                </label>
+                                            </li>
+                                            <li class="hardware-item">
+                                                <input class="input__radio-hardware" type="radio" name="hardware" id="hardware__option-4" >
+                                                <label class="hardware__lable" for="hardware__option-4">
+                                                <span class="hardwar__span"><p>32gb-512gb</p></span>
+                                                </label>
+                                            </li>
+                                        
+                                </ul>
+                                <div class="price__product">1000$</div>   
+                                </div> 
+                                <div class="form-submit__container">
+                                    <input type="submit" class="input__submit" value="Add to cart" style="font-size: 1.6rem;font-weight: 500;">
+                                    <input type="submit" class="input__submit" value="Buy Now" style="font-size: 1.6rem;font-weight: 500;">
+                                </div>
+                            </form> 
+                        </div>
+                    </div>
+                </div>
+               
+               
+                <div class="container__description">
+                    <h3 class="description__tittle">Description</h3>
+                    <div class="description__detail-container"><p class="description__detail">Điện thoại di động iPhone 12 64GB Purple MJNM3VN/A sở hữu vẻ ngoài bắt mắt, các chức năng được cải tiến vượt trội so với thế hệ iPhone 11. Đây chắc chắn sẽ là sản phẩm mang lại trải nghiệm tuyệt vời, là sự lựa chọn hoàn hảo cho các iFan.
+                        Thiết kế bắt mắt, màu sắc độc đáo
+                        Là sản phẩm mới của nhà cung cấp APPLE, điện thoại di động iPhone 12 64GB Purple MJNM3VN/A có khối lượng 135g, kích thước 14.67 x 7.15 x 0.74 cm với phần cạnh được làm vuông vức hơn, tạo nét thu hút cực mạnh đối với người nhìn.
+                        <span id="dots">...</span><span id="more">
+                        Đặc biệt, iPhone 12 64GB MJNM3VN/A có vẻ ngoài màu tím độc lạ cùng thiết kế màn tai thỏ quen thuộc đem lại cảm giác quý phái, hiện đại mà đầy trẻ trung, năng động, chắc chắn khiến bạn trở thành điểm nổi bật trong mọi không gian.
+                       
+                        Điện thoại di động iPhone 12 64GB Purple MJNM3VN/A | Thiết kế hiện đại, trẻ trung
+                        Màn hình 6.1 inch-Super Retina XDR OLED, dung lượng 64GB
+                        Đến từ thương hiệu được tin dùng hàng đầu thế giới, điện thoại di động iPhone 12 64GB Purple MJNM3VN/A được trang bị màn hình 6.1 inch-Super Retina XDR OLED với độ phân giải 2532x1170px, đem lại chất lượng hình ảnh hoàn hảo, sắc nét và rực rõ hơn trước.
+                        
+                        Bên cạnh đó, iPhone 12 này có dung lượng 64GB, là không gian lưu trữ thoải mái để bạn có thể giữ lại những kỷ niệm đẹp nhất bên mình, lưu trữ các dữ liệu công việc một cách dễ dàng và thuận tiện.
+                        
+                        Điện thoại di động iPhone 12 64GB Purple MJNM3VN/A | Màn hình Retina sắc nét
+                        CPU Apple A14 Bionic, camera hiện đại
+                        Đặc biệt, điện thoại di động iPhone 12 64GB Purple MJNM3VN/A được trang bị chip Apple A14 Bionic mới nhất, cho phép người dùng trải nghiệm các ứng dụng nặng như game một cách mượt mà hay các hiệu ứng đồ họa tuyệt đẹp mà không lo gián đoạn.
+                        
+                        Cùng với đó, iPhone 12 64GB Purple MJNM3VN/A có cụm camera không ngừng cải tiến với hệ thống camera kép cùng độ phân giải 12MP, chế độ chụp hay xử lý hình ảnh đều được nâng cấp, đem lại kết quả chi tiết, màu sắc rõ nét đáng kinh ngạc.
+                        
+                        Điện thoại di động iPhone 12 64GB Purple MJNM3VN/A | Hiệu năng mạnh mẽ
+                        Tiết kiệm pin tích hợp sạc nhanh, kết nối hiện đại
+                        APPLE đã trang bị cho điện thoại di động iPhone 12 64GB Purple MJNM3VN/A pin với dung lượng lên đến 2815mAh, khả năng sạc nhanh 20W và 12W không dây, đem lại khả năng hoạt động liên tục trong thời gian dài với hiệu suất ổn định mà vẫn tiết kiệm pin.
+                        
+                        Hơn thế nữa, iPhone 12 MJNM3VN/A kết nối với nhiều loại bluetooth và wifi hay GPS khác nhau, đem lại tính hữu dụng cực cao, dễ dàng kết nối với nhiều thiết bị, tạo nên những trải nghiệm tuyệt vời nhất.
+                        
+                        Điện thoại di động iPhone 12 64GB Purple MJNM3VN/A | Tích hợp sạc nhanh và kết nối hiện đại
+                        Mua điện thoại di động iPhone 12 64GB Purple MJNM3VN/A chính hãng | Bảo hành 12 tháng tại Phong Vũ
+                        Sở hữu thiết kế đầy tinh tế, cá tính, các tính năng được cải tiến nhằm phục vụ tối đa người dùng, điện thoại di động iPhone 12 64GB Purple MJNM3VN/A là sự lựa chọn tuyệt vời cho mọi đối tượng sử dụng. Mua ngay tại Phong VŨ để được trả góp 0%, nhận các voucher giảm giá cùng các ưu đãi khác.
+                        
+                        Thông số kỹ thuật
+                        Thương hiệu
+                        APPLE
+                        Bảo hành
+                        12
+                        Thông tin chung
+                        Nhóm sản phẩm
+                        Điện thoại
+                        Tên
+                        iPhone 12 MJNM3VN/A
+                        Màu sắc
+                        Tím
+                        Màn hình
+                        Loại màn hình
+                        6.1"-Super Retina XDR OLED
+                        Độ phân giải
+                        2532x1170 pixels
+                        Cấu hình
+                        Dung lượng (ROM)
+                        64GB
+                        Hệ điều hành
+                        IOS
+                        RAM
+                        4GB
+                        Chip
+                        Apple A14 Bionic
+                        Pin
+                        2815mAh
+                        Công nghệ pin
+                        Sạc nhanh 20W
+                        Sạc nhanh không dây 12W
+                        Cổng sạc
+                        Lightning
+                        Loại sim
+                        Nano-SIM hoặc E-SIM
+                        Mạng di động
+                        GSM / CDMA / HSPA / EVDO / LTE / 5G
+                        Camera
+                        Camera sau
+                        2x 12MP
+                        Camera trước
+                        12MP
+                        Kết nối
+                        Wifi
+                        Wi-Fi 802.11 a/b/g/n/ac/6, dual-band, hotspot
+                        GPS
+                        A-GPS, GLONASS, GALILEO, QZSS
+                        Bluetooth
+                        Bluetooth 5.0
+                        Jack tai nghe
+                        Lightning
+                        Thiết kế & trọng lượng
+                        Kích thước
+                        14.67 x 7.15 x 0.74 cm
+                        Khối lượng
+                        135 g
+                        Cùng thương hiệu APPLE</span></p>
+                    </div>    
+                    <p class="click__show-more" onclick="myFunction()" id="myBtn">Show more<i class=" click__show-more-icon fas fa-angle-down"></i></p>
+                    
+                </div>
+                <div class="container__review">
+                    <h3 class="review__tittle">Comment</h3>
+                    <div class="form-comment__container">
+                        <form class="form-review">
+                            <lable for="reviewer-name" class="name-lable">FullName</lable>
+                            <input placeholder="Input your Name" type="text" id="reviewer-name" class="input-cName" name="reviewer-name">
+                            <lable for="pComment" class="comment-lable">Comment</lable>
+                            <textarea type="text"class="pComment" id="pComment" name="pComment" placeholder="Input detail your comment"></textarea>
+                            <input type="submit" class="input__comment-submit" value="Submit your comment">
+                        </form>
+                     </div>
+                    <ul class="review-list">
+                        <li class="reivew-row">
+                            <span class="review__reviewer-name">
+                                Binz
+                            </span>
+                            <p class="review__reviewer-comment">
+                               5 stars! Amazing Good Job Apple!
+                            </p>
+                        </li>
+                        <li class="reivew-row">
+                            <span class="review__reviewer-name">
+                                Tran Dan
+                            </span>
+                            <p class="review__reviewer-comment">
+                                Tui xin tự giới thiệu tui là Tiên Tri Vũ Trụ Trần Dần, cố vấn
+                                 tối cao của tổng thống Obama, hiện cũng là cố vấn tối
+                                  cao của tổng thống Donald Trump
+                            </p>
+                        </li>
+                        <li class="reivew-row">
+                            <span class="review__reviewer-name">
+                                Tran Dan
+                            </span>
+                            <p class="review__reviewer-comment">
+                                Tiếc diên là năm 2003, tự nhiên tui cầ
+                                u ở trên nhà ở Phao sần palay, tự nhiên
+                                ấy 1 hiện tượng lạ, lúc đó tui mới thấy ủa
+                                 sao kì vậy, 1 cái hình tượng mà tui là 
+                                 đạo Phật, tui nói quý dị nghe tui là đạo 
+                                 Phật, tự nhiên tui thấy có trái tim màu 
+                                 hồng và có ánh hào quang ra sao, đó là mắt
+                                 y tại nghe chứ không phải là tui nằm chiêm 
+                                 bao, tui dụi mắt thêm 1 lần nữa thì tui thấy
+                                  ông Chúa Giê Su ổng nói tiếng Việt
+                            </p>
+                        </li>
+                        <li class="reivew-row">
+                            <span class="review__reviewer-name">
+                                Huan Hoa Hong
+                            </span>
+                            <p class="review__reviewer-comment">
+                                Em có sai với ai đi nữa, có làm cái gì
+                                 đi nữa. Nếu có phải trả giá thì em cũng xin 
+                                 chấp nhận. Bởi vì anh biết đấy. Ra xã hội làm 
+                                 ăn bươn chải, liều thì ăn nhiều, không liều thì 
+                                 ăn ít. Muốn thành công thì phải chấp nhận trải qua
+                                  đắng cay ngọt bùi. Làm ăn muốn kiếm được tiền thì
+                                   phải chấp nhận mạo hiểm, nguy hiểm một tí nhưng 
+                                   trong tầm kiểm soát. Xã hội này, chỉ có làm, chịu khó 
+                                   cần cù thì bù siêng năng. Chỉ có làm thì mới có ăn.
+                                    Những cái loại không làm mà đòi có ăn thì ăn đầu bu*i 
+                                    nhá, ăn cứt. Thế cho nó dễ!
+                            </pd>
+                        </li>
+                    </ul>
+                </div>
+        </div> 
+            <footer>
+                <div class="grid footer-border">
+                        
+                    <h2 class="foot-tittle">Contact us</h2>
+                    <div class="foot-info">    
+                        <div class="foot-left-info">
+                            <div class="foot-left-info__mail">
+                                <i class="fas fa-envelope"></i>
+                                <span class="foot-left-info__mail-addres">SE15AppleStore@gmail.com</span>
+                            </div>
+                            <div class="foot-left-info__phonenumber">
+                                <i class="fas fa-phone-square-alt"></i>
+                                <span class="foot-left-info__phonenumber-number">0839440343</span>
+                            </div>
+                            <div class="foot-left-info__shop-address">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span class="foot-left-info__shop-address-text">Cupertino, California,America</span>
+                            </div>
+                        </div>
+                        <div class="foot-right-info">
+                            <div class="foot-right-info__apple-icon"><i class="fab fa-apple"></i></div>
+                            <div class="foot-right-info__link">
+                                <div class="foot-right-info__product">
+                                    <a href="" class="foot-right-info__product-link">Iphone</a>
+                                    <a href="" class="foot-right-info__product-link">Ipad</a>
+                                    <a href="" class="foot-right-info__product-link">Mac</a>
+                                    <a href="" class="foot-right-info__product-link">Others</a>
+                            </div>
+                            <div class="foot-right-info__policy">
+                                    <a href="" class="foot-right-info__policy-link">Privacy Policies</a>
+                                    <a href="" class="foot-right-info__policy-link">Sale and refund</a>
+                            </div>
+                            </div>
+                        </div>      
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </body>
+</html>    

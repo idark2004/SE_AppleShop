@@ -1,0 +1,68 @@
+html {
+    height: 100%;
+    margin: 0;
+}
+
+.main-container {
+    margin: 2rem;
+}
+
+
+/* Style tab links */
+
+.tablink {
+    background-color: rgb(124, 124, 124);
+    color: black;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    font-size: 15px;
+}
+
+.tablink:hover {
+    background-color: #777;
+    color: black;
+}
+
+
+/* Style the tab content (and add height:100% for full page content) */
+
+.tabcontent {
+    color: black;
+    display: none;
+    padding: 100px 20px;
+    height: 100%;
+}
+
+#UserProfile {
+    background-color: rgb(202, 202, 202);
+}
+
+#OrderList {
+    background-color: rgb(202, 202, 202);
+}
+
+
+/*----------------------------------User Detail-------------------------------------*/
+
+.user-container {
+    margin: 0 35rem 0 35rem;
+    font-size: 1.75rem;
+}
+
+.panel-title {
+    font-size: 2.75rem;
+}
+
+.table-user-information>tbody>tr {
+    border-top: 1px solid rgb(221, 221, 221);
+}
+
+.table-user-information>tbody>tr:first-child {
+    border-top: 0;
+}
+
+.table-user-information>tbody>tr>td {
+    border-top: 0;
+}

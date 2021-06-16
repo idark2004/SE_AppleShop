@@ -1,0 +1,29 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jun 5, 2021, 11:07:06 AM
+    Author     : anime
+*/
+
+.cart{
+    position: relative;
+}
+.cart-items{
+    position: absolute;
+    background-color: var(--white-color);
+    color: var(--black-color);
+    border-radius: 5px;
+    top:10%;
+    right: 15%;
+    width: 40%;
+    font-size: 1rem;
+    text-align: center;
+    box-shadow: 0 1px 20px rgba(0, 0, 0, 0.5);
+}
+a:hover .cart-items{
+    background-color:var(--black-color) ;
+    color:  var(--white-color);
+}

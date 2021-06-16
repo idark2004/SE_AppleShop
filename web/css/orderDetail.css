@@ -1,0 +1,60 @@
+.order-infor__body{
+    border: 1px solid var(--black-color);
+    margin: 30px 10px;
+    border-radius:4px ;
+    background-color: #f5f5f5;
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);
+}
+.order-infor__container{
+    background-color: #DDDDDD;
+    border-radius: 4px;
+    margin: 30px 0;
+}
+.order-infor__left-header,.order-infor__right-header{
+    font-weight: 400;
+}
+.order-infor__header{
+    text-align: center;
+}
+.order-infor__left{
+  
+}
+.order-infor__left,.order-infor__right{
+   
+    width: 50%;
+    
+}
+.order-infor__right-header,.order-infor__left-header{
+    font-size: 2rem;
+}
+.order-infor__right{
+    float: right;
+   
+}
+.order-infor__left-label,.order-infor__right-label{
+    
+    font-size: 1.8rem;
+    font-weight: 500;
+}
+.order-infor__left-detail,.order-infor__right-detail{
+    font-size: 1.5rem;
+}
+.bill-detail{
+    margin-left: 4%;
+    margin-bottom: 30px;
+}
+.bill-detail__table{
+    border-radius: 4px;
+}
+.table-secondary{
+    font-size: 1.6rem;
+}
+.table-body{
+    font-size:1.4rem;
+}
+@media screen and (max-width:700px) {
+    .order-infor__container{
+        margin: 30px;
+    }
+    
+}

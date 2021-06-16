@@ -1,0 +1,275 @@
+header{
+    position: relative;
+}
+.container__product-detail{
+    background-color: var(--bg-color);
+    padding: 10px 0;
+    display: flex;
+    
+}
+.frame__product-detail{
+    background-color: var(--white-color);
+    width: 70%;
+    padding: 10px 0;
+    transform: translateX(5%);
+    border-radius: 3px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 1px 10px rgba(0,0,0,0.5);
+}
+.form__product-detail{
+    display: flex;
+    height: 90%;
+}
+.tittle__product-detail{
+    font-size: 3rem;
+    text-align: center;
+    margin: 0;
+    margin-bottom: 10px;
+}
+.user-info-left{
+    
+    text-align: center;
+    width: 40%;
+   
+    
+}
+.product__img{
+    object-fit: contain;
+    width:100% ;   
+    height: 75%;
+}
+.user-info-right{
+    display: flex;
+    flex:1;
+}
+.product-detail__tittle{
+    font-size: 1.6rem;
+    min-width: 120px;
+  
+    font-size: 1.6rem;
+}
+.file-input{
+   width: 50%;
+   font-size: 1.5rem;
+}
+.product-infor{
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.input__product-detail{
+
+    width: 200px;
+    height: 30px;
+    font-size: 1.5rem;
+    margin-right:15px;
+}
+.button-update{
+    margin-left: 10px;
+    font-size: 1.7rem;
+}
+.color-list{
+    display: flex;
+}
+.color-option__container{
+    cursor: default;
+    position: relative;
+    display: flex;
+}
+
+.color-list p{
+    font-size: 1.5rem;
+    margin-right: 80px;
+}
+    input[type=radio] {
+      display: none;
+    }
+      .label-color {
+        color: #333;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+    }
+    .img-span {
+          display: inline-block;
+          width: 40px;
+          height: 40px;
+          margin: -1px 4px 0 0;
+          vertical-align: middle;
+          cursor: pointer;
+          border-radius: 50%;
+          border: 2px solid #FFFFFF;
+          box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.33);
+          background-repeat: no-repeat;
+          background-position: center;
+          text-align: center;
+          line-height: 44px;
+        }
+        .icon-check {
+            opacity: 0; 
+            transition: all .3s ease;
+          }
+    .input__radio-color:checked + label span i {
+        opacity: 1;
+      }
+      .color-option:hover .remove-btn{
+          display: block;
+      }
+      .remove-btn{
+          position: absolute;
+          margin-top: 1px;
+          width:70px;
+          box-shadow: 0 1px 10px rgba(0,0,0,0.5);
+          background-color: var(--bg-color);
+          border-radius: 3px;
+          z-index: 1;
+          text-align: center;
+          display: none;
+      }
+      .remove-btn::after{
+          content: "";
+          display: block;
+          border-style :solid;
+         
+          left: 10px;
+          top:-17px;
+          border-width:9px 9px;
+          border-color:transparent transparent var(--bg-color) transparent;
+          position: absolute;
+      }
+      .remove-link{
+          font-size: 1.4rem;
+         text-decoration: none;
+          color: var(--black-color);
+      }
+    /* Hardware css */
+      .hardware-list {
+          width: 100%;
+        display: flex;
+      }
+      .hardware-tittle{
+          margin-right: 50px;
+          font-size: 1.5rem;
+      }
+      ul.list-hardware-option li{
+        display: inline;
+    
+    }
+    .list-hardware-option{
+        width: 100%;
+        padding-left: 0;
+    }
+    .hardware-item{
+        position: relative;
+        height: 100px;
+    }
+    .hardwar__span:hover .remove-btn{
+        display: block;
+    }
+    .hardware__lable{
+            color: var(--black-color);
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            width: 100%;
+    }
+      .hardwar__span{
+        height: 50px;
+        margin-right: 10px;
+        /* vertical-align: middle; */
+        cursor: pointer;
+        border: 2px solid #F5F5F5;
+        background-color: var(--white-color);
+        box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.33);
+        border-radius: 4px;
+        display: inline-block;
+        margin-top:10px ;
+        width:30%;
+    }
+    .hardwar__span p {
+        margin-top: 10%;
+        transform: translateX(-15%);
+        display: inline-block;
+        text-align: center;
+        width: 140%;
+    }
+    @media only screen and (max-width: 1065px) {
+        .hardwar__span{
+           width: 45%;
+        }
+      }
+      @media only screen and (min-width:1066px)and (max-width: 1261px) {
+        .price__product {
+            width: 45%;
+        }
+      }
+      .spec-frame{
+        background-color: var(--white-color);
+        width: 20%;
+        padding: 10px 0;
+        transform: translateX(30%);
+        border-radius: 3px;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        box-shadow: 0 1px 10px rgba(0,0,0,0.5);
+      }
+      .spec-tittle{
+            text-align: center;
+            font-size: 2rem;
+            margin: 0;
+      }
+      .spec-detail__tittle{
+          font-size: 1.7rem;
+
+      }
+      .spec-infor{
+          margin: 0 10px;
+          display: flex;
+          flex-direction: column;
+          margin-bottom: 10px;
+      }
+      .input__spec-detail{
+          flex: 1;
+          font-size: 1.7rem;
+      }
+      .submit-option{
+        margin-left: 10px;
+        font-size: 1.5rem;
+      }
+      @media screen and (max-width:1000px) {
+        .container__product-detail{
+            flex-direction: column;
+        }
+        .frame__product-detail{
+            width: 80%;
+            transform: translateX(10%);
+        }
+        .spec-frame{
+            width: 80%;
+            transform: translateX(10%);
+        }
+        .form__product-detail{
+            flex-direction:column ;
+        }
+        .hardwar__span{
+            width: 29%;
+        }
+        .submit-option{
+            
+            font-size: 1.5rem;
+        }
+        .user-info-right{
+            flex: 0;
+            margin-left: 20%;
+        }
+        .user-info-left{
+            align-items: center;
+            width: 50%;
+            transform: translateX(40%);
+            margin-bottom: 20px;
+        }
+      }
+      @media screen and (min-width:1000px) and (max-width:1200px){
+        .user-info-left{
+            width: 80%;
+        }
+      }
