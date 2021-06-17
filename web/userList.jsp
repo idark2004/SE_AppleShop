@@ -151,10 +151,11 @@
                                                         </td>
                                                     </tr>
                                                 </c:forEach>
-                                                <c:otherwise>
-                                                <h1>No user in the system</h1>
-                                            </c:otherwise>
+                                               
                                         </c:when>
+                                    <c:otherwise>
+                                        <h1>No user in the system</h1>
+                                    </c:otherwise>
                                     </c:choose>                                    
                                     </tbody>
                                 </table>
