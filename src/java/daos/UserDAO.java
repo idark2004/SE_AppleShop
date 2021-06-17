@@ -70,7 +70,7 @@ public class UserDAO {
         return null;
     }
     
-    public UserDTO userDetail(String uid) throws NamingException, SQLException {
+    public UserDTO getUserProfile(String uid) throws NamingException, SQLException {
         Connection c = null; //doi tuong ket noi
         PreparedStatement ps = null; //doi tuong truy van
         ResultSet rs = null;//doi tuong nhan ket qua
@@ -78,8 +78,7 @@ public class UserDAO {
         String sql ="SELECT * FROM tblUsers WHERE userID=?";
         
         try{
-            DBConnect db = new DBConnect();
-            c = db.makeConnection(); // tao doi tuong connection qua DBConnection
+            c = DBConnect.makeConnection(); // tao doi tuong connection qua DBConnection
             
             if (c!=null){
                 ps = c.prepareStatement(sql); // tao truy van

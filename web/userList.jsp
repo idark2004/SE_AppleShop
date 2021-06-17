@@ -120,7 +120,7 @@
                                                         <td><img src="images/male.png" alt=""></td>
                                                         <td>${user.userID}</td>
                                                         <td>
-                                                            <a href="">${user.name}</a>
+                                                            <a href="ManageUserDetail?userID=${user.userID}">${user.name}</a>
                                                         </td>
                                                         <td>2020/08/12</td>
                                                         <td class="text-center">
@@ -151,11 +151,10 @@
                                                         </td>
                                                     </tr>
                                                 </c:forEach>
-                                               
-                                        </c:when>
-                                    <c:otherwise>
-                                        <h1>No user in the system</h1>
-                                    </c:otherwise>
+                                            </c:when>
+                                            <c:otherwise>
+                                            <h1>No user in the system</h1>
+                                        </c:otherwise>
                                     </c:choose>                                    
                                     </tbody>
                                 </table>

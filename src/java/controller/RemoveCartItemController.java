@@ -29,7 +29,7 @@ public class RemoveCartItemController extends HttpServlet {
         HttpSession session = request.getSession();
         System.err.println("Run Through RemoveCartItemController");
         response.setContentType("text/html;charset=UTF-8");    
-        String url=request.getParameter("page");
+        String url=ERROR;
         
         try{
             
