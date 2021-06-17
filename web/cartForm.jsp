@@ -16,19 +16,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="fonts/fontawesome-free-5.15.3-web/css/all.css" rel="stylesheet">
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-    
-
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/cartForm.css">
-
     <title>Your Cart</title>
 </head>
 
 <body>
-    <form>
-
-        
+    <form>      
         <div class="imgcontainer">
             <a href="Homepage.jsp" class="home-link" style="float:left;">
                 <i class="fas fa-arrow-left"></i>Homepage
@@ -37,11 +32,9 @@
                 <img style="max-width: 10rem;" src="images/shop_logo.png" alt="Logo" class="shop-logo">
             </a>
         </div>
-
         <div class="row">
             <div class="col-75">
                 <div class="container">
-
                     <c:set var="total" value="0"/>
                     <c:choose>
                         <c:when test="${sessionScope.cart != null}">
@@ -53,8 +46,6 @@
                                         <img src="${cartItem.product.image}" alt="">
 
                                         <h3>Remove product</h3>
-
-
                                     </a>
                                 </header>
 
@@ -101,11 +92,7 @@
                         <h1 class="total">Total: <span>  <fmt:formatNumber type="number" maxFractionDigits = "0" value="${total}" /></span> VND</h1>
                     </div>
                 </div>
-
-
             </div>
-
-
             <div class="col-25">
                 <div class="container">
                     <form action="MainController">
@@ -156,7 +143,6 @@
 
         </div>
     </form>
-
     <!-- Script tham khao: remove san pham, doi gia total theo tang giam so luong -->
     <script>
         var check = false;
@@ -255,8 +241,7 @@
         });
     </script>
     <footer>
-        <div class="grid footer-border">
-                
+        <div class="grid footer-border">         
             <h2 class="foot-tittle">Contact us</h2>
             <div class="foot-info">    
                 <div class="foot-left-info">
@@ -292,5 +277,4 @@
         </div>
     </footer>
 </body>
-
 </html>

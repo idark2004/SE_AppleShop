@@ -70,11 +70,8 @@
                         <li class="header_item">
                             <a href="signup.jsp" class="header_item-link">Signup</a>
                         </li>
-                        </c:if>
-                        
-                        
+                        </c:if>                      
                     </ul>
-
                 </div> 
             </header>
                  <div class="nav">

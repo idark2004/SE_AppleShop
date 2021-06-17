@@ -24,8 +24,7 @@
               document.getElementById('dot2').click();
             }, 3000);
           };
-        </script>
-        
+        </script>    
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -47,8 +46,7 @@
 						<h1><i class="fab fa-apple fa-2x"></i> SE15 Apple Store</h1>
 					</section>
 				</a>
-                </div>
-    
+                </div>   
                 <div class="login">
                     <ul class="header_item_list">
                         <!-- If user logged in suscessfully , the item below wil showup and hide item other li item  -->
@@ -82,11 +80,8 @@
                         <li class="header_item">
                             <a href="signup.jsp" class="header_item-link">Signup</a>
                         </li>
-                        </c:if>
-                        
-                        
-                    </ul>
-    
+                        </c:if>                     
+                    </ul>    
                 </div>
             </header>
             <div class="nav">
@@ -107,17 +102,14 @@
                                 <button type="submit"><i class="fa fa-search"></i></button>
                             </form>
                         </div>
-
-                        <div class=" cart">
-                            
+                        <div class=" cart">                         
                             <a class="cart-view" href="MainController?action=ViewCart">
                                 <i class="carft-icon fas fa-shopping-cart"></i>
                                 <c:forEach var="cartItem" items="${sessionScope.cart}">
                                     <c:set var="subtotalCount" value="${cartItem.quantity}"/>
                                     <c:set var="subtotal" value="${subtotal+cartItem.quantity}"/>
                                 </c:forEach>
-                                <span class="cart-items">${subtotal}</span>
-                            
+                                <span class="cart-items">${subtotal}</span>                         
                             </a>
                             <c:choose>
                                 <c:when test="${sessionScope.cart == null}">
@@ -157,8 +149,7 @@
                                                             style="color:black;text-align: right;
                                                             padding:0;height: 20px;">Remove</a></span>
                                                         </div>
-                                                    </div>
-                                                                    
+                                                    </div>                                                                   
                                                 </li>
                                             </c:forEach> 
                                         </ul>
@@ -167,12 +158,9 @@
                                 </c:otherwise>  
                         </c:choose>
                         </div>
-                    </div>
-                    
-    
+                    </div>                   
                 </div>
             </div>
-
         <div class="home-page__body">
             <div class="slideshow-container">
 
@@ -192,10 +180,8 @@
                     <img class="slide-img" src="images/watch6.jpg" style="width:100%">
                     <div class="text">Apple Watch Series 6</div>
                 </div>
-
             </div>
             <br>
-
             <div  style="text-align:center ;padding-bottom:10px;">
                 <span class="dot" onclick="currentSlide(1)"></span> 
                 <span id="dot2" class="dot" onclick="currentSlide(2)"></span> 
@@ -204,7 +190,6 @@
         </div>
         <footer>
             <div class="grid footer-border">
-
                 <h2 class="foot-tittle">Contact us</h2>
                 <div class="foot-info">    
                     <div class="foot-left-info">
@@ -239,7 +224,6 @@
                 </div>
             </div>
         </footer>
-
     </body>
 </html>
 

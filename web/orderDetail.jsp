@@ -26,36 +26,35 @@
         <header>
             <div class="shop-logo">
                 <a href="Homepage.jsp" class="home-link" style="display: inline-block;">
-                        <section class="header_item" id="shopLogo">
-                                <h1><i class="fab fa-apple fa-2x"></i> SE15 Apple Store</h1>
-                        </section>
+                    <section class="header_item" id="shopLogo">
+                            <h1><i class="fab fa-apple fa-2x"></i> SE15 Apple Store</h1>
+                    </section>
                 </a>
-            </div>
-    
+            </div>   
             <div class="login">
                 <ul class="header_item_list">
                     <!-- If user logged in suscessfully , the item below wil showup and hide item other li item  -->
                     <c:if test="${sessionScope.user != null }">
                     <li class="header_item header__navbar-user">
-                            <span class="header_item_user-name">Hello,${sessionScope.user.name}</span>
-                            <ul class="header__navbar-user--menu">
-                                    <li class="header__navbar-user--item">
-                                         <a href="UserDetailController?userid=${sessionScope.user.userID}">User detail</a>
-                                    </li>
-                                    
-                                    <li class="header__navbar-user--item">
-                                        <a href="cartForm.jsp">Order detail</a>
-                                    </li>
-                                     <li class="header__navbar-user--item">
-                                        <a href="orderHisotry.html">Order History</a>
-                                    </li>
-                                     <li class="header__navbar-user--item">
-                                        <a href="changePass.jsp">Update Password</a>
-                                    </li>
-                                    <li class="header__navbar-user--item">
-                                        <a href="">Sign out</a>
-                                    </li>
-                                </ul>
+                        <span class="header_item_user-name">Hello,${sessionScope.user.name}</span>
+                        <ul class="header__navbar-user--menu">
+                            <li class="header__navbar-user--item">
+                                 <a href="UserDetailController?userid=${sessionScope.user.userID}">User detail</a>
+                            </li>
+
+                            <li class="header__navbar-user--item">
+                                <a href="cartForm.jsp">Order detail</a>
+                            </li>
+                             <li class="header__navbar-user--item">
+                                <a href="orderHisotry.html">Order History</a>
+                            </li>
+                             <li class="header__navbar-user--item">
+                                <a href="changePass.jsp">Update Password</a>
+                            </li>
+                            <li class="header__navbar-user--item">
+                                <a href="">Sign out</a>
+                            </li>
+                        </ul>
                     </li>
                     </c:if>
                     <c:if test="${sessionScope.user == null }">
@@ -65,11 +64,8 @@
                     <li class="header_item">
                         <a href="signup.jsp" class="header_item-link">Signup</a>
                     </li>
-                    </c:if>
-                    
-                    
-                </ul>
-    
+                    </c:if>                                   
+                </ul>   
             </div>
         </header>
         <div class="nav">
@@ -80,8 +76,7 @@
                     <a class="product-link" href="">OrderList</a>
                 </div>
               </div>
-        </div>
-       
+        </div>       
             <div class="order-infor__body">
                 <div class="order-infor__container container">
                     <h2 class="order-infor__header">Order ${requestScope.order.orderID}</h2>
@@ -94,9 +89,7 @@
                             <span class="order-infor__left-label">Order status:</span>
                             <p class="order-infor__left-detail">${requestScope.order.status}</p>
                             <span class="order-infor__left-label">Method:</span>
-                            <p class="order-infor__left-detail">${requestScope.order.payMethod}</p>
-                            
-
+                            <p class="order-infor__left-detail">${requestScope.order.payMethod}</p>                          
                         </div>
                         <div class="col-6 order-infor__right">
                             <h4 class="order-infor__right-header">Customer Information</h4>
@@ -141,10 +134,8 @@
                                 </c:choose>
                             </tbody>
                         </table>
-                    </div>
-            
-            </div>
-           
+                    </div>       
+                </div>      
         <footer>
             <div class="grid footer-border">
   
