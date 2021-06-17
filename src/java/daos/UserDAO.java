@@ -11,6 +11,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.naming.NamingException;
 
 /**
@@ -209,5 +211,46 @@ public class UserDAO {
         }
     }
     
+    public List<UserDTO> getUserList(String roleID) throws SQLException{
+        List<UserDTO> list = null;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBConnect.makeConnection();
+            if(conn!=null){
+                String sql = "SELECT userID, name, email, password, phoneNumber, address, roleID"
+                        + " FROM tblUsers "
+                        + " WHERE roleID LIKE ?";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, "%"+roleID+"%");
+                rs=stm.executeQuery();
+                while(rs.next()){
+                    String userID = rs.getString("userID");
+                    String name = rs.getString("name");
+                    String emai = rs.getString("email");
+                    String password = rs.getString("password");
+                    String phone = rs.getString("phoneNumber");
+                    String address = rs.getString("address");
+                    if(list == null){
+                        list = new ArrayList<>();
+                    }
+                    list.add(new UserDTO(userID, name, emai, password, phone, address, roleID));
+                }
+            }
+        } catch (Exception e) {
+        }finally{
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
     
 }
