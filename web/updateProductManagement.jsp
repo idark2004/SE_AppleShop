@@ -45,16 +45,23 @@
                     <li class="header_item header__navbar-user">
                             <span class="header_item_user-name">Hello,${requestScope.username}</span>
                             <ul class="header__navbar-user--menu">
-                                <li class="header__navbar-user--item">
-                                    <a href="">User detail</a>
-                                </li>
-                                <li class="header__navbar-user--item">
-                                    <a href="">Order detail</a>
-                                </li>
-                                <li class="header__navbar-user--item">
-                                    <a href="">Sign out</a>
-                                </li>
-                            </ul>
+                                    <li class="header__navbar-user--item">
+                                         <a href="UserDetailController?userid=${sessionScope.user.userID}">User detail</a>
+                                    </li>
+                                    
+                                    <li class="header__navbar-user--item">
+                                        <a href="cartForm.jsp">Order detail</a>
+                                    </li>
+                                     <li class="header__navbar-user--item">
+                                        <a href="orderHisotry.html">Order History</a>
+                                    </li>
+                                     <li class="header__navbar-user--item">
+                                        <a href="changePass.jsp">Update Password</a>
+                                    </li>
+                                    <li class="header__navbar-user--item">
+                                        <a href="">Sign out</a>
+                                    </li>
+                                </ul>
                     </li>
                     </c:if>
                     <c:if test="${requestScope.success == null }">

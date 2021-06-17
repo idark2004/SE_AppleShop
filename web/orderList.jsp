@@ -36,15 +36,24 @@
                 <li class="header_item header__navbar-user">
                         <span class="header_item_user-name">Hello,${sessionScope.user.name}</span>
                         <ul class="header__navbar-user--menu">
-                            <li class="header__navbar-user--item">
-                                 <a href="UserDetailController?userid=${sessionScope.user.userID}">User detail</a>
-                            </li>
-                            <li class="header__navbar-user--item">
-                                <a href="">Order detail</a>
-                            </li>
-                            <li class="header__navbar-user--item">
-                                <a href="">Sign out</a>
-                            </li>
+                            <ul class="header__navbar-user--menu">
+                                    <li class="header__navbar-user--item">
+                                         <a href="UserDetailController?userid=${sessionScope.user.userID}">User detail</a>
+                                    </li>
+                                    
+                                    <li class="header__navbar-user--item">
+                                        <a href="cartForm.jsp">Order detail</a>
+                                    </li>
+                                     <li class="header__navbar-user--item">
+                                        <a href="orderHisotry.html">Order History</a>
+                                    </li>
+                                     <li class="header__navbar-user--item">
+                                        <a href="changePass.jsp">Update Password</a>
+                                    </li>
+                                    <li class="header__navbar-user--item">
+                                        <a href="">Sign out</a>
+                                    </li>
+                                </ul>
                         </ul>
                 </li>
                 </c:if>
