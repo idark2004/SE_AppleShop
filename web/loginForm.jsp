@@ -41,7 +41,7 @@
                     <div class="container" style="background-color:#f1f1f1">
                         <a href="Homepage.jsp"  class="form-cance"><button type="button" class="cancelbtn">Cancel</button></a>
                          <button type="submit" class="btn" name="action" value="Login">Submit</button>
-                        <span class="psw"><a href="#">Forgot password?</a></span>
+                        <span class="psw"><a href="ForgotPassword.jsp">Forgot password?</a></span>
                     </div>
                 </form>
             </div>
