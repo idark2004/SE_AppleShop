@@ -13,7 +13,7 @@
         <title>Log In</title>
         <script src="js/main.js"></script>
         <link rel="stylesheet" href="css/loginPage.css">
-        <link rel="stylesheet" href="css/mainP.css">
+        <link rel="stylesheet" href="css/footer.css">
         <link rel="stylesheet" href="css/base.css">     
         <link href="fonts/fontawesome-free-5.15.3-web/css/all.css" rel="stylesheet">
     </head>

@@ -15,12 +15,19 @@
         <link rel="stylesheet" href="css/base.css">
         <link rel="stylesheet" href="css/footer.css">
         <link rel="stylesheet" href="css/mainHoang.css">
+        <link rel="stylesheet" href="css/carticon.css">
+        <link rel="stylesheet" href="css/cartListIcon.css">
         <link rel="stylesheet" href="css/productDetailManagement.css">
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
         <link href="fonts/fontawesome-free-5.15.3-web/css/all.css" rel="stylesheet">
         <script>
+        <% 
+          String uri = request.getRequestURI();
+          int lastIndex = uri.lastIndexOf("/");
+          String resource = uri.substring(lastIndex + 1);
+        %>
         var loadFile = function(event) {
                 var image = document.getElementById('image');
                 image.src = URL.createObjectURL(event.target.files[0]);
@@ -79,28 +86,82 @@
             </div> 
         </header>
         <div class="nav">
-            <div class="topnav">
-                <a href="MainController?action=ProductListManagement&categoryID=" class="nav-item-active">All</a>
-                <a href="MainController?action=ProductListManagement&categoryID=MC">Mac</a>
-                <a href="MainController?action=ProductListManagement&categoryID=ID">iPad</a>
-                <a href="MainController?action=ProductListManagement&categoryID=IP">iPhone</a>
-                <a href="MainController?action=ProductListManagement&categoryID=AW">Apple Watch</a>
-                <a href="MainController?action=ProductListManagement&categoryID=AS">Accessories</a>
-    
-                <div class="cart">
-                    <a href=""><i class="carft-icon fas fa-shopping-cart"></i></a>
+                <div class="topnav">
+                    <div class="product-page">
+                        <a class="product-link" href="ViewProductController?categoryID=&status=True" class="header-nav__item-active">All</a>
+                        <a class="product-link" href="ViewProductController?categoryID=MB&status=True">Mac</a>
+                        <a class="product-link" href="ViewProductController?categoryID=ID&status=True">iPad</a>
+                        <a class="product-link" href="ViewProductController?categoryID=IP&status=True">iPhone</a>
+                        <a class="product-link" href="ViewProductController?categoryID=AW&status=True">Apple Watch</a>
+                        <a class="product-link" href="ViewProductController?categoryID=AS&status=True">Accessories</a>
+                        <a class="product-link" href="MainController?action=ProductListManagement&categoryID=">Test Management</a>
+                    </div>
+                    <div class="responsive-div" style="display: flex; ">
+                        <div class=" search-container">
+                            <form action="" class="search-form">
+                                <input type="text" placeholder="Search.." name="search">
+                                <button type="submit"><i class="fa fa-search"></i></button>
+                            </form>
+                        </div>
+                        <div class=" cart">                         
+                            <a class="cart-view" href="MainController?action=ViewCart">
+                                <i class="carft-icon fas fa-shopping-cart"></i>
+                                <c:forEach var="cartItem" items="${sessionScope.cart}">
+                                    <c:set var="subtotalCount" value="${cartItem.quantity}"/>
+                                    <c:set var="subtotal" value="${subtotal+cartItem.quantity}"/>
+                                </c:forEach>
+                                <span class="cart-items">${subtotal}</span>                         
+                            </a>
+                            <c:choose>
+                                <c:when test="${sessionScope.cart == null}">
+                                     <div class="header__cart-list header__cart-list--no-cart">
+
+                                         <img src="images/no-cart.png" alt="" class="header___cart--no-cart---img">
+                                         <span class="header__cart-list--no-cart-msg">Empty Cart</span>
+
+                                     </div>     
+                                </c:when>
+                                <c:otherwise>
+                                    <div class="header__cart-list">                                                              
+                                        <header class="header__cart-heading">
+                                            <h4 >View cart</h4>
+                                        </header>
+                                        <ul class="header__cart-list--item">
+                                            <c:forEach var="cartItem" items="${sessionScope.cart}">
+                                                <li class="header__cart-item">
+                                                    <img src="${cartItem.product.image}" alt="" class="header__cart-img">
+                                                    <div class="header__cart-item--info">
+                                                        <div class="header__cart-item--head">
+                                                            <h5 class="header__cart-item--name">
+                                                                ${cartItem.product.name}
+                                                            </h5>
+                                                            <div class="header__cart-item-price--wrap">
+                                                            <span class="header__cart-item--price"><fmt:formatNumber type="number" maxFractionDigits = "0" value="${cartItem.product.price}"/>VND</span>
+                                                            <span class="header__cart-item--multiplication">x</span>
+                                                            <span class="header__cart-item--quantity">${cartItem.quantity}</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="header__cart-item--body">
+                                                            <span class="header__cart-item--description">
+                                                                color:${cartItem.product.color} | ram-storage:${cartItem.product.ram}-${cartItem.product.storage}
+                                                            </span>
+                                                            <span class="header__cart-item--remove"><a 
+                                                                    href="MainController?action=RemoveCart&page=<%=resource%>&productID=${cartItem.product.productID.trim()}&color=${cartItem.product.color.trim()}&ram=${cartItem.product.ram.trim()}&storage=${cartItem.product.storage.trim()}"
+                                                            style="color:black;text-align: right;
+                                                            padding:0;height: 20px;">Remove</a></span>
+                                                        </div>
+                                                    </div>                                                                   
+                                                </li>
+                                            </c:forEach> 
+                                        </ul>
+                                        <a class="header__cart-view-cart btn btn__primary" href="MainController?action=ViewCart" style="background-color: #DDDDDD;color:black">View detail</a>
+                                    </div> 
+                                </c:otherwise>  
+                        </c:choose>
+                        </div>
+                    </div>                   
                 </div>
-    
-                <div class="search-container">
-                    <form action="">
-                        <input type="text" placeholder="Search.." name="search">
-                        <button type="submit"><i class="fa fa-search"></i></button>
-                    </form>
-                </div>
-    
-    
             </div>
-        </div>
 
         <div class="container__product-detail">
             <div class="frame__product-detail">
@@ -144,10 +205,10 @@
                                             <i class="icon-check fas fa-check"></i>                                               
                                         </span>
                                     </label>
-                                            
+                                    <span class="remove-btn"><a href="youtube.com" class="remove-link">Remove color</a></span>        
                                     <c:set var="i" value="${i + 1}" scope="page"/>
                                 </div>
-                                <span class="remove-btn"><a href="youtube.com" class="remove-link">Remove color</a></span>
+                                
                                 </c:forEach>
                                 
                             </div>                   
