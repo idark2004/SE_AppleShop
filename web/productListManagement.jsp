@@ -187,8 +187,9 @@
                 <div class="grid__column-10">
                     <div class="home__product">
                         <div class="grid__row">
+                            <c:forEach var="product" items="${requestScope.PRODUCT_LIST}">
                             <div class="grid__column-2-4">
-                                <c:forEach var="product" items="${requestScope.PRODUCT_LIST}">
+                                
                                 <div class="home__product-item">
                                         <span class="managermenu" >
                                             <a href="MainController?action=UpdateProductManagement&productID=${product.productID.trim()}" class="managermenu-item">
@@ -214,9 +215,9 @@
                                         </div>
                                     
                                 </div>  
-                                </c:forEach>
+                                
                             </div> 
-                            
+                            </c:forEach>
                             </div>  
                             
                            
