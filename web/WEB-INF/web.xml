@@ -92,6 +92,10 @@
         <servlet-name>ManageUserDetail</servlet-name>
         <servlet-class>controller.ManageUserDetail</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>test</servlet-name>
+        <servlet-class>controller.test</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AddCommentController</servlet-name>
         <url-pattern>/AddCommentController</url-pattern>
@@ -188,6 +192,10 @@
     <servlet-mapping>
         <servlet-name>ManageUserDetail</servlet-name>
         <url-pattern>/ManageUserDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>test</servlet-name>
+        <url-pattern>/test</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
