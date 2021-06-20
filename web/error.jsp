@@ -13,7 +13,7 @@
     </head>
     <body>
         <h1>Hello World!</h1>
-        ${requestScope.error}
+        ${requestScope.ERROR}
         ${requestScope.url}
     </body>
 </html>

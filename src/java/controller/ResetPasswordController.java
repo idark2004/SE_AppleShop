@@ -8,9 +8,6 @@ package controller;
 import daos.UserDAO;
 import dtos.UserDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.SQLException;
-import javax.naming.NamingException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -32,6 +29,7 @@ public class ResetPasswordController extends HttpServlet {
     private String name;
     private String pass;
  
+    @Override
     public void init() {
         // reads SMTP server setting from web.xml file
         ServletContext context = getServletContext();

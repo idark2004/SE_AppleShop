@@ -40,6 +40,7 @@ public class MainController extends HttpServlet {
     private static final String CREATESPEC="CreateSpecController";
     private static final String SUBMITCOMMENT="AddCommentController";
     private static final String CHANGEPASS="ChangePasswordController";
+    private static final String GOOGLE="GoogleSignInController";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {        
@@ -110,6 +111,9 @@ public class MainController extends HttpServlet {
                     break;
                 case "Change Password":
                     url = CHANGEPASS;
+                    break;
+                case "Google":
+                    url = GOOGLE;
                     break;
                 default:
                     url="Homepage.jsp";

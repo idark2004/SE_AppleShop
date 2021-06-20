@@ -13,6 +13,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.naming.NamingException;
@@ -247,7 +248,8 @@ public class ProductDAO {
 
     public void completeOrder(List<CartItemDTO> cart, String address, String name, String email, String phone, String userID, String codeID, String method, double price) throws SQLException {
         long d = System.currentTimeMillis();
-        Date currentDate = new Date(d);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date currentDate = new Date(d);        
         Connection conn = null;
         PreparedStatement stm = null;
         try {
@@ -259,7 +261,7 @@ public class ProductDAO {
                 stm.setString(1, "TEST");
                 stm.setString(2, name);
                 stm.setString(3, address);
-                stm.setString(4, currentDate.toString());
+                stm.setString(4, formatter.format(currentDate));
                 stm.setString(5, codeID);
                 stm.setString(6, userID);
                 stm.setDouble(7, price);

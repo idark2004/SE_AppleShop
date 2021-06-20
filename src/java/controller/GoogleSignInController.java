@@ -5,19 +5,23 @@
  */
 package controller;
 
+import daos.UserDAO;
+import dtos.UserDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author anime
+ * @author phath
  */
-public class test extends HttpServlet {
-
+public class GoogleSignInController extends HttpServlet {
+    private static final String ERROR = "error.jsp";
+    private static final String SUCCESS = "Homepage.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -30,13 +34,22 @@ public class test extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-           request.setAttribute("hello", "Iphone");
-           request.setAttribute("hello1", "Ipad");
-           request.setAttribute("hello2", "MacBook");
-           request.setAttribute("hello3", "Acsessories");
-           request.getRequestDispatcher("dashBoard.jsp").forward(request, response);
+        String url = ERROR;
+        try {
+            String userID = request.getParameter("userID");
+            String name = request.getParameter("name");
+            String email = request.getParameter("email");
+            HttpSession session = request.getSession();
+            UserDAO dao = new UserDAO();
+            UserDTO user = new UserDTO(userID, name, email, "True", "US");
+            dao.manageGoogleUser(user);
+            session.setAttribute("user", user);
+            url = SUCCESS;
+        } catch (Exception e) {
+            log("Error at GoogleSignInController: " + e.toString());            
+        }
+        finally{
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 
