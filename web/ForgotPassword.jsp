@@ -20,7 +20,7 @@
         <link href="fonts/fontawesome-free-5.15.3-web/css/all.css" rel="stylesheet">
          
 </head>
-<body>
+<body onload="<c:if test="${message != null}">ResetPassLoad()</c:if>">
    
       <div class="page-login">
               <div class="form-login">
@@ -38,7 +38,7 @@
                     </div>
                     <div class="container" style="background-color:#f1f1f1">
                         <a href="Homepage.jsp"  class="form-cance"><button type="button" class="cancelbtn">Cancel</button></a>
-                         <button type="submit" class="btn" name="action" value="Login">Send me new password</button>
+                         <button type="submit" class="btn" >Send me new password</button>
                     </div>
                 </form>
             </div>
@@ -82,7 +82,9 @@
             </footer>
         </div>
 <script type="text/javascript">
- 
+    function ResetPassLoad()	{
+                    alert("${message}");
+                }
     $(document).ready(function() {
         $("#resetForm").validate({
             rules: {

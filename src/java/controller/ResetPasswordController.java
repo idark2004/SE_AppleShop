@@ -97,7 +97,7 @@ public class ResetPasswordController extends HttpServlet {
             message = "There were an error: " + ex.getMessage();
         } finally {
             request.setAttribute("message", message);
-            request.getRequestDispatcher("message.jsp").forward(request, response);
+            request.getRequestDispatcher("ForgotPassword.jsp").forward(request, response);
         }
     }
 

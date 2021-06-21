@@ -91,7 +91,7 @@
     flex-direction: column;
     background-color: var();
     margin: auto;
-    width:50%;
+    width:65%;
     background-color: var(--white-color);
     padding: 30px 0;
     margin-top: 30px;
@@ -103,11 +103,24 @@
 .tittle__user-profile{
     margin: auto;
     padding-top: 20px;
-	font-size:3rem;
+    font-size:3rem;
+    margin-bottom: 20px;    
+}
+.notify-update{
+    text-align: left;
+    font-size: 1.6rem;
+    background-color:#dff0d8;
+    line-height: 4rem;
+    color: #21BD73;
+    width: 80%;
+    transform: translateX(12%);
+    border-radius: 3px;
+    padding-left: 10px;
 }
 .form__user-profile{
     margin: auto;
     margin-top: 30px;
+    width: 80%;
 }
 .user-infor{
     display: flex;
@@ -122,21 +135,30 @@
     cursor: auto;
 }
 .tittle__user-profile{
-    font-size: 3rem;
+    font-size: 4rem;
 }
 .input__user-profile{
     flex:1;
+    font-size: 1.6rem;
+    line-height: 3rem;
 }
 .user-infor__tittle{
     min-width: 120px;
     margin: 0;
-    font-size: 1.6rem;
+    font-size: 1.7rem;
 }
 .button-update{
-    width:40%;
+    width:41%;
     margin: auto;
     margin-top: 2rem;
-    /* margin-left: 165px; */
+    transform: translateX(44%);
+    font-size: 1.6rem;
+}
+.link-resPass{
+    text-align: center;
+    display: block;
+    text-decoration: none;
+    color: var(--black-color);
 }
 .link-update{
     text-decoration: none;
@@ -697,3 +719,43 @@ footer {
     padding-right: 0;
     font-size: 1.4rem;
 }
+@media screen and (max-width:700px){
+    .foot-right-info__link{
+        margin-left: 0;
+    }
+    .foot-left-info {
+    /* left: 0; */
+   
+    margin-left: 0;
+    }
+    
+}
+    @media screen and (min-width:501px) and (max-width:800px){
+         .button-update{
+        transform:translateX(2%); 
+         }
+        .button-submit{
+            
+            
+            margin-left: 10px;
+        }
+        .frame__user-profile{
+        width: 80%;
+        }
+    }
+ @media screen and (max-width:500px){   
+.user-infor__tittle{
+        font-size: 1.6rem;
+    }
+    .frame__user-profile{
+        width: 80%;
+    }
+    .button-update{
+        transform:translateX(2%); 
+    }
+    .button-submit{
+        padding: 10px 0;
+        transform: translateY(20%);
+        margin-left: 10px;
+    }
+ }

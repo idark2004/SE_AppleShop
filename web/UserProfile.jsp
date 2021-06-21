@@ -159,6 +159,8 @@
             <div class="container__user-profile">
                 <div class="frame__user-profile">
                     <h2 class="tittle__user-profile">User profile</h2>
+                    <span class="notify-update"><i class="fas fa-check-circle"></i>
+                    ${requestScope.UpSuccess}</span>
                     <form class="form__user-profile" action="MainController" method="post">
                         <div class="user-infor full-name">
                             <span class="user-infor__tittle full-name__tittle">Fullname</span>
@@ -178,10 +180,10 @@
                         </div>
                             <input type="hidden"  name="userID" value="${sessionScope.user.userID}" >
                             <input type="hidden"  name="action" value="UpdateProfile" >
-                        <input class="button-update" type="submit"  value="Update Profile">
-                        <a href="changePass.jsp">Change Password</a>
+                        <button class="button-update"><a class ="link-resPass" href="changePass.jsp">Change Password</a></button>
+                        <button class="button-submit button-update" type="submit"  >Update Profile</button>
                     </form>  
-                        ${requestScope.UpSuccess}
+                        
                 </div>
             </div>
                      
