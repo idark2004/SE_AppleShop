@@ -159,8 +159,8 @@
             <div class="container__user-profile">
                 <div class="frame__user-profile">
                     <h2 class="tittle__user-profile">User profile</h2>
-                    <span class="notify-update"><i class="fas fa-check-circle"></i>
-                    ${requestScope.UpSuccess}</span>
+                    <c:if test="${requestScope.UpSuccess !=null}"><span class="notify-update"><i class="fas fa-check-circle"></i>
+                            ${requestScope.UpSuccess}</span></c:if>
                     <form class="form__user-profile" action="MainController" method="post">
                         <div class="user-infor full-name">
                             <span class="user-infor__tittle full-name__tittle">Fullname</span>
