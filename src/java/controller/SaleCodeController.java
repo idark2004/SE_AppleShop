@@ -35,7 +35,9 @@ public class SaleCodeController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
         String url = ERROR;
         String perform = request.getParameter("perform");
         boolean codeStatus = Boolean.parseBoolean(request.getParameter("codeStatus"));
@@ -43,8 +45,12 @@ public class SaleCodeController extends HttpServlet {
         try {
             SaleCodeDAO dao = new SaleCodeDAO();
             SaleCodeDTO code = new SaleCodeDTO();
+
             System.out.println(perform);
             if (perform == null) {                
+
+            if (perform == null) {
+
                 List<SaleCodeDTO> list = dao.getSaleCodeList(codeStatus);
                 if (list != null) {
                     request.setAttribute("ERROR", "list not null");
@@ -63,12 +69,21 @@ public class SaleCodeController extends HttpServlet {
                         url = VIEW;
                         break;
                     case "Update":
+                        String newCodeID = request.getParameter("newCodeID");
+                        String codeName = request.getParameter("codeName");
+                        String percentage = request.getParameter("percentage");
+                        String expDate = request.getParameter("expDate");
+                        code = new SaleCodeDTO(codeID, codeName, percentage, expDate);
+                        boolean check = dao.updateSaleCode(code, newCodeID);
+                        if (check) {
+                            url = VIEW;
+                        }
                         break;
                     case "Delete":
                         break;
                 }
             }
-
+          }
         } catch (Exception e) {
             request.setAttribute("ERROR", e.toString());
         } finally {

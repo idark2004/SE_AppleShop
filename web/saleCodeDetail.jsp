@@ -9,20 +9,21 @@
 <!DOCTYPE html>
 <html>
     <head>
-    <link rel="stylesheet" href="css/mainP.css">
-    <link rel="stylesheet" href="css/mainHoang.css">
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/carticon.css">
-    <link rel="stylesheet" href="css/cartListIcon.css">
-    <link href="fonts/fontawesome-free-5.15.3-web/css/all.css" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <% 
-          String uri = request.getRequestURI();
-          int lastIndex = uri.lastIndexOf("/");
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <link rel="stylesheet" href="css/mainP.css">
+        <link rel="stylesheet" href="css/mainHoang.css">
+        <link rel="stylesheet" href="css/base.css">
+        <link rel="stylesheet" href="css/carticon.css">
+        <link rel="stylesheet" href="css/cartListIcon.css">
+        <link href="fonts/fontawesome-free-5.15.3-web/css/all.css" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <%
+            String uri = request.getRequestURI();
+            int lastIndex = uri.lastIndexOf("/");
             String resource = uri.substring(lastIndex + 1);
         %>
-    
+
         <title> <%= resource%> </title>
     </head>
 
@@ -41,7 +42,7 @@
                     <ul class="header_item_list">
                         <!-- If user logged in suscessfully , the item below wil showup and hide item other li item  -->
                         <c:if test="${sessionScope.user != null}">
-                        <li class="header_item header__navbar-user">
+                            <li class="header_item header__navbar-user">
                                 <span class="header_item_user-name">Hello,${sessionScope.user.name}</span>
                                 <ul class="header__navbar-user--menu">
                                     <li class="header__navbar-user--item">
@@ -54,18 +55,18 @@
                                         <a href="">Sign out</a>
                                     </li>
                                 </ul>
-                        </li>
+                            </li>
                         </c:if>
                         <c:if test="${sessionScope.user == null }">
-                        <li class="header_item">
-                            <a href="loginForm.jsp" class="header_item-link">Login</a>
-                        </li>
-                        <li class="header_item">
-                            <a href="signup.jsp" class="header_item-link">Signup</a>
-                        </li>
+                            <li class="header_item">
+                                <a href="loginForm.jsp" class="header_item-link">Login</a>
+                            </li>
+                            <li class="header_item">
+                                <a href="signup.jsp" class="header_item-link">Signup</a>
+                            </li>
                         </c:if>
-                        
-                        
+
+
                     </ul>
 
                 </div> 
@@ -84,26 +85,27 @@
             <div class="container__user-profile">
                 <div class="frame__user-profile">
                     <h2 class="tittle__user-profile">Sale code detail</h2>
-                    <form class="form__user-profile" action="MainController" method="post">
+                    <form class="form__user-profile" action="MainController" method="post" accept-charset="utf-8">
                         <div class="user-infor full-name">
                             <span class="user-infor__tittle full-name__tittle">Code Id</span>
-                            <input type="text" class="input__user-profile full-name__input" name="codeid" value="${requestScope.CODE_DETAIL.codeID}" >
+                            <input type="hidden" name="codeID" value="${requestScope.CODE_DETAIL.codeID}">
+                            <input type="text" class="input__user-profile full-name__input" name="newCodeID" value="${requestScope.CODE_DETAIL.codeID}">
                         </div>
                         <div class="user-infor email">
                             <span class="user-infor__tittle email__tittle">Name</span>
-                            <input type="text" class="input__user-profile email__input" name="name" value="${requestScope.CODE_DETAIL.codeName}" >
+                            <input type="text" class="input__user-profile email__input" name="codeName" value="${requestScope.CODE_DETAIL.codeName}" >
                         </div>
                         <div class="user-infor phonenumber">
                             <span class="user-infor__tittle phonenumber__tittle">Percentage</span>
-                            <input type="text" class="input__user-profile phonenumber__input" name="percent" value="${requestScope.CODE_DETAIL.percentage}" >
+                            <input type="text" class="input__user-profile phonenumber__input" name="percentage" value="${requestScope.CODE_DETAIL.percentage}" >
                         </div>
                         <div class="user-infor address">
                             <span class="user-infor__tittle adress__tittle">Created day</span>
-                            <input type="text" class="input__user-profile address__input" name="cday" value="${requestScope.CODE_DETAIL.createDate}" readonly>
+                            <input type="text" class="input__user-profile address__input" name="createDay" value="${requestScope.CODE_DETAIL.createDate}" readonly>
                         </div>
                         <div class="user-infor address">
                             <span class="user-infor__tittle adress__tittle">Exp day</span>
-                            <input type="text" class="input__user-profile address__input" name="eday" value="${requestScope.CODE_DETAIL.expDate}">
+                            <input type="text" class="input__user-profile address__input" name="expDay" value="${requestScope.CODE_DETAIL.expDate}">
                         </div>
                         <div class="user-infor address">
                             <c:choose>
@@ -115,17 +117,17 @@
                                 </c:otherwise>
                             </c:choose>
                         </div>
-                            <input type="hidden"  name="codeID" value="${sessionScope.user.userID}" >
-                            <input type="hidden"  name="action" value="SaleCode" >
-                            <input class="button-update" type="submit" name="perform"  value="Update">
+                        <input type="hidden"  name="codeID" value="${sessionScope.user.userID}" >
+                        <input type="hidden"  name="action" value="SaleCode" >
+                        <input class="button-update" type="submit" name="perform"  value="Update">
                     </form>  
-                        ${requestScope.UpSuccess}
+                    ${requestScope.UpSuccess}
                 </div>
             </div>
-                     
+
             <footer>
                 <div class="grid footer-border">
-                        
+
                     <h2 class="foot-tittle">Contact us</h2>
                     <div class="foot-info">    
                         <div class="foot-left-info">
@@ -150,11 +152,11 @@
                                     <a href="" class="foot-right-info__product-link">Ipad</a>
                                     <a href="" class="foot-right-info__product-link">Mac</a>
                                     <a href="" class="foot-right-info__product-link">Others</a>
-                            </div>
-                            <div class="foot-right-info__policy">
+                                </div>
+                                <div class="foot-right-info__policy">
                                     <a href="" class="foot-right-info__policy-link">Privacy Policies</a>
                                     <a href="" class="foot-right-info__policy-link">Sale and refund</a>
-                            </div>
+                                </div>
                             </div>
                         </div>      
                     </div>
