@@ -19,58 +19,60 @@ import utils.DBConnect;
  * @author phath
  */
 public class SaleCodeDAO {
-    public List<SaleCodeDTO> getSaleCodeList(boolean codeStatus) throws SQLException{
+
+    public List<SaleCodeDTO> getSaleCodeList(boolean codeStatus) throws SQLException {
         List<SaleCodeDTO> list = null;
         Connection conn = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
         try {
             conn = DBConnect.makeConnection();
-            if(conn!=null){
+            if (conn != null) {
                 String sql = "SELECT codeID, percentage, codeName, createDate, expDate, codeStatus"
                         + " FROM tblSaleCode WHERE codeStatus = ?";
                 stm = conn.prepareStatement(sql);
                 stm.setBoolean(1, codeStatus);
                 rs = stm.executeQuery();
-                while(rs.next()){
+                while (rs.next()) {
                     String codeID = rs.getString("codeID");
                     String percentage = rs.getString("percentage");
                     String codeName = rs.getString("codeName");
                     String createDate = rs.getString("createDate");
                     String expDate = rs.getString("expDate");
-                    if(list == null){
+                    if (list == null) {
                         list = new ArrayList<>();
                     }
-                    list.add(new SaleCodeDTO(codeID, codeName, percentage, createDate, expDate,codeStatus));
+                    list.add(new SaleCodeDTO(codeID, codeName, percentage, createDate, expDate, codeStatus));
                 }
             }
-        } finally{
-            if(rs!=null){
+        } finally {
+            if (rs != null) {
                 rs.close();
             }
-            if(stm!=null){
+            if (stm != null) {
                 stm.close();
             }
-            if(conn!=null){
+            if (conn != null) {
                 conn.close();
             }
         }
         return list;
     }
-    public SaleCodeDTO getCode(String codeID){
+
+    public SaleCodeDTO getCode(String codeID) {
         SaleCodeDTO code = new SaleCodeDTO();
         Connection conn = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
         try {
             conn = DBConnect.makeConnection();
-            if(conn!=null){
-                String sql ="SELECT codeName, percentage, createDate, expDate, codeStatus "
+            if (conn != null) {
+                String sql = "SELECT codeName, percentage, createDate, expDate, codeStatus "
                         + " FROM tblSaleCode WHERE codeID LIKE ?";
                 stm = conn.prepareStatement(sql);
-                stm.setString(1, "%"+codeID+"%");
-                rs=stm.executeQuery();
-                while(rs.next()){
+                stm.setString(1, "%" + codeID + "%");
+                rs = stm.executeQuery();
+                while (rs.next()) {
                     String codeName = rs.getString("codeName");
                     String percentage = rs.getString("percentage");
                     String createDate = rs.getString("createDate");
@@ -79,14 +81,37 @@ public class SaleCodeDAO {
                     code = new SaleCodeDTO(codeID, codeName, percentage, createDate, expDate, codeStatus);
                 }
             }
-                
+
         } catch (Exception e) {
         }
         return code;
     }
-    public boolean updateSaleCode(SaleCodeDTO code){
+
+    public boolean updateSaleCode(SaleCodeDTO code, String newCodeID) throws SQLException {
         boolean check = false;
-        
+        Connection conn = null;
+        PreparedStatement stm = null;
+        try {
+            conn = DBConnect.makeConnection();
+            if (conn != null) {
+                String sql = "UPDATE tblSaleCode SET percentage = ?, codeName = ?, expDate = ? , userID = ?"
+                        + "WHERE codeID = ? ";
+                stm =conn.prepareStatement(sql);
+                stm.setString(1, code.getPercentage());
+                stm.setString(2, code.getCodeName());
+                stm.setString(3, code.getExpDate());
+                stm.setString(4, newCodeID);
+                stm.setString(5, code.getCodeID());
+                check =stm.executeUpdate() >0;
+            }
+        } finally{
+            if(stm!=null){
+                stm.close();
+            }
+            if(conn!=null){
+                conn.close();
+            }
+        }
         return check;
     }
 }

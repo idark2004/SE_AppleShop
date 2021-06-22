@@ -30,6 +30,13 @@ public class SaleCodeDTO {
         this.codeStatus = codeStatus;
     }
 
+    public SaleCodeDTO(String codeID, String codeName, String percentage, String expDate) {
+        this.codeID = codeID;
+        this.codeName = codeName;
+        this.percentage = percentage;
+        this.expDate = expDate;
+    }
+
     public boolean isCodeStatus() {
         return codeStatus;
     }

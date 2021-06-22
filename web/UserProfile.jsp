@@ -4,8 +4,8 @@
     Author     : ADMIN
 --%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -161,7 +161,7 @@
                     <h2 class="tittle__user-profile">User profile</h2>
                     <c:if test="${requestScope.UpSuccess !=null}"><span class="notify-update"><i class="fas fa-check-circle"></i>
                             ${requestScope.UpSuccess}</span></c:if>
-                    <form class="form__user-profile" action="MainController" method="post">
+                    <form class="form__user-profile" action="MainController" method="post" accept-charset="UTF-8">
                         <div class="user-infor full-name">
                             <span class="user-infor__tittle full-name__tittle">Fullname</span>
                             <input type="text" class="input__user-profile full-name__input" name="name" value="${sessionScope.user.name}" readonly>
