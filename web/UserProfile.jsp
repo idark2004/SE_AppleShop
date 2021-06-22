@@ -168,7 +168,7 @@
                     <form class="form__user-profile" action="MainController" method="post" accept-charset="UTF-8">
 
                         <div class="user-infor full-name">
-                            <span class="user-infor__tittle full-name__tittle">Tên đầy đủ</span>
+                            <span class="user-infor__tittle full-name__tittle">Full name</span>
                             <input type="text" class="input__user-profile full-name__input" name="name" value="${sessionScope.user.name}" readonly>
                         </div>
                         <div class="user-infor email">

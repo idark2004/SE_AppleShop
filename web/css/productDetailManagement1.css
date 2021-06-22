@@ -5,7 +5,7 @@ header{
     background-color: var(--bg-color);
     padding: 10px 0;
     display: flex;
-    
+    flex-wrap: wrap;
 }
 .frame__product-detail{
     background-color: var(--white-color);
@@ -235,6 +235,101 @@ header{
         margin-left: 10px;
         font-size: 1.5rem;
       }
+      .frame-discription{
+        background-color: var(--white-color);
+        padding: 10px 0;
+        position: relative;
+        width: 93%;
+        transform: translateX(3.5%);
+        border-radius: 3px;
+        margin-top: 20px;
+        margin-bottom: 30px;
+        box-shadow: 0 1px 10px rgba(0,0,0,0.5);
+        padding-bottom: 50px;
+        min-height:100px;
+      }
+      @media screen  and (max-width:600px){
+          .input-des{
+              width: 400px;
+             
+          }
+      }
+      .tittle-des{
+          font-size: 3rem;
+          text-align: center;
+        }
+        #activate-edit{
+            transform: translateX(20%);
+            margin: 10px 0;
+            font-size: 1.4rem;
+            padding: 10px;
+        }
+        @media screen and (max-width:600px){
+            #activate-edit{
+            transform: translateX(11%);
+                padding: 7px;
+            }
+            #la:after{
+                left: 7.1vw; 
+            }
+        }
+        .input-des{
+            border: 0px solid;   
+            width: 95%;
+            height: 200px;
+            font-size: 1.6rem;
+            margin: 0 10px 10px;
+            padding:10px 10px;
+            transform: translateX(2%);
+            overflow: hidden;
+            resize: none;
+            position: relative;
+        }
+        .input-des:focus{
+            outline: none;
+        }
+  
+        
+        .input-des:after {
+           content  : "";
+  position : absolute;
+  z-index  : 1;
+  bottom   : 0;
+  left     : 0;
+  pointer-events   : none;
+  background-image : linear-gradient(to bottom, 
+                    rgba(255,255,255, 0), 
+                    rgba(255,255,255, 1) 90%);
+  width    : 100%;
+  height   : 4em;
+          }
+      #ch{
+          display: none;
+      }
+      #la {
+            position: absolute;
+            top: 100%;
+        }
+      #la:after{
+          content: "Show More";
+/*          transform: translateX(50%);*/
+          color:#6A7FD9;
+          font-size: 1.6rem;
+          text-align: center;         
+          position: relative;
+          left: 31.1vw;         
+          bottom:40px;
+      }
+        #ch:checked + #la:after {
+          content: "Show Less";
+          }
+        #ch:checked ~ .input-des {
+           
+            
+        }
+        #ch:checked ~  .input-des:after {
+            width    : 0;
+        }
       @media screen and (max-width:1000px) {
         .container__product-detail{
             flex-direction: column;

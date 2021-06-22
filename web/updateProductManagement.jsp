@@ -17,7 +17,7 @@
         <link rel="stylesheet" href="css/mainHoang.css">
         <link rel="stylesheet" href="css/carticon.css">
         <link rel="stylesheet" href="css/cartListIcon.css">
-        <link rel="stylesheet" href="css/productDetailManagement.css">
+        <link rel="stylesheet" href="css/productDetailManagement1.css">
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -34,7 +34,7 @@
         };
         </script>
 </head>
-<body>
+<body >
     <div class="page__user-profile">
         <header>
          <div class="shop-logo">
@@ -287,8 +287,90 @@
                     <input type="submit" name="action" value="Create new option" class="submit-option">
                 </form>
             </div>
-        </div>
+               <div class="frame-discription">
+                   <h2 class="tittle-des" >Description</h2>
+                   <button id="activate-edit" onclick="editMode()">Change to Edit Mode</button>
+                   <input id="ch" type="checkbox" onchange="textResize()" >
+                   <label  for="ch" id="la"></label>                  
+                   <textarea class="input-des" id="input-des" name="des"  readonly>
+                    Google LLC là một công ty công nghệ đa quốc gia của Mỹ, chuyên về các dịch vụ và sản phẩm liên quan đến Internet, bao gồm các công nghệ quảng cáo trực tuyến, công cụ tìm kiếm, điện toán đám mây, phần mềm và phần cứng. Đây được coi là một trong những công ty công nghệ Big Four, cùng với Amazon, Apple và Facebook.
 
+                    Google được thành lập vào năm 1998 bởi Larry Page và Sergey Brin trong khi họ là nghiên cứu sinh đã có bằng tiến sĩ tại Đại học Stanford ở California. Họ cùng nhau sở hữu khoảng 14% cổ phần và kiểm soát 56% quyền biểu quyết của cổ đông thông qua cổ phiếu ưu đãi. Họ đã hợp nhất Google thành một công ty tư nhân vào ngày 4 tháng 9 năm 1998. Một đợt chào bán công khai lần đầu (IPO) diễn ra vào ngày 19 tháng 8 năm 2004 và Google chuyển đến trụ sở chính tại Mountain View, California với tên Googleplex. Vào tháng 8 năm 2015, Google đã công bố kế hoạch tổ chức lại công ty với tư cách là một tập đoàn có tên là Alphabet Inc. Google là công ty con hàng đầu của Alphabet và sẽ tiếp tục là công ty ô dù vì lợi ích Internet của Alphabet. Sundar Pichai được bổ nhiệm làm CEO của Google, thay thế Larry Page trở thành CEO của Alphabet.
+
+                    Sự phát triển nhanh chóng của công ty kể từ khi thành lập đã kích hoạt một chuỗi các sản phẩm, mua lại để sáp nhập và hợp tác ngoài công cụ tìm kiếm cốt lõi của Google (Google Tìm kiếm). Nó cung cấp các dịch vụ được thiết kế cho công việc và năng suất (Google Docs, Google Sheets và Google Slides), email (Gmail/Inbox), lập lịch và quản lý thời gian (Lịch Google), lưu trữ đám mây (Google Drive), mạng xã hội (Google+), nhắn tin và trò chuyện video trực tiếp (Google Allo, Duo, Hangouts), dịch ngôn ngữ (Google Dịch), lập bản đồ và điều hướng (Google Maps, Waze, Google Earth, Chế độ xem phố), chia sẻ video (YouTube), ghi chú (Google Keep) và tổ chức và chỉnh sửa ảnh (Google Ảnh). Công ty dẫn đầu sự phát triển của hệ điều hành di động Android, trình duyệt web Google Chrome và Chrome OS, một hệ điều hành nhẹ dựa trên trình duyệt Chrome. Google đã ngày càng chuyển sang phần cứng; từ năm 2010 đến 2015, nó hợp tác với các nhà sản xuất điện tử lớn trong việc sản xuất các thiết bị Nexus của mình và đã phát hành nhiều sản phẩm phần cứng vào tháng 10 năm 2016, bao gồm điện thoại thông minh Google Pixel, loa thông minh Google Home, bộ định tuyến không dây Google Wifi và Daydream-tai nghe thực tế ảo. Google cũng đã thử nghiệm trở thành nhà cung cấp dịch vụ Internet (Google Fiber, Project Fi và Google Station).
+
+                    Google.com là trang web được truy cập nhiều nhất trên thế giới. Một số dịch vụ khác của Google cũng nằm trong top 100 trang web được truy cập nhiều nhất trên thế giới, bao gồm YouTube và Blogger. Google là thương hiệu có giá trị nhất thế giới tính đến năm 2017 nhưng đã nhận được sự chỉ trích đáng kể liên quan đến các vấn đề như lo ngại về quyền riêng tư, tránh thuế, chống độc quyền, kiểm duyệt và trung lập trong tìm kiếm. Tuyên bố sứ mệnh của Google là "tổ chức thông tin của thế giới", và khẩu hiệu không chính thức là "Don't be evil" (Đừng trở nên xấu xa) cho đến khi cụm từ này được xóa khỏi quy tắc ứng xử của công ty vào khoảng tháng 5 năm 2018, nhưng lại được đưa vào trở lại ngày 31 tháng 7 năm 2018.[8][9]
+
+
+                    Mục lục
+                    1	Lịch sử
+                    1.1	Ban đầu
+                    1.2	Tài chính (1998) và chào bán công khai lần đầu (2004)
+                    1.3	Phát triển
+                    1.4	2013 trở đi
+                    1.5	Mua lại và hợp tác
+                    1.5.1	2000-2009
+                    1.5.2	2010-Hiện tại
+                    1.6	Trung tâm dữ liệu Google
+                    1.7	Alphabet
+                    1.8	Phát hành cổ phiếu lần đầu
+                    2	Sự phát triển
+                    3	Các thương vụ mua bán và sự cộng tác
+                    3.1	Các thương vụ mua bán
+                    3.2	Sự cộng tác
+                    4	Sản phẩm và dịch vụ
+                    4.1	Quảng cáo
+                    4.2	Công cụ tìm kiếm
+                    4.3	Dịch vụ doanh nghiệp
+                    4.3.1	Vườn ươm doanh nghiệp
+                    4.4	Dịch vụ tiêu dùng
+                    4.4.1	Dịch vụ dựa trên web
+                    4.4.2	Phần mềm
+                    4.4.3	Phần cứng
+                    4.5	Dịch vụ Internet
+                    4.6	Sản phẩm khác
+                    4.7	API
+                    4.8	Các trang web khác
+                    4.9	Ứng dụng
+                    4.10	Sản phẩm phục vụ kinh doanh
+                    5	Các dịch vụ chính
+                    5.1	Chương trình
+                    5.2	Ứng dụng để bàn
+                    6	Chỉ trích
+                    7	Tham khảo
+                    8	Liên kết ngoài
+                    Lịch sử
+                    Bài chi tiết: Lịch sử Google
+                    Ban đầu
+
+                    Trang chủ ban đầu của Google có thiết kế đơn giản vì những người sáng lập công ty có ít kinh nghiệm về HTML, ngôn ngữ đánh dấu được sử dụng để thiết kế các trang web.
+                    Google ban đầu là một công trình nghiên cứu của Larry Page và Sergey Brin, hai nghiên cứu sinh bằng tiến sĩ tại trường Đại học Stanford, California vào tháng 1 năm 1996.
+
+                    Trong khi các công cụ tìm kiếm thông thường xếp hạng kết quả bằng cách đếm số lần tìm kiếm xuất hiện trên trang, hai lý thuyết đã đưa ra giả thuyết về một hệ thống tốt hơn phân tích mối quan hệ giữa các trang web. Họ gọi công nghệ mới này là PageRank; nó xác định mức độ liên quan của một trang web theo số lượng trang và tầm quan trọng của những trang được liên kết trở lại trang web gốc.
+
+                    Page và Brin ban đầu đặt biệt danh cho công cụ tìm kiếm mới của họ là "BackRub" (Gãi lưng) tại vì hệ thống này dùng các liên kết đến để ước tính tầm quan trọng của trang. Họ cũng tin rằng những trang có nhiều liên kết đến nhất từ các trang thích hợp khác sẽ là những trang thích hợp nhất. Cuối cùng, họ đã đổi tên thành Google; tên của công cụ tìm kiếm bắt nguồn từ một lỗi chính tả của từ "googol" có nghĩa là số 1 ​​đầu và theo sau là 100 số không, được chọn để biểu thị rằng công cụ tìm kiếm nhằm cung cấp số lượng lớn thông tin. Ban đầu, Google hoạt động dưới trang web của đại học Stanford với các tên miền google.stanford.edu và z.stanford.edu. Họ đã quyết định thử nghiệm giả thuyết trong nghiên cứu của họ, tạo nền móng cho công cụ Google hiện đại bây giờ. Tên miền www.google.com được đăng ký ngày 15 tháng 9 năm 1997. Họ chính thức thành lập công ty Google, Inc. ngày 4 tháng 9 năm 1998 tại một ga ra của nhà Susan Wojcicki (được thuê làm nhân viên đầu tiên của Google, Phó Chủ tịch cấp cao, phụ trách bộ phận quảng cáo) tại Menlo Park, California.
+
+                    Tài chính (1998) và chào bán công khai lần đầu (2004)
+
+                    Máy chủ đầu tiên của Google.
+                    Google ban đầu được tài trợ bởi khoản đóng góp 100.000 đô la tháng 8 năm 1998 từ Andy Bechtolsheim, đồng sáng lập của Sun Microsystems; tiền đã được đưa ra trước khi Google được hợp nhất. Google đã nhận được tiền từ ba nhà đầu tư thiên thần khác vào năm 1998: Jeff Bezos, người sáng lập Amazon.com, giáo sư khoa học máy tính David Cheriton và doanh nhân Ram Shriram.
+
+                    Sau một số khoản đầu tư nhỏ, từ cuối năm 1998 đến đầu năm 1999, một vòng tài trợ mới trị giá 25 triệu đô la đã được công bố vào ngày 7 tháng 6 năm 1999, với các nhà đầu tư lớn bao gồm các công ty đầu tư mạo hiểm Kleiner Perkins và Sequoia Capital.[10][11]
+
+                    Đầu năm 1999, Brin và Page quyết định họ muốn bán Google cho Excite. Họ đã đến gặp CEO Excite George Bell và đề nghị bán nó cho anh ta với giá 1 triệu đô la. Anh từ chối lời đề nghị. Vinod Khosla, một trong những nhà đầu tư mạo hiểm của Excite, đã nói họ giảm xuống còn 750.000 đô la, nhưng Bell vẫn từ chối.
+
+                    Chào bán công khai ban đầu của Google (IPO) diễn ra năm năm sau đó, vào ngày 19 tháng 8 năm 2004. Vào thời điểm đó, Larry Page, Serge Brin và Eric Schmidt đã đồng ý làm việc cùng nhau tại Google trong 20 năm, cho đến năm 2024.
+
+                    Tại đợt IPO, công ty đã chào bán 19.605.052 cổ phiếu với mức giá 85 USD/cổ phiếu. Cổ phần đã được bán theo một hình thức đấu giá trực tuyến bằng cách sử dụng một hệ thống được xây dựng bởi Morgan Stanley và Credit Suisse, người bảo lãnh cho thỏa thuận này. Việc bán 1,67 tỷ đô la đã mang lại cho Google vốn hóa thị trường hơn 23 tỷ đô la. Đến tháng 1 năm 2014, vốn hóa thị trường của nó đã tăng lên 397 tỷ đô la. Phần lớn trong số 271 triệu cổ phiếu vẫn nằm dưới sự kiểm soát của Google và nhiều nhân viên của Google đã trở thành triệu phú ngay lập tức. Yahoo!, một đối thủ cạnh tranh của Google, cũng được hưởng lợi vì sở hữu 8.4 triệu cổ phiếu Google trước khi IPO diễn ra.
+
+                    Đã có những lo ngại rằng IPO của Google sẽ dẫn đến những thay đổi trong văn hóa công ty. Lý do dao động từ áp lực của cổ đông đối với việc giảm lợi ích của nhân viên cho đến việc nhiều giám đốc điều hành của công ty sẽ trở thành triệu phú ngay lập tức. Để trả lời cho mối quan tâm này, đồng sáng lập Brin và Page đã hứa trong một báo cáo cho các nhà đầu tư tiềm năng rằng IPO sẽ không thay đổi văn hóa của công ty. Năm 2005, các bài báo trên The New York Times và các nguồn khác bắt đầu cho thấy Google đã mất đi tính chống đối, không có triết lý độc ác. Trong nỗ lực duy trì văn hóa độc đáo của công ty, Google đã chỉ định một Giám đốc Văn hóa, người cũng là Giám đốc Nhân sự. Mục đích của Giám đốc Văn hóa là phát triển và duy trì văn hóa và làm việc theo những cách để giữ đúng với các giá trị cốt lõi mà công ty được thành lập: một tổ chức phẳng với môi trường hợp tác hòa nhập. Google cũng đã phải đối mặt với các cáo buộc về chủ nghĩa phân biệt giới tính và tuổi tác từ các nhân viên cũ. Vào năm 2013, một vụ kiện tập thể chống lại một số công ty ở Thung lũng Silicon, bao gồm Google, đã được đệ trình vì các thỏa thuận đã hạn chế việc tuyển dụng nhân viên công nghệ cao.
+
+                    Cổ phiếu hoạt động tốt sau IPO, với cổ phiếu lần đầu tiên đạt 350 đô la vào ngày 31 tháng 10 năm 2007, chủ yếu vì doanh thu và thu nhập mạnh mẽ trên thị trường quảng cáo trực tuyến. Sự tăng vọt của giá cổ phiếu được thúc đẩy chủ yếu bởi các nhà đầu tư cá nhân, trái ngược với các nhà đầu tư tổ chức lớn và các quỹ tương hỗ. Cổ phiếu GOOG được chia thành cổ phiếu GOOG loại C và cổ phiếu GOOGL loại A. Công ty được liệt kê trên sàn giao dịch chứng khoán NASDAQ với các ký hiệu GOOGL và GOOG và trên sàn giao dịch chứng khoán Frankfurt dưới ký hiệu GGQ1. Các ký hiệu này hiện đề cập đến công ty cổ phần của Alphabet Inc., kể từ quý IV năm 2015.
+                   </textarea>     
+                </div>   
+               
+        </div>
+       
         <footer>
             <div class="grid footer-border">
                     
@@ -328,3 +410,40 @@
         </footer>
     </div>
 </body>
+    <script>
+        function textResize() {
+        var elmnt = document.getElementById("input-des");
+        var y = elmnt.scrollHeight;
+        var x = elmnt.scrollWidth;
+        var height = y+"px";
+        if(document.getElementById("ch").checked) {
+            elmnt.style.height = height;   
+        }
+        else{
+            elmnt.style.height = "200px" ;
+        }
+      }
+      function editMode(){
+          var btn = document.getElementById("activate-edit");
+          var elmnt = document.getElementById("input-des");
+          var la = document.getElementById("la");
+          var y = elmnt.scrollHeight;
+          var height = y+"px";
+          if(btn.innerHTML === "Change to Edit Mode"){
+            elmnt.style.height = height;
+            elmnt.removeAttribute("readonly");  
+            elmnt.style.borderWidth = "1px";
+            la.style.display = "none";
+            btn.innerHTML = "Change to View Mode";
+          }
+          else{
+            elmnt.style.height = null;
+            elmnt.readOnly = true;  
+            elmnt.style.borderWidth = null;
+            la.style.display = null;
+            btn.innerHTML = "Change to Edit Mode";
+          }
+         
+      }
+    </script>
+</html>
