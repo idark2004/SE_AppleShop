@@ -29,7 +29,7 @@ public class UpdateUserController extends HttpServlet {
         HttpSession session = request.getSession();
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-        try{
+        try{  
             UserDTO user= (UserDTO) session.getAttribute("user");
             user.setAddress(request.getParameter("address"));
             user.setPhone(request.getParameter("phone"));

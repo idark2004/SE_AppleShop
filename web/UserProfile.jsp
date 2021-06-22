@@ -16,7 +16,8 @@
     <link rel="stylesheet" href="css/cartListIcon.css">
     <link href="fonts/fontawesome-free-5.15.3-web/css/all.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    
         <% 
           String uri = request.getRequestURI();
           int lastIndex = uri.lastIndexOf("/");
@@ -161,9 +162,9 @@
                     <h2 class="tittle__user-profile">User profile</h2>
                     <c:if test="${requestScope.UpSuccess !=null}"><span class="notify-update"><i class="fas fa-check-circle"></i>
                             ${requestScope.UpSuccess}</span></c:if>
-                    <form class="form__user-profile" action="MainController" method="post">
+                    <form class="form__user-profile" action="MainController" >
                         <div class="user-infor full-name">
-                            <span class="user-infor__tittle full-name__tittle">Fullname</span>
+                            <span class="user-infor__tittle full-name__tittle">Tên đầy đủ</span>
                             <input type="text" class="input__user-profile full-name__input" name="name" value="${sessionScope.user.name}" readonly>
                         </div>
                         <div class="user-infor email">
@@ -182,6 +183,8 @@
                             <input type="hidden"  name="action" value="UpdateProfile" >
                         <button class="button-update"><a class ="link-resPass" href="changePass.jsp">Change Password</a></button>
                         <button class="button-submit button-update" type="submit"  >Update Profile</button>
+                       
+
                     </form>  
                         
                 </div>
