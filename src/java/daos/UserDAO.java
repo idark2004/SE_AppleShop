@@ -270,7 +270,7 @@ public class UserDAO {
                 stm.setString(4, formatter.format(currentDate));
                 stm.setBoolean(5, Boolean.parseBoolean(user.getStatus()));
                 stm.setString(6, user.getRoleID());
-                stm.executeQuery();
+                stm.execute();
             }
         } catch (Exception e) {
         } finally {

@@ -41,6 +41,7 @@ public class MainController extends HttpServlet {
     private static final String SUBMITCOMMENT="AddCommentController";
     private static final String CHANGEPASS="ChangePasswordController";
     private static final String GOOGLE="GoogleSignInController";
+    private static final String SALECODE="SaleCodeController";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {        
@@ -114,6 +115,9 @@ public class MainController extends HttpServlet {
                     break;
                 case "Google":
                     url = GOOGLE;
+                    break;
+                case"SaleCode":
+                    url = SALECODE;
                     break;
                 default:
                     url="Homepage.jsp";

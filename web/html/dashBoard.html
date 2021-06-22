@@ -1,11 +1,9 @@
-<%-- 
-    Document   : dashBoard
-    Created on : Jun 18, 2021, 11:12:52 AM
-    Author     : anime
---%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
 <html>
 
 <head>
@@ -17,7 +15,7 @@
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/mainHoang.css">
-    <link rel="stylesheet" href="css/mainP.css">
+    <link rel="stylesheet" href="css/mainPhuc.css">
     <link rel="stylesheet" href="css/userList.css">
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="bootstrap-5.0.1-dist/css/bootstrap.css">
@@ -79,7 +77,6 @@
                 <a class="product-link" href="">Add a product</a>
                 <a class="product-link" href="">Order list</a>
                 <a class="product-link" href="">User list</a>
-                <a class="product-link" href="MainController?action=SaleCode&codeStatus=True">Sale Code list</a>
             </div>
         </div>
     </div>
@@ -412,7 +409,7 @@
     var myPieChart = new Chart(ctx, {
         type: 'pie',
         data: {
-            labels: ["${requestScope.hello}", "${requestScope.hello1}", "${requestScope.hello2}", "${requestScope.hello3}"],
+            labels: ["Blue", "Red", "Yellow", "Green"],
             datasets: [{
                 data: [12.21, 15.58, 11.25, 8.32],
                 backgroundColor: ['#007bff', '#dc3545', '#ffc107', '#28a745'],
@@ -470,4 +467,3 @@
         });
     })(jQuery); // End of use strict
 </script>
-
