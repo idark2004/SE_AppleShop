@@ -195,7 +195,7 @@
                                             <a href="MainController?action=UpdateProductManagement&productID=${product.productID.trim()}" class="managermenu-item">
                                                 Update Product
                                             </a>
-                                            <a href="MainController?action=ProductDetailManagement&productID=${product.productID.trim()}" class="managermenu-item">
+                                            <a href="MainController?action=ProductDetail&productID=${product.productID}" class="managermenu-item">
                                                 Product detail
                                             </a>
                                             <a href="" class="managermenu-item">

@@ -3,22 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jav;
+package controller;
 
+import daos.SaleCodeDAO;
+import dtos.SaleCodeDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author anime
+ * @author phath
  */
-@WebServlet(name = "JavController", urlPatterns = {"/JavController"})
-public class JavController extends HttpServlet {
+public class SaleCodeController extends HttpServlet {
+
+    private static final String ERROR = "error.jsp";
+    private static final String LIST = "saleCodeList.jsp";
+    private static final String VIEW = "saleCodeDetail.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,7 +36,38 @@ public class JavController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+        String url = ERROR;
+        String perform = request.getParameter("perform");
+        boolean codeStatus = Boolean.parseBoolean(request.getParameter("codeStatus"));
+        String codeID = request.getParameter("codeID");
+        try {
+            SaleCodeDAO dao = new SaleCodeDAO();
+            SaleCodeDTO code = new SaleCodeDTO();
+            if (perform == null) {                
+                List<SaleCodeDTO> list = dao.getSaleCodeList(codeStatus);
+                if (list != null) {
+                    request.setAttribute("CODE_LIST", list);
+                    url = LIST;
+                }
+            } else {
+                switch (perform) {
+                    case "View":
+                        code = dao.getCode(codeID);
+                        request.setAttribute("CODE_DETAIL", code);
+                        url = VIEW;
+                        break;
+                    case "Update":
+                        break;
+                    case "Delete":
+                        break;
+                }
+            }
+
+        } catch (Exception e) {
+            request.setAttribute("ERROR", e.toString());
+        } finally {
+            request.getRequestDispatcher(url).forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

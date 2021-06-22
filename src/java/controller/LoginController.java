@@ -22,8 +22,10 @@ public class LoginController extends HttpServlet {
 
 //    private static final String SUCCESS = "MainController";
 //    private static final String ERROR = "MainController?action=LoginForm";
-    private static final String SUCCESS ="Homepage.jsp";
+    private static final String USER = "Homepage.jsp";
     private static final String ERROR = "loginForm.jsp";
+    private static final String MAD = "dashBoard.jsp";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -38,35 +40,37 @@ public class LoginController extends HttpServlet {
         HttpSession session = request.getSession();
         System.err.println("Run Through LoginController");
         response.setContentType("text/html;charset=UTF-8");
-        String url=ERROR;
-        try{
+        String url = ERROR;
+        try {
             String uname = request.getParameter("uname");
             String psw = request.getParameter("psw");
 
             boolean IsAUser = false; //xac thuc co hay khong
             UserDAO ud = new UserDAO();
-            
-            UserDTO u= ud.checkLogin(uname, psw);
-            if (u!=null){
-                IsAUser=true;
+
+            UserDTO u = ud.checkLogin(uname, psw);
+            if (u != null) {
+                IsAUser = true;
             }
-            
-            if (IsAUser){//neu co trong db
+
+            if (IsAUser) {//neu co trong db
                 session.setAttribute("user", u);
-                url=SUCCESS;
-                request.setAttribute("ERRORNOTLOGIN", "");
-                request.setAttribute("success","true");
-                request.setAttribute("username",u.getName());
-                request.setAttribute("userid",u.getUserID());
-            }
-            else {//khong co
+                if (u.getRoleID().contains("AD") || u.getRoleID().contains("MN")) {
+                    url = MAD;
+                } else {
+                    url = USER;
+                }
+                request.setAttribute("success", "true");
+                request.setAttribute("username", u.getName());
+                request.setAttribute("userid", u.getUserID());
+            } else {//khong co
                 System.out.println("WRONG");
                 request.setAttribute("ERROR", "Invalid username or password");
             }
         } catch (Exception e) {
-            log ("ERROR at LoginController: " + e.getMessage());
+            log("ERROR at LoginController: " + e.getMessage());
         } finally {
-            System.out.println("This is the username: " + session.getAttribute("user"));
+            System.out.println("This is the user: " + session.getAttribute("user"));
             request.getRequestDispatcher(url).forward(request, response);
         }
     }
