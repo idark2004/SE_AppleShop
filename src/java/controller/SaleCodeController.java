@@ -43,11 +43,17 @@ public class SaleCodeController extends HttpServlet {
         try {
             SaleCodeDAO dao = new SaleCodeDAO();
             SaleCodeDTO code = new SaleCodeDTO();
+            System.out.println(perform);
             if (perform == null) {                
                 List<SaleCodeDTO> list = dao.getSaleCodeList(codeStatus);
                 if (list != null) {
+                    request.setAttribute("ERROR", "list not null");
+                   
                     request.setAttribute("CODE_LIST", list);
                     url = LIST;
+                }
+                else {
+                    request.setAttribute("ERROR","list null");
                 }
             } else {
                 switch (perform) {

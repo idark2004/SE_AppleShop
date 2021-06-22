@@ -27,8 +27,8 @@ public class SaleCodeDAO {
         try {
             conn = DBConnect.makeConnection();
             if(conn!=null){
-                String sql = "SELECT codeID, percentage, codeName, createDate, expDate, codeStatus"
-                        + " FROM tblSaleCode WHERE codeStatus = ?";
+                String sql = "SELECT codeID, percentage, codeName, createDate, expDate, codeStatus "
+                        + " FROM tblSaleCode WHERE codeStatus = ? ";
                 stm = conn.prepareStatement(sql);
                 stm.setBoolean(1, codeStatus);
                 rs = stm.executeQuery();

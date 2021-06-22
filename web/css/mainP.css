@@ -146,6 +146,7 @@
     min-width: 120px;
     margin: 0;
     font-size: 1.7rem;
+    transform: translateY(10px);
 }
 .button-update{
     width:41%;

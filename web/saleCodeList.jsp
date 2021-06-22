@@ -116,24 +116,21 @@
                                                     <td>${code.createDate}</td>
                                                     <td>${code.expDate}</td>
                                                     <td style="width: 20%;">
+                                                       
                                                         <a href="MainController?action=SaleCode&perform=View&codeID=${code.codeID}" class="table-link text-warning">
                                                             <span class="fa-stack">
                                                                 <i class="fa fa-square fa-stack-2x"></i>
                                                                 <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
                                                             </span>
                                                         </a>
-                                                        <!--<a href="" class="table-link text-info">
-                                                            <span class="fa-stack">
+                                                        
+                                                        <a href="MainController?action=SaleCode&perform=Delete" class="table-link text-danger">
+                                                            <span class="fa-stack fa-1x">
                                                                 <i class="fa fa-square fa-stack-2x"></i>
-                                                                <i class="fas fa-pencil-alt"></i>
-                                                            </span>
-                                                        </a> -->
-                                                        <a href="MainController?action=SaleCode&perform=Delete" class="table-link danger">
-                                                            <span class="fa-stack">
-                                                                <i class="fa fa-square fa-stack-2x"></i>
-                                                                <i class="fas fa-trash"></i>
+                                                                <i class="fa fa-trash fa-stack-1x fa-inverse"></i>
                                                             </span>
                                                         </a>
+                                                            
                                                     </td>
                                                 </tr>                                    
                                             </tbody>
