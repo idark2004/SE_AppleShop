@@ -112,7 +112,7 @@ header{
     .input__radio-color:checked + label span i {
         opacity: 1;
       }
-      .color-option:hover .remove-btn{
+      .option-color:hover .remove-btn{
           display: block;
       }
       .remove-btn{
@@ -153,17 +153,20 @@ header{
       }
       ul.list-hardware-option li{
         display: inline;
-    
+    position: relative;
     }
     .list-hardware-option{
         width: 100%;
         padding-left: 0;
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
     }
     .hardware-item{
-        position: relative;
-        height: 100px;
+        margin: 10px 0;
+        width: 10vw;
     }
-    .hardwar__span:hover .remove-btn{
+    .hardware-item:hover .remove-btn{
         display: block;
     }
     .hardware__lable{
@@ -183,10 +186,10 @@ header{
         border-radius: 4px;
         display: inline-block;
         margin-top:10px ;
-        width:30%;
+        width:90%;
     }
     .hardwar__span p {
-        margin-top: 10%;
+        margin-top: 4%;
         transform: translateX(-15%);
         display: inline-block;
         text-align: center;
@@ -252,6 +255,18 @@ header{
           .input-des{
               width: 400px;
              
+          }
+      }
+       @media screen  and (max-width:1000px){
+           .frame__product-detail{
+              order: 1;
+          }
+          .frame-discription{
+              order: 2;
+          }
+         
+          .spec-frame{
+              order:3;
           }
       }
       .tittle-des{

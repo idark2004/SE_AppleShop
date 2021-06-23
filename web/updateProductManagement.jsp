@@ -216,10 +216,10 @@
                         </div>
                         <div class="hardware-list">
                             <p class="hardware-tittle">Hardware:</p>
-                            <ul class="list-hardware-option">                      
+                            <div class="list-hardware-option">                      
                                 <c:set var="i" value="1" scope="page"/>
                                     <c:forEach var="hardware" items="${requestScope.hardware}">
-                                    <li class="hardware-item">
+                                    <div class="hardware-item">
                                         <c:if test = "${hardware.specID.trim() == requestScope.specID}">
                                             <input class="input__radio-hardware" onClick="window.location = 'MainController?action=UpdateProductManagement&productID=${product.productID.trim()}&color=${requestScope.colorChosen}&specID=${hardware.specID.trim()}';" type="radio" name="hardware" id="hardware__option-${i}" value="${hardware.ram}-${hardware.storage}" checked required>
                                         </c:if>
@@ -230,13 +230,12 @@
                                             <span class="hardwar__span"><p>${hardware.ram}-${hardware.storage}
                                                     <br><strong><fmt:formatNumber type="number" maxFractionDigits = "0" value="${hardware.price}" /> VND</strong></p>
                                             </span>
-                                        </label>
-                                        <c:set var="i" value="${i + 1}" scope="page"/>
+                                        </label>                   
                                         <span class="remove-btn"><a href="youtube.com" class="remove-link">Remove option</a></span>
-                                    </li>
-                                    </c:forEach>
-                                            
-                            </ul>
+                                    </div>
+                                    <c:set var="i" value="${i + 1}" scope="page"/>
+                                    </c:forEach>                                           
+                            </div>
                         </div>
                         <c:if test="${requestScope.spec!=null}">
                         <div class="product-infor product-price">
