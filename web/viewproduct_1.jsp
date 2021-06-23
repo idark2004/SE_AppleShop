@@ -222,7 +222,7 @@
                                                 ${product.name}
                                             </h4>
                                             <div class="home__product-item--price">
-                                                <span class="home__product-item--current-price"><fmt:formatNumber type="number" maxFractionDigits = "0" value="${product.price}" /></span>
+                                                <span style="font-size: 1.3rem;">From </span><span class="home__product-item--current-price"><fmt:formatNumber type="number" maxFractionDigits = "0" value="${product.price}" /></span>
                                                 <a href="${product.productID}" class="home__product-add-to-cart--link"><i class="add-cart__icon fas fa-cart-plus"></i></a>
                                             </div>
                                         </a>  
