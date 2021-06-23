@@ -624,7 +624,7 @@ ul.list-hardware-option li{
     box-shadow: 0 1px 20px rgba(0, 0, 0, 0.05);
 }
 .form-review{
-
+transform: translateX(10px);
 }
 .form-comment__container{
     transform: translateX(3%);
@@ -657,9 +657,9 @@ ul.list-hardware-option li{
 .pComment{
     width: 100%;
     height: 100px;
-    width: 900px;
+    width: 66vw;
     margin-bottom: 10px;
-
+    resize: none;
 }
 .pComment::placeholder{
     font-size: 1.6rem;
@@ -672,6 +672,11 @@ ul.list-hardware-option li{
     font-size: 1.6rem;
     margin-bottom: 20px;
 }
+#reviewer-name{
+    margin-bottom: 10px;
+    line-height: 2rem;
+    font-size: 1.6rem;
+}
 .review__tittle{
     font-size: 3rem;
     font-weight: 700;
@@ -679,6 +684,14 @@ ul.list-hardware-option li{
 }
 .review-list{
     list-style: none;
+}
+@media screen and (max-width:600px){
+    .pComment{
+        width: 68vw;
+    }
+    .review-list{
+        transform: translateX(-18px);
+    }
 }
 .reivew-row{
     background-color: var(--white-color);
