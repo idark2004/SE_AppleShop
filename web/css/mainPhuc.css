@@ -375,11 +375,18 @@ input[type="radio"] {
 /* margin-bottom: 30px; 
 }  */ 
 ul.list-hardware-option li{
-    display: inline;
-
+     width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
 }
 .list-hardware-option{
     padding-left: 0;
+}
+.hardware-item{
+    margin: 10px 0;
+    width: 11vw;
+    display: inline-block;
 }
 .hardware__lable{
     color: var(--black-color);
@@ -398,14 +405,16 @@ ul.list-hardware-option li{
     box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.33);
     border-radius: 4px;
     display: inline-block;
-    margin-top:10px ;
-    width:30%;
+        margin-top:10px ;
+        width:90%;
 }
 .hardwar__span p {
-    transform: translateY(-60%);
+/*    transform: translateX(-14%);*/
+    transform: translate(-14%,-6px);
     display: inline-block;
     text-align: center;
-    width: 100%;
+    width: 140%;
+    margin: 0;
 }
 @media only screen and (max-width: 1065px) {
     .hardwar__span{
@@ -552,7 +561,7 @@ ul.list-hardware-option li{
           text-align: center;         
           position: relative;
           left: 31.1vw;         
-          bottom:38px;
+          bottom:25px;
       }
         #ch:checked + #la:after {
           content: "Show Less";

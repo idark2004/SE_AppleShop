@@ -196,11 +196,11 @@
                                         </div>
                                     </div>
                                     
-                                        <ul class="list-hardware-option">
+                                        <div class="list-hardware-option">
                                             
                                             <c:set var="i" value="1" scope="page"/>
                                             <c:forEach var="spec" items="${requestScope.spec}">
-                                            <li class="hardware-item">
+                                            <div class="hardware-item">
                                                 <c:if test = "${i == 1}">
                                                     <input class="input__radio-hardware" type="radio" name="hardware" id="hardware__option-${i}" value="${spec.ram}-${spec.storage}" checked required>
                                                 </c:if>
@@ -212,9 +212,9 @@
                                                             <br><strong><fmt:formatNumber type="number" maxFractionDigits = "0" value="${spec.price}" /> VND</strong></p></span>
                                                 </label>
                                                 <c:set var="i" value="${i + 1}" scope="page"/>
-                                            </li>
+                                            </div>
                                             </c:forEach>
-                                        </ul>
+                                        </div>
                                 <div class="form-submit__container">
                                     <input type="submit" class="input__submit" name="action" value="Add to cart" style="font-size: 1.6rem;font-weight: 500;">
                                     <input type="submit" class="input__submit" name="action" value="Buy Now" style="font-size: 1.6rem;font-weight: 500;">
@@ -232,7 +232,7 @@
                         <textarea class="input-des" id="input-des" readonly>
                                     ${requestScope.product.description}
                         </textarea>
-                       <div class="fadeout"></div>                    
+                                           
                 </div>
                 <div class="container__review">
                     <h3 class="review__tittle">Comment</h3>
