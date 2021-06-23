@@ -367,6 +367,7 @@
 
                     Cổ phiếu hoạt động tốt sau IPO, với cổ phiếu lần đầu tiên đạt 350 đô la vào ngày 31 tháng 10 năm 2007, chủ yếu vì doanh thu và thu nhập mạnh mẽ trên thị trường quảng cáo trực tuyến. Sự tăng vọt của giá cổ phiếu được thúc đẩy chủ yếu bởi các nhà đầu tư cá nhân, trái ngược với các nhà đầu tư tổ chức lớn và các quỹ tương hỗ. Cổ phiếu GOOG được chia thành cổ phiếu GOOG loại C và cổ phiếu GOOGL loại A. Công ty được liệt kê trên sàn giao dịch chứng khoán NASDAQ với các ký hiệu GOOGL và GOOG và trên sàn giao dịch chứng khoán Frankfurt dưới ký hiệu GGQ1. Các ký hiệu này hiện đề cập đến công ty cổ phần của Alphabet Inc., kể từ quý IV năm 2015.
                    </textarea>     
+                   <div class="fadeout"></div> 
                 </div>   
                
         </div>

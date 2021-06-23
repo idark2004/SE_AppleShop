@@ -14,7 +14,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Sign Up</title>
         <link rel="stylesheet" href="css/signupForm.css">
-        <link rel="stylesheet" href="css/mainP.css">  
+        <link rel="stylesheet" href="css/mainPhuc.css">  
         <link rel="stylesheet" href="css/base.css">      
         <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
         <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>

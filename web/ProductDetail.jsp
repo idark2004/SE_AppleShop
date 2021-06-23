@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="css/mainP.css">
+        <link rel="stylesheet" href="css/mainPhuc.css">
         <link rel="stylesheet" href="css/mainHoang.css">
         <link rel="stylesheet" href="css/base.css">
         <link rel="stylesheet" href="css/carticon.css">
@@ -227,12 +227,12 @@
                
                 <div class="container__description">
                     <h3 class="description__tittle">Description</h3>
-                            <div class="description__detail-container"><p class="description__detail">
+                        <input id="ch" type="checkbox" onchange="textResize()" >
+                        <label  for="ch" id="la"></label>   
+                        <textarea class="input-des" id="input-des" readonly>
                                     ${requestScope.product.description}
-                        </p>
-                    </div>    
-                    <p class="click__show-more" onclick="myFunction()" id="myBtn">Show more<i class=" click__show-more-icon fas fa-angle-down"></i></p>
-                    
+                        </textarea>
+                       <div class="fadeout"></div>                    
                 </div>
                 <div class="container__review">
                     <h3 class="review__tittle">Comment</h3>
@@ -343,4 +343,19 @@
         </div>
         </div>                 
     </body>
+    <script>
+        function textResize() {
+        var elmnt = document.getElementById("input-des");
+        var y = elmnt.scrollHeight;
+        var x = elmnt.scrollWidth;
+        var height = (y-50)+"px";
+        if(document.getElementById("ch").checked) {
+            
+            elmnt.style.height = height;   
+        }
+        else{
+            elmnt.style.height = "200px" ;
+        }
+      }
+      </script>
 </html>    

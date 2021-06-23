@@ -14,7 +14,7 @@
         <script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js'></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">    
         <link rel="stylesheet" href="css/base.css">
-        <link rel="stylesheet" href="css/mainP.css">     
+        <link rel="stylesheet" href="css/mainPhuc.css">     
         <link rel="stylesheet" href="css/mainHoang.css">
         <link rel="stylesheet" href="css/carticon.css">
         <link rel="stylesheet" href="css/cartListIcon.css">

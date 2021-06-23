@@ -14,7 +14,7 @@
     <title>Change Password</title>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <link rel="stylesheet" href="css/loginPage.css">
-    <link rel="stylesheet" href="css/mainP.css">
+    <link rel="stylesheet" href="css/mainPhuc.css">
     <link rel="stylesheet" href="css/base.css">
 </head>
 
