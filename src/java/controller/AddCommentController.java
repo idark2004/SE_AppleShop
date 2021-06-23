@@ -30,6 +30,7 @@ public class AddCommentController extends HttpServlet {
         System.out.println("go through?");
         String url = ERROR;
         try {
+            String aaaaaaaaaaaaaaaaaaa;
             String productId = request.getParameter("productID");
             String ownerName = request.getParameter("reviewer-name");
             String description = request.getParameter("pComment");
