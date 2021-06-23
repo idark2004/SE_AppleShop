@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="css/mainPhuc.css">
+        <link rel="stylesheet" href="css/mainP.css">
         <link rel="stylesheet" href="css/mainHoang.css">
         <link rel="stylesheet" href="css/base.css">
         <link rel="stylesheet" href="css/carticon.css">
@@ -236,6 +236,8 @@
                 </div>
                 <div class="container__review">
                     <h3 class="review__tittle">Comment</h3>
+                    <span class="btn__edit-comment"><a href="youtube.com" style="text-decoration: none;color: var(--black-color);">
+                            Edit mode</a></span>
                     <div class="form-comment__container">
                         <form action="MainController" class="form-review">
                             <lable for="reviewer-name" class="name-lable">Full Name</lable>
@@ -247,14 +249,20 @@
                         </form>
                      </div>
                     <ul class="review-list">
-                        <li class="reivew-row">
-                            <span class="review__reviewer-name">
-                                Binz
-                            </span>
-                            <p class="review__reviewer-comment">
-                               5 stars! Amazing Good Job Apple!
-                            </p>
-                        </li>
+                        <div review-item__container>
+                            <li class="reivew-row">
+                                <span class="review__reviewer-name">
+                                    Binz
+                                </span>
+                                <p class="review__reviewer-comment">
+                                   5 stars! Amazing Good Job Apple!
+                                </p>  
+                            </li>
+                            <ul class="review-option">
+                                <li class="review-option__item">Reply</li>
+                                <li class="review-option__item">Hide</li>                         
+                            </ul>
+                        </div>
                         <li class="reivew-row">
                             <span class="review__reviewer-name">
                                 Tran Dan
@@ -265,6 +273,10 @@
                                   cao của tổng thống Donald Trump
                             </p>
                         </li>
+                        <ul class="review-option">
+                            <li class="review-option__item">Reply</li>
+                            <li class="review-option__item">Hide</li>                         
+                        </ul>
                         <li class="reivew-row">
                             <span class="review__reviewer-name">
                                 Tran Dan
@@ -282,6 +294,10 @@
                                   ông Chúa Giê Su ổng nói tiếng Việt
                             </p>
                         </li>
+                        <ul class="review-option">
+                            <li class="review-option__item">Reply</li>
+                            <li class="review-option__item">Hide</li>                         
+                        </ul>
                         <li class="reivew-row">
                             <span class="review__reviewer-name">
                                 Huan Hoa Hong
@@ -300,6 +316,10 @@
                                     nhá, ăn cứt. Thế cho nó dễ!
                             </pd>
                         </li>
+                        <ul class="review-option">
+                            <li class="review-option__item">Reply</li>
+                            <li class="review-option__item">Hide</li>                         
+                        </ul>
                     </ul>
                 </div>
         </div> 
