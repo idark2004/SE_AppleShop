@@ -13,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -23,6 +24,7 @@ public class SaleCodeController extends HttpServlet {
     private static final String ERROR = "error.jsp";
     private static final String LIST = "saleCodeList.jsp";
     private static final String VIEW = "saleCodeDetail.jsp";
+    private static final String SUCCESS = "SaleCodeController";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,26 +44,26 @@ public class SaleCodeController extends HttpServlet {
         String perform = request.getParameter("perform");
         boolean codeStatus = Boolean.parseBoolean(request.getParameter("codeStatus"));
         String codeID = request.getParameter("codeID");
+
         try {
             SaleCodeDAO dao = new SaleCodeDAO();
             SaleCodeDTO code = new SaleCodeDTO();
-
+            HttpSession session = request.getSession();
             System.out.println(perform);
-            if (perform == null) {                
 
             if (perform == null) {
 
                 List<SaleCodeDTO> list = dao.getSaleCodeList(codeStatus);
                 if (list != null) {
                     request.setAttribute("ERROR", "list not null");
-                   
-                    request.setAttribute("CODE_LIST", list);
+
+                    session.setAttribute("CODE_LIST", list);
                     url = LIST;
-                }
-                else {
-                    request.setAttribute("ERROR","list null");
+                } else {
+                    request.setAttribute("ERROR", "list null");
                 }
             } else {
+                boolean check = false;
                 switch (perform) {
                     case "View":
                         code = dao.getCode(codeID);
@@ -74,16 +76,27 @@ public class SaleCodeController extends HttpServlet {
                         String percentage = request.getParameter("percentage");
                         String expDate = request.getParameter("expDate");
                         code = new SaleCodeDTO(codeID, codeName, percentage, expDate);
-                        boolean check = dao.updateSaleCode(code, newCodeID);
+                        check = dao.updateSaleCode(code, newCodeID);
                         if (check) {
                             url = VIEW;
                         }
                         break;
-                    case "Delete":
+                    case "DeActive":
+                        check = dao.deactiveSaleCode(codeID);
+                        if (check) {
+                            List<SaleCodeDTO> list = dao.getSaleCodeList(codeStatus);
+                            if (list != null) {
+                                request.setAttribute("ERROR", "list not null");
+
+                                session.setAttribute("CODE_LIST", list);
+                                url = LIST;
+                            } else {
+                                request.setAttribute("ERROR", "list null");
+                            }
+                        }
                         break;
                 }
             }
-          }
         } catch (Exception e) {
             request.setAttribute("ERROR", e.toString());
         } finally {

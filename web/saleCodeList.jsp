@@ -94,7 +94,7 @@
                     <div class="main-box no-header clearfix">
                         <div class="main-box-body clearfix">
                             <c:choose>
-                                <c:when test="${not empty requestScope.CODE_LIST}">
+                                <c:when test="${not empty sessionScope.CODE_LIST}">
                                     <div class="table-responsive">
                                         <table class="table user-list" id="myTable">
                                             <thead>
@@ -107,7 +107,7 @@
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
-                                            <c:forEach var="code" items="${requestScope.CODE_LIST}">
+                                            <c:forEach var="code" items="${sessionScope.CODE_LIST}">
                                             <tbody>
                                                 <tr>
                                                     <td>${code.codeID}</td>
@@ -124,7 +124,7 @@
                                                             </span>
                                                         </a>
                                                         
-                                                        <a href="MainController?action=SaleCode&perform=Delete" class="table-link text-danger">
+                                                        <a href="MainController?action=SaleCode&perform=DeActive&codeID=${code.codeID}" class="table-link text-danger">
                                                             <span class="fa-stack fa-1x">
                                                                 <i class="fa fa-square fa-stack-2x"></i>
                                                                 <i class="fa fa-trash fa-stack-1x fa-inverse"></i>
