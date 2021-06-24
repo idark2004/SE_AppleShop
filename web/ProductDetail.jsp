@@ -197,10 +197,10 @@
                                         </div>
                                     </div>
                                     
-                                        <div class="list-hardware-option>       
+                                        <div class="list-hardware-option" >       
                                             <c:set var="i" value="1" scope="page"/>
                                             <c:forEach var="spec" items="${requestScope.spec}">
-                                            <div class="hardware-item">
+                                            <div class="hardware-item " >
                                                 <c:if test = "${i == 1}">
                                                     <input class="input__radio-hardware" type="radio" name="hardware" id="hardware__option-${i}" value="${spec.ram}-${spec.storage}" checked required>
                                                 </c:if>
@@ -214,7 +214,7 @@
                                                 <c:set var="i" value="${i + 1}" scope="page"/>
                                             </div>
                                             </c:forEach>
-                                        </div>
+                                </div>
                                 <div class="form-submit__container">
                                     <input type="submit" class="input__submit" name="action" value="Add to cart" style="font-size: 1.6rem;font-weight: 500;">
                                     <input type="submit" class="input__submit" name="action" value="Buy Now" style="font-size: 1.6rem;font-weight: 500;">
@@ -262,7 +262,7 @@
                             <ul class="review-option">
                                 <li class="review-option__item">Hide</li> 
                                 <li class="review-option__item" 
-                                    onclick="replybutton(this)">Reply
+                                    onclick="replybutton(this)">
                                  
                                 </li>
                                 <form method="POST" class="reply-form d-none" id="comment-1-reply-form">
