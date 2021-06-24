@@ -4,6 +4,7 @@
     Author     : phath
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -11,13 +12,19 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Order History</title>
+    <c:set var="page" value="${pageContext.page}"></c:set>
+    <% 
+      String uri = request.getRequestURI();
+      int lastIndex = uri.lastIndexOf("/");
+      String resource = uri.substring(lastIndex + 1);
+    %>
 
-    <link rel="stylesheet" href="../css/base.css">
-    <link rel="stylesheet" href="../css/mainHoang.css">
-    <link rel="stylesheet" href="../css/footer.css">
-    <link rel="stylesheet" href="../css/orderList.css">
-    <link rel="stylesheet" href="../css/carticon.css">
-    <link rel="stylesheet" href="../css/cartListIcon.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/mainHoang.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/orderList.css">
+    <link rel="stylesheet" href="css/carticon.css">
+    <link rel="stylesheet" href="css/cartListIcon.css">
     <link href="fonts/fontawesome-free-5.15.3-web/css/all.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" />
@@ -188,6 +195,24 @@
                         <td class="table__row" style="width: 12%">Shipping</td>
                         <td class="table__row" style="width: 12%" ><a href=""><button  class="btn btn-secondary action-btn">View</button></a></td>                
                     </tr>
+                    <c:choose>
+                    <c:when test="${requestScope.ORDER_LIST != null}">
+                        <c:forEach var="order" items="${requestScope.ORDER_LIST}">
+                            <tr>
+                                <td class="table__row" style="width: 12%">${order.orderID}</td>
+                                <td class="table__row" style="width: 12%">${order.orderDate}</td>
+                                
+                                <td class="table__row" style="width: 12%">${order.address}</td>
+                                <td class="table__row" style="width: 12%"><fmt:formatNumber type="number" maxFractionDigits = "0" value="${order.price}"/></td>
+                                <td class="table__row" style="width: 12%">${order.status}</td>
+                                <td class="table__row" style="width: 12%"><a href="OrderDetailController?orderID=${order.orderID}"><button  class="btn btn-secondary action-btn">View</button></a><a href=""><button class="btn btn-success action-btn">Done</button></a></td>
+                            </tr>
+                        </c:forEach>
+                    </c:when>
+                        <c:otherwise>
+                            <h1>${requestScope.EMPTY_LIST.msg}</h1>
+                        </c:otherwise>
+                    </c:choose>
                  
                 </tbody>
               </table>

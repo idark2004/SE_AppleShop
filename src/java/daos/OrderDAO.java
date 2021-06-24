@@ -66,6 +66,53 @@ public class OrderDAO {
         return lst;
     }
     
+    public ArrayList<OrderDTO> getAllUserOrder(String userID) throws NamingException, SQLException {
+        Connection c = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        String sql = "SELECT orderID, orderDate, cusName, price, address, payMethod, status FROM tblOrders WHERE userID=?";
+
+        ArrayList<OrderDTO> lst = new ArrayList<>();
+
+        try {
+            c = DBConnect.makeConnection();
+            if (c != null) {
+                ps = c.prepareStatement(sql);
+                ps.setString(1, userID);
+                rs = ps.executeQuery();
+                
+                
+                if(rs != null) System.out.println("rs <> null");
+                else System.out.println("rs null");
+                
+                while (rs.next()) {
+                    OrderDTO o = new OrderDTO();
+                    o.setOrderID(rs.getString("orderID"));
+                    o.setOrderDate(rs.getString("orderDate"));
+                    o.setCusName(rs.getString("cusName"));
+                    o.setPrice(rs.getDouble("price"));
+                    o.setAddress(rs.getString("address"));
+                    o.setPayMethod(rs.getString("payMethod"));
+                    o.setStatus(rs.getString("status"));
+                    
+                    lst.add(o);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (c != null) {
+                c.close();
+            }
+        }
+        return lst;
+    }
+    
     public OrderDTO getOrder(String oid) throws NamingException, SQLException {
         Connection c = null; //doi tuong ket noi
         PreparedStatement ps = null; //doi tuong truy van

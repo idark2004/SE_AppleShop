@@ -77,7 +77,7 @@
             <div class="product-page">
                 <a class="product-link" href="" class="header-nav__item-active">Dashboard</a>
                 <a class="product-link" href="">Add a product</a>
-                <a class="product-link" href="">Order list</a>
+                <a class="product-link" href="MainController?action=OrderList">Order list</a>
                 <a class="product-link" href="">User list</a>
                 <a class="product-link" href="MainController?action=SaleCode&codeStatus=True">Sale Code list</a>
             </div>

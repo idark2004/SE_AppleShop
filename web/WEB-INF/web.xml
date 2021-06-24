@@ -126,6 +126,10 @@
         <servlet-name>SaleCodeController</servlet-name>
         <servlet-class>controller.SaleCodeController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>OrderHistoryController</servlet-name>
+        <servlet-class>controller.OrderHistoryController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AddCommentController</servlet-name>
         <url-pattern>/AddCommentController</url-pattern>
@@ -237,7 +241,7 @@
     </context-param>
     <context-param>
         <param-name>name</param-name>
-        <param-value>Bou Boi</param-value>
+        <param-value>Test</param-value>
     </context-param>
     <context-param>
         <param-name>pass</param-name>
@@ -254,6 +258,10 @@
     <servlet-mapping>
         <servlet-name>SaleCodeController</servlet-name>
         <url-pattern>/SaleCodeController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderHistoryController</servlet-name>
+        <url-pattern>/OrderHistoryController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
