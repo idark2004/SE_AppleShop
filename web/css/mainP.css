@@ -752,11 +752,15 @@ transform: translateX(10px);
     .btn__edit-comment{
         width: 14%;
     }
+    .reivew-row{
+        width: 86.6%;
+    }
 }
 .reivew-row{
     background-color: var(--white-color);
     padding: 10px 30px;
-    width: 97%;
+    margin-left: 40px;
+    width: 92.6%;
     border-radius: 4px;  
     box-shadow: 0 1px 20px rgba(0, 0, 0, 0.05);
 }
@@ -768,7 +772,39 @@ transform: translateX(10px);
 .review__reviewer-comment{
     font-size: 1.4rem;
 }
-
+.reply-form{
+    margin-left: 4.5%;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    display: none;
+}
+.input-reply{
+    width: 50%;
+    display: block;
+    margin-bottom: 10px;
+    transform: translateX(-10px);
+}
+.reply-submit{
+    margin-right: 5px;
+    margin-left: -10px;
+}
+.reply-item__container{
+    margin-left: 28px;
+}
+@media screen and (max-width:600px){
+    .pComment{
+        width: 68vw;
+    }
+    .review-list{
+        transform: translateX(-18px);
+    }
+    .btn__edit-comment{
+        width: 14%;
+    }
+    .reivew-row{
+        width: 86.6%;
+    }
+}
 
 /*footer css*/
 footer {

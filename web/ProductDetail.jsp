@@ -18,6 +18,7 @@
         <link href="fonts/fontawesome-free-5.15.3-web/css/all.css" rel="stylesheet">
         <meta name="viewport" content="width=device-width, initial-scale=1">
          <script type="text/javascript" src="js/main.js"></script>
+         
          <% 
           String uri = request.getRequestURI();
           int lastIndex = uri.lastIndexOf("/");
@@ -248,79 +249,128 @@
                             <input type="submit" name="action" class="input__comment-submit" value="Submit comment">
                         </form>
                      </div>
-                    <ul class="review-list">
+                    <div class="review-list">
                         <div review-item__container>
-                            <li class="reivew-row">
+                            <div class="reivew-row">
                                 <span class="review__reviewer-name">
-                                    Binz
+                                    Chủ shop
                                 </span>
                                 <p class="review__reviewer-comment">
-                                   5 stars! Amazing Good Job Apple!
-                                </p>  
+                                    GIảm giá 100% mại dô
+                                </p>
+                            </div>
+                            <ul class="review-option">
+                                <li class="review-option__item">Hide</li> 
+                                <li class="review-option__item" 
+                                    onclick="replybutton(this)">
+                                    Reply
+                                </li>
+                                <form method="POST" class="reply-form d-none" id="comment-1-reply-form">
+                                    <textarea class="input-reply" placeholder="Reply to comment" rows="4"></textarea>
+                                    <button class="reply-submit" type="submit">Submit</button>
+                                    <button type="button" onclick="closeForm(this)">Cancel</button>
+                                </form>
+                            </ul>
+                            
+                            
+                            <div id ="reply-1" class="reply-item__container">
+                                    <div class="reivew-row">
+                                       <span class="review__reviewer-name">
+                                           Customer
+                                       </span>
+                                       <p class="review__reviewer-comment">
+                                           Cú lừa à
+                                       </p>
+                                   </div>
+                                   <ul class="review-option">
+                                       <li class="review-option__item">Hide</li> 
+                                       <li class="review-option__item"
+                                           onclick="replybutton(this)">Reply
+                                       </li>
+                                       <form method="POST" class="reply-form d-none" id="comment-1-reply-form">
+                                            <textarea class="input-reply" placeholder="Reply to comment" rows="4"></textarea>
+                                            <button class="reply-submit" type="submit">Submit</button>
+                                            <button type="button" onclick="closeForm(this)" >Cancel</button>
+                                        </form>
+                                   </ul>
+                                
+                            </div>
+                        </div>
+                       <div review-item__container>
+                            <li class="reivew-row">
+                                <span class="review__reviewer-name">
+                                    Thang anh 69
+                                </span>
+                                <p class="review__reviewer-comment">
+                                        Ngành IT Việt Nam hiện nay ở đầu của sự phát triển. Có thể nói IT là vua
+                                    của các nghề. Vừa có tiền, có quyền. Vừa kiếm được nhiều $ lại được xã hội
+                                    trọng vọng.
+                                        Thằng em mình học bách khoa cơ khí, sinh năm 96. Tự mày mò học code 
+                                    rồi đi làm remote cho công ty Mỹ 2 năm nay.
+                                    Mỗi tối online 3-4 giờ là xong việc. Lương tháng 3k6. 
+                                    Nhưng thu nhập chính vẫn là từ nhận các project bên ngoài làm thêm. 
+                                    Tuần làm 2,3 cái nhẹ nhàng 9,10k tiền tươi thóc thật không phải đóng thuế. 
+                                    Làm gần được 3 năm mà nhà xe nó đã mua đủ cả. Nghĩ mà thèm.
+                                </p>
                             </li>
                             <ul class="review-option">
-                                <li class="review-option__item">Reply</li>
-                                <li class="review-option__item">Hide</li>                         
+                                <li class="review-option__item">Hide</li> 
+                                <li class="review-option__item"
+                                    onclick="replybutton(this)">Reply
+                                </li>
+                                <form method="POST" class="reply-form d-none" id="comment-1-reply-form">
+                                    <textarea class="input-reply" placeholder="Reply to comment" rows="4"></textarea>
+                                    <button class="reply-submit" type="submit">Submit</button>
+                                    <button type="button" onclick="closeForm(this)" >Cancel</button>
+                                </form>
                             </ul>
+                            
+                             <div id ="reply-1" class="reply-item__container">
+                                <li class="reivew-row">
+                                    <span class="review__reviewer-name">
+                                        Netizen
+                                    </span>
+                                    <p class="review__reviewer-comment">
+                                       Truất
+                                    </p>
+                                </li>
+                                <ul class="review-option">
+                                    <li class="review-option__item">Hide</li>       
+                                    <li class="review-option__item"
+                                        onclick="replybutton(this)">Reply
+                                    </li>
+                                    <form method="POST" class="reply-form d-none" id="comment-1-reply-form">
+                                    <textarea class="input-reply" placeholder="Reply to comment" rows="4"></textarea>
+                                    <button class="reply-submit" type="submit">Submit</button>
+                                    <button type="button" onclick="closeForm(this)" >Cancel</button>
+                                    </form>
+                                </ul>
+                                
+                            </div>
+                            <div id ="reply-2" class="reply-item__container">
+                                <li class="reivew-row">
+                                    <span class="review__reviewer-name">
+                                        Netizen
+                                    </span>
+                                    <p class="review__reviewer-comment">
+                                       Thôi thôi m đừng có mà bốc phét
+                                    </p>
+                                </li>
+                                <ul class="review-option">
+                                    <li class="review-option__item">Hide</li>     
+                                    <li class="review-option__item"
+                                        onclick="replybutton(this)">Reply
+                                    </li>
+                                    <form method="POST" class="reply-form d-none" id="comment-1-reply-form">
+                                    <textarea class="input-reply" placeholder="Reply to comment" rows="4"></textarea>
+                                    <button class="reply-submit" type="submit">Submit</button>
+                                    <button type="button" onclick="closeForm(this)" >Cancel</button>
+                                    </form>
+                                </ul>
+                                
+                            </div>
                         </div>
-                        <li class="reivew-row">
-                            <span class="review__reviewer-name">
-                                Tran Dan
-                            </span>
-                            <p class="review__reviewer-comment">
-                                Tui xin tự giới thiệu tui là Tiên Tri Vũ Trụ Trần Dần, cố vấn
-                                 tối cao của tổng thống Obama, hiện cũng là cố vấn tối
-                                  cao của tổng thống Donald Trump
-                            </p>
-                        </li>
-                        <ul class="review-option">
-                            <li class="review-option__item">Reply</li>
-                            <li class="review-option__item">Hide</li>                         
-                        </ul>
-                        <li class="reivew-row">
-                            <span class="review__reviewer-name">
-                                Tran Dan
-                            </span>
-                            <p class="review__reviewer-comment">
-                                Tiếc diên là năm 2003, tự nhiên tui cầ
-                                u ở trên nhà ở Phao sần palay, tự nhiên
-                                ấy 1 hiện tượng lạ, lúc đó tui mới thấy ủa
-                                 sao kì vậy, 1 cái hình tượng mà tui là 
-                                 đạo Phật, tui nói quý dị nghe tui là đạo 
-                                 Phật, tự nhiên tui thấy có trái tim màu 
-                                 hồng và có ánh hào quang ra sao, đó là mắt
-                                 y tại nghe chứ không phải là tui nằm chiêm 
-                                 bao, tui dụi mắt thêm 1 lần nữa thì tui thấy
-                                  ông Chúa Giê Su ổng nói tiếng Việt
-                            </p>
-                        </li>
-                        <ul class="review-option">
-                            <li class="review-option__item">Reply</li>
-                            <li class="review-option__item">Hide</li>                         
-                        </ul>
-                        <li class="reivew-row">
-                            <span class="review__reviewer-name">
-                                Huan Hoa Hong
-                            </span>
-                            <p class="review__reviewer-comment">
-                                Em có sai với ai đi nữa, có làm cái gì
-                                 đi nữa. Nếu có phải trả giá thì em cũng xin 
-                                 chấp nhận. Bởi vì anh biết đấy. Ra xã hội làm 
-                                 ăn bươn chải, liều thì ăn nhiều, không liều thì 
-                                 ăn ít. Muốn thành công thì phải chấp nhận trải qua
-                                  đắng cay ngọt bùi. Làm ăn muốn kiếm được tiền thì
-                                   phải chấp nhận mạo hiểm, nguy hiểm một tí nhưng 
-                                   trong tầm kiểm soát. Xã hội này, chỉ có làm, chịu khó 
-                                   cần cù thì bù siêng năng. Chỉ có làm thì mới có ăn.
-                                    Những cái loại không làm mà đòi có ăn thì ăn đầu bu*i 
-                                    nhá, ăn cứt. Thế cho nó dễ!
-                            </pd>
-                        </li>
-                        <ul class="review-option">
-                            <li class="review-option__item">Reply</li>
-                            <li class="review-option__item">Hide</li>                         
-                        </ul>
-                    </ul>
+                    </div>
                 </div>
         </div> 
             <footer>
@@ -377,5 +427,13 @@
             elmnt.style.height = "200px" ;
         }
       }
+    function replybutton(btn){
+        
+        btn.nextElementSibling.style.display = "block";
+        
+    }
+    function closeForm(btn){
+        btn.parentElement.style.display="none";
+    }
       </script>
 </html>    
