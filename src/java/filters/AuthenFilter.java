@@ -106,8 +106,7 @@ public class AuthenFilter implements Filter {
         HttpServletResponse res = (HttpServletResponse) response;
         HttpSession session = req.getSession();
         if (session != null && session.getAttribute("user") != null) {
-            if ((((UserDTO) session.getAttribute("user")).getRoleID().equals("AD"))
-                    || ((UserDTO) session.getAttribute("user")).getRoleID().equals("MN")) {
+            if (!((UserDTO) session.getAttribute("user")).getRoleID().equals("US")) {
                 chain.doFilter(request, response);
             }
         } else {

@@ -28,8 +28,6 @@ public class SaleCodeDAO {
         try {
             conn = DBConnect.makeConnection();
 
-          
-
             if (conn != null) {
                 String sql = "SELECT codeID, percentage, codeName, createDate, expDate, codeStatus"
                         + " FROM tblSaleCode WHERE codeStatus = ?";
@@ -49,8 +47,7 @@ public class SaleCodeDAO {
                     list.add(new SaleCodeDTO(codeID, codeName, percentage, createDate, expDate, codeStatus));
                 }
             }
-        } 
-            finally {
+        } finally {
             if (rs != null) {
                 rs.close();
             }
@@ -63,7 +60,6 @@ public class SaleCodeDAO {
         }
         return list;
     }
-    
 
     public SaleCodeDTO getCode(String codeID) {
         SaleCodeDTO code = new SaleCodeDTO();
@@ -102,19 +98,43 @@ public class SaleCodeDAO {
             if (conn != null) {
                 String sql = "UPDATE tblSaleCode SET percentage = ?, codeName = ?, expDate = ? , userID = ?"
                         + "WHERE codeID = ? ";
-                stm =conn.prepareStatement(sql);
+                stm = conn.prepareStatement(sql);
                 stm.setString(1, code.getPercentage());
                 stm.setString(2, code.getCodeName());
                 stm.setString(3, code.getExpDate());
                 stm.setString(4, newCodeID);
                 stm.setString(5, code.getCodeID());
-                check =stm.executeUpdate() >0;
+                check = stm.executeUpdate() > 0;
             }
-        } finally{
-            if(stm!=null){
+        } finally {
+            if (stm != null) {
                 stm.close();
             }
-            if(conn!=null){
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+
+    public boolean deactiveSaleCode(String codeID) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        try {
+            conn = DBConnect.makeConnection();
+            if (conn != null) {
+                String sql = "UPDATE tblSaleCode SET codeStatus = 0 "
+                        + " WHERE codeID = ? ";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, codeID);
+                check = stm.executeUpdate() > 0;
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
                 conn.close();
             }
         }
