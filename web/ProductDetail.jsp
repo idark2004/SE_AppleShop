@@ -196,6 +196,7 @@
                                             </c:forEach>
                                         </div>
                                     </div>
+                                    
                                         <div class="list-hardware-option>       
                                             <c:set var="i" value="1" scope="page"/>
                                             <c:forEach var="spec" items="${requestScope.spec}">
@@ -261,19 +262,8 @@
                             <ul class="review-option">
                                 <li class="review-option__item">Hide</li> 
                                 <li class="review-option__item" 
-                                    onclick="replybutton(this)">
-                                    CellphoneS xin chào anh Huỳnh Thanh Bình,
-                                    Dạ trường hợp SAMSUNG GALAXY A51 6GB 128GB của mình tình trạng máy còn đẹp, các chức năng hoạt động tốt, màn hình đẹp, CellphoneS hỗ trợ thu lại khoảng 3.200.000 (có trợ giá lên đời iphone 12). Sau đó mình bù chênh lệch để đổi lên đời iphone 12. Nếu đúng hình thức, chức năng máy không lỗi sẽ được nhập lại với mức giá như trên. Em mời mình đến cửa hàng để kỹ thuật viên thẩm định máy cho mình nhé.
-                                    Dạ, APPLE IPHONE 12 256GB ĐEN CHÍNH HÃNG (VN/A) giá thời điểm hiện tại 25.000.000. Kỳ hạn 12 tháng nhé ạ.
-                                    Đây chỉ là bảng tính tham khảo, anh vui lòng ra cửa hàng gần nhất để biết thông tin chính xác ạ.
-                                    SỐ TIỀN MUA TRẢ GÓP : 25.000.000
-                                    NGÂN HÀNG : HSBC
-                                    KỲ HẠN ( Tháng ) : 12
-                                    TỔNG PHÍ CHUYỂN ĐỔI TRẢ GÓP: 1.500.000 đ
-                                    PHÍ MỖI THÁNG : ( 1 ) 125.000 đ
-                                    TIỀN MÁY GÓP MỖI THÁNG : ( 2 ) 2.084.000
-                                    TỔNG TIỀN GÓP MỖI THÁNG : (1) + (2) 2.209.000 đ
-                                    TỔNG TIỀN MUA TRẢ GÓP : 26.500.000 đ
+                                    onclick="replybutton(this)">Reply
+                                 
                                 </li>
                                 <form method="POST" class="reply-form d-none" id="comment-1-reply-form">
                                     <textarea class="input-reply" placeholder="Reply to comment" rows="4"></textarea>
@@ -289,7 +279,18 @@
                                            Customer
                                        </span>
                                        <p class="review__reviewer-comment">
-                                           Cú lừa à
+                                        CellphoneS xin chào anh Huỳnh Thanh Bình,
+                                        Dạ trường hợp SAMSUNG GALAXY A51 6GB 128GB của mình tình trạng máy còn đẹp, các chức năng hoạt động tốt, màn hình đẹp, CellphoneS hỗ trợ thu lại khoảng 3.200.000 (có trợ giá lên đời iphone 12). Sau đó mình bù chênh lệch để đổi lên đời iphone 12. Nếu đúng hình thức, chức năng máy không lỗi sẽ được nhập lại với mức giá như trên. Em mời mình đến cửa hàng để kỹ thuật viên thẩm định máy cho mình nhé.
+                                        Dạ, APPLE IPHONE 12 256GB ĐEN CHÍNH HÃNG (VN/A) giá thời điểm hiện tại 25.000.000. Kỳ hạn 12 tháng nhé ạ.
+                                        Đây chỉ là bảng tính tham khảo, anh vui lòng ra cửa hàng gần nhất để biết thông tin chính xác ạ.
+                                        SỐ TIỀN MUA TRẢ GÓP : 25.000.000
+                                        NGÂN HÀNG : HSBC
+                                        KỲ HẠN ( Tháng ) : 12
+                                        TỔNG PHÍ CHUYỂN ĐỔI TRẢ GÓP: 1.500.000 đ
+                                        PHÍ MỖI THÁNG : ( 1 ) 125.000 đ
+                                        TIỀN MÁY GÓP MỖI THÁNG : ( 2 ) 2.084.000
+                                        TỔNG TIỀN GÓP MỖI THÁNG : (1) + (2) 2.209.000 đ
+                                        TỔNG TIỀN MUA TRẢ GÓP : 26.500.000 đ
                                        </p>
                                    </div>
                                    <ul class="review-option">
