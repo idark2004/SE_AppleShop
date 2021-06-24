@@ -55,14 +55,14 @@
                                 <span class="header_item_user-name">Hello,${sessionScope.user.name}</span>
                                 <ul class="header__navbar-user--menu">
                                     <li class="header__navbar-user--item">
-                                         <a href="UserDetailController?userid=${sessionScope.user.userID}">User detail</a>
+                                         <a href="UserDetailController?userid=${sessionScope.user.userID.trim()}">User detail</a>
                                     </li>
                                     
                                     <li class="header__navbar-user--item">
                                         <a href="cartForm.jsp">Order detail</a>
                                     </li>
                                      <li class="header__navbar-user--item">
-                                        <a href="orderHistory.jsp">Order History</a>
+                                        <a href="OrderHistoryController?userid=${sessionScope.user.userID.trim()}">Order History</a>
                                     </li>
                                      <li class="header__navbar-user--item">
                                         <a href="changePass.jsp">Update Password</a>
@@ -93,7 +93,11 @@
                         <a class="product-link" href="ViewProductController?categoryID=IP&status=True">iPhone</a>
                         <a class="product-link" href="ViewProductController?categoryID=AW&status=True">Apple Watch</a>
                         <a class="product-link" href="ViewProductController?categoryID=AS&status=True">Accessories</a>
-                        <a class="product-link" href="MainController?action=ProductListManagement&categoryID=">Test Management</a>
+                    <c:if test="${sessionScope.user.roleID.trim()!='US'|| sessionScope.user != null}">
+                        <a class="product-link" href="dashBoard.jsp">Dashboard</a>
+                        <a class="product-link" href="MainController?action=ProductListManagement&categoryID=">Management</a>
+                        
+                    </c:if>
                     </div>
                     <div class="responsive-div" style="display: flex; ">
                         <div class=" search-container">

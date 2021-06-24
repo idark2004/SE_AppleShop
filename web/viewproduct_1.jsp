@@ -55,7 +55,7 @@
                                         <a href="cartForm.jsp">Order detail</a>
                                     </li>
                                      <li class="header__navbar-user--item">
-                                        <a href="orderHisotry.html">Order History</a>
+                                        <a href="OrderHistoryController?userid=${sessionScope.user.userID.trim()}">Order History</a>
                                     </li>
                                      <li class="header__navbar-user--item">
                                         <a href="changePass.jsp">Update Password</a>

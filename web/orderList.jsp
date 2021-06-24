@@ -45,7 +45,7 @@
                                         <a href="cartForm.jsp">Order detail</a>
                                     </li>
                                      <li class="header__navbar-user--item">
-                                        <a href="orderHisotry.html">Order History</a>
+                                        <a href="OrderHistoryController?userid=${sessionScope.user.userID.trim()}">Order History</a>
                                     </li>
                                      <li class="header__navbar-user--item">
                                         <a href="changePass.jsp">Update Password</a>
@@ -74,9 +74,11 @@
     <div class="nav">
         <div class="topnav">
             <div class="product-page">
-                <a class="product-link" href="" class="header-nav__item-active">Dashboard</a>
-                <a class="product-link" href="">Add a product</a>
-                <a class="product-link" href="">OrderList</a>
+                <a class="product-link" href="dashBoard.jsp" class="header-nav__item-active">Dashboard</a>
+                <a class="product-link" href="addProduct.jsp">Add a product</a>
+                <a class="product-link" href="MainController?action=OrderList">Order list</a>
+                <a class="product-link" href="MainController?action=UserList">User list</a>
+                <a class="product-link" href="MainController?action=SaleCode&codeStatus=True">Sale Code list</a>
             </div>
           </div>
     </div>    

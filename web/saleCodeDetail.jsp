@@ -46,10 +46,17 @@
                                 <span class="header_item_user-name">Hello,${sessionScope.user.name}</span>
                                 <ul class="header__navbar-user--menu">
                                     <li class="header__navbar-user--item">
-                                        <a href="">User detail</a>
+                                         <a href="UserDetailController?userid=${sessionScope.user.userID}">User detail</a>
                                     </li>
+                                    
                                     <li class="header__navbar-user--item">
-                                        <a href="">Order detail</a>
+                                        <a href="cartForm.jsp">Order detail</a>
+                                    </li>
+                                     <li class="header__navbar-user--item">
+                                        <a href="OrderHistoryController?userid=${sessionScope.user.userID.trim()}">Order History</a>
+                                    </li>
+                                     <li class="header__navbar-user--item">
+                                        <a href="changePass.jsp">Update Password</a>
                                     </li>
                                     <li class="header__navbar-user--item">
                                         <a href="">Sign out</a>
@@ -74,11 +81,11 @@
             <div class="nav">
                 <div class="topnav">
                     <div class="product-page">
-                        <a class="product-link" href="" class="header-nav__item-active">Dashboard</a>
-                        <a class="product-link" href="">Add a product</a>
-                        <a class="product-link" href="">Order list</a>
-                        <a class="product-link" href="">User list</a>
-                        <a class="product-link" href="MainController?action=SaleCodeList">Sale Code list</a>
+                        <a class="product-link" href="dashBoard.jsp" class="header-nav__item-active">Dashboard</a>
+                        <a class="product-link" href="addProduct.jsp">Add a product</a>
+                        <a class="product-link" href="MainController?action=OrderList">Order list</a>
+                        <a class="product-link" href="MainController?action=UserList">User list</a>
+                        <a class="product-link" href="MainController?action=SaleCode&codeStatus=True">Sale Code list</a>
                     </div>
                 </div>
             </div>
