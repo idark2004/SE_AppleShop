@@ -263,7 +263,7 @@
                                 <li class="review-option__item">Hide</li> 
                                 <li class="review-option__item" 
                                     onclick="replybutton(this)">
-                                 
+                                    Reply
                                 </li>
                                 <form method="POST" class="reply-form d-none" id="comment-1-reply-form">
                                     <textarea class="input-reply" placeholder="Reply to comment" rows="4"></textarea>

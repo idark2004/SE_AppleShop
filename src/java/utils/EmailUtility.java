@@ -74,27 +74,17 @@ public class EmailUtility {
         // creates a new session with an authenticator
        Properties pro = new Properties();
        pro =getMailProperties(host, port);
-       Authenticator auth = new Authenticator() {
-           
+       Authenticator auth = new Authenticator() {          
         
        };
        auth = getMailAuth(senderEmail, password);
-       Session session = getMailSession(pro, auth); 
-  
-       
+       Session session = getMailSession(pro, auth);          
        final Multipart parts = new MimeMultipart ( "alternative" );
-
-       
-
         // set HTML, optionally
-
         final MimeBodyPart htmlPart = new MimeBodyPart ();
         htmlPart.setContent ( message, "text/html; charset=utf-8" );
         parts.addBodyPart ( htmlPart );
-
-        // set parts
-
-        
+        // set parts       
         // creates a new e-mail message
         Message msg = new MimeMessage(session);
   

@@ -66,7 +66,7 @@ public class CompleteOrderController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
         String url = ERROR;
-        String subject = "Your billing";
+       
         String MailMessage ="";
         try {
             
@@ -99,6 +99,7 @@ public class CompleteOrderController extends HttpServlet {
                 request.setAttribute("newOrder",neworder);
                 session.removeAttribute("cart");
                 //send Mail
+                 String subject = "Your billing at SE15AppleShop";
                   String content = "<table width='100%' border='1' align='center'>"
                 + "<tr align='center'>"
                 + "<td><b>OrderID<b></td>"
