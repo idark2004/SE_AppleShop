@@ -8,6 +8,12 @@ package controller;
 import daos.UserDAO;
 import dtos.UserDTO;
 import java.io.IOException;
+import java.util.Map;
+import java.util.Properties;
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -87,11 +93,13 @@ public class ResetPasswordController extends HttpServlet {
 
             String content = "Hi, this is your new password: " + newPassword;
             content += "\nNote: for security reason, "
-                    + "you must change your password after logging in.";
-
-            
+                    + "you must change your password after logging in.";            
+         
+         
+           
             EmailUtility.sendEmail(host, port, email, name, pass, recipient, subject, content);
             message = "Your password has been reset. Please check your e-mail.";
+            
         } catch (Exception ex) {
             ex.printStackTrace();
             message = "There were an error: " + ex.getMessage();

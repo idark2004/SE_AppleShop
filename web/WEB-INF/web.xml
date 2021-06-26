@@ -130,6 +130,10 @@
         <servlet-name>OrderHistoryController</servlet-name>
         <servlet-class>controller.OrderHistoryController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BillingMailController</servlet-name>
+        <servlet-class>controller.BillingMailController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AddCommentController</servlet-name>
         <url-pattern>/AddCommentController</url-pattern>
@@ -262,6 +266,10 @@
     <servlet-mapping>
         <servlet-name>OrderHistoryController</servlet-name>
         <url-pattern>/OrderHistoryController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BillingMailController</servlet-name>
+        <url-pattern>/BillingMailController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

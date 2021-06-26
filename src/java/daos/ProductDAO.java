@@ -7,14 +7,19 @@ package daos;
 
 import utils.DBConnect;
 import dtos.CartItemDTO;
+import dtos.OrderDTO;
 import dtos.ProductDTO;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import javax.naming.NamingException;
 
@@ -246,10 +251,12 @@ public class ProductDAO {
         return null;
     }
 
-    public void completeOrder(List<CartItemDTO> cart, String address, String name, String email, String phone, String userID, String codeID, String method, double price) throws SQLException {
+    public OrderDTO completeOrder(List<CartItemDTO> cart, String address, String name, String email, String phone, String userID, String codeID, String method, double price) throws SQLException {
         long d = System.currentTimeMillis();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        Date currentDate = new Date(d);        
+        DateFormat formatter = new SimpleDateFormat("uuuu/MM/dd HH:mm:ss");
+        Date currentDate = new Date(d);   
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("uuuu/MM/dd HH:mm:ss");
+        LocalDateTime currentDateTime = LocalDateTime.now();
         Connection conn = null;
         PreparedStatement stm = null;
         try {
@@ -277,6 +284,8 @@ public class ProductDAO {
                 conn.close();
             }
         }
+        OrderDTO newOrder = new OrderDTO("TEST", name, address, phone, email,formatter.format(currentDate), codeID, userID, price, method,"True");
+        return newOrder;
     }
 
     public void addOrder(List<CartItemDTO> cart) throws SQLException {
