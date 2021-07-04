@@ -230,7 +230,7 @@
                         <textarea class="input-des" id="input-des" readonly>
                                     ${requestScope.product.description}
                         </textarea>                  
-                </div>
+                </div>zz
                 <div class="container__review">
                     <h3 class="review__tittle">Comment</h3>
                     <span class="btn__edit-comment"><a href="youtube.com" style="text-decoration: none;color: var(--black-color);">

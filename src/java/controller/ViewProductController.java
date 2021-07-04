@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class ViewProductController extends HttpServlet {
     public static final String ERROR="error.jsp";
-    public static final String SUCCESS="viewproduct_1.jsp";
+    public static final String SUCCESS="productList.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,6 +40,7 @@ public class ViewProductController extends HttpServlet {
         try {
             ProductDAO dao = new ProductDAO();
             String categoryID = request.getParameter("categoryID");
+            if(request.getParameter("categoryID")==null) {categoryID="";}
             String status = request.getParameter("status");            
             List<ProductDTO> list = dao.viewProduct(categoryID, status);
             if(list != null){
