@@ -9,6 +9,7 @@ import daos.ProductDAO;
 import dtos.ProductDTO;
 import dtos.ViewProductErrorDTO;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import java.util.List;
 import javax.servlet.ServletException;
@@ -40,18 +41,51 @@ public class ViewProductController extends HttpServlet {
         try {
             ProductDAO dao = new ProductDAO();
             String categoryID = request.getParameter("categoryID");
+            String pageNum = request.getParameter("pageNum");
+            int page = 0;
+            if(pageNum != null){
+                 page = Integer.parseInt(pageNum);
+            }
+            System.out.println(page);
             if(request.getParameter("categoryID")==null) {categoryID="";}
             String status = request.getParameter("status");       
             if(request.getParameter("status")==null) {status="True";}
-            List<ProductDTO> list = dao.viewProduct(categoryID, status);
+            List<ProductDTO> list = dao.viewProduct(categoryID, status);    
+            int product_per_page = 2;
+            int pNum = list.size();
+            int pages = 0;
+            if(pNum % product_per_page==0){
+                pages = pNum/product_per_page;
+            }
+           
+            else{pages = (pNum/product_per_page)+1;}
+             System.out.println(pNum);
             if(list != null){
-            request.setAttribute("PRODUCT_LIST", list);
+                if(request.getParameter("pageNum") != null){
+                    if(pNum >= (page*product_per_page))
+                    { 
+                        List<ProductDTO> subList = list.subList(((page-1)*product_per_page),(page*product_per_page));
+                        request.setAttribute("PRODUCT_LIST",subList );
+                    }
+                    else{
+                        List<ProductDTO> subList = list.subList(((page-1)*product_per_page),pNum);
+                        request.setAttribute("PRODUCT_LIST",subList );
+                    }      
+                    } else{    
+                        List<ProductDTO> subList = list.subList(0,product_per_page);
+                        request.setAttribute("PRODUCT_LIST",subList );
+                    }       
+
+            request.setAttribute("pages", pages);
+            request.setAttribute("cateID", categoryID);
             } else{
                 msg.setMsg("Sorry our shop currently doesn't have these products in stock !!");
                 request.setAttribute("EMPTY_LIST", msg);
             }
             url = SUCCESS;
         } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println(e);
         }
         finally{
             request.getRequestDispatcher(url).forward(request, response);

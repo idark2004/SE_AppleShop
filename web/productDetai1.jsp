@@ -202,15 +202,14 @@
                                     <label class="control-label"><span>Color</span></label>
                                     <div class="controls">
                                         
-                                        <select class="span2" name="color" onClick="window.location = 'MainController?action=ProductDetail&productID=${product.productID.trim()}&color=${color.color}';">
+                                        <select class="span2" name="color" onChange="window.location = 'MainController?action=ProductDetail&productID=${product.productID.trim()}&color=${color.color}';">
                                         <c:forEach var="color" items="${requestScope.color}">           
                                             <option value="${color.color}">${color.color}</option>
                                          </c:forEach>
                                         </select>
                                         <select class="span2" name="option">
                                          <c:forEach var="spec" items="${requestScope.spec}">          
-                                             <option value="${color.color}">${color.color}</option>
-						  
+                                             <option value="${color.color}">${color.color}</option>  
                                          </c:forEach>
                                         </select>
                                     </div>

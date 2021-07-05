@@ -170,11 +170,12 @@
                         <div class="control-group">
                             <label class="control-label alignL">Sort By </label>
                             <select>
-              <option>Priduct name A - Z</option>
-              <option>Priduct name Z - A</option>
-              <option>Priduct Stoke</option>
-              <option>Price Lowest first</option>
-            </select>
+                                <option disabled selected value> --Sort By-- </option>
+                                <option>Priduct name A - Z</option>
+                                <option>Priduct name Z - A</option>
+                                <option>Priduct Stoke</option>
+                                <option>Price Lowest first</option>
+                          </select>
                         </div>
                     </form>
 
@@ -259,11 +260,9 @@
                     <div class="pagination">
                         <ul>
                             <li><a href="#">&lsaquo;</a></li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">...</a></li>
+                                <c:forEach var="pageNum" begin="1" end="${requestScope.pages}">                           
+                                <li><a href="ViewProductController?pageNum=${pageNum}&CategoryID=${requestScope.cateID}&status=True">${pageNum}</a></li>
+                            </c:forEach>
                             <li><a href="#">&rsaquo;</a></li>
                         </ul>
                     </div>
