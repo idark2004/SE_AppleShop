@@ -1,18 +1,17 @@
 <%-- 
-    Document   : productList
-    Created on : Jul 4, 2021, 9:24:17 PM
+    Document   : cartDetail
+    Created on : Jul 5, 2021, 11:29:41 AM
     Author     : anime
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
-    <title>SE15 Shop | Products</title>
+    <title>SE15 Shop | Product Cart</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -39,10 +38,10 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="themes/images/ico/apple.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="themes/images/ico/apple.png">
     <link rel="apple-touch-icon-precomposed" href="themes/images/ico/apple.png">
+    <style type="text/css" id="enject"></style>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
      <meta name="google-signin-scope" content="profile email">
      <meta name="google-signin-client_id" content="779792849031-s9k66dv106kav3h90o9lak0vnm2943ci.apps.googleusercontent.com">
-    <style type="text/css" id="enject"></style>
 </head>
 
 <body>
@@ -51,7 +50,7 @@
             <div id="welcomeLine" class="row">
                 <div class="span6">Welcome!<strong> User</strong></div>
                 <div class="span6">
-                    <div class="pull-right">
+                   <div class="pull-right">
                           <c:forEach var="cartItem" items="${sessionScope.cart}">
                                     <c:set var="subtotalCount" value="${cartItem.quantity}"/>
                                     <c:set var="subtotal" value="${subtotal+cartItem.quantity}"/>
@@ -74,7 +73,7 @@
                         <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
                     </form>
                     <ul id="topMenu" class="nav pull-right">
-                        <li class=""><a href="Product.html">All Products</a></li>
+                        <li class=""><a href="allProduct.html">All Products</a></li>
                         <li class=""><a href="contact.html">Contact</a></li>
                         <li class=""><a href="contact.html">Profile</a></li>
                         <li class="">
@@ -102,6 +101,7 @@
                                             <a href="#"><img width="30" height="30" src="themes/images/google.png" title="Login with Google" alt="Google Login" /></a>
                                         </div>
                                     </form>
+                                    <div class="g-signin2" data-onsuccess="onSignIn"></div>
                                     <button type="submit" class="btn btn-success">Sign in</button>
                                     <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
                                 </div>
@@ -141,7 +141,7 @@
             <div class="row">
                 <!-- Sidebar ================================================== -->
                 <div id="sidebar" class="span3">
-                    <div class="well well-small">
+                     <div class="well well-small">
                         <c:forEach var="cartItem" items="${sessionScope.cart}">
                                     <c:set var="subtotalCount" value="${cartItem.quantity}"/>
                                     <c:set var="subtotal" value="${subtotal+cartItem.quantity}"/>
@@ -150,124 +150,174 @@
                         <a id="myCart" href="product_summary.html"><img src="themes/images/ico-cart.png" alt="cart">${subtotal} Items in your cart <span class="badge badge-warning pull-right">${total}</span></a>
                     </div>
                     <ul id="sideManu" class="nav nav-tabs nav-stacked">
-                        <li><a href="ViewProductController?categoryID=&status=True">All</a></li>
-                        <li><a href="ViewProductController?categoryID=IP&status=True">iPhone</a></li>
-                        <li><a href="ViewProductController?categoryID=ID&status=True">iPad</a></li>
-                        <li><a href="ViewProductController?categoryID=MB&status=True">Mac</a></li>
-                        <li><a href="ViewProductController?categoryID=AW&status=True">Apple Watch</a></li>
-                        <li><a href="ViewProductController?categoryID=AS&status=True">Accessory</a></li>
+                        <li><a href="products.html">All</a></li>
+                        <li><a href="products.html">iPhone</a></li>
+                        <li><a href="products.html">iPad</a></li>
+                        <li><a href="products.html">Mac</a></li>
+                        <li><a href="products.html">Accessory</a></li>
                     </ul>
                     <br/>
                 </div>
                 <!-- Sidebar end=============================================== -->
                 <div class="span9">
                     <ul class="breadcrumb">
-                        <li><a href="index.jsp">Home</a> <span class="divider">/</span></li>
-                        <li class="active">All Products</li>
+                        <li><a href="index.html">Home</a> <span class="divider">/</span></li>
+                        <li class="active"> SHOPPING CART</li>
                     </ul>
-                    <h3> Products Name <small class="pull-right"> 40 products are available </small></h3>
-                    <form class="form-horizontal span6">
-                        <div class="control-group">
-                            <label class="control-label alignL">Sort By </label>
-                            <select>
-              <option>Priduct name A - Z</option>
-              <option>Priduct name Z - A</option>
-              <option>Priduct Stoke</option>
-              <option>Price Lowest first</option>
-            </select>
-                        </div>
-                    </form>
+                    <h3> SHOPPING CART <a href="ViewProductController?categoryID=&status=True" class="btn btn-large pull-right"><i class="icon-arrow-left"></i> Continue Shopping </a></h3>
+                    <hr class="soft" />
+                    <table class="table table-bordered">
+                        <tr>
+                            <th> I AM ALREADY REGISTERED </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <form class="form-horizontal">
+                                    <div class="control-group">
+                                        <label class="control-label" for="inputUsername">Username</label>
+                                        <div class="controls">
+                                            <input type="text" id="inputUsername" placeholder="Enter Username" name="uname" required>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="inputPassword1">Password</label>
+                                        <div class="controls">
+                                            <input type="password" id="inputPassword1" placeholder="Enter Password" name="psw" required>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <button type="submit" class="btn" name="action" value="Login">Sign in</button> OR <a href="signupForm.jsp" class="btn">Register Now!</a>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <a href="forgetpass.html" style="text-decoration:underline">Forgot password ?</a>
+                                        </div>
+                                    </div>
+                                </form>
+                            </td>
+                        </tr>
+                    </table>
 
-                    <div id="myTab" class="pull-right">
-                        <a href="#listView" data-toggle="tab"><span class="btn btn-large"><i class="icon-list"></i></span></a>
-                        <a href="#blockView" data-toggle="tab"><span class="btn btn-large btn-primary"><i class="icon-th-large"></i></span></a>
-                    </div>
-                    <br class="clr" />
-                    <div class="tab-content">
-                        <div class="tab-pane" id="listView">
-                            <c:choose>
-                                    <c:when test="${requestScope.PRODUCT_LIST != null}">
-                                     <c:forEach var="product" items="${requestScope.PRODUCT_LIST}"> 
-                            <div class="row">
-                                <div class="span2">
-                                    <img src="${product.image}" alt="" />
-                                </div>
-                                <div class="span4">
-                                    <h3>${product.name}</h3>
-                                    <hr class="soft" />
-<!--                                    <h5>Available </h5>
-                                    <p>
-                                        Input content here, bitches!
-                                    </p>-->
-                                    <a class="btn btn-small pull-right" href="MainController?action=ProductDetail&productID=${product.productID}">View Details</a>
-                                    <br class="clr" />
-                                </div>
-                                <div class="span3 alignR">
-                                    <form class="form-horizontal qtyFrm">
-                                        <h3><fmt:formatNumber type="number" maxFractionDigits = "0" value="${product.price}" /></h3>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Description</th>
+                                <th>Quantity/Update</th>
+                                <th>Price</th>
+                                <th>Discount</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:set var="total" value="0"/>
+                    <c:choose>
+                        <c:when test="${sessionScope.cart != null}">
+                        <c:forEach var="cartItem" items="${sessionScope.cart}">
+                            <tr>
+                                
+                                <td> <img width="60" src="${cartItem.product.image}" alt="" /></td>
+                                
+                                <td>${cartItem.product.name}<br/>Color : ${cartItem.product.color}<br/>Hardware :
+                                Ram: ${cartItem.product.ram}<br/>
+                                Storage: ${cartItem.product.storage}</td>
+                                <td>
+                                    <p>${cartItem.quantity}<p>
+                                    <div class="input-append"><input class="span1" style="max-width:34px" placeholder="1" id="appendedInputButtons" size="16" type="text"><button class="btn" type="button"><i class="icon-minus"></i></button><button class="btn" type="button"><i class="icon-plus"></i></button>
+                                        <button class="btn btn-danger" type="button">                                        
+                                            <a class="remove" href="MainController?action=RemoveCart&productID=${cartItem.product.productID.trim()}&color=${cartItem.product.color.trim()}&ram=${cartItem.product.ram.trim()}&storage=${cartItem.product.storage.trim()}">
+                                            <i class="icon-remove icon-white"></i>
+                                            </a>
+                                        </button>
 
-                                        <a href="MainController?action=ProductDetail&productID=${product.productID}" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
-                                        <a href="product_details.html" class="btn btn-large"><i class="icon-zoom-in"></i></a>
-
-                                    </form>
-                                </div>
-                            </div>
-                                    
-                            <hr class="soft" />
-                            </c:forEach>
-                            </c:when>
+                                    </div>
+                                </td>
+                                <td>
+                                    <fmt:formatNumber type="number" maxFractionDigits = "0" value="${cartItem.product.price}" />
+                                </td>
+                                <td>100,000 VND</td>
+                                <td>
+                                    <fmt:formatNumber type="number" maxFractionDigits = "0" value="${cartItem.quantity * cartItem.product.price}" />
+                                </td>
+                                 <c:set var="total" value="${total + (cartItem.quantity * cartItem.product.price)}"/>
+                            </tr>
+                        </c:forEach>
+                              </c:when>
                         <c:otherwise>
                             <h1>${requestScope.EMPTY_LIST.msg}</h1>
                         </c:otherwise>
                     </c:choose>
-                           
-                            
-                        </div>
+                            <tr>
+                                <td colspan="6" style="text-align:right">Total Price: </td>
+                                <td>
+                                    <fmt:formatNumber type="number" maxFractionDigits = "0" value="${total}" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6" style="text-align:right">Total Discount: </td>
+                                <td> 200,000 VND</td>
+                            </tr>
+                            <tr>
+                                <td colspan="6" style="text-align:right"><strong>TOTAL (${total} - 200,000 VND) =</strong></td>
+                                <td class="label label-important" style="display:block"> <strong> 20,000,000 VND </strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
 
-                        <div class="tab-pane  active" id="blockView">
-                            <ul class="thumbnails">
-                                <c:choose>
-                                    <c:when test="${requestScope.PRODUCT_LIST != null}">
-                                        <c:forEach var="product" items="${requestScope.PRODUCT_LIST}">    
-                                            <li class="span3">
-                                                <div class="thumbnail">
-                                                    <a href="MainController?action=ProductDetail&productID=${product.productID}"><img src="${product.image}" alt="" /></a>
-                                                    <div class="caption">
-                                                        <h5>${product.name}</h5>
-                                                        <p>
-                                                            <fmt:formatNumber type="number" maxFractionDigits = "0" value="${product.price}" />
-                                                        </p>
-                                                        <h4 style="text-align:center">
-                                                            <a class="btn" href="MainController?action=ProductDetail&productID=${product.productID}"> <i class="icon-zoom-in"></i></a> <a class="btn" href="MainController?action=ProductDetail&productID=${product.productID}">Add to <i class="icon-shopping-cart"></i></a>
-                                                        </h4>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </c:forEach>
-                                    </c:when>
-                                    <c:otherwise>
-                                    <h1>${requestScope.EMPTY_LIST.msg}</h1>
-                                    </c:otherwise>
-                                </c:choose>
-                               
-                               
-                                
-                            </ul>
-                            <hr class="soft" />
-                        </div>
-                    </div>
-                    <div class="pagination">
-                        <ul>
-                            <li><a href="#">&lsaquo;</a></li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">...</a></li>
-                            <li><a href="#">&rsaquo;</a></li>
-                        </ul>
-                    </div>
-                    <br class="clr" />
+
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <form class="form-horizontal">
+                                        <div class="control-group">
+                                            <label class="control-label"><strong> SALE CODE: </strong> </label>
+                                            <div class="controls">
+                                                <input type="text" class="input-medium" placeholder="CODE">
+                                                <button type="submit" class="btn"> ADD </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>SHIPPING ADDRESS</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <form class="form-horizontal">
+                                    <div class="control-group">
+                                        <label class="control-label" for="">Your shipping address </label>
+                                        <div class="controls">
+                                            <input type="text" id="inputAddress" placeholder="123, A Street, District 2">
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group" style="margin-left: -10rem;">
+                                        <div class="controls">
+                                            <label class="radio">
+                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
+                                                Pay after delivery (Using the billing address above as shipping address)
+                                                <br/>
+                                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" checked="">
+                                                Pay at SE15 Shop
+                                            </label>
+                                        </div>
+                                    </div>
+                                </form>
+                            </td>
+                        </tr>
+                    </table>
+                    <a href="products.html" class="btn btn-large"><i class="icon-arrow-left"></i> Continue Shopping </a>
+                    <a href="login.html" class="btn btn-large pull-right">Next <i class="icon-arrow-right"></i></a>
+
                 </div>
             </div>
         </div>
@@ -365,5 +415,18 @@
     </div>
     <span id="themesBtn"></span>
 </body>
-
+<script>
+        window.onbeforeunload = function () {
+            gapi.auth2.getAuthInstance().signOut();
+        };
+        function onSignIn(googleUser) {
+            var profile = googleUser.getBasicProfile();
+            var id = googleUser.getId();
+            var name = profile.getName();
+            var email = profile.getEmail();
+            googleUser.disconnect();
+            window.location.href = 'MainController?action=Google&name=' + name + '&email=' + email + '&userID='
+                    + id;
+        }
+        </script>
 </html>

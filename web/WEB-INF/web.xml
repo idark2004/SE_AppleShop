@@ -164,7 +164,7 @@
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>
-            ViewProductController/categoryID=
+            ViewProductController
         </welcome-file>
     </welcome-file-list>
     <servlet-mapping>

@@ -1,18 +1,16 @@
 <%-- 
-    Document   : productList
-    Created on : Jul 4, 2021, 9:24:17 PM
+    Document   : contact
+    Created on : Jul 5, 2021, 10:38:00 AM
     Author     : anime
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
-    <title>SE15 Shop | Products</title>
+    <title>SE15 Shop | Contact</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -39,9 +37,6 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="themes/images/ico/apple.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="themes/images/ico/apple.png">
     <link rel="apple-touch-icon-precomposed" href="themes/images/ico/apple.png">
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-     <meta name="google-signin-scope" content="profile email">
-     <meta name="google-signin-client_id" content="779792849031-s9k66dv106kav3h90o9lak0vnm2943ci.apps.googleusercontent.com">
     <style type="text/css" id="enject"></style>
 </head>
 
@@ -52,11 +47,7 @@
                 <div class="span6">Welcome!<strong> User</strong></div>
                 <div class="span6">
                     <div class="pull-right">
-                          <c:forEach var="cartItem" items="${sessionScope.cart}">
-                                    <c:set var="subtotalCount" value="${cartItem.quantity}"/>
-                                    <c:set var="subtotal" value="${subtotal+cartItem.quantity}"/>
-                          </c:forEach>
-                        <a href="product_summary.html"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> ${subtotal} Itemes in your cart </span> </a>
+                        <a href="product_summary.html"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> [ 3 ] Itemes in your cart </span> </a>
                     </div>
                 </div>
             </div>
@@ -74,7 +65,7 @@
                         <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
                     </form>
                     <ul id="topMenu" class="nav pull-right">
-                        <li class=""><a href="Product.html">All Products</a></li>
+                        <li class=""><a href="allProduct.html">All Products</a></li>
                         <li class=""><a href="contact.html">Contact</a></li>
                         <li class=""><a href="contact.html">Profile</a></li>
                         <li class="">
@@ -113,161 +104,65 @@
         </div>
     </div>
     <!-- Header End====================================================================== -->
-    <div id="carouselBlk">
-        <div id="myCarousel" class="carousel slide">
-            <div class="carousel-inner">
-                <div class="item active">
-                    <div class="container">
-                        <a href="register.html"><img style="width:100%" src="themes/images/carousel/1.png" alt="" /></a>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="container">
-                        <a href="register.html"><img style="width:100%" src="themes/images/carousel/2.png" alt="" /></a>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="container">
-                        <a href="register.html"><img src="themes/images/carousel/3.png" alt="" /></a>
-                    </div>
-                </div>
-            </div>
-            <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-            <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
-        </div>
-    </div>
     <div id="mainBody">
         <div class="container">
+            <hr class="soften">
+            <h1>Visit us</h1>
+            <hr class="soften" />
             <div class="row">
-                <!-- Sidebar ================================================== -->
-                <div id="sidebar" class="span3">
-                    <div class="well well-small">
-                        <c:forEach var="cartItem" items="${sessionScope.cart}">
-                                    <c:set var="subtotalCount" value="${cartItem.quantity}"/>
-                                    <c:set var="subtotal" value="${subtotal+cartItem.quantity}"/>
-                                </c:forEach>
-                         <c:set var="total" value="${total + (cartItem.quantity * cartItem.product.price)}"/>
-                        <a id="myCart" href="product_summary.html"><img src="themes/images/ico-cart.png" alt="cart">${subtotal} Items in your cart <span class="badge badge-warning pull-right">${total}</span></a>
-                    </div>
-                    <ul id="sideManu" class="nav nav-tabs nav-stacked">
-                        <li><a href="ViewProductController?categoryID=&status=True">All</a></li>
-                        <li><a href="ViewProductController?categoryID=IP&status=True">iPhone</a></li>
-                        <li><a href="ViewProductController?categoryID=ID&status=True">iPad</a></li>
-                        <li><a href="ViewProductController?categoryID=MB&status=True">Mac</a></li>
-                        <li><a href="ViewProductController?categoryID=AW&status=True">Apple Watch</a></li>
-                        <li><a href="ViewProductController?categoryID=AS&status=True">Accessory</a></li>
-                    </ul>
-                    <br/>
+                <div class="span4">
+                    <h4>Contact Details</h4>
+                    <p> 58 Hoa Sứ Street,<br/> District Phú Nhuận, Ho Chi Minh City
+                        <br/><br/> SE15@gmail.com
+                        <br/> ﻿Tel 0914123456<br/> <br/> web: SE15AppleShop.com
+                    </p>
                 </div>
-                <!-- Sidebar end=============================================== -->
-                <div class="span9">
-                    <ul class="breadcrumb">
-                        <li><a href="index.jsp">Home</a> <span class="divider">/</span></li>
-                        <li class="active">All Products</li>
-                    </ul>
-                    <h3> Products Name <small class="pull-right"> 40 products are available </small></h3>
-                    <form class="form-horizontal span6">
-                        <div class="control-group">
-                            <label class="control-label alignL">Sort By </label>
-                            <select>
-              <option>Priduct name A - Z</option>
-              <option>Priduct name Z - A</option>
-              <option>Priduct Stoke</option>
-              <option>Price Lowest first</option>
-            </select>
-                        </div>
-                    </form>
 
-                    <div id="myTab" class="pull-right">
-                        <a href="#listView" data-toggle="tab"><span class="btn btn-large"><i class="icon-list"></i></span></a>
-                        <a href="#blockView" data-toggle="tab"><span class="btn btn-large btn-primary"><i class="icon-th-large"></i></span></a>
-                    </div>
-                    <br class="clr" />
-                    <div class="tab-content">
-                        <div class="tab-pane" id="listView">
-                            <c:choose>
-                                    <c:when test="${requestScope.PRODUCT_LIST != null}">
-                                     <c:forEach var="product" items="${requestScope.PRODUCT_LIST}"> 
-                            <div class="row">
-                                <div class="span2">
-                                    <img src="${product.image}" alt="" />
-                                </div>
-                                <div class="span4">
-                                    <h3>${product.name}</h3>
-                                    <hr class="soft" />
-<!--                                    <h5>Available </h5>
-                                    <p>
-                                        Input content here, bitches!
-                                    </p>-->
-                                    <a class="btn btn-small pull-right" href="MainController?action=ProductDetail&productID=${product.productID}">View Details</a>
-                                    <br class="clr" />
-                                </div>
-                                <div class="span3 alignR">
-                                    <form class="form-horizontal qtyFrm">
-                                        <h3><fmt:formatNumber type="number" maxFractionDigits = "0" value="${product.price}" /></h3>
+                <div class="span4">
+                    <h4>Opening Hours</h4>
+                    <h5> Monday - Friday</h5>
+                    <p>09:00am - 09:00pm<br/><br/></p>
+                    <h5>Saturday</h5>
+                    <p>09:00am - 07:00pm<br/><br/></p>
+                    <h5>Sunday</h5>
+                    <p>10:00am - 05:00pm<br/><br/></p>
+                </div>
+                <div class="span4">
 
-                                        <a href="MainController?action=ProductDetail&productID=${product.productID}" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
-                                        <a href="product_details.html" class="btn btn-large"><i class="icon-zoom-in"></i></a>
+                    <!-- Email Contact -->
+                    <!-- Thích thì dùng, không thích có thể bỏ -->
+                    <h4>Email Us</h4>
+                    <form class="form-horizontal">
+                        <fieldset>
+                            <div class="control-group">
 
-                                    </form>
-                                </div>
+                                <input type="text" placeholder="Fullname" class="input-xlarge" />
+
                             </div>
-                                    
-                            <hr class="soft" />
-                            </c:forEach>
-                            </c:when>
-                        <c:otherwise>
-                            <h1>${requestScope.EMPTY_LIST.msg}</h1>
-                        </c:otherwise>
-                    </c:choose>
-                           
-                            
-                        </div>
+                            <div class="control-group">
 
-                        <div class="tab-pane  active" id="blockView">
-                            <ul class="thumbnails">
-                                <c:choose>
-                                    <c:when test="${requestScope.PRODUCT_LIST != null}">
-                                        <c:forEach var="product" items="${requestScope.PRODUCT_LIST}">    
-                                            <li class="span3">
-                                                <div class="thumbnail">
-                                                    <a href="MainController?action=ProductDetail&productID=${product.productID}"><img src="${product.image}" alt="" /></a>
-                                                    <div class="caption">
-                                                        <h5>${product.name}</h5>
-                                                        <p>
-                                                            <fmt:formatNumber type="number" maxFractionDigits = "0" value="${product.price}" />
-                                                        </p>
-                                                        <h4 style="text-align:center">
-                                                            <a class="btn" href="MainController?action=ProductDetail&productID=${product.productID}"> <i class="icon-zoom-in"></i></a> <a class="btn" href="MainController?action=ProductDetail&productID=${product.productID}">Add to <i class="icon-shopping-cart"></i></a>
-                                                        </h4>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </c:forEach>
-                                    </c:when>
-                                    <c:otherwise>
-                                    <h1>${requestScope.EMPTY_LIST.msg}</h1>
-                                    </c:otherwise>
-                                </c:choose>
-                               
-                               
-                                
-                            </ul>
-                            <hr class="soft" />
-                        </div>
-                    </div>
-                    <div class="pagination">
-                        <ul>
-                            <li><a href="#">&lsaquo;</a></li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">...</a></li>
-                            <li><a href="#">&rsaquo;</a></li>
-                        </ul>
-                    </div>
-                    <br class="clr" />
+                                <input type="text" placeholder="Email" class="input-xlarge" />
+
+                            </div>
+                            <div class="control-group">
+
+                                <input type="text" placeholder="Subject" class="input-xlarge" />
+
+                            </div>
+                            <div class="control-group">
+                                <textarea rows="3" id="textarea" class="input-xlarge"></textarea>
+
+                            </div>
+
+                            <button class="btn btn-large" type="submit">Send Messages</button>
+
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="span12">
+                    <iframe style="width:100%; height:300; border: 0px" scrolling="no" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJNa466M8odTERVWhaSh4ZZpY&key=AIzaSyAZF689iaZDujaYH8NgVK9HkNgOPe3J_9M"></iframe><br/>
                 </div>
             </div>
         </div>

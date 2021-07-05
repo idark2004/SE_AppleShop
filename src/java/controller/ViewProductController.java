@@ -41,7 +41,8 @@ public class ViewProductController extends HttpServlet {
             ProductDAO dao = new ProductDAO();
             String categoryID = request.getParameter("categoryID");
             if(request.getParameter("categoryID")==null) {categoryID="";}
-            String status = request.getParameter("status");            
+            String status = request.getParameter("status");       
+            if(request.getParameter("status")==null) {status="True";}
             List<ProductDTO> list = dao.viewProduct(categoryID, status);
             if(list != null){
             request.setAttribute("PRODUCT_LIST", list);

@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class ProductDetailController extends HttpServlet {
 
-    private static final String SUCCESS ="ProductDetail.jsp";
+    private static final String SUCCESS ="productDetai1.jsp";
     private static final String ERROR = "error.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

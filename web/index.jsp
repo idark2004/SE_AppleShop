@@ -1,18 +1,16 @@
 <%-- 
-    Document   : productList
-    Created on : Jul 4, 2021, 9:24:17 PM
+    Document   : index
+    Created on : Jul 5, 2021, 10:52:09 AM
     Author     : anime
 --%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
-    <title>SE15 Shop | Products</title>
+    <title>SE15 Shop | Homepage</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -39,9 +37,6 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="themes/images/ico/apple.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="themes/images/ico/apple.png">
     <link rel="apple-touch-icon-precomposed" href="themes/images/ico/apple.png">
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-     <meta name="google-signin-scope" content="profile email">
-     <meta name="google-signin-client_id" content="779792849031-s9k66dv106kav3h90o9lak0vnm2943ci.apps.googleusercontent.com">
     <style type="text/css" id="enject"></style>
 </head>
 
@@ -74,7 +69,7 @@
                         <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
                     </form>
                     <ul id="topMenu" class="nav pull-right">
-                        <li class=""><a href="Product.html">All Products</a></li>
+                        <li class=""><a href="allProduct.html">All Products</a></li>
                         <li class=""><a href="contact.html">Contact</a></li>
                         <li class=""><a href="contact.html">Profile</a></li>
                         <li class="">
@@ -142,132 +137,113 @@
                 <!-- Sidebar ================================================== -->
                 <div id="sidebar" class="span3">
                     <div class="well well-small">
-                        <c:forEach var="cartItem" items="${sessionScope.cart}">
-                                    <c:set var="subtotalCount" value="${cartItem.quantity}"/>
-                                    <c:set var="subtotal" value="${subtotal+cartItem.quantity}"/>
-                                </c:forEach>
-                         <c:set var="total" value="${total + (cartItem.quantity * cartItem.product.price)}"/>
-                        <a id="myCart" href="product_summary.html"><img src="themes/images/ico-cart.png" alt="cart">${subtotal} Items in your cart <span class="badge badge-warning pull-right">${total}</span></a>
+                        <a id="myCart" href="product_summary.html"><img src="themes/images/ico-cart.png" alt="cart">3 Items in your cart <span class="badge badge-warning pull-right">445,000VND</span></a>
                     </div>
                     <ul id="sideManu" class="nav nav-tabs nav-stacked">
-                        <li><a href="ViewProductController?categoryID=&status=True">All</a></li>
-                        <li><a href="ViewProductController?categoryID=IP&status=True">iPhone</a></li>
-                        <li><a href="ViewProductController?categoryID=ID&status=True">iPad</a></li>
-                        <li><a href="ViewProductController?categoryID=MB&status=True">Mac</a></li>
-                        <li><a href="ViewProductController?categoryID=AW&status=True">Apple Watch</a></li>
-                        <li><a href="ViewProductController?categoryID=AS&status=True">Accessory</a></li>
+                        <li><a href="products.html">All</a></li>
+                        <li><a href="products.html">iPhone</a></li>
+                        <li><a href="products.html">iPad</a></li>
+                        <li><a href="products.html">Mac</a></li>
+                        <li><a href="products.html">Accessory</a></li>
                     </ul>
                     <br/>
                 </div>
                 <!-- Sidebar end=============================================== -->
                 <div class="span9">
-                    <ul class="breadcrumb">
-                        <li><a href="index.jsp">Home</a> <span class="divider">/</span></li>
-                        <li class="active">All Products</li>
-                    </ul>
-                    <h3> Products Name <small class="pull-right"> 40 products are available </small></h3>
-                    <form class="form-horizontal span6">
-                        <div class="control-group">
-                            <label class="control-label alignL">Sort By </label>
-                            <select>
-              <option>Priduct name A - Z</option>
-              <option>Priduct name Z - A</option>
-              <option>Priduct Stoke</option>
-              <option>Price Lowest first</option>
-            </select>
-                        </div>
-                    </form>
-
-                    <div id="myTab" class="pull-right">
-                        <a href="#listView" data-toggle="tab"><span class="btn btn-large"><i class="icon-list"></i></span></a>
-                        <a href="#blockView" data-toggle="tab"><span class="btn btn-large btn-primary"><i class="icon-th-large"></i></span></a>
-                    </div>
-                    <br class="clr" />
-                    <div class="tab-content">
-                        <div class="tab-pane" id="listView">
-                            <c:choose>
-                                    <c:when test="${requestScope.PRODUCT_LIST != null}">
-                                     <c:forEach var="product" items="${requestScope.PRODUCT_LIST}"> 
-                            <div class="row">
-                                <div class="span2">
-                                    <img src="${product.image}" alt="" />
-                                </div>
-                                <div class="span4">
-                                    <h3>${product.name}</h3>
-                                    <hr class="soft" />
-<!--                                    <h5>Available </h5>
-                                    <p>
-                                        Input content here, bitches!
-                                    </p>-->
-                                    <a class="btn btn-small pull-right" href="MainController?action=ProductDetail&productID=${product.productID}">View Details</a>
-                                    <br class="clr" />
-                                </div>
-                                <div class="span3 alignR">
-                                    <form class="form-horizontal qtyFrm">
-                                        <h3><fmt:formatNumber type="number" maxFractionDigits = "0" value="${product.price}" /></h3>
-
-                                        <a href="MainController?action=ProductDetail&productID=${product.productID}" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
-                                        <a href="product_details.html" class="btn btn-large"><i class="icon-zoom-in"></i></a>
-
-                                    </form>
-                                </div>
-                            </div>
-                                    
-                            <hr class="soft" />
-                            </c:forEach>
-                            </c:when>
-                        <c:otherwise>
-                            <h1>${requestScope.EMPTY_LIST.msg}</h1>
-                        </c:otherwise>
-                    </c:choose>
-                           
-                            
-                        </div>
-
-                        <div class="tab-pane  active" id="blockView">
-                            <ul class="thumbnails">
-                                <c:choose>
-                                    <c:when test="${requestScope.PRODUCT_LIST != null}">
-                                        <c:forEach var="product" items="${requestScope.PRODUCT_LIST}">    
+                    <div class="well well-small">
+                        <h4>Featured Products <small class="pull-right">200+ featured products</small></h4>
+                        <div class="row-fluid">
+                            <div id="featured" class="carousel slide">
+                                <div class="carousel-inner">
+                                    <div class="item active">
+                                        <ul class="thumbnails">
                                             <li class="span3">
                                                 <div class="thumbnail">
-                                                    <a href="MainController?action=ProductDetail&productID=${product.productID}"><img src="${product.image}" alt="" /></a>
+                                                    <i class="tag"></i>
+                                                    <a href="product_details.html"><img src="themes/images/products/5.jpg" alt=""></a>
                                                     <div class="caption">
-                                                        <h5>${product.name}</h5>
-                                                        <p>
-                                                            <fmt:formatNumber type="number" maxFractionDigits = "0" value="${product.price}" />
-                                                        </p>
-                                                        <h4 style="text-align:center">
-                                                            <a class="btn" href="MainController?action=ProductDetail&productID=${product.productID}"> <i class="icon-zoom-in"></i></a> <a class="btn" href="MainController?action=ProductDetail&productID=${product.productID}">Add to <i class="icon-shopping-cart"></i></a>
-                                                        </h4>
+                                                        <h5>Product name</h5>
+                                                        <h4 style="font-size: small;"><a class="btn" href="product_details.html">VIEW</a> <span class="pull-right">115,000,000 VND</span></h4>
                                                     </div>
                                                 </div>
                                             </li>
-                                        </c:forEach>
-                                    </c:when>
-                                    <c:otherwise>
-                                    <h1>${requestScope.EMPTY_LIST.msg}</h1>
-                                    </c:otherwise>
-                                </c:choose>
-                               
-                               
-                                
-                            </ul>
-                            <hr class="soft" />
+                                            <li class="span3">
+                                                <div class="thumbnail">
+                                                    <i class="tag"></i>
+                                                    <a href="product_details.html"><img src="themes/images/products/6.jpg" alt=""></a>
+                                                    <div class="caption">
+                                                        <h5>Product name</h5>
+                                                        <h4 style="font-size: small;"><a class="btn" href="product_details.html">VIEW</a> <span class="pull-right">115,000,000 VND</span></h4>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="span3">
+                                                <div class="thumbnail">
+                                                    <a href="product_details.html"><img src="themes/images/products/7.jpg" alt=""></a>
+                                                    <div class="caption">
+                                                        <h5>Product name</h5>
+                                                        <h4 style="font-size: small;"><a class="btn" href="product_details.html">VIEW</a> <span class="pull-right">115,000,000 VND</span></h4>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="span3">
+                                                <div class="thumbnail">
+                                                    <a href="product_details.html"><img src="themes/images/products/8.jpg" alt=""></a>
+                                                    <div class="caption">
+                                                        <h5>Product name</h5>
+                                                        <h4 style="font-size: small;"><a class="btn" href="product_details.html">VIEW</a> <span class="pull-right">115,000,000 VND</span></h4>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="item">
+                                        <ul class="thumbnails">
+                                            <li class="span3">
+                                                <div class="thumbnail">
+                                                    <a href="product_details.html"><img src="themes/images/products/2.jpg" alt=""></a>
+                                                    <div class="caption">
+                                                        <h5>Product name</h5>
+                                                        <h4 style="font-size: small;"><a class="btn" href="product_details.html">VIEW</a> <span class="pull-right">115,000,000 VND</span></h4>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="span3">
+                                                <div class="thumbnail">
+                                                    <a href="product_details.html"><img src="themes/images/products/3.jpg" alt=""></a>
+                                                    <div class="caption">
+                                                        <h5>Product name</h5>
+                                                        <h4 style="font-size: small;"><a class="btn" href="product_details.html">VIEW</a> <span class="pull-right">115,000,000 VND</span></h4>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="span3">
+                                                <div class="thumbnail">
+                                                    <a href="product_details.html"><img src="themes/images/products/4.jpg" alt=""></a>
+                                                    <div class="caption">
+                                                        <h5>Product name</h5>
+                                                        <h4 style="font-size: small;"><a class="btn" href="product_details.html">VIEW</a> <span class="pull-right">115,000,000 VND</span></h4>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="span3">
+                                                <div class="thumbnail">
+                                                    <a href="product_details.html"><img src="themes/images/products/5.jpg" alt=""></a>
+                                                    <div class="caption">
+                                                        <h5>Product name</h5>
+                                                        <h4 style="font-size: small;"><a class="btn" href="product_details.html">VIEW</a> <span class="pull-right">115,000,000 VND</span></h4>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <a class="left carousel-control" href="#featured" data-slide="prev">‹</a>
+                                <a class="right carousel-control" href="#featured" data-slide="next">›</a>
+                            </div>
                         </div>
                     </div>
-                    <div class="pagination">
-                        <ul>
-                            <li><a href="#">&lsaquo;</a></li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">...</a></li>
-                            <li><a href="#">&rsaquo;</a></li>
-                        </ul>
-                    </div>
-                    <br class="clr" />
                 </div>
             </div>
         </div>

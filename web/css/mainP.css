@@ -508,8 +508,7 @@ ul.list-hardware-option li{
             padding:10px 10px;
             transform: translateX(1.5%);
             overflow: hidden;
-            resize: none;
-            position: relative;
+            resize: none;           
             border-radius: 2px;
         }
         .input-des:focus{
@@ -557,11 +556,13 @@ ul.list-hardware-option li{
           content: "Show More";
 /*          transform: translateX(50%);*/
           color:#6A7FD9;
-          font-size: 1.6rem;
+          font-size:1.4rem;
           text-align: center;         
-          position: relative;
+          position: absolute;
           left: 31.1vw;         
-          bottom:25px;
+          bottom:-6px;
+          width: 88px;
+          height:22px;
       }
         #ch:checked + #la:after {
           content: "Show Less";

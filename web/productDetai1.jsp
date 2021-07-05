@@ -1,18 +1,17 @@
 <%-- 
-    Document   : productList
-    Created on : Jul 4, 2021, 9:24:17 PM
+    Document   : productDetai1l
+    Created on : Jul 5, 2021, 1:07:56 PM
     Author     : anime
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
-    <title>SE15 Shop | Products</title>
+    <title>SE15 Shop | Product Detail</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -28,6 +27,7 @@
     <!-- Bootstrap style -->
     <link id="callCss" rel="stylesheet" href="themes/bootshop/bootstrap.min.css" media="screen" />
     <link href="themes/css/base.css" rel="stylesheet" media="screen" />
+    <link href="themes/css/comment.css" rel="stylesheet" media="screen" />
     <!-- Bootstrap style responsive -->
     <link href="themes/css/bootstrap-responsive.min.css" rel="stylesheet" />
     <link href="themes/css/font-awesome.css" rel="stylesheet" type="text/css">
@@ -39,10 +39,10 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="themes/images/ico/apple.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="themes/images/ico/apple.png">
     <link rel="apple-touch-icon-precomposed" href="themes/images/ico/apple.png">
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-     <meta name="google-signin-scope" content="profile email">
-     <meta name="google-signin-client_id" content="779792849031-s9k66dv106kav3h90o9lak0vnm2943ci.apps.googleusercontent.com">
+    <link rel="stylesheet" href="css/mainP.css">
     <style type="text/css" id="enject"></style>
+    <link rel="stylesheet" href="themes/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/base.css">
 </head>
 
 <body>
@@ -68,13 +68,13 @@
                     <span class="icon-bar"></span>
                 </a>
                 <div class="navbar-inner">
-                    <a class="brand" href="index.html">SE15 Shop</a>
+                    <a class="brand" href="index.jsp">SE15 Shop</a>
                     <form class="form-inline navbar-search" method="post" action="products.html">
                         <input id="srchFld" class="srchTxt" type="text" />
                         <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
                     </form>
                     <ul id="topMenu" class="nav pull-right">
-                        <li class=""><a href="Product.html">All Products</a></li>
+                        <li class=""><a href="allProduct.html">All Products</a></li>
                         <li class=""><a href="contact.html">Contact</a></li>
                         <li class=""><a href="contact.html">Profile</a></li>
                         <li class="">
@@ -150,12 +150,11 @@
                         <a id="myCart" href="product_summary.html"><img src="themes/images/ico-cart.png" alt="cart">${subtotal} Items in your cart <span class="badge badge-warning pull-right">${total}</span></a>
                     </div>
                     <ul id="sideManu" class="nav nav-tabs nav-stacked">
-                        <li><a href="ViewProductController?categoryID=&status=True">All</a></li>
-                        <li><a href="ViewProductController?categoryID=IP&status=True">iPhone</a></li>
-                        <li><a href="ViewProductController?categoryID=ID&status=True">iPad</a></li>
-                        <li><a href="ViewProductController?categoryID=MB&status=True">Mac</a></li>
-                        <li><a href="ViewProductController?categoryID=AW&status=True">Apple Watch</a></li>
-                        <li><a href="ViewProductController?categoryID=AS&status=True">Accessory</a></li>
+                        <li><a href="products.html">All</a></li>
+                        <li><a href="products.html">iPhone</a></li>
+                        <li><a href="products.html">iPad</a></li>
+                        <li><a href="products.html">Mac</a></li>
+                        <li><a href="products.html">Accessory</a></li>
                     </ul>
                     <br/>
                 </div>
@@ -163,111 +162,166 @@
                 <div class="span9">
                     <ul class="breadcrumb">
                         <li><a href="index.jsp">Home</a> <span class="divider">/</span></li>
-                        <li class="active">All Products</li>
+                        <li><a href="products.html">Products</a> <span class="divider">/</span></li>
+                        <li class="active">iPhone 12 Pro Max</li>
                     </ul>
-                    <h3> Products Name <small class="pull-right"> 40 products are available </small></h3>
-                    <form class="form-horizontal span6">
-                        <div class="control-group">
-                            <label class="control-label alignL">Sort By </label>
-                            <select>
-              <option>Priduct name A - Z</option>
-              <option>Priduct name Z - A</option>
-              <option>Priduct Stoke</option>
-              <option>Price Lowest first</option>
-            </select>
-                        </div>
-                    </form>
-
-                    <div id="myTab" class="pull-right">
-                        <a href="#listView" data-toggle="tab"><span class="btn btn-large"><i class="icon-list"></i></span></a>
-                        <a href="#blockView" data-toggle="tab"><span class="btn btn-large btn-primary"><i class="icon-th-large"></i></span></a>
-                    </div>
-                    <br class="clr" />
-                    <div class="tab-content">
-                        <div class="tab-pane" id="listView">
-                            <c:choose>
-                                    <c:when test="${requestScope.PRODUCT_LIST != null}">
-                                     <c:forEach var="product" items="${requestScope.PRODUCT_LIST}"> 
-                            <div class="row">
-                                <div class="span2">
-                                    <img src="${product.image}" alt="" />
-                                </div>
-                                <div class="span4">
-                                    <h3>${product.name}</h3>
-                                    <hr class="soft" />
-<!--                                    <h5>Available </h5>
-                                    <p>
-                                        Input content here, bitches!
-                                    </p>-->
-                                    <a class="btn btn-small pull-right" href="MainController?action=ProductDetail&productID=${product.productID}">View Details</a>
-                                    <br class="clr" />
-                                </div>
-                                <div class="span3 alignR">
-                                    <form class="form-horizontal qtyFrm">
-                                        <h3><fmt:formatNumber type="number" maxFractionDigits = "0" value="${product.price}" /></h3>
-
-                                        <a href="MainController?action=ProductDetail&productID=${product.productID}" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
-                                        <a href="product_details.html" class="btn btn-large"><i class="icon-zoom-in"></i></a>
-
-                                    </form>
+                    <div class="row">
+                        <div id="gallery" class="span3">
+                            <a href="${requestScope.product.image}" title="iPhone 12 Pro Max">
+                                <img src="${requestScope.product.image}" style="width:100%" alt="iPhone 12 Pro Max" />
+                            </a>
+                            <div id="differentview" class="moreOptopm carousel slide">
+                                <div class="carousel-inner">
+                                    <div class="item active">
+                                        <a href="${requestScope.product.image}"> <img style="width:29%" src="${requestScope.product.image}" alt="" /></a>
+                                        <a href="${requestScope.product.image}"> <img style="width:29%" src="${requestScope.product.image}" alt="" /></a>
+                                        <a href="${requestScope.product.image}"> <img style="width:29%" src="${requestScope.product.image}" alt="" /></a>
+                                    </div>
                                 </div>
                             </div>
-                                    
+                        </div>
+                        <div class="span6">
+                            <input type="text" name="productID" value="${requestScope.product.productID}" hidden>
+                            <h3>${requestScope.product.name}</h3>
+<!--                            <small>-Ceramic Shield front | Glass back and aluminum design</small>-->
                             <hr class="soft" />
-                            </c:forEach>
-                            </c:when>
-                        <c:otherwise>
-                            <h1>${requestScope.EMPTY_LIST.msg}</h1>
-                        </c:otherwise>
-                    </c:choose>
-                           
-                            
+                            <form class="form-horizontal qtyFrm">
+                                <div class="control-group">
+                                    <label class="control-label"><span><fmt:formatNumber type="number" maxFractionDigits = "0" value="${spec.price}" /> VND</span></label>
+                                    <div class="controls">
+                                        <input type="number" class="span1" placeholder="Qty." />
+                                        <button type="submit" class="btn btn-large btn-primary pull-right"> Add to cart <i class=" icon-shopping-cart"></i></button>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <hr class="soft" />
+                            <h4>100 items in stock</h4>
+                            <form class="form-horizontal qtyFrm pull-right">
+                                <div class="control-group">
+                                    <label class="control-label"><span>Color</span></label>
+                                    <div class="controls">
+                                        
+                                        <select class="span2" name="color" onClick="window.location = 'MainController?action=ProductDetail&productID=${product.productID.trim()}&color=${color.color}';">
+                                        <c:forEach var="color" items="${requestScope.color}">           
+                                            <option value="${color.color}">${color.color}</option>
+                                         </c:forEach>
+                                        </select>
+                                        <select class="span2" name="option">
+                                         <c:forEach var="spec" items="${requestScope.spec}">          
+                                             <option value="${color.color}">${color.color}</option>
+						  
+                                         </c:forEach>
+                                        </select>
+                                    </div>
+                                </div>
+                            </form>
+                            <hr class="soft clr" />
+                            <a class="btn btn-small pull-right" href="#detail">More Details</a>
+                            <br class="clr" />
+                            <a href="#" name="detail"></a>
+                            <hr class="soft" />
                         </div>
 
-                        <div class="tab-pane  active" id="blockView">
-                            <ul class="thumbnails">
-                                <c:choose>
-                                    <c:when test="${requestScope.PRODUCT_LIST != null}">
-                                        <c:forEach var="product" items="${requestScope.PRODUCT_LIST}">    
-                                            <li class="span3">
-                                                <div class="thumbnail">
-                                                    <a href="MainController?action=ProductDetail&productID=${product.productID}"><img src="${product.image}" alt="" /></a>
-                                                    <div class="caption">
-                                                        <h5>${product.name}</h5>
-                                                        <p>
-                                                            <fmt:formatNumber type="number" maxFractionDigits = "0" value="${product.price}" />
-                                                        </p>
-                                                        <h4 style="text-align:center">
-                                                            <a class="btn" href="MainController?action=ProductDetail&productID=${product.productID}"> <i class="icon-zoom-in"></i></a> <a class="btn" href="MainController?action=ProductDetail&productID=${product.productID}">Add to <i class="icon-shopping-cart"></i></a>
-                                                        </h4>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </c:forEach>
-                                    </c:when>
-                                    <c:otherwise>
-                                    <h1>${requestScope.EMPTY_LIST.msg}</h1>
-                                    </c:otherwise>
-                                </c:choose>
-                               
-                               
-                                
+                        <div class="span9">
+                            <ul id="productDetail" class="nav nav-tabs">
+                                <li class="active"><a href="#home" data-toggle="tab">Product Details</a></li>
+                                <li><a href="#profile" data-toggle="tab">Comment</a></li>
                             </ul>
-                            <hr class="soft" />
+                            <div id="myTabContent" class="tab-content">
+                                <div class="tab-pane fade active in" id="home" style="position: relative;overflow: hidden;padding-bottom: 20px;" >
+                                    <h4>Product Information</h4>                                  
+                                    <p>
+                                        iPhone 12 Pro Max mobile was launched on 13th October 2020. 
+                                        
+                                        The phone comes with a 6.70-inch touchscreen display with a resolution of 1284x2778 pixels at a pixel density of 458 pixels per inch (ppi). The iPhone 12 Pro Max supports wireless charging, as
+                                            well as proprietary fast charging. 
+                                        
+                                        As far as the cameras are concerned, the iPhone 12 Pro Max on the rear packs a 12-megapixel primary camera with an f/1.6 aperture; a 12-megapixel camera with an f/2.4 aperture,
+                                            and a 12-megapixel camera with an f/2.2 aperture. The rear camera setup has autofocus. It sports a 12-megapixel camera on the front for selfies with an f/2.2 aperture. iPhone 12 Pro Max is based on iOS 14 and packs
+                                            128GB of inbuilt storage. The iPhone 12 Pro Max is a dual-SIM (GSM and GSM) mobile that accepts Nano-SIM and eSIM cards. The iPhone 12 Pro Max measures 160.80 x 78.10 x 7.40mm (height x width x thickness) and weighs
+                                            228.00 grams. It was launched in Gold, Graphite, Pacific Blue, and Silver colours. It features an IP68 rating for dust and water protection. Connectivity options on the iPhone 12 Pro Max include Wi-Fi 802.11 a/b/g/n/ac/Yes,
+                                            GPS, Bluetooth v5.00, Lightning, 3G, and 4G (with support for Band 40 used by some LTE networks in India). Sensors on the phone include accelerometer, ambient light sensor, barometer, gyroscope, proximity sensor,
+                                            and compass/ magnetometer. The iPhone 12
+                                            
+                                    </p>
+                                </div>
+                                <div class="tab-pane fade" id="profile">
+
+                                    <div class="container__review">
+                                        <h3 class="review__tittle">Comment</h3>
+
+                                        <div class="form-comment__container">
+                                            <form action="MainController" class="form-review">
+                                                <lable for="reviewer-name" class="name-lable">Full Name</lable>
+                                                <input placeholder="Input your Name" type="text" id="reviewer-name" class="cName" name="reviewer-name">
+                                                <lable for="pComment" class="comment-lable">Comment</lable>
+                                                <textarea type="text" class="pComment" id="pComment" name="pComment" placeholder="Input detail your comment"></textarea>
+                                                <input type="hidden" name="productID" value="${requestScope.product.productID}" />
+                                                <input type="submit" name="action" class="btn btn-small" value="Submit comment">
+                                            </form>
+                                        </div>
+                                        <div class="review-list">
+                                            <div review-item__container>
+                                                <div class="reivew-row">
+                                                    <span class="review__reviewer-name">
+                                                    Khach hang
+                                                    </span>
+                                                    <p class="review__reviewer-comment">
+                                                        Cho mình hòi Galaxy A51 đã sử dụng hơn 1 năm, shop có xem xét áp dụng chương trình trợ giá đổi qua IP 12 bản 256GB không ạ? và có áp dụng thêm chương trình trả góp qua thẻ tín dụng của HSBC không ạ? và kì hạn hỗ trợ tối đa là bao nhiêu? mình cảm ơn shope.
+                                                    </p>
+                                                </div>
+                                                <ul class="review-option">
+                                                    <form method="POST" class="reply-form d-none" id="comment-1-reply-form">
+                                                        <textarea class="input-reply" placeholder="Reply to comment" rows="4"></textarea>
+                                                        <button class="reply-submit" type="submit">Submit</button>
+                                                        <button type="button" onclick="closeForm(this)">Cancel</button>
+                                                    </form>
+                                                </ul>
+
+
+                                                <div id="reply-1" class="reply-item__container">
+
+                                                    <div class="reivew-row">
+                                                        <span class="fas fa-share review__reviewer-name">
+                                                        Customer
+                                                        </span>
+
+                                                        <p class="review__reviewer-comment">
+                                                            Shop xin chào anh Galaxy A51 hiện chưa được áp dụng cái kiểu chương trình này ạ.
+                                                        </p>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <hr class="soft" />
+                                            <div review-item__container>
+                                                <li class="reivew-row">
+                                                    <span class="review__reviewer-name">
+                                                    Thang anh 69
+                                                    </span>
+                                                    <p class="review__reviewer-comment">
+                                                        Ngành IT Việt Nam hiện nay ở đầu của sự phát triển. Có thể nói IT là vua của các nghề. Vừa có tiền, có quyền. Vừa kiếm được nhiều $ lại được xã hội trọng vọng. Thằng em mình học bách khoa cơ khí, sinh năm 96. Tự mày mò học code rồi đi làm remote cho công
+                                                        ty Mỹ 2 năm nay. Mỗi tối online 3-4 giờ là xong việc. Lương tháng 3k6. Nhưng thu nhập chính vẫn là từ nhận các project bên ngoài làm thêm. Tuần làm 2,3 cái nhẹ nhàng 9,10k tiền tươi thóc thật không
+                                                        phải đóng thuế. Làm gần được 3 năm mà nhà xe nó đã mua đủ cả. Nghĩ mà thèm.
+                                                    </p>
+                                                </li>
+                                                <ul class="review-option">
+                                                    <form method="POST" class="reply-form d-none" id="comment-1-reply-form">
+                                                        <textarea class="input-reply" placeholder="Reply to comment" rows="4"></textarea>
+                                                        <button class="reply-submit" type="submit">Submit</button>
+                                                        <button type="button" onclick="closeForm(this)">Cancel</button>
+                                                    </form>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
                         </div>
+
                     </div>
-                    <div class="pagination">
-                        <ul>
-                            <li><a href="#">&lsaquo;</a></li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">...</a></li>
-                            <li><a href="#">&rsaquo;</a></li>
-                        </ul>
-                    </div>
-                    <br class="clr" />
                 </div>
             </div>
         </div>
@@ -365,5 +419,6 @@
     </div>
     <span id="themesBtn"></span>
 </body>
+
 
 </html>

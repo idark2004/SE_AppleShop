@@ -29,7 +29,7 @@
                         <label for="password"><b>Password</b></label>
                         <input type="password" placeholder="Enter New Password" name="password" required>
                         <label for="psw"><b>Confirm</b></label>
-                        <input type="password" placeholder="Re-enter Password" name=psw required>                       
+                        <input type="password" placeholder="Re-enter Password" name="psw" required>                       
                         <label>
                             <input type="checkbox" checked="checked" name="remember"> Remember me
                         </label>

@@ -1,21 +1,20 @@
 <%-- 
-    Document   : productList
-    Created on : Jul 4, 2021, 9:24:17 PM
+    Document   : signupForm
+    Created on : Jul 4, 2021, 10:40:14 PM
     Author     : anime
 --%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
-    <title>SE15 Shop | Products</title>
+    <title>SE15 Shop | Register</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="google-signin-client_id" content="779792849031-s9k66dv106kav3h90o9lak0vnm2943ci.apps.googleusercontent.com">
     <!--Less styles -->
     <!-- Other Less css file //different less files has different color scheam
 	<link rel="stylesheet/less" type="text/css" href="themes/less/simplex.less">
@@ -39,9 +38,6 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="themes/images/ico/apple.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="themes/images/ico/apple.png">
     <link rel="apple-touch-icon-precomposed" href="themes/images/ico/apple.png">
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-     <meta name="google-signin-scope" content="profile email">
-     <meta name="google-signin-client_id" content="779792849031-s9k66dv106kav3h90o9lak0vnm2943ci.apps.googleusercontent.com">
     <style type="text/css" id="enject"></style>
 </head>
 
@@ -51,7 +47,7 @@
             <div id="welcomeLine" class="row">
                 <div class="span6">Welcome!<strong> User</strong></div>
                 <div class="span6">
-                    <div class="pull-right">
+                   <div class="pull-right">
                           <c:forEach var="cartItem" items="${sessionScope.cart}">
                                     <c:set var="subtotalCount" value="${cartItem.quantity}"/>
                                     <c:set var="subtotal" value="${subtotal+cartItem.quantity}"/>
@@ -68,13 +64,13 @@
                     <span class="icon-bar"></span>
                 </a>
                 <div class="navbar-inner">
-                    <a class="brand" href="index.html">SE15 Shop</a>
+                    <a class="brand" href="index.jsp">SE15 Shop</a>
                     <form class="form-inline navbar-search" method="post" action="products.html">
                         <input id="srchFld" class="srchTxt" type="text" />
                         <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
                     </form>
                     <ul id="topMenu" class="nav pull-right">
-                        <li class=""><a href="Product.html">All Products</a></li>
+                        <li class=""><a href="allProduct.html">All Products</a></li>
                         <li class=""><a href="contact.html">Contact</a></li>
                         <li class=""><a href="contact.html">Profile</a></li>
                         <li class="">
@@ -150,124 +146,145 @@
                         <a id="myCart" href="product_summary.html"><img src="themes/images/ico-cart.png" alt="cart">${subtotal} Items in your cart <span class="badge badge-warning pull-right">${total}</span></a>
                     </div>
                     <ul id="sideManu" class="nav nav-tabs nav-stacked">
-                        <li><a href="ViewProductController?categoryID=&status=True">All</a></li>
-                        <li><a href="ViewProductController?categoryID=IP&status=True">iPhone</a></li>
-                        <li><a href="ViewProductController?categoryID=ID&status=True">iPad</a></li>
-                        <li><a href="ViewProductController?categoryID=MB&status=True">Mac</a></li>
-                        <li><a href="ViewProductController?categoryID=AW&status=True">Apple Watch</a></li>
-                        <li><a href="ViewProductController?categoryID=AS&status=True">Accessory</a></li>
+                        <li><a href="products.html">All</a></li>
+                        <li><a href="products.html">iPhone</a></li>
+                        <li><a href="products.html">iPad</a></li>
+                        <li><a href="products.html">Mac</a></li>
+                        <li><a href="products.html">Accessory</a></li>
                     </ul>
                     <br/>
                 </div>
                 <!-- Sidebar end=============================================== -->
                 <div class="span9">
                     <ul class="breadcrumb">
-                        <li><a href="index.jsp">Home</a> <span class="divider">/</span></li>
-                        <li class="active">All Products</li>
+                        <li><a href="index.html">Home</a> <span class="divider">/</span></li>
+                        <li class="active">Registration</li>
                     </ul>
-                    <h3> Products Name <small class="pull-right"> 40 products are available </small></h3>
-                    <form class="form-horizontal span6">
-                        <div class="control-group">
-                            <label class="control-label alignL">Sort By </label>
-                            <select>
-              <option>Priduct name A - Z</option>
-              <option>Priduct name Z - A</option>
-              <option>Priduct Stoke</option>
-              <option>Price Lowest first</option>
-            </select>
-                        </div>
-                    </form>
+                    <h3> Registration</h3>
+                    <div class="well">
+                        <!--
+	<div class="alert alert-info fade in">
+		<button type="button" class="close" data-dismiss="alert">×</button>
+		<strong>Lorem Ipsum is simply dummy</strong> text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+	 </div>
+	<div class="alert fade in">
+		<button type="button" class="close" data-dismiss="alert">×</button>
+		<strong>Lorem Ipsum is simply dummy</strong> text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+	 </div>
+	 <div class="alert alert-block alert-error fade in">
+		<button type="button" class="close" data-dismiss="alert">×</button>
+		<strong>Lorem Ipsum is simply</strong> dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+	 </div> -->
+                        <form class="form-horizontal">
+                            <h4>Your personal information</h4>
 
-                    <div id="myTab" class="pull-right">
-                        <a href="#listView" data-toggle="tab"><span class="btn btn-large"><i class="icon-list"></i></span></a>
-                        <a href="#blockView" data-toggle="tab"><span class="btn btn-large btn-primary"><i class="icon-th-large"></i></span></a>
-                    </div>
-                    <br class="clr" />
-                    <div class="tab-content">
-                        <div class="tab-pane" id="listView">
-                            <c:choose>
-                                    <c:when test="${requestScope.PRODUCT_LIST != null}">
-                                     <c:forEach var="product" items="${requestScope.PRODUCT_LIST}"> 
-                            <div class="row">
-                                <div class="span2">
-                                    <img src="${product.image}" alt="" />
-                                </div>
-                                <div class="span4">
-                                    <h3>${product.name}</h3>
-                                    <hr class="soft" />
-<!--                                    <h5>Available </h5>
-                                    <p>
-                                        Input content here, bitches!
-                                    </p>-->
-                                    <a class="btn btn-small pull-right" href="MainController?action=ProductDetail&productID=${product.productID}">View Details</a>
-                                    <br class="clr" />
-                                </div>
-                                <div class="span3 alignR">
-                                    <form class="form-horizontal qtyFrm">
-                                        <h3><fmt:formatNumber type="number" maxFractionDigits = "0" value="${product.price}" /></h3>
-
-                                        <a href="MainController?action=ProductDetail&productID=${product.productID}" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
-                                        <a href="product_details.html" class="btn btn-large"><i class="icon-zoom-in"></i></a>
-
-                                    </form>
+                            <div class="control-group">
+                                <label class="control-label" for="inputFname1">Username <sup>*</sup></label>
+                                <div class="controls">
+                                    <input type="text" id="inputFname1" placeholder="abc123">
                                 </div>
                             </div>
-                                    
-                            <hr class="soft" />
-                            </c:forEach>
-                            </c:when>
-                        <c:otherwise>
-                            <h1>${requestScope.EMPTY_LIST.msg}</h1>
-                        </c:otherwise>
-                    </c:choose>
-                           
-                            
-                        </div>
 
-                        <div class="tab-pane  active" id="blockView">
-                            <ul class="thumbnails">
-                                <c:choose>
-                                    <c:when test="${requestScope.PRODUCT_LIST != null}">
-                                        <c:forEach var="product" items="${requestScope.PRODUCT_LIST}">    
-                                            <li class="span3">
-                                                <div class="thumbnail">
-                                                    <a href="MainController?action=ProductDetail&productID=${product.productID}"><img src="${product.image}" alt="" /></a>
-                                                    <div class="caption">
-                                                        <h5>${product.name}</h5>
-                                                        <p>
-                                                            <fmt:formatNumber type="number" maxFractionDigits = "0" value="${product.price}" />
-                                                        </p>
-                                                        <h4 style="text-align:center">
-                                                            <a class="btn" href="MainController?action=ProductDetail&productID=${product.productID}"> <i class="icon-zoom-in"></i></a> <a class="btn" href="MainController?action=ProductDetail&productID=${product.productID}">Add to <i class="icon-shopping-cart"></i></a>
-                                                        </h4>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </c:forEach>
-                                    </c:when>
-                                    <c:otherwise>
-                                    <h1>${requestScope.EMPTY_LIST.msg}</h1>
-                                    </c:otherwise>
-                                </c:choose>
-                               
-                               
-                                
-                            </ul>
-                            <hr class="soft" />
-                        </div>
+                            <div class="control-group">
+                                <label class="control-label" for="input_email">Email <sup>*</sup></label>
+                                <div class="controls">
+                                    <input type="text" id="input_email" placeholder="abc@gamil.com">
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label" for="inputPassword1">Password <sup>*</sup></label>
+                                <div class="controls">
+                                    <input type="password" id="inputPassword1" placeholder="Password">
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">Gender <sup>*</sup></label>
+                                <div class="controls">
+                                    <select class="span1" name="days">
+										<option value="">-</option>
+										<option value="1">Male</option>
+										<option value="2">Female</option>
+									</select>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">Date of Birth <sup>*</sup></label>
+                                <div class="controls">
+                                    <select class="span1" name="days">
+										<option value="">-</option>
+											<option value="1">1&nbsp;&nbsp;</option>
+											<option value="2">2&nbsp;&nbsp;</option>
+											<option value="3">3&nbsp;&nbsp;</option>
+											<option value="4">4&nbsp;&nbsp;</option>
+											<option value="5">5&nbsp;&nbsp;</option>
+											<option value="6">6&nbsp;&nbsp;</option>
+											<option value="7">7&nbsp;&nbsp;</option>
+									</select>
+                                    <select class="span1" name="days">
+										<option value="">-</option>
+											<option value="1">1&nbsp;&nbsp;</option>
+											<option value="2">2&nbsp;&nbsp;</option>
+											<option value="3">3&nbsp;&nbsp;</option>
+											<option value="4">4&nbsp;&nbsp;</option>
+											<option value="5">5&nbsp;&nbsp;</option>
+											<option value="6">6&nbsp;&nbsp;</option>
+											<option value="7">7&nbsp;&nbsp;</option>
+									</select>
+                                    <select class="span1" name="days">
+										<option value="">-</option>
+											<option value="1">1&nbsp;&nbsp;</option>
+											<option value="2">2&nbsp;&nbsp;</option>
+											<option value="3">3&nbsp;&nbsp;</option>
+											<option value="4">4&nbsp;&nbsp;</option>
+											<option value="5">5&nbsp;&nbsp;</option>
+											<option value="6">6&nbsp;&nbsp;</option>
+											<option value="7">7&nbsp;&nbsp;</option>
+									</select>
+                                </div>
+                            </div>
+
+                            <div class="alert alert-block alert-error fade in">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                <strong>Warning:</strong> Muốn báo cc gì thì bỏ vào đây, đại loại như: DMM, nhập thiếu kìa, loz mắt mù
+                            </div>
+
+                            <h4>Your address</h4>
+                            <div class="control-group">
+                                <label class="control-label" for="inputFname">Full name <sup>*</sup></label>
+                                <div class="controls">
+                                    <input type="text" id="inputFname" placeholder="Trần Văn A">
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label" for="address">Address<sup>*</sup></label>
+                                <div class="controls">
+                                    <input type="text" id="address" placeholder="69 Trần Duy Hưng TP Hà Nội" /> <span>Street address, P.O. box, company name, c/o</span>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label" for="phone">Phone <sup>*</sup></label>
+                                <div class="controls">
+                                    <input type="text" name="phone" id="Phone" placeholder="0914123456" /> <span>You must register at least one phone number</span>
+                                </div>
+                            </div>
+
+                            <p><sup>*</sup>Required field </p>
+
+                            <div class="control-group">
+                                <div class="controls">
+                                    <input type="hidden" name="email_create" value="1">
+                                    <input type="hidden" name="is_new_customer" value="1">
+                                    <input class="btn btn-large btn-success" type="submit" value="Register" />
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                    <div class="pagination">
-                        <ul>
-                            <li><a href="#">&lsaquo;</a></li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">...</a></li>
-                            <li><a href="#">&rsaquo;</a></li>
-                        </ul>
-                    </div>
-                    <br class="clr" />
+
                 </div>
             </div>
         </div>
