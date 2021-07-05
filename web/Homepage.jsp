@@ -93,7 +93,7 @@
                         <a class="product-link" href="ViewProductController?categoryID=IP&status=True">iPhone</a>
                         <a class="product-link" href="ViewProductController?categoryID=AW&status=True">Apple Watch</a>
                         <a class="product-link" href="ViewProductController?categoryID=AS&status=True">Accessories</a>
-                    <c:if test="${sessionScope.user.roleID.trim()!='US'|| sessionScope.user != null}">
+                        <c:if test="${sessionScope.user.roleID.trim()!='US'|| sessionScope.user != null}">
                         <a class="product-link" href="dashBoard.jsp">Dashboard</a>
                         <a class="product-link" href="MainController?action=ProductListManagement&categoryID=">Management</a>
                         

@@ -43,9 +43,10 @@
      <meta name="google-signin-scope" content="profile email">
      <meta name="google-signin-client_id" content="779792849031-s9k66dv106kav3h90o9lak0vnm2943ci.apps.googleusercontent.com">
     <style type="text/css" id="enject"></style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
-<body>
+<body onload="a();">
     <div id="header">
         <div class="container">
             <div id="welcomeLine" class="row">
@@ -169,11 +170,11 @@
                     <form class="form-horizontal span6">
                         <div class="control-group">
                             <label class="control-label alignL">Sort By </label>
-                            <select>
+                            <select id="sortList" onchange="sortList();">
                                 <option disabled selected value> --Sort By-- </option>
-                                <option>Priduct name A - Z</option>
+                                <option>Product name A - Z</option>
                                 <option>Priduct name Z - A</option>
-                                <option>Priduct Stoke</option>
+                                <option>From Highest</option>
                                 <option>Price Lowest first</option>
                           </select>
                         </div>
@@ -194,7 +195,7 @@
                                     <img src="${product.image}" alt="" />
                                 </div>
                                 <div class="span4">
-                                    <h3>${product.name}</h3>
+                                    <h3 class="product-name">${product.name}</h3>
                                     <hr class="soft" />
 <!--                                    <h5>Available </h5>
                                     <p>
@@ -220,22 +221,19 @@
                         <c:otherwise>
                             <h1>${requestScope.EMPTY_LIST.msg}</h1>
                         </c:otherwise>
-                    </c:choose>
-                           
-                            
+                    </c:choose>                                                     
                         </div>
-
                         <div class="tab-pane  active" id="blockView">
-                            <ul class="thumbnails">
+                            <ul class="thumbnails" id="product-list">
                                 <c:choose>
                                     <c:when test="${requestScope.PRODUCT_LIST != null}">
                                         <c:forEach var="product" items="${requestScope.PRODUCT_LIST}">    
-                                            <li class="span3">
+                                            <li class="span3 product-item">
                                                 <div class="thumbnail">
                                                     <a href="MainController?action=ProductDetail&productID=${product.productID}"><img src="${product.image}" alt="" /></a>
                                                     <div class="caption">
-                                                        <h5>${product.name}</h5>
-                                                        <p>
+                                                        <h5 id="product-name" class="product-name">${product.name}d</h5>
+                                                        <p class="product-price">
                                                             <fmt:formatNumber type="number" maxFractionDigits = "0" value="${product.price}" />
                                                         </p>
                                                         <h4 style="text-align:center">
@@ -259,11 +257,14 @@
                     </div>
                     <div class="pagination">
                         <ul>
-                            <li><a href="#">&lsaquo;</a></li>
+                            <li><a <c:if test="${requestScope.curPage == 1 }">style="cursor:default;pointer-events: none; "</c:if>
+                                    href="ViewProductController?pageNum=${requestScope.curPage - 1}&CategoryID=${requestScope.cateID}&status=True">&lsaquo;</a></li>
                                 <c:forEach var="pageNum" begin="1" end="${requestScope.pages}">                           
-                                <li><a href="ViewProductController?pageNum=${pageNum}&CategoryID=${requestScope.cateID}&status=True">${pageNum}</a></li>
+                                <li 
+                                    ><a <c:if test="${requestScope.curPage == pageNum}">style="color:red;"</c:if> href="ViewProductController?pageNum=${pageNum}&CategoryID=${requestScope.cateID}&status=True">${pageNum}</a></li>
                             </c:forEach>
-                            <li><a href="#">&rsaquo;</a></li>
+                            <li><a <c:if test="${requestScope.curPage == requestScope.pages }">style="cursor:default;pointer-events: none; "</c:if>
+                                    href="ViewProductController?pageNum=${requestScope.curPage + 1}&CategoryID=${requestScope.cateID}&status=True">&rsaquo;</a></li>
                         </ul>
                     </div>
                     <br class="clr" />
@@ -364,5 +365,136 @@
     </div>
     <span id="themesBtn"></span>
 </body>
+<script>
 
+            $('#sortList').on('change', function() {
+             sortPriceAcs();
+            });
+    function sortPriceAcs() {
+    var list, i, switching,name, b, shouldSwitch,main1,main2;
+    list = document.getElementById("product-list");
+    switching = true;
+    /* Make a loop that will continue until
+    no switching has been done: */
+    while (switching) {
+      // start by saying: no switching is done:
+      switching = false;
+      b = list.getElementsByClassName("product-item");
+       var num1,num2,price1,price2;
+      // Loop through all list-items:
+      for (i = 0; i < (b.length - 1); i++) {
+        // start by saying there should be no switching:
+        shouldSwitch = false;
+        /* check if the next item should
+        switch place with the current item: */
+        num1 = b[i].getElementsByClassName("product-price")[0].innerHTML;   
+        num2 = b[i+1].getElementsByClassName("product-price")[0].innerHTML;
+        price1 = num1.replaceAll(",","");
+        price2 = num2.replaceAll(",","");
+        main1 = parseInt(price1);
+        main2 = parseInt(price2);
+        if (main1>main2) {
+          /* if next item is alphabetically
+          lower than current item, mark as a switch
+          and break the loop: */
+          shouldSwitch = true;
+          break;
+        }
+      }
+    if (shouldSwitch) {
+      /* If a switch has been marked, make the switch
+      and mark the switch as done: */
+      b[i].parentNode.insertBefore(b[i + 1], b[i]);
+      switching = true;
+    }
+  }
+}                
+    function sortListAcs() {
+    var list, i, switching,name, b, shouldSwitch;
+    list = document.getElementById("product-list");
+    switching = true;
+    /* Make a loop that will continue until
+    no switching has been done: */
+    while (switching) {
+      // start by saying: no switching is done:
+      switching = false;
+      b = list.getElementsByClassName("product-item");
+       
+      // Loop through all list-items:
+      for (i = 0; i < (b.length - 1); i++) {
+        // start by saying there should be no switching:
+        shouldSwitch = false;
+        /* check if the next item should
+        switch place with the current item: */
+        if (b[i].getElementsByClassName("product-name")[0].innerHTML.toLowerCase() > b[i + 1].getElementsByClassName("product-name")[0].innerHTML.toLowerCase()) {
+          /* if next item is alphabetically
+          lower than current item, mark as a switch
+          and break the loop: */
+          shouldSwitch = true;
+          break;
+        }
+      }
+    if (shouldSwitch) {
+      /* If a switch has been marked, make the switch
+      and mark the switch as done: */
+      b[i].parentNode.insertBefore(b[i + 1], b[i]);
+      switching = true;
+    }
+  }
+}        
+            
+      function sortListDes() {
+    var list, i, switching,name, b, shouldSwitch;
+    list = document.getElementById("product-list");
+    switching = true;
+    /* Make a loop that will continue until
+    no switching has been done: */
+    while (switching) {
+      // start by saying: no switching is done:
+      switching = false;
+      b = list.getElementsByClassName("product-item");
+       
+      // Loop through all list-items:
+      for (i = 0; i < (b.length - 1); i++) {
+        // start by saying there should be no switching:
+        shouldSwitch = false;
+        /* check if the next item should
+        switch place with the current item: */
+        if (b[i].getElementsByClassName("product-name")[0].innerHTML.toLowerCase() < b[i + 1].getElementsByClassName("product-name")[0].innerHTML.toLowerCase()) {
+          /* if next item is alphabetically
+          lower than current item, mark as a switch
+          and break the loop: */
+          shouldSwitch = true;
+          break;
+        }
+      }
+    if (shouldSwitch) {
+      /* If a switch has been marked, make the switch
+      and mark the switch as done: */
+      b[i].parentNode.insertBefore(b[i + 1], b[i]);
+      switching = true;
+    }
+  }
+}   
+    function a(){
+        var list, i, switching,name,name1, b, shouldSwitch,price1,price2,main1,main2;
+        list = document.getElementById("product-list");
+    
+    /* Make a loop that will continue until
+    no switching has been done: */
+    
+      // start by saying: no switching is done:
+      
+      b = list.getElementsByClassName("product-item");
+      name = b[0].getElementsByClassName("product-price")[0].innerHTML;
+      name1 = b[1].getElementsByClassName("product-price")[0].innerHTML;
+      price1 = name.replaceAll(",","");
+      price2 = name1.replaceAll(",","");
+      main1 = parseInt(price1);
+      main2 = parseInt(price2);
+      alert(main1);
+      if(main1>main2) alert("lon hon");
+      else alert("nho hon");
+    }
+</script>
 </html>

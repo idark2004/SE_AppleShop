@@ -46,12 +46,15 @@ public class ViewProductController extends HttpServlet {
             if(pageNum != null){
                  page = Integer.parseInt(pageNum);
             }
+            else{
+                page = 1;
+            }
             System.out.println(page);
             if(request.getParameter("categoryID")==null) {categoryID="";}
             String status = request.getParameter("status");       
             if(request.getParameter("status")==null) {status="True";}
             List<ProductDTO> list = dao.viewProduct(categoryID, status);    
-            int product_per_page = 2;
+            int product_per_page = 10;
             int pNum = list.size();
             int pages = 0;
             if(pNum % product_per_page==0){
@@ -72,11 +75,16 @@ public class ViewProductController extends HttpServlet {
                         request.setAttribute("PRODUCT_LIST",subList );
                     }      
                     } else{    
+                        if(pNum<product_per_page){
+                            request.setAttribute("PRODUCT_LIST",list );
+                        }else{
                         List<ProductDTO> subList = list.subList(0,product_per_page);
                         request.setAttribute("PRODUCT_LIST",subList );
-                    }       
+                        }
+                   }       
 
             request.setAttribute("pages", pages);
+            request.setAttribute("curPage", page);
             request.setAttribute("cateID", categoryID);
             } else{
                 msg.setMsg("Sorry our shop currently doesn't have these products in stock !!");
