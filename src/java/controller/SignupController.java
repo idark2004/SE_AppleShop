@@ -38,10 +38,10 @@ public class SignupController extends HttpServlet {
         ErrorDTO error = new ErrorDTO();
         try {
             String emaill= request.getParameter("email");
-            String password= request.getParameter("psw");
-            String confirm= request.getParameter("psw-repeat");
+            String password= request.getParameter("password");
+            String confirm= request.getParameter("confirm");
             String name= request.getParameter("name");
-            String address= request.getParameter("uAdd");
+            String address= request.getParameter("address");
             String phoneNumber= request.getParameter("pnum");
             if(confirm.equals(password)){
                 UserDTO user = new UserDTO(emaill, name, password, address, phoneNumber, "US");

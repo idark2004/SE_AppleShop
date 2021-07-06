@@ -5,11 +5,11 @@
  */
 package controller;
 
-import daos.ProductDAO;
-import dtos.ProductDTO;
+import daos.UserDAO;
+import dtos.ErrorDTO;
+import dtos.UserDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,44 +17,53 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author ADMIN
+ * @author phath
  */
-public class CreateSpecController extends HttpServlet {
+public class UserController extends HttpServlet {
 
-    
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     private static final String ERROR = "error.jsp";
-    
+    private static final String FAIL_SIGNUP="signupForm.jsp";
+    private static final String SIGNUP = "index.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        System.out.println("go through?");
-        String url=ERROR;
-        String id = request.getParameter("productID");
-        String newSpecID = request.getParameter("newSpecID");
-        String newColor = request.getParameter("newColor");
-        String newRam = request.getParameter("newRam");
-        String newStorage = request.getParameter("newStorage");
-        double newPrice = Double.parseDouble(request.getParameter("newPrice"));
-        int newQuantity = Integer.parseInt(request.getParameter("newQuantity"));
+        String url = ERROR;
+        ErrorDTO error = new ErrorDTO();
+        String perform = request.getParameter("perform");
         try {
-            ProductDTO newProductSpec=new ProductDTO();
-            newProductSpec.setProductID(id);
-            newProductSpec.setSpecID(newSpecID);
-            newProductSpec.setColor(newColor);
-            newProductSpec.setRam(newRam);
-            newProductSpec.setStorage(newStorage);
-            newProductSpec.setPrice(newPrice);
-            newProductSpec.setSpecQuantity(newQuantity);
-            
-            ProductDAO pDAO = new ProductDAO();
-            if (pDAO.CreateSpec(newProductSpec)){
-                url="MainController?action=UpdateProductManagement&productID="+id;
-                System.out.println("success");
+            switch (perform) {
+                case "Sign Up":
+                    String emaill = request.getParameter("email");
+                    String password = request.getParameter("password");
+                    String confirm = request.getParameter("confirm");
+                    String name = request.getParameter("name");
+                    String address = request.getParameter("address");
+                    String phoneNumber = request.getParameter("phone");
+                    if (confirm.equals(password)) {
+                        UserDTO user = new UserDTO(emaill, name, password, address, phoneNumber, "US");
+                        UserDAO dao = new UserDAO();
+                        dao.insert(user);                        
+                        url = SIGNUP;
+                    } else {
+                        error.setPasswordError("Passwords don't match");
+                        request.setAttribute("SIGNUP_ERROR", error);
+                        url = FAIL_SIGNUP;
+                    }
+                    break;
             }
-            
         } catch (Exception e) {
-            log ("ERROR at CreateSpecController: " + e.getMessage());
-        } finally {
+            request.setAttribute("ERROR", e.toString());
+        }finally{
             request.getRequestDispatcher(url).forward(request, response);
         }
     }

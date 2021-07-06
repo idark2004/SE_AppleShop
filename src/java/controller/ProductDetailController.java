@@ -32,7 +32,7 @@ public class ProductDetailController extends HttpServlet {
         String colorChoosen = request.getParameter("color");
         String specChosen = request.getParameter("specID");
         try {
-            ProductDAO pDAO= new ProductDAO();
+            ProductDAO pDAO= new ProductDAO();   
             
             ProductDTO product= pDAO.getProduct(id);
             List<ProductDTO> color= pDAO.getAllColor(id);

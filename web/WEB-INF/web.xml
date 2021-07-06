@@ -134,6 +134,10 @@
         <servlet-name>BillingMailController</servlet-name>
         <servlet-class>controller.BillingMailController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UserController</servlet-name>
+        <servlet-class>controller.UserController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AddCommentController</servlet-name>
         <url-pattern>/AddCommentController</url-pattern>
@@ -270,6 +274,10 @@
     <servlet-mapping>
         <servlet-name>BillingMailController</servlet-name>
         <url-pattern>/BillingMailController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserController</servlet-name>
+        <url-pattern>/UserController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

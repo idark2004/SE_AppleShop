@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.naming.NamingException;
+import utils.DBSupport;
 
 /**
  *
@@ -230,17 +231,20 @@ public class UserDAO {
         try {
             conn = DBConnect.makeConnection(); // tao doi tuong connection qua DBConnection
             if (conn != null) {
-                String sql = "INSERT INTO tblUsers(userID, name, email, password, phoneNumber, address, roleID)"
-                        + " VALUES(?,?,?,?,?,?,?)";
+                DBSupport db = new DBSupport();
+                String userID="US-";
+                String sql = "INSERT INTO tblUsers(userID, name, email, password, phoneNumber, address, roleID, status)"
+                        + " VALUES(?,?,?,?,?,?,?,?)";
                 stm = conn.prepareStatement(sql);
-                stm.setString(1, "TEST21");
+                stm.setString(1, userID+db.getNumbRows("userID", "tblUsers"));
                 stm.setString(2, user.getName());
                 stm.setString(3, user.getEmail());
                 stm.setString(4, user.getPassword());
                 stm.setString(5, user.getPhone());
                 stm.setString(6, user.getAddress());
                 stm.setString(7, user.getRoleID());
-                stm.executeQuery();
+                stm.setBoolean(8, true);
+                stm.executeUpdate();
             }
         } finally {
             if (stm != null) {
