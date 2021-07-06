@@ -173,8 +173,8 @@
                             <select id="sortList" onchange="sortList();">
                                 <option disabled selected value> --Sort By-- </option>
                                 <option>Product name A - Z</option>
-                                <option>Priduct name Z - A</option>
-                                <option>From Highest</option>
+                                <option>Product name Z - A</option>
+                                <option>Price Highest first</option>
                                 <option>Price Lowest first</option>
                           </select>
                         </div>
@@ -368,25 +368,57 @@
 <script>
 
             $('#sortList').on('change', function() {
-             sortPriceAcs();
+                var conceptName = $('#sortList').find(":selected").text();
+                if(conceptName==="Product name A - Z") {
+                    sortNameAcs();
+                }else if(conceptName==="Product name Z - A"){
+                    sortNameDes();
+                }
+                else if(conceptName==="Price Lowest first"){
+                    sortPriceAcs();
+                }
+                else {
+                    sortPriceDes();
+                }
             });
+      function sortPriceDes() {
+    var list, i, switching,name, b, shouldSwitch,main1,main2;
+    list = document.getElementById("product-list");
+    switching = true;
+    while (switching) {
+      switching = false;
+      b = list.getElementsByClassName("product-item");
+       var num1,num2,price1,price2;
+      for (i = 0; i < (b.length - 1); i++) {     
+        shouldSwitch = false; 
+        num1 = b[i].getElementsByClassName("product-price")[0].innerHTML;   
+        num2 = b[i+1].getElementsByClassName("product-price")[0].innerHTML;
+        price1 = num1.replaceAll(",","");
+        price2 = num2.replaceAll(",","");
+        main1 = parseInt(price1);
+        main2 = parseInt(price2);
+        if (main1<main2) {
+         
+          shouldSwitch = true;
+          break;
+        }
+      }
+    if (shouldSwitch) {
+      b[i].parentNode.insertBefore(b[i + 1], b[i]);
+      switching = true;
+    }
+  }
+}          
     function sortPriceAcs() {
     var list, i, switching,name, b, shouldSwitch,main1,main2;
     list = document.getElementById("product-list");
     switching = true;
-    /* Make a loop that will continue until
-    no switching has been done: */
     while (switching) {
-      // start by saying: no switching is done:
       switching = false;
       b = list.getElementsByClassName("product-item");
        var num1,num2,price1,price2;
-      // Loop through all list-items:
-      for (i = 0; i < (b.length - 1); i++) {
-        // start by saying there should be no switching:
-        shouldSwitch = false;
-        /* check if the next item should
-        switch place with the current item: */
+      for (i = 0; i < (b.length - 1); i++) {     
+        shouldSwitch = false; 
         num1 = b[i].getElementsByClassName("product-price")[0].innerHTML;   
         num2 = b[i+1].getElementsByClassName("product-price")[0].innerHTML;
         price1 = num1.replaceAll(",","");
@@ -394,107 +426,58 @@
         main1 = parseInt(price1);
         main2 = parseInt(price2);
         if (main1>main2) {
-          /* if next item is alphabetically
-          lower than current item, mark as a switch
-          and break the loop: */
+         
           shouldSwitch = true;
           break;
         }
       }
     if (shouldSwitch) {
-      /* If a switch has been marked, make the switch
-      and mark the switch as done: */
       b[i].parentNode.insertBefore(b[i + 1], b[i]);
       switching = true;
     }
   }
 }                
-    function sortListAcs() {
+    function sortNameAcs() {
     var list, i, switching,name, b, shouldSwitch;
     list = document.getElementById("product-list");
     switching = true;
-    /* Make a loop that will continue until
-    no switching has been done: */
     while (switching) {
-      // start by saying: no switching is done:
       switching = false;
       b = list.getElementsByClassName("product-item");
-       
-      // Loop through all list-items:
       for (i = 0; i < (b.length - 1); i++) {
-        // start by saying there should be no switching:
         shouldSwitch = false;
-        /* check if the next item should
-        switch place with the current item: */
-        if (b[i].getElementsByClassName("product-name")[0].innerHTML.toLowerCase() > b[i + 1].getElementsByClassName("product-name")[0].innerHTML.toLowerCase()) {
-          /* if next item is alphabetically
-          lower than current item, mark as a switch
-          and break the loop: */
+        if (b[i].getElementsByClassName("product-name")[0].innerHTML.toLowerCase() > b[i + 1].getElementsByClassName("product-name")[0].innerHTML.toLowerCase()) 
+        {
           shouldSwitch = true;
           break;
         }
       }
     if (shouldSwitch) {
-      /* If a switch has been marked, make the switch
-      and mark the switch as done: */
       b[i].parentNode.insertBefore(b[i + 1], b[i]);
       switching = true;
     }
   }
 }        
             
-      function sortListDes() {
+      function sortNameDes() {
     var list, i, switching,name, b, shouldSwitch;
     list = document.getElementById("product-list");
     switching = true;
-    /* Make a loop that will continue until
-    no switching has been done: */
     while (switching) {
-      // start by saying: no switching is done:
       switching = false;
       b = list.getElementsByClassName("product-item");
-       
-      // Loop through all list-items:
       for (i = 0; i < (b.length - 1); i++) {
-        // start by saying there should be no switching:
         shouldSwitch = false;
-        /* check if the next item should
-        switch place with the current item: */
         if (b[i].getElementsByClassName("product-name")[0].innerHTML.toLowerCase() < b[i + 1].getElementsByClassName("product-name")[0].innerHTML.toLowerCase()) {
-          /* if next item is alphabetically
-          lower than current item, mark as a switch
-          and break the loop: */
           shouldSwitch = true;
           break;
         }
       }
     if (shouldSwitch) {
-      /* If a switch has been marked, make the switch
-      and mark the switch as done: */
       b[i].parentNode.insertBefore(b[i + 1], b[i]);
       switching = true;
     }
   }
-}   
-    function a(){
-        var list, i, switching,name,name1, b, shouldSwitch,price1,price2,main1,main2;
-        list = document.getElementById("product-list");
-    
-    /* Make a loop that will continue until
-    no switching has been done: */
-    
-      // start by saying: no switching is done:
-      
-      b = list.getElementsByClassName("product-item");
-      name = b[0].getElementsByClassName("product-price")[0].innerHTML;
-      name1 = b[1].getElementsByClassName("product-price")[0].innerHTML;
-      price1 = name.replaceAll(",","");
-      price2 = name1.replaceAll(",","");
-      main1 = parseInt(price1);
-      main2 = parseInt(price2);
-      alert(main1);
-      if(main1>main2) alert("lon hon");
-      else alert("nho hon");
-    }
+}     
 </script>
 </html>
