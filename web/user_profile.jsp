@@ -1,16 +1,16 @@
 <%-- 
-    Document   : product_details
-    Created on : Jul 4, 2021, 10:12:23 PM
-    Author     : ADMIN
+    Document   : user_profile
+    Created on : Jul 6, 2021, 4:26:41 PM
+    Author     : anime
 --%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
-    <title>SE15 Shop | Product Detail</title>
+    <title>SE15 Shop | Profile</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -26,7 +26,6 @@
     <!-- Bootstrap style -->
     <link id="callCss" rel="stylesheet" href="themes/bootshop/bootstrap.min.css" media="screen" />
     <link href="themes/css/base.css" rel="stylesheet" media="screen" />
-    <link href="themes/css/comment.css" rel="stylesheet" media="screen" />
     <!-- Bootstrap style responsive -->
     <link href="themes/css/bootstrap-responsive.min.css" rel="stylesheet" />
     <link href="themes/css/font-awesome.css" rel="stylesheet" type="text/css">
@@ -39,7 +38,6 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="themes/images/ico/apple.png">
     <link rel="apple-touch-icon-precomposed" href="themes/images/ico/apple.png">
     <style type="text/css" id="enject"></style>
-    <link rel="stylesheet" href="themes/font-awesome-4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -48,12 +46,12 @@
             <div id="welcomeLine" class="row">
                 <div class="span6">Welcome!<strong> User</strong></div>
                 <div class="span6">
-                    <div class="pull-right">
-                        <c:forEach var="cartItem" items="${sessionScope.cart}">
+                     <div class="pull-right">
+                          <c:forEach var="cartItem" items="${sessionScope.cart}">
                                     <c:set var="subtotalCount" value="${cartItem.quantity}"/>
                                     <c:set var="subtotal" value="${subtotal+cartItem.quantity}"/>
                           </c:forEach>
-                        <a href="product_summary.jsp"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> ${subtotal} Itemes in your cart </span> </a>
+                        <a href="product_summary.html"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> ${subtotal} Itemes in your cart </span> </a>
                     </div>
                 </div>
             </div>
@@ -71,11 +69,11 @@
                         <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
                     </form>
                     <ul id="topMenu" class="nav pull-right">
-                        <li class=""><a href="allProduct.html">All Products</a></li>
+                        <li class=""><a href="products.html">All Products</a></li>
                         <li class=""><a href="contact.html">Contact</a></li>
-                        <li class=""><a href="contact.html">Profile</a></li>
+                        <li class=""><a href="user_profile.html">Profile</a></li>
                         <li class="">
-                            <a href="register.html" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Signup</span></a>
+                            <a href="register.html" role="button" style="padding-right:0"><span class="btn btn-large btn-success">Signup</span></a>
                         </li>
                         <li class="">
                             <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
@@ -96,6 +94,8 @@
                                             <label class="checkbox">
 											<input type="checkbox"> Remember me
 											</label>
+                                        </div>
+                                        <div class="control-group">
                                             <a href="#"><img width="30" height="30" src="themes/images/google.png" title="Login with Google" alt="Google Login" /></a>
                                         </div>
                                     </form>
@@ -140,9 +140,11 @@
                 <div id="sidebar" class="span3">
                     <div class="well well-small">
                         <c:forEach var="cartItem" items="${sessionScope.cart}">
-                            <c:set var="total" value="${total + (cartItem.quantity * cartItem.product.price)}"/>
-                        </c:forEach>
-                        <a id="myCart" href="product_summary.jsp"><img src="themes/images/ico-cart.png" alt="cart">${subtotal} Items in your cart <span class="badge badge-warning pull-right">${total}</span></a>
+                                    <c:set var="subtotalCount" value="${cartItem.quantity}"/>
+                                    <c:set var="subtotal" value="${subtotal+cartItem.quantity}"/>
+                                </c:forEach>
+                         <c:set var="total" value="${total + (cartItem.quantity * cartItem.product.price)}"/>
+                        <a id="myCart" href="product_summary.html"><img src="themes/images/ico-cart.png" alt="cart">${subtotal} Items in your cart <span class="badge badge-warning pull-right">${total}</span></a>
                     </div>
                     <ul id="sideManu" class="nav nav-tabs nav-stacked">
                         <li><a href="products.html">All</a></li>
@@ -157,186 +159,56 @@
                 <div class="span9">
                     <ul class="breadcrumb">
                         <li><a href="index.html">Home</a> <span class="divider">/</span></li>
-                        <li><a href="products.html">Products</a> <span class="divider">/</span></li>
-                        <li class="active">${requestScope.product.name}</li>
+                        <li class="active">Edit Profile</li>
                     </ul>
-                    <div class="row">
-                        <div id="gallery" class="span3">
-                            <a href="${requestScope.product.image}" title="iPhone 12 Pro Max">
-                                <img src="${requestScope.product.image}" style="width:100%" alt="iPhone 12 Pro Max" />
-                            </a>
-                            <div id="differentview" class="moreOptopm carousel slide">
-                                <div class="carousel-inner">
-                                    <div class="item active">
-                                        <a href="${requestScope.product.image}"> <img style="width:29%" src="${requestScope.product.image}" alt="" /></a>
-                                        <a href="${requestScope.product.image}"> <img style="width:29%" src="${requestScope.product.image}" alt="" /></a>
-                                        <a href="${requestScope.product.image}"> <img style="width:29%" src="${requestScope.product.image}" alt="" /></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <form  action="MainController" method="POST">  
-                        <div class="span6">
-                            <input type="hidden" name="productID" value="${requestScope.product.productID.trim()}" />
-                            <h3>${requestScope.product.name}</h3>
-                            <small>-Ceramic Shield front | Glass back and aluminum design</small>
-                            <hr class="soft" />
-                            <div class="form-horizontal qtyFrm">
+                    <h3> Edit Profile</h3>
+                    <div class="well">
+                        <form class="form-horizontal">
+                            <fieldset>
                                 <div class="control-group">
-                                    <label class="control-label">
-                                        <c:if test="${requestScope.colorChosen==null}">
-                                            <h4>Select a Color</h4>
-                                        </c:if>
-                                        <c:if test="${requestScope.spec==null}">
-                                            <h4>Select a spec</h4>
-                                        </c:if>
-                                        <c:if test="${requestScope.spec!=null}">
-                                            <span><fmt:formatNumber type="number" maxFractionDigits = "0" value="${requestScope.spec.price}" /></span>
-                                        </c:if>
-                                    </label>
+                                    <label class="control-label" for="input01">Fullname</label>
                                     <div class="controls">
-                                        <input type="number" name="Quantity" class="span1" placeholder="Qty." />
-                                        <button type="submit" name="action" value="Add to cart" class="btn btn-large btn-primary pull-right"> Add to cart <i class=" icon-shopping-cart"></i></button>
-                                    </div>
-                                </div>
-                            </div>
+                                        <input type="text" class="input-xlarge" id="input01" placeholder="Input Name" name="name" value="${sessionScope.user.name}" readonly>
 
-                            <hr class="soft" />
-                            <h4>100 items in stock</h4>
-                            <div class="form-horizontal qtyFrm pull-right">
-                                <div class="control-group">
-                                    <label class="control-label"><span>Color</span></label>
-                                    <div class="controls">
-                                        <select name="color" class="span2" onchange="window.location = 'MainController?action=ProductDetail&productID=${product.productID.trim()}&color='+this.value">
-                                            <c:if test="${requestScope.colorChosen == null}">
-                                                <option value="" selected="selected"></option>
-                                            </c:if>
-                                            <c:forEach var="color" items="${requestScope.color}">
-                                                <c:if test = "${color.color == requestScope.colorChosen}">
-                                                    <option value="${color.color.trim()}" selected="selected">${color.color}</option>
-                                                </c:if>
-                                                <c:if test = "${color.color != requestScope.colorChosen}">
-                                                    <option value="${color.color.trim()}">${color.color}</option>
-                                                </c:if>
-                                            </c:forEach>
-					</select>
                                     </div>
-                                        <c:if test="${requestScope.colorChosen!=null}">
-                                    <label class="control-label"><span>Spec</span></label>
-                                    <div class="controls">
-                                        <select name="hardware" class="span2" onchange="window.location = 'MainController?action=ProductDetail&productID=${product.productID.trim()}&color=${requestScope.colorChosen}&specID='+this.value">
-                                            <c:if test="${requestScope.spec==null}">
-                                                <option value="" selected="selected"></option>
-                                            </c:if>
-                                                <c:forEach var="hardware" items="${requestScope.hardware}">
-                                                    <c:if test = "${hardware.specID == requestScope.spec.specID}">
-                                                        <option value="${hardware.specID}" selected="selected">Ram:${hardware.ram}-Storage:${hardware.storage}</option>
-                                                    </c:if>
-                                                    <c:if test = "${hardware.specID != requestScope.spec.specID}">
-                                                        <option value="${hardware.specID}">Ram:${hardware.ram}-Storage:${hardware.storage}</option>
-                                                    </c:if>
-                                                </c:forEach>
-                                        </select>
-                                    </div>
-                                        </c:if>
                                 </div>
-                            </div>
-                            <hr class="soft clr" />
-                            <a class="btn btn-small pull-right" href="#detail">More Details</a>
-                            <br class="clr" />
-                            <a href="#" name="detail"></a>
-                            <hr class="soft" />
-                        </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="input02">Email</label>
+                                    <div class="controls">
+                                        <input type="text" class="input-xlarge" id="input02" placeholder="Input Email" name="email" value="${sessionScope.user.email}" readonly>
+
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="input03">Address</label>
+                                    <div class="controls">
+                                        <input type="text" class="input-xlarge" id="input03" placeholder="Input Address" name="address" value="${sessionScope.user.address}"> 
+
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="input04">Phone</label>
+                                    <div class="controls">
+                                        <input type="text" class="input-xlarge" id="input04" placeholder="Old data here, bitches!">
+
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <a href="newPass.jsp" role="button" style="padding-right:0"><span class="btn btn-primary btn-success">Reset New Password</span></a>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                        <button class="btn">Cancel</button>
+                                    </div>
+                                </div>
+                            </fieldset>
                         </form>
 
-                        <div class="span9">
-                            <ul id="productDetail" class="nav nav-tabs">
-                                <li class="active"><a href="#home" data-toggle="tab">Product Details</a></li>
-                                <li><a href="#profile" data-toggle="tab">Comment</a></li>
-                            </ul>
-                            <div id="myTabContent" class="tab-content">
-                                <div class="tab-pane fade active in" id="home">
-                                    <h4>Product Information</h4>
-                                    <p>
-                                        ${product.description}
-                                    </p>
-                                </div>
-                                <div class="tab-pane fade" id="profile">
-
-                                    <div class="container__review">
-                                        <h3 class="review__tittle">Comment</h3>
-
-                                        <div class="form-comment__container">
-                                            <form action="MainController" class="form-review">
-                                                <lable for="reviewer-name" class="name-lable">Full Name</lable>
-                                                <input placeholder="Input your Name" type="text" id="reviewer-name" class="cName" name="reviewer-name">
-                                                <lable for="pComment" class="comment-lable">Comment</lable>
-                                                <textarea type="text" class="pComment" id="pComment" name="pComment" placeholder="Input detail your comment"></textarea>
-                                                <input type="hidden" name="productID" value="${requestScope.product.productID}" />
-                                                <input type="submit" name="action" class="btn btn-small" value="Submit comment">
-                                            </form>
-                                        </div>
-                                        <div class="review-list">
-                                            <div review-item__container>
-                                                <div class="reivew-row">
-                                                    <span class="review__reviewer-name">
-                                                    Khach hang
-                                                    </span>
-                                                    <p class="review__reviewer-comment">
-                                                        Cho mình hòi Galaxy A51 đã sử dụng hơn 1 năm, shop có xem xét áp dụng chương trình trợ giá đổi qua IP 12 bản 256GB không ạ? và có áp dụng thêm chương trình trả góp qua thẻ tín dụng của HSBC không ạ? và kì hạn hỗ trợ tối đa là bao nhiêu? mình cảm ơn shope.
-                                                    </p>
-                                                </div>
-                                                <ul class="review-option">
-                                                    <form method="POST" class="reply-form d-none" id="comment-1-reply-form">
-                                                        <textarea class="input-reply" placeholder="Reply to comment" rows="4"></textarea>
-                                                        <button class="reply-submit" type="submit">Submit</button>
-                                                        <button type="button" onclick="closeForm(this)">Cancel</button>
-                                                    </form>
-                                                </ul>
-
-
-                                                <div id="reply-1" class="reply-item__container">
-
-                                                    <div class="reivew-row">
-                                                        <span class="fas fa-share review__reviewer-name">
-                                                        Customer
-                                                        </span>
-
-                                                        <p class="review__reviewer-comment">
-                                                            Shop xin chào anh Galaxy A51 hiện chưa được áp dụng cái kiểu chương trình này ạ.
-                                                        </p>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                            <hr class="soft" />
-                                            <div review-item__container>
-                                                <li class="reivew-row">
-                                                    <span class="review__reviewer-name">
-                                                    Thang anh 69
-                                                    </span>
-                                                    <p class="review__reviewer-comment">
-                                                        Ngành IT Việt Nam hiện nay ở đầu của sự phát triển. Có thể nói IT là vua của các nghề. Vừa có tiền, có quyền. Vừa kiếm được nhiều $ lại được xã hội trọng vọng. Thằng em mình học bách khoa cơ khí, sinh năm 96. Tự mày mò học code rồi đi làm remote cho công
-                                                        ty Mỹ 2 năm nay. Mỗi tối online 3-4 giờ là xong việc. Lương tháng 3k6. Nhưng thu nhập chính vẫn là từ nhận các project bên ngoài làm thêm. Tuần làm 2,3 cái nhẹ nhàng 9,10k tiền tươi thóc thật không
-                                                        phải đóng thuế. Làm gần được 3 năm mà nhà xe nó đã mua đủ cả. Nghĩ mà thèm.
-                                                    </p>
-                                                </li>
-                                                <ul class="review-option">
-                                                    <form method="POST" class="reply-form d-none" id="comment-1-reply-form">
-                                                        <textarea class="input-reply" placeholder="Reply to comment" rows="4"></textarea>
-                                                        <button class="reply-submit" type="submit">Submit</button>
-                                                        <button type="button" onclick="closeForm(this)">Cancel</button>
-                                                    </form>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
+
                 </div>
             </div>
         </div>
@@ -348,15 +220,15 @@
             <div class="row">
                 <div class="span3">
                     <h5>ACCOUNT</h5>
-                    <a href="loginForm.jsp">LOGIN</a>
-                    <a href="user-profile.jsp">PROFILE</a>
-                    <a href="product_details">CART</a>
-                    <a href="orderHistory.jsp">ORDER HISTORY</a>
+                    <a href="login.html">LOGIN</a>
+                    <a href="login.html">PROFILE</a>
+                    <a href="login.html">CART</a>
+                    <a href="login.html">ORDER HISTORY</a>
                 </div>
                 <div class="span3">
                     <h5>INFORMATION</h5>
-                    <a href="contact.jsp">CONTACT</a>
-                    <a href="signupForm.jsp">REGISTRATION</a>
+                    <a href="contact.html">CONTACT</a>
+                    <a href="register.html">REGISTRATION</a>
                     <a href="legal_notice.html">LEGAL NOTICE</a>
                     <a href="tac.html">TERMS AND CONDITIONS</a>
                 </div>

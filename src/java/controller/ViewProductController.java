@@ -54,7 +54,7 @@ public class ViewProductController extends HttpServlet {
             String status = request.getParameter("status");       
             if(request.getParameter("status")==null) {status="True";}
             List<ProductDTO> list = dao.viewProduct(categoryID, status);    
-            int product_per_page = 10;
+            int product_per_page = 10;////////change this to update product per page
             int pNum = list.size();
             int pages = 0;
             if(pNum % product_per_page==0){

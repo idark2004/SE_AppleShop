@@ -175,7 +175,7 @@
                                 <option>Product name A - Z</option>
                                 <option>Product name Z - A</option>
                                 <option>Price Highest first</option>
-                                <option>Price Lowest first</option>
+                              <option>Price Lowest first</option>
                           </select>
                         </div>
                     </form>

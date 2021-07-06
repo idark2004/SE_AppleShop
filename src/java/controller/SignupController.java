@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 public class SignupController extends HttpServlet {
 
     public static final String SUCCESS="loginForm.jsp";
-    public static final String ERROR = "signup.jsp";
+    public static final String ERROR = "signupForm.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.

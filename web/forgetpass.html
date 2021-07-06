@@ -1,20 +1,12 @@
-<%-- 
-    Document   : signupForm
-    Created on : Jul 4, 2021, 10:40:14 PM
-    Author     : anime
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
-    <title>SE15 Shop | Register</title>
+    <title>SE15 Shop | Forget Pass</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <meta name="google-signin-client_id" content="779792849031-s9k66dv106kav3h90o9lak0vnm2943ci.apps.googleusercontent.com">
     <!--Less styles -->
     <!-- Other Less css file //different less files has different color scheam
 	<link rel="stylesheet/less" type="text/css" href="themes/less/simplex.less">
@@ -47,12 +39,8 @@
             <div id="welcomeLine" class="row">
                 <div class="span6">Welcome!<strong> User</strong></div>
                 <div class="span6">
-                   <div class="pull-right">
-                          <c:forEach var="cartItem" items="${sessionScope.cart}">
-                                    <c:set var="subtotalCount" value="${cartItem.quantity}"/>
-                                    <c:set var="subtotal" value="${subtotal+cartItem.quantity}"/>
-                          </c:forEach>
-                        <a href="product_summary.html"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> ${subtotal} Itemes in your cart </span> </a>
+                    <div class="pull-right">
+                        <a href="product_summary.html"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> [ 3 ] Itemes in your cart </span> </a>
                     </div>
                 </div>
             </div>
@@ -64,17 +52,17 @@
                     <span class="icon-bar"></span>
                 </a>
                 <div class="navbar-inner">
-                    <a class="brand" href="index.jsp">SE15 Shop</a>
+                    <a class="brand" href="index.html">SE15 Shop</a>
                     <form class="form-inline navbar-search" method="post" action="products.html">
                         <input id="srchFld" class="srchTxt" type="text" />
                         <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
                     </form>
                     <ul id="topMenu" class="nav pull-right">
-                        <li class=""><a href="productList.jsp">All Products</a></li>
-                        <li class=""><a href="contact.jsp">Contact</a></li>
-                        <li class=""><a href="user_profile.jsp">Profile</a></li>
+                        <li class=""><a href="products.html">All Products</a></li>
+                        <li class=""><a href="contact.html">Contact</a></li>
+                        <li class=""><a href="user_profile.html">Profile</a></li>
                         <li class="">
-                            <a href="signupForm.jsp" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Signup</span></a>
+                            <a href="register.html" role="button" style="padding-right:0"><span class="btn btn-large btn-success">Signup</span></a>
                         </li>
                         <li class="">
                             <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
@@ -95,6 +83,8 @@
                                             <label class="checkbox">
 											<input type="checkbox"> Remember me
 											</label>
+                                        </div>
+                                        <div class="control-group">
                                             <a href="#"><img width="30" height="30" src="themes/images/google.png" title="Login with Google" alt="Google Login" /></a>
                                         </div>
                                     </form>
@@ -114,17 +104,17 @@
             <div class="carousel-inner">
                 <div class="item active">
                     <div class="container">
-                        <a href="signupForm.jsp"><img style="width:100%" src="themes/images/carousel/1.png" alt="" /></a>
+                        <a href="register.html"><img style="width:100%" src="themes/images/carousel/1.png" alt="" /></a>
                     </div>
                 </div>
                 <div class="item">
                     <div class="container">
-                        <a href="signupForm.jsp"><img style="width:100%" src="themes/images/carousel/2.png" alt="" /></a>
+                        <a href="register.html"><img style="width:100%" src="themes/images/carousel/2.png" alt="" /></a>
                     </div>
                 </div>
                 <div class="item">
                     <div class="container">
-                        <a href="signupForm.jsp"><img src="themes/images/carousel/3.png" alt="" /></a>
+                        <a href="register.html"><img src="themes/images/carousel/3.png" alt="" /></a>
                     </div>
                 </div>
             </div>
@@ -138,103 +128,44 @@
                 <!-- Sidebar ================================================== -->
                 <div id="sidebar" class="span3">
                     <div class="well well-small">
-                        <c:forEach var="cartItem" items="${sessionScope.cart}">
-                                    <c:set var="subtotalCount" value="${cartItem.quantity}"/>
-                                    <c:set var="subtotal" value="${subtotal+cartItem.quantity}"/>
-                                </c:forEach>
-                         <c:set var="total" value="${total + (cartItem.quantity * cartItem.product.price)}"/>
-                        <a id="myCart" href="product_summary.html"><img src="themes/images/ico-cart.png" alt="cart">${subtotal} Items in your cart <span class="badge badge-warning pull-right">${total}</span></a>
+                        <a id="myCart" href="product_summary.html"><img src="themes/images/ico-cart.png" alt="cart">3 Items in your cart <span class="badge badge-warning pull-right">445,000VND</span></a>
                     </div>
                     <ul id="sideManu" class="nav nav-tabs nav-stacked">
-                        <li><a href="ViewProductController?categoryID=&status=True">All</a></li>
-                        <li><a href="ViewProductController?categoryID=IP&status=True">iPhone</a></li>
-                        <li><a href="ViewProductController?categoryID=ID&status=True">iPad</a></li>                        
-                        <li><a href="ViewProductController?categoryID=MB&status=True">Mac</a></li>
-                        <li><a href="ViewProductController?categoryID=AW&status=True">Apple Watch</a></li>
-                        <li><a href="ViewProductController?categoryID=AS&status=True">Accessory</a></li>
+                        <li><a href="products.html">All</a></li>
+                        <li><a href="products.html">iPhone</a></li>
+                        <li><a href="products.html">iPad</a></li>
+                        <li><a href="products.html">Mac</a></li>
+                        <li><a href="products.html">Accessory</a></li>
                     </ul>
                     <br/>
                 </div>
                 <!-- Sidebar end=============================================== -->
                 <div class="span9">
                     <ul class="breadcrumb">
-                        <li><a href="index.jsp">Home</a> <span class="divider">/</span></li>
-                        <li class="active">Registration</li>
+                        <li><a href="index.html">Home</a> <span class="divider">/</span></li>
+                        <li class="active">Forget password?</li>
                     </ul>
-                    <h3> Registration</h3>
-                    <div class="well">
-                        <!--
-	<div class="alert alert-info fade in">
-		<button type="button" class="close" data-dismiss="alert">×</button>
-		<strong>Lorem Ipsum is simply dummy</strong> text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
-	 </div>
-	<div class="alert fade in">
-		<button type="button" class="close" data-dismiss="alert">×</button>
-		<strong>Lorem Ipsum is simply dummy</strong> text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
-	 </div>
-	 <div class="alert alert-block alert-error fade in">
-		<button type="button" class="close" data-dismiss="alert">×</button>
-		<strong>Lorem Ipsum is simply</strong> dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
-	 </div> -->
-                        <form class="form-horizontal">
-                            <h4>Your personal information</h4>
-                            <div class="control-group">
-                                <label class="control-label" for="input_email">Email <sup>*</sup></label>
-                                <div class="controls">
-                                    <input type="text" id="input_email" placeholder="abc@gamil.com" name="email">
-                                </div>
-                            </div>
+                    <h3> FORGET YOUR PASSWORD?</h3>
+                    <hr class="soft" />
 
-                            <div class="control-group">
-                                <label class="control-label" for="inputPassword1">Password <sup>*</sup></label>
-                                <div class="controls">
-                                    <input type="password" id="inputPassword1" placeholder="Password" name="psw">
-                                </div>
+                    <div class="row">
+                        <div class="span9" style="min-height:900px">
+                            <div class="well">
+                                <h5>Reset your password</h5><br/> Please enter the email address for your account. A random password will be generated and sent to you. Once you have received the new password, you will be able to login in your account, then
+                                you can change your own one.<br/><br/><br/>
+                                <form>
+                                    <div class="control-group">
+                                        <label class="control-label" for="inputEmail1">E-mail address</label>
+                                        <div class="controls">
+                                            <input class="span3" type="text" id="inputEmail1" placeholder="Email">
+                                        </div>
+                                    </div>
+                                    <div class="controls">
+                                        <button type="submit" class="btn block">Submit</button>
+                                    </div>
+                                </form>
                             </div>
-                            <div class="control-group">
-                                <label class="control-label" for="inputPassword1">Password <sup>*</sup></label>
-                                <div class="controls">
-                                    <input type="password" id="inputPassword1" placeholder="Password" name="psw-repeat">
-                                </div>
-                            </div>
-                          
-
-                            <div class="alert alert-block alert-error fade in">
-                                <button type="button" class="close" data-dismiss="alert">×</button>
-                                <strong>Warning:</strong> Muốn báo cc gì thì bỏ vào đây, đại loại như: DMM, nhập thiếu kìa, loz mắt mù
-                            </div>
-
-                            <h4>Your address</h4>
-                            <div class="control-group">
-                                <label class="control-label" for="inputFname">Full name <sup>*</sup></label>
-                                <div class="controls">
-                                    <input type="text" id="inputFname" placeholder="Trần Văn A" name="name">
-                                </div>
-                            </div>
-
-                            <div class="control-group">
-                                <label class="control-label" for="address">Address<sup>*</sup></label>
-                                <div class="controls">
-                                    <input name="uAdd" type="text" id="address" placeholder="69 Trần Duy Hưng TP Hà Nội" /> <span>Street address, P.O. box, company name, c/o</span>
-                                </div>
-                            </div>
-
-                            <div class="control-group">
-                                <label class="control-label" for="phone">Phone<sup>*</sup></label>
-                                <div class="controls">
-                                    <input type="text" name="pnum" name="phone" id="Phone" placeholder="0914123456" /> <span>You must register at least one phone number</span>
-                                </div>
-                            </div>
-
-                            <p><sup>*</sup>Required field </p>
-
-                            <div class="control-group">
-                                <div class="controls">
-                                    <a href="index.jsp"><button class="btn btn-large btn-info">Cancel</button></a>
-                                    <input class="btn btn-large btn-success" type="submit" value="Sign Up" />
-                                </div>
-                            </div>
-                        </form>
+                        </div>
                     </div>
 
                 </div>
@@ -248,15 +179,15 @@
             <div class="row">
                 <div class="span3">
                     <h5>ACCOUNT</h5>
-                    <a href="loginForm.jsp">LOGIN</a>
-                    <a href="user_profile.jsp">PROFILE</a>
-                    <a href="cartDetail.jsp">CART</a>
-                    <a href="orderHistory.jsp">ORDER HISTORY</a>
+                    <a href="login.html">LOGIN</a>
+                    <a href="login.html">PROFILE</a>
+                    <a href="login.html">CART</a>
+                    <a href="login.html">ORDER HISTORY</a>
                 </div>
                 <div class="span3">
                     <h5>INFORMATION</h5>
-                    <a href="contact.jsp">CONTACT</a>
-                    <a href="signupForm.jsp">REGISTRATION</a>
+                    <a href="contact.html">CONTACT</a>
+                    <a href="register.html">REGISTRATION</a>
                     <a href="legal_notice.html">LEGAL NOTICE</a>
                     <a href="tac.html">TERMS AND CONDITIONS</a>
                 </div>
