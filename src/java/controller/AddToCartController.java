@@ -39,34 +39,36 @@ public class AddToCartController extends HttpServlet {
             ProductDAO prDAO=new ProductDAO();
             String productID= request.getParameter("productID").trim();
             String color= request.getParameter("color").trim();
-            String hardware= request.getParameter("hardware");
-            String ram=hardware.split("-")[0].trim();
-            String storage=hardware.split("-")[1].trim();
+            String specID= request.getParameter("hardware").trim();
+            int qty = Integer.parseInt(request.getParameter("Quantity"));
+            //String ram=hardware.split("-")[0].trim();
+            //String storage=hardware.split("-")[1].trim();
             
-            ProductDTO product=prDAO.findSpec(productID,color, ram, storage);
-            System.out.println(product.getColor());
+            ProductDTO product=prDAO.GetSpec(specID);
             if (product!=null){
-                if(session.getAttribute("cart")==null){
-                    List<CartItemDTO> cart = new ArrayList<CartItemDTO>();
-                    cart.add(new CartItemDTO(prDAO.findSpec(productID, 
-                            color, ram, storage), 1));
-                    session.setAttribute("cart", cart);
-                    url=SUCCESS +"&productID="+productID;
-                }
-                else {
-                    List<CartItemDTO> cart = (List<CartItemDTO>) session.getAttribute("cart");
-                    int index = isExisting(productID, 
-                            color, ram, storage, cart);
-                    if (index == -1){
-                        cart.add(new CartItemDTO(prDAO.findSpec(productID, 
-                            color, ram, storage), 1));
+                for(int i=0; i<qty; i++){
+                    if(session.getAttribute("cart")==null){
+                        List<CartItemDTO> cart = new ArrayList<CartItemDTO>();
+                        cart.add(new CartItemDTO(prDAO.GetSpec( 
+                                specID), 1));
+                        session.setAttribute("cart", cart);
+                        url=SUCCESS +"&productID="+productID+"&color="+color+"&specID="+specID;
                     }
                     else {
-                        int quantity = cart.get(index).getQuantity() + 1;
-                        cart.get(index).setQuantity(quantity);
+                        List<CartItemDTO> cart = (List<CartItemDTO>) session.getAttribute("cart");
+                        int index = isExisting( 
+                                specID, cart);
+                        if (index == -1){
+                            cart.add(new CartItemDTO(prDAO.GetSpec(
+                                specID), 1));
+                        }
+                        else {
+                            int quantity = cart.get(index).getQuantity() + 1;
+                            cart.get(index).setQuantity(quantity);
+                        }
+                        session.setAttribute("cart", cart);
+                        url=SUCCESS+"&productID="+productID+"&color="+color+"&specID="+specID;
                     }
-                    session.setAttribute("cart", cart);
-                    url=SUCCESS+"&productID="+productID;
                 }
             } else {
                 request.setAttribute("error", "the item isnt exist");
@@ -81,14 +83,13 @@ public class AddToCartController extends HttpServlet {
         }
     }
     
-    private int isExisting(String productID, String color, String ram, String storage, List<CartItemDTO> cart){
+    private int isExisting(String specID, List<CartItemDTO> cart){
         System.out.println("isExisting do work");
         for (int i = 0; i < cart.size(); i++){
-            if(cart.get(i).getProduct().getProductID().trim().equalsIgnoreCase(productID) 
-                    && cart.get(i).getProduct().getColor().trim().equalsIgnoreCase(color)
-                    && cart.get(i).getProduct().getRam().trim().equalsIgnoreCase(ram) 
-                    && cart.get(i).getProduct().getStorage().trim().equalsIgnoreCase(storage)){
+            if( cart.get(i).getProduct().getSpecID().trim().equalsIgnoreCase(specID)){
                 System.out.println("the index is: " + i);
+                int quantity = cart.get(i).getQuantity() + 1;
+                System.out.println("with this quantity:" + quantity);
                 return i;
             }
         }

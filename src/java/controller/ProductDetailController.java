@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class ProductDetailController extends HttpServlet {
 
-    private static final String SUCCESS ="productDetai1.jsp";
+    private static final String SUCCESS ="product_details.jsp";
     private static final String ERROR = "error.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -30,17 +30,21 @@ public class ProductDetailController extends HttpServlet {
         String url=ERROR;
         String id = request.getParameter("productID").trim();
         String colorChoosen = request.getParameter("color");
+        String specChosen = request.getParameter("specID");
         try {
             ProductDAO pDAO= new ProductDAO();
             
             ProductDTO product= pDAO.getProduct(id);
             List<ProductDTO> color= pDAO.getAllColor(id);
-            List<ProductDTO> SpecList= pDAO.getAllSpecWithColor(id, colorChoosen);
+            ProductDTO spec=pDAO.getPriceAndQuantity(id, colorChoosen, specChosen);
+            List<ProductDTO> hardware= pDAO.getAllHardwareWithColor(id, colorChoosen);
             
             request.setAttribute("product", product);
             request.setAttribute("color", color);
             request.setAttribute("colorChosen", colorChoosen);
-            request.setAttribute("spec", SpecList);
+            request.setAttribute("hardware", hardware);
+            request.setAttribute("specID", specChosen);
+            request.setAttribute("spec", spec);
             url=SUCCESS;
         } catch (Exception e) {
             log ("ERROR at ProductDetailController: " + e.getMessage());

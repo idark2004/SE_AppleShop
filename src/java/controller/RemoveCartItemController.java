@@ -34,9 +34,8 @@ public class RemoveCartItemController extends HttpServlet {
         try{
             
             List<CartItemDTO> cart =(List<CartItemDTO>) session.getAttribute("cart");
-            int index = isExisting(request.getParameter("productID"), 
-                            request.getParameter("color"), request.getParameter("ram"), 
-                            request.getParameter("storage"), cart);
+            int index = isExisting(request.getParameter("specID")
+                    , cart);
             cart.remove(index);
             
             if (cart.isEmpty())
@@ -57,14 +56,13 @@ public class RemoveCartItemController extends HttpServlet {
         }
     }
     
-    private int isExisting(String productID, String color, String ram, String storage, List<CartItemDTO> cart){
+    private int isExisting(String specID, List<CartItemDTO> cart){
         System.out.println("isExisting do work");
         for (int i = 0; i < cart.size(); i++){
-            if(cart.get(i).getProduct().getProductID().trim().equalsIgnoreCase(productID) 
-                    && cart.get(i).getProduct().getColor().trim().equalsIgnoreCase(color)
-                    && cart.get(i).getProduct().getRam().trim().equalsIgnoreCase(ram) 
-                    && cart.get(i).getProduct().getStorage().trim().equalsIgnoreCase(storage)){
+            if( cart.get(i).getProduct().getSpecID().trim().equalsIgnoreCase(specID)){
                 System.out.println("the index is: " + i);
+                int quantity = cart.get(i).getQuantity() + 1;
+                System.out.println("with this quantity:" + quantity);
                 return i;
             }
         }

@@ -9,11 +9,13 @@ import utils.DBConnect;
 import dtos.CartItemDTO;
 import dtos.OrderDTO;
 import dtos.ProductDTO;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -29,6 +31,35 @@ import javax.naming.NamingException;
  */
 public class ProductDAO {
 
+    public int countProduct() throws SQLException{
+        int rows =0;
+        Connection conn = null;
+        CallableStatement proc = null;
+        try {
+            conn = DBConnect.makeConnection();
+            if (conn != null) {
+                proc = conn.prepareCall("{call countRows(?,?,?)}");
+                proc.setString(1, "productID");
+                proc.setString(2, "tblProducts");
+                proc.registerOutParameter(3, Types.INTEGER);
+                proc.execute();
+                
+                rows = proc.getInt(3);
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (proc != null) {
+                proc.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return rows;
+    }
     public List<ProductDTO> viewProduct(String categoryID, String status) throws SQLException {
         List<ProductDTO> list = null;
         Connection conn = null;
@@ -250,6 +281,55 @@ public class ProductDAO {
         }
         return null;
     }
+    
+    public ProductDTO GetSpec(String specID) throws NamingException, SQLException {
+        Connection c = null; //doi tuong ket noi
+        PreparedStatement ps = null; //doi tuong truy van
+        ResultSet rs = null;//doi tuong nhan ket qua
+
+        String sql = "SELECT p.productID, p.name, p.image, s.color, s.ram, s.storage, s.price, s.specID "
+                + "FROM tblProductSpec s, tblProducts p "
+                + "WHERE s.specID=? AND p.productID=s.productID";
+
+        try {
+            DBConnect db = new DBConnect();
+            c = db.makeConnection(); // tao doi tuong connection qua DBConnection
+
+            if (c != null) {
+                ps = c.prepareStatement(sql); // tao truy van
+                ps.setString(1, specID);
+                rs = ps.executeQuery();
+
+                while (rs.next()) {
+                    String productID=rs.getString("productID");
+                    String name = rs.getString("name");
+                    String image = rs.getString("image");
+                    double price = rs.getDouble("price");
+                    String ram = rs.getString("ram");
+                    String storage = rs.getString("storage");
+                    String color = rs.getString("color");
+                    //ProductDTO prs=new ProductDTO(productID, name, "", 0, price, 0, 0, true, image, ram, storage, color);
+                    ProductDTO prs = new ProductDTO(productID, name, price, true, image, ram, storage, color, specID);
+                    return prs;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+
+            if (ps != null) {
+                ps.close();
+            }
+
+            if (c != null) {
+                c.close();
+            }
+        }
+        return null;
+    }
 
     public OrderDTO completeOrder(List<CartItemDTO> cart, String address, String name, String email, String phone, String userID, String codeID, String method, double price) throws SQLException {
         long d = System.currentTimeMillis();
@@ -265,7 +345,7 @@ public class ProductDAO {
                 String sql = "INSERT INTO tblOrders(orderID,cusName,address,orderDate,codeID,userID,price,payMethod) "
                         + "VALUES(?,?,?,?,?,?,?,?)";
                 stm = conn.prepareStatement(sql);
-                stm.setString(1, "TEST");
+                stm.setString(1, "TEST31");
                 stm.setString(2, name);
                 stm.setString(3, address);
                 stm.setString(4, formatter.format(currentDate));

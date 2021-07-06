@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 public class ViewCartController extends HttpServlet {
 
     
-    private static final String SUCCESS ="cartForm.jsp";
+    private static final String SUCCESS ="product_summary.jsp";
     private static final String ERROR = "error.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
