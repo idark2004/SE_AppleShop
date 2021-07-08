@@ -53,18 +53,7 @@
                                     <c:set var="subtotal" value="${subtotal+cartItem.quantity}"/>
                           </c:forEach>
                         <a href="product_summary.jsp"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> ${subtotal} Itemes in your cart </span> </a>
-    <body>
-        <div id="header">
-            <div class="container">
-                <div id="welcomeLine" class="row">
-                    <div class="span6">Welcome!<strong> User</strong></div>
-                    <div class="span6">
-                        <div class="pull-right">
-                            <c:forEach var="cartItem" items="${sessionScope.cart}">
-                                <c:set var="subtotalCount" value="${cartItem.quantity}"/>
-                                <c:set var="subtotal" value="${subtotal+cartItem.quantity}"/>
-                            </c:forEach>
-                            <a href="product_summary.jsp"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> ${subtotal} Itemes in your cart </span> </a>
+    
                         </div>
                     </div>
                 </div>
@@ -133,9 +122,9 @@
                         <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
                     </form>
                     <ul id="topMenu" class="nav pull-right">
-                        <li class=""><a href="ViewProductController">All Products</a></li>
+                        <li class=""><a href="MainController?action=Product&perform=ViewProduct">All Products</a></li>
                         <li class=""><a href="contact.jsp">Contact</a></li>
-                        <li class=""><a href="user_profile.jsp">Profile</a></li>
+                        <li class=""><a href="userProfile.jsp">Profile</a></li>
                         <li class="">
                             <a href="signupForm.jsp" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Signup</span></a>
                         </li>

@@ -77,9 +77,9 @@
                             <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
                         </form>
                         <ul id="topMenu" class="nav pull-right">
-                            <li class=""><a href="ViewProductController">All Products</a></li>
+                            <li class=""><a href="MainController?action=Product&perform=ViewProduct">All Products</a></li>
                             <li class=""><a href="contact.jsp">Contact</a></li>
-                            <li class=""><a href="user_profile.jsp">Profile</a></li>
+                            <li class=""><a href="userProfile.jsp">Profile</a></li>
                             <li class="">
                                 <a href="signupForm.jsp" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Signup</span></a>
                             </li>
@@ -151,12 +151,12 @@
                             <a id="myCart" href="product_summary.jsp"><img src="themes/images/ico-cart.png" alt="cart">${subtotal} Items in your cart <span class="badge badge-warning pull-right">${total}</span></a>
                         </div>
                         <ul id="sideManu" class="nav nav-tabs nav-stacked">
-                            <li><a href="ViewProductController?categoryID=&status=True">All</a></li>
-                            <li><a href="ViewProductController?categoryID=IP&status=True">iPhone</a></li>
-                            <li><a href="ViewProductController?categoryID=ID&status=True">iPad</a></li>
-                            <li><a href="ViewProductController?categoryID=MB&status=True">Mac</a></li>
-                            <li><a href="ViewProductController?categoryID=AW&status=True">Apple Watch</a></li>
-                            <li><a href="ViewProductController?categoryID=AS&status=True">Accessory</a></li>
+                            <li><a href="MainController?action=Product&perform=ViewProduct">All</a></li>
+                            <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=IP&status=True">iPhone</a></li>
+                            <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=ID&status=True">iPad</a></li>
+                            <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=MB&status=True">Mac</a></li>
+                            <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AW&status=True">Apple Watch</a></li>
+                            <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AS&status=True">Accessory</a></li>
                         </ul>
                         <br/>
                     </div>
@@ -215,7 +215,7 @@
                                         <div class="control-group">
                                             <label class="control-label"><span>Color</span></label>
                                             <div class="controls">
-                                                <select name="color" class="span2" onchange="window.location = 'MainController?action=ProductDetail&productID=${product.productID.trim()}&color=' + this.value">
+                                                <select name="color" class="span2" onchange="window.location = 'MainController?action=Product&perform=ViewDetail&productID=${product.productID.trim()}&color=' + this.value">
                                                     <c:if test="${requestScope.colorChosen == null}">
                                                         <option value="" selected="selected"></option>
                                                     </c:if>
@@ -232,7 +232,7 @@
                                             <c:if test="${requestScope.colorChosen!=null}">
                                                 <label class="control-label"><span>Spec</span></label>
                                                 <div class="controls">
-                                                    <select name="hardware" class="span2" onchange="window.location = 'MainController?action=ProductDetail&productID=${product.productID.trim()}&color=${requestScope.colorChosen}&specID=' + this.value">
+                                                    <select name="hardware" class="span2" onchange="window.location = 'MainController?action=Product&perform=ViewDetail&productID=${product.productID.trim()}&color=${requestScope.colorChosen}&specID=' + this.value">
                                                         <c:if test="${requestScope.spec==null}">
                                                             <option value="" selected="selected"></option>
                                                         </c:if>

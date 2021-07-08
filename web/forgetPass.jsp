@@ -137,19 +137,18 @@
                 <div id="sidebar" class="span3">
                      <div class="well well-small">
                         <c:forEach var="cartItem" items="${sessionScope.cart}">
-                                    <c:set var="subtotalCount" value="${cartItem.quantity}"/>
-                                    <c:set var="subtotal" value="${subtotal+cartItem.quantity}"/>
-                                </c:forEach>
-                         <c:set var="total" value="${total + (cartItem.quantity * cartItem.product.price)}"/>
+                            <c:set var="total" value="${total + (cartItem.quantity * cartItem.product.price)}"/>
+                        </c:forEach>
+                        <c:set var="total" value="${total + (cartItem.quantity * cartItem.product.price)}"/>
                         <a id="myCart" href="product_summary.jsp"><img src="themes/images/ico-cart.png" alt="cart">${subtotal} Items in your cart <span class="badge badge-warning pull-right">${total}</span></a>
                     </div>
                     <ul id="sideManu" class="nav nav-tabs nav-stacked">
-                        <li><a href="ViewProductController">All</a></li>
-                        <li><a href="ViewProductController?categoryID=IP&status=True">iPhone</a></li>
-                        <li><a href="ViewProductController?categoryID=ID&status=True">iPad</a></li>
-                        <li><a href="ViewProductController?categoryID=MB&status=True">Mac</a></li>
-                        <li><a href="ViewProductController?categoryID=AW&status=True">Apple Watch</a></li>
-                        <li><a href="ViewProductController?categoryID=AS&status=True">Accessory</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct">All</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=IP&status=True">iPhone</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=ID&status=True">iPad</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=MB&status=True">Mac</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AW&status=True">Apple Watch</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AS&status=True">Accessory</a></li>
                     </ul>
                     <br/>
                 </div>

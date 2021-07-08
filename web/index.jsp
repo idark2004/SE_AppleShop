@@ -79,9 +79,9 @@
                         <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
                     </form>
                     <ul id="topMenu" class="nav pull-right">
-                        <li class=""><a href="ViewProductController">All Products</a></li>
+                        <li class=""><a href="MainController?action=Product&perform=ViewProduct">All Products</a></li>
                         <li class=""><a href="contact.jsp">Contact</a></li>
-                        <li class=""><a href="user_profile.jsp">Profile</a></li>
+                        <li class=""><a href="userProfile.jsp">Profile</a></li>
                         <li class="">
                             <a href="signupForm.jsp" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Signup</span></a>
                         </li>
@@ -102,10 +102,11 @@
                                         </div>
                                         <div class="control-group">
                                             <label class="checkbox">
-											<input type="checkbox"> Remember me
-											</label>
+                                                <input type="checkbox"> Remember me
+                                            </label>
                                             <div class="g-signin2" data-onsuccess="onSignIn"></div>
-                                            <button type="submit" class="btn btn-success" name="action" value="Login">Sign in</button>
+                                            <input type="hidden" name="action" value="User Manage"/>
+                                            <button type="submit" class="btn btn-success" name="perform" value="Log in">Sign in</button>
                                             <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
                                         </div>
                                     </form>
@@ -146,15 +147,19 @@
                     <!-- Sidebar ================================================== -->
                     <div id="sidebar" class="span3">
                         <div class="well well-small">
-                            <a id="myCart" href="product_summary.html"><img src="themes/images/ico-cart.png" alt="cart">3 Items in your cart <span class="badge badge-warning pull-right">445,000VND</span></a>
+                            <c:forEach var="cartItem" items="${sessionScope.cart}">
+                            <c:set var="total" value="${total + (cartItem.quantity * cartItem.product.price)}"/>
+                        </c:forEach>
+                         <c:set var="total" value="${total + (cartItem.quantity * cartItem.product.price)}"/>
+                        <a id="myCart" href="product_summary.jsp"><img src="themes/images/ico-cart.png" alt="cart">${subtotal} Items in your cart <span class="badge badge-warning pull-right">${total}</span></a>
                         </div>
                         <ul id="sideManu" class="nav nav-tabs nav-stacked">
-                            <li><a href="ViewProductController">All</a></li>
-                        <li><a href="ViewProductController?categoryID=IP&status=True">iPhone</a></li>
-                        <li><a href="ViewProductController?categoryID=ID&status=True">iPad</a></li>
-                        <li><a href="ViewProductController?categoryID=MB&status=True">Mac</a></li>
-                        <li><a href="ViewProductController?categoryID=AW&status=True">Apple Watch</a></li>
-                        <li><a href="ViewProductController?categoryID=AS&status=True">Accessory</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct">All</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=IP&status=True">iPhone</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=ID&status=True">iPad</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=MB&status=True">Mac</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AW&status=True">Apple Watch</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AS&status=True">Accessory</a></li>
                         </ul>
                         <br/>
                     </div>
