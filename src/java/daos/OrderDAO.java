@@ -71,7 +71,7 @@ public class OrderDAO {
         PreparedStatement ps = null;
         ResultSet rs = null;
 
-        String sql = "SELECT orderID, orderDate, cusName, price, address, payMethod, status FROM tblOrders WHERE userID=?";
+        String sql = "SELECT orderID, orderDate, cusName, orderPrice, orderAddress, payMethod, orderStatus FROM tblOrders WHERE userID=?";
 
         ArrayList<OrderDTO> lst = new ArrayList<>();
 
@@ -91,10 +91,10 @@ public class OrderDAO {
                     o.setOrderID(rs.getString("orderID"));
                     o.setOrderDate(rs.getString("orderDate"));
                     o.setCusName(rs.getString("cusName"));
-                    o.setPrice(rs.getDouble("price"));
-                    o.setAddress(rs.getString("address"));
+                    o.setPrice(rs.getDouble("orderPrice"));
+                    o.setAddress(rs.getString("orderAddress"));
                     o.setPayMethod(rs.getString("payMethod"));
-                    o.setStatus(rs.getString("status"));
+                    o.setStatus(rs.getString("orderStatus"));
                     
                     lst.add(o);
                 }
