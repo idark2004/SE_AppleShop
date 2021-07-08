@@ -44,7 +44,7 @@
     <div id="header">
         <div class="container">
             <div id="welcomeLine" class="row">
-                <div class="span6">Welcome!<strong> User</strong></div>
+                <div class="span6">Welcome!<strong>${sessionScope.user.name}</strong></div>
                 <div class="span6">
                     <div class="pull-right">
                           <c:forEach var="cartItem" items="${sessionScope.cart}">
@@ -63,17 +63,17 @@
                     <span class="icon-bar"></span>
                 </a>
                 <div class="navbar-inner">
-                    <a class="brand" href="index.html">SE15 Shop</a>
+                    <a class="brand" href="index.jsp">SE15 Shop</a>
                     <form class="form-inline navbar-search" action="ResetPasswordController" method="post">
                         <input id="srchFld" class="srchTxt" placeholder="Enter your recovery email" type="text" name="email" />
                         <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
                     </form>
                     <ul id="topMenu" class="nav pull-right">
-                        <li class=""><a href="products.html">All Products</a></li>
-                        <li class=""><a href="contact.html">Contact</a></li>
-                        <li class=""><a href="user_profile.html">Profile</a></li>
+                        <li class=""><a href="ViewProductController">All Products</a></li>
+                        <li class=""><a href="contact.jsp">Contact</a></li>
+                        <li class=""><a href="user_profile.jsp">Profile</a></li>
                         <li class="">
-                            <a href="register.html" role="button" style="padding-right:0"><span class="btn btn-large btn-success">Signup</span></a>
+                            <a href="signupForm.jsp" role="button" style="padding-right:0"><span class="btn btn-large btn-success">Signup</span></a>
                         </li>
                         <li class="">
                             <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>

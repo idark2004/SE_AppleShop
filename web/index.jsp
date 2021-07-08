@@ -44,14 +44,14 @@
     <div id="header">
         <div class="container">
             <div id="welcomeLine" class="row">
-                <div class="span6">Welcome!<strong> User</strong></div>
+                <div class="span6">Welcome!<strong>${sessionScope.user.name}</strong></div>
                 <div class="span6">
                     <div class="pull-right">
                           <c:forEach var="cartItem" items="${sessionScope.cart}">
                                     <c:set var="subtotalCount" value="${cartItem.quantity}"/>
                                     <c:set var="subtotal" value="${subtotal+cartItem.quantity}"/>
                           </c:forEach>
-                        <a href="product_summary.html"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> ${subtotal} Itemes in your cart </span> </a>
+                        <a href="product_summary.jsp"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> ${subtotal} Itemes in your cart </span> </a>
                     </div>
                 </div>
             </div>
@@ -63,17 +63,17 @@
                     <span class="icon-bar"></span>
                 </a>
                 <div class="navbar-inner">
-                    <a class="brand" href="index.html">SE15 Shop</a>
+                    <a class="brand" href="index.jsp">SE15 Shop</a>
                     <form class="form-inline navbar-search" method="post" action="products.html">
                         <input id="srchFld" class="srchTxt" type="text" />
                         <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
                     </form>
                     <ul id="topMenu" class="nav pull-right">
-                        <li class=""><a href="allProduct.html">All Products</a></li>
-                        <li class=""><a href="contact.html">Contact</a></li>
-                        <li class=""><a href="contact.html">Profile</a></li>
+                        <li class=""><a href="ViewProductController">All Products</a></li>
+                        <li class=""><a href="contact.jsp">Contact</a></li>
+                        <li class=""><a href="user_profile.jsp">Profile</a></li>
                         <li class="">
-                            <a href="register.html" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Signup</span></a>
+                            <a href="signupForm.jsp" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Signup</span></a>
                         </li>
                         <li class="">
                             <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
@@ -113,17 +113,17 @@
             <div class="carousel-inner">
                 <div class="item active">
                     <div class="container">
-                        <a href="register.html"><img style="width:100%" src="themes/images/carousel/1.png" alt="" /></a>
+                        <a href="signupForm.jsp"><img style="width:100%" src="themes/images/carousel/1.png" alt="" /></a>
                     </div>
                 </div>
                 <div class="item">
                     <div class="container">
-                        <a href="register.html"><img style="width:100%" src="themes/images/carousel/2.png" alt="" /></a>
+                        <a href="signupForm.jsp"><img style="width:100%" src="themes/images/carousel/2.png" alt="" /></a>
                     </div>
                 </div>
                 <div class="item">
                     <div class="container">
-                        <a href="register.html"><img src="themes/images/carousel/3.png" alt="" /></a>
+                        <a href="signupForm.jsp"><img src="themes/images/carousel/3.png" alt="" /></a>
                     </div>
                 </div>
             </div>
@@ -137,14 +137,15 @@
                 <!-- Sidebar ================================================== -->
                 <div id="sidebar" class="span3">
                     <div class="well well-small">
-                        <a id="myCart" href="product_summary.html"><img src="themes/images/ico-cart.png" alt="cart">3 Items in your cart <span class="badge badge-warning pull-right">445,000VND</span></a>
+                        <a id="myCart" href="product_summary.jsp"><img src="themes/images/ico-cart.png" alt="cart">3 Items in your cart <span class="badge badge-warning pull-right">445,000VND</span></a>
                     </div>
                     <ul id="sideManu" class="nav nav-tabs nav-stacked">
-                        <li><a href="products.html">All</a></li>
-                        <li><a href="products.html">iPhone</a></li>
-                        <li><a href="products.html">iPad</a></li>
-                        <li><a href="products.html">Mac</a></li>
-                        <li><a href="products.html">Accessory</a></li>
+                        <li><a href="ViewProductController">All</a></li>
+                        <li><a href="ViewProductController?categoryID=IP&status=True">iPhone</a></li>
+                        <li><a href="ViewProductController?categoryID=ID&status=True">iPad</a></li>
+                        <li><a href="ViewProductController?categoryID=MB&status=True">Mac</a></li>
+                        <li><a href="ViewProductController?categoryID=AW&status=True">Apple Watch</a></li>
+                        <li><a href="ViewProductController?categoryID=AS&status=True">Accessory</a></li>
                     </ul>
                     <br/>
                 </div>
@@ -160,7 +161,7 @@
                                             <li class="span3">
                                                 <div class="thumbnail">
                                                     <i class="tag"></i>
-                                                    <a href="product_details.html"><img src="themes/images/products/5.jpg" alt=""></a>
+                                                    <a href="product_details.jsp"><img src="themes/images/products/5.jpg" alt=""></a>
                                                     <div class="caption">
                                                         <h5>Product name</h5>
                                                         <h4 style="font-size: small;"><a class="btn" href="product_details.html">VIEW</a> <span class="pull-right">115,000,000 VND</span></h4>
