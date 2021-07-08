@@ -42,14 +42,8 @@ public class ViewProductController extends HttpServlet {
         try {
             ProductDAO dao = new ProductDAO();
             String categoryID = request.getParameter("categoryID");
-            String pageNum = request.getParameter("pageNum");
-            int page = 0;
-            if (pageNum != null) {
-                page = Integer.parseInt(pageNum);
-            } else {
-                page = 1;
-            }
-            System.out.println(page);
+            
+            
             if (request.getParameter("categoryID") == null) {
                 categoryID = "";
             }
@@ -61,8 +55,15 @@ public class ViewProductController extends HttpServlet {
             List<ProductDTO> list = dao.viewProduct(categoryID, status); //qq nay null nè
 
            
-
-            int product_per_page = 10;
+             //Pagination
+            String pageNum = request.getParameter("pageNum");
+            int page = 0;
+            if (pageNum != null) {
+                page = Integer.parseInt(pageNum);
+            } else {
+                page = 1;
+            } 
+            int product_per_page = 10;// set product per page here
             int pNum = list.size();
             int pages = 0;
             if (pNum % product_per_page == 0) {
@@ -71,6 +72,7 @@ public class ViewProductController extends HttpServlet {
                 pages = (pNum / product_per_page) + 1;
             }
             System.out.println(pNum);
+            System.out.println(page);
             if (list != null) {
                 if (request.getParameter("pageNum") != null) {
                     if (pNum >= (page * product_per_page)) {
@@ -88,9 +90,9 @@ public class ViewProductController extends HttpServlet {
                         request.setAttribute("PRODUCT_LIST", subList);
                     }
                 }
-
                 request.setAttribute("pages", pages);
                 request.setAttribute("curPage", page);
+                //end pagination      
                 request.setAttribute("cateID", categoryID);
             } else {
                 msg.setMsg("Sorry our shop currently doesn't have these products in stock !!");

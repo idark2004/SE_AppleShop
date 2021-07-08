@@ -237,15 +237,15 @@
                             </c:otherwise>
                         </c:choose>
                             <tr>
-                                <td colspan="6" style="text-align:right">Total Price: </td>
+                                <td colspan="5" style="text-align:right">Total Price: </td>
                                 <td> <fmt:formatNumber type="number" maxFractionDigits = "0" value="${total}"/> VND</td>
                             </tr>
                             <tr>
-                                <td colspan="6" style="text-align:right">Total Discount: </td>
+                                <td colspan="5" style="text-align:right">Total Discount: </td>
                                 <td> discount money VND</td>
                             </tr>
                             <tr>
-                                <td colspan="6" style="text-align:right"><strong>TOTAL (<fmt:formatNumber type="number" maxFractionDigits = "0" value="${total}"/> VND - discount money VND) =</strong></td>
+                                <td colspan="5" style="text-align:right"><strong>TOTAL (<fmt:formatNumber type="number" maxFractionDigits = "0" value="${total}"/> VND - discount money VND) =</strong></td>
                                 <td class="label label-important" style="display:block"> <strong><fmt:formatNumber type="number" maxFractionDigits = "0" value="${total}"/> VND</strong></td>
                             </tr>
                         </tbody>

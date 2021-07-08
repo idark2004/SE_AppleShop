@@ -69,13 +69,13 @@
                     <span class="icon-bar"></span>
                 </a>
                 <div class="navbar-inner">
-                    <a class="brand" href="index.html">SE15 Shop</a>
+                    <a class="brand" href="index.jsp">SE15 Shop</a>
                     <form class="form-inline navbar-search" method="post" action="products.html">
                         <input id="srchFld" class="srchTxt" type="text" />
                         <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
                     </form>
                     <ul id="topMenu" class="nav pull-right">
-                        <li class=""><a href="productList.jsp">All Products</a></li>
+                        <li class=""><a href="ViewProductController">All Products</a></li>
                         <li class=""><a href="contact.jsp">Contact</a></li>
                         <li class=""><a href="user_profile.jsp">Profile</a></li>
                         <li class="">
@@ -151,7 +151,7 @@
                         <a id="myCart" href="product_summary.html"><img src="themes/images/ico-cart.png" alt="cart">${subtotal} Items in your cart <span class="badge badge-warning pull-right">${total}</span></a>
                     </div>
                     <ul id="sideManu" class="nav nav-tabs nav-stacked">
-                        <li><a href="ViewProductController?categoryID=&status=True">All</a></li>
+                        <li><a href="ViewProductController">All</a></li>
                         <li><a href="ViewProductController?categoryID=IP&status=True">iPhone</a></li>
                         <li><a href="ViewProductController?categoryID=ID&status=True">iPad</a></li>
                         <li><a href="ViewProductController?categoryID=MB&status=True">Mac</a></li>

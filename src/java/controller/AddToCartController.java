@@ -41,10 +41,12 @@ public class AddToCartController extends HttpServlet {
             String color= request.getParameter("color").trim();
             String specID= request.getParameter("hardware").trim();
             int qty = Integer.parseInt(request.getParameter("Quantity"));
-            //String ram=hardware.split("-")[0].trim();
-            //String storage=hardware.split("-")[1].trim();
+//            String ram=specID.split("-")[0].trim();
+//            String storage=specID.split("-")[1].trim();
             
             ProductDTO product=prDAO.GetSpec(specID);
+            if(prDAO.GetSpec(specID)==null) System.err.println("null spec");
+            else System.err.println("not null");
             if (product!=null){
                 for(int i=0; i<qty; i++){
                     if(session.getAttribute("cart")==null){

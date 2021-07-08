@@ -71,17 +71,17 @@
                         <span class="icon-bar"></span>
                     </a>
                     <div class="navbar-inner">
-                        <a class="brand" href="index.html">SE15 Shop</a>
+                        <a class="brand" href="index.jsp">SE15 Shop</a>
                         <form class="form-inline navbar-search" method="post" action="products.html">
                             <input id="srchFld" class="srchTxt" type="text" />
                             <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
                         </form>
                         <ul id="topMenu" class="nav pull-right">
-                            <li class=""><a href="allProduct.html">All Products</a></li>
-                            <li class=""><a href="contact.html">Contact</a></li>
-                            <li class=""><a href="contact.html">Profile</a></li>
+                            <li class=""><a href="ViewProductController">All Products</a></li>
+                            <li class=""><a href="contact.jsp">Contact</a></li>
+                            <li class=""><a href="user_profile.jsp">Profile</a></li>
                             <li class="">
-                                <a href="register.html" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Signup</span></a>
+                                <a href="signupForm.jsp" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Signup</span></a>
                             </li>
                             <li class="">
                                 <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
@@ -121,17 +121,17 @@
                 <div class="carousel-inner">
                     <div class="item active">
                         <div class="container">
-                            <a href="register.html"><img style="width:100%" src="themes/images/carousel/1.png" alt="" /></a>
+                            <a href="signupForm.jsp"><img style="width:100%" src="themes/images/carousel/1.png" alt="" /></a>
                         </div>
                     </div>
                     <div class="item">
                         <div class="container">
-                            <a href="register.html"><img style="width:100%" src="themes/images/carousel/2.png" alt="" /></a>
+                            <a href="signupForm.jsp"><img style="width:100%" src="themes/images/carousel/2.png" alt="" /></a>
                         </div>
                     </div>
                     <div class="item">
                         <div class="container">
-                            <a href="register.html"><img src="themes/images/carousel/3.png" alt="" /></a>
+                            <a href="signupForm.jsp"><img src="themes/images/carousel/3.png" alt="" /></a>
                         </div>
                     </div>
                 </div>
@@ -151,19 +151,20 @@
                             <a id="myCart" href="product_summary.jsp"><img src="themes/images/ico-cart.png" alt="cart">${subtotal} Items in your cart <span class="badge badge-warning pull-right">${total}</span></a>
                         </div>
                         <ul id="sideManu" class="nav nav-tabs nav-stacked">
-                            <li><a href="products.html">All</a></li>
-                            <li><a href="products.html">iPhone</a></li>
-                            <li><a href="products.html">iPad</a></li>
-                            <li><a href="products.html">Mac</a></li>
-                            <li><a href="products.html">Accessory</a></li>
+                            <li><a href="ViewProductController?categoryID=&status=True">All</a></li>
+                            <li><a href="ViewProductController?categoryID=IP&status=True">iPhone</a></li>
+                            <li><a href="ViewProductController?categoryID=ID&status=True">iPad</a></li>
+                            <li><a href="ViewProductController?categoryID=MB&status=True">Mac</a></li>
+                            <li><a href="ViewProductController?categoryID=AW&status=True">Apple Watch</a></li>
+                            <li><a href="ViewProductController?categoryID=AS&status=True">Accessory</a></li>
                         </ul>
                         <br/>
                     </div>
                     <!-- Sidebar end=============================================== -->
                     <div class="span9">
                         <ul class="breadcrumb">
-                            <li><a href="index.html">Home</a> <span class="divider">/</span></li>
-                            <li><a href="products.html">Products</a> <span class="divider">/</span></li>
+                            <li><a href="index.jsp">Home</a> <span class="divider">/</span></li>
+                            <li><a href="productList.jsp">Products</a> <span class="divider">/</span></li>
                             <li class="active">${requestScope.product.name}</li>
                         </ul>
                         <div class="row">
@@ -176,19 +177,16 @@
                                         <div class="item active">
                                             <a href="${requestScope.product.image}"> <img style="width:29%" src="${requestScope.product.image}" alt="" /></a>
                                             <a href="${requestScope.product.image}"> <img style="width:29%" src="${requestScope.product.image}" alt="" /></a>
-                                            <a href="${requestScope.product.image}"> <img style="width:29%" src="${requestScope.product.image}" alt="" /></a>
-                                
+                                            <a href="${requestScope.product.image}"> <img style="width:29%" src="${requestScope.product.image}" alt="" /></a>                                
                                         </div>
-                           
-                             
                                     </div>
                                 </div>
                             </div>
-                             <form  action="MainController" method="POST">  
+                            <form  action="MainController" method="POST">  
                                 <div class="span6">
                                     <input type="hidden" name="productID" value="${requestScope.product.productID.trim()}" />
                                     <h3>${requestScope.product.name}</h3>
-                                    <small>-Ceramic Shield front | Glass back and aluminum design</small>
+                                   
                                     <hr class="soft" />
                                     <div class="form-horizontal qtyFrm">
                                         <div class="control-group">
@@ -251,11 +249,6 @@
                                             </c:if>
                                         </div>
                                     </div>
-                                    <hr class="soft clr" />
-                                    <a class="btn btn-small pull-right" href="#detail">More Details</a>
-                                    <br class="clr" />
-                                    <a href="#" name="detail"></a>
-                                    <hr class="soft" />
                                 </div>
                             </form>                
                         </div>                    
@@ -368,15 +361,15 @@
                 <div class="row">
                     <div class="span3">
                         <h5>ACCOUNT</h5>
-                        <a href="login.html">LOGIN</a>
-                        <a href="login.html">PROFILE</a>
-                        <a href="login.html">CART</a>
+                        <a href="loginForm.jsp">LOGIN</a>
+                        <a href="user_profile.jsp">PROFILE</a>
+                        <a href="product_summary.jsp">CART</a>
                         <a href="login.html">ORDER HISTORY</a>
                     </div>
                     <div class="span3">
                         <h5>INFORMATION</h5>
-                        <a href="contact.html">CONTACT</a>
-                        <a href="register.html">REGISTRATION</a>
+                        <a href="contact.jsp">CONTACT</a>
+                        <a href="signupForm.jsp">REGISTRATION</a>
                         <a href="legal_notice.html">LEGAL NOTICE</a>
                         <a href="tac.html">TERMS AND CONDITIONS</a>
                     </div>
