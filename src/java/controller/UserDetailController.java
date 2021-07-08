@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
  */
 public class UserDetailController extends HttpServlet {
 
-    private static final String SUCCESS ="UserProfile.jsp";
+    private static final String SUCCESS ="user_profile.jsp";
     private static final String ERROR = "error.html";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

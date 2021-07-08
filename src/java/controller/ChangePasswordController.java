@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
  */
 public class ChangePasswordController extends HttpServlet {
 
-    private static final String SUCCESS ="UserProfile.jsp";
+    private static final String SUCCESS ="user_profile.jsp";
     private static final String ERROR = "error.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -38,7 +38,7 @@ public class ChangePasswordController extends HttpServlet {
                 UserDAO ud=new UserDAO();
                 if(ud.UpdateUserPassword(user)){
                     url=SUCCESS;
-                    request.setAttribute("UpSuccess","Update successfully");
+                    request.setAttribute("UpSuccess","Change password successfully");
                 }
             }
             request.setAttribute("error","No user found to update");

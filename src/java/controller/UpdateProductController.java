@@ -97,11 +97,10 @@ public class UpdateProductController extends HttpServlet {
             System.out.println(imgUrl.length());
             //String photo=request.getParameter("photo");
             String name = request.getParameter("name");
-            int totalQuantity = Integer.parseInt(request.getParameter("totalQuantity"));
             ProductDAO pDAO = new ProductDAO();
             System.out.println("go through?");
             if (imgUrl.length()<=7){
-                if(pDAO.UpdateProduct(id, name, totalQuantity)){
+                if(pDAO.UpdateProduct(id, name)){
                     double price = Double.parseDouble(request.getParameter("price"));
                     int quantity = Integer.parseInt(request.getParameter("quantity"));
                     if (pDAO.UpdateProductSpec(specID, price, quantity)){
@@ -114,7 +113,7 @@ public class UpdateProductController extends HttpServlet {
                 System.out.println("go");
                 //String imgUrl=uploadFile(request);
                 System.out.println("through?");
-                if(pDAO.UpdateProductWithImage(id, name, totalQuantity, imgUrl)){
+                if(pDAO.UpdateProductWithImage(id, name, imgUrl)){
                     double price = Double.parseDouble(request.getParameter("price"));
                     int quantity = Integer.parseInt(request.getParameter("quantity"));
                     if (pDAO.UpdateProductSpec(specID, price, quantity)){

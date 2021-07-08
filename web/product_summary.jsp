@@ -98,9 +98,9 @@
 											</label>
                                             <a href="#"><img width="30" height="30" src="themes/images/google.png" title="Login with Google" alt="Google Login" /></a>
                                         </div>
+                                        <button type="submit" class="btn btn-success">Sign in</button>
+                                        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
                                     </form>
-                                    <button type="submit" class="btn btn-success">Sign in</button>
-                                    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
                                 </div>
                             </div>
                         </li>

@@ -12,8 +12,7 @@ package dtos;
 public class ProductDTO {
     private String productID;
     private String name;
-    private String description;
-    private int totalQuantity;
+    private String description;   
     private double price;
     private int viewCount;
     private int orderCount;
@@ -23,15 +22,15 @@ public class ProductDTO {
     private String storage;
     private String color;
     private String specID;
+    private int specQuantity;
 
     public ProductDTO() {
     }
 
-    public ProductDTO(String productID, String name, String description, int totalQuantity, double price, int viewCount, int orderCount, boolean status, String image, String ram, String storage, String color) {
+    public ProductDTO(String productID, String name, String description, double price, int viewCount, int orderCount, boolean status, String image, String ram, String storage, String color) {
         this.productID = productID;
         this.name = name;
-        this.description = description;
-        this.totalQuantity = totalQuantity;
+        this.description = description;        
         this.price = price;
         this.viewCount = viewCount;
         this.orderCount = orderCount;
@@ -52,6 +51,14 @@ public class ProductDTO {
         this.storage = storage;
         this.color = color;
         this.specID = specID;
+    }
+
+    public int getSpecQuantity() {
+        return specQuantity;
+    }
+
+    public void setSpecQuantity(int specQuantity) {
+        this.specQuantity = specQuantity;
     }
     
     
@@ -78,15 +85,7 @@ public class ProductDTO {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public int getTotalQuantity() {
-        return totalQuantity;
-    }
-
-    public void setTotalQuantity(int totalQuantity) {
-        this.totalQuantity = totalQuantity;
-    }
+    }    
 
     public double getPrice() {
         return price;
