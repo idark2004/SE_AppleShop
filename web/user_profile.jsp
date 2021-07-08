@@ -1,18 +1,16 @@
 <%-- 
-    Document   : product_summary
-    Created on : Jul 5, 2021, 2:52:05 PM
-    Author     : ADMIN
+    Document   : user_profile
+    Created on : Jul 6, 2021, 4:26:41 PM
+    Author     : anime
 --%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
-    <title>SE15 Shop | Product Cart</title>
+    <title>SE15 Shop | Profile</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -39,6 +37,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="themes/images/ico/apple.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="themes/images/ico/apple.png">
     <link rel="apple-touch-icon-precomposed" href="themes/images/ico/apple.png">
+    <link rel="stylesheet" href="css/mainP.css">
     <style type="text/css" id="enject"></style>
 </head>
 
@@ -48,11 +47,11 @@
             <div id="welcomeLine" class="row">
                 <div class="span6">Welcome!<strong>${sessionScope.user.name}</strong></div>
                 <div class="span6">
-                    <div class="pull-right">
-                        <c:forEach var="cartItem" items="${sessionScope.cart}">
+                     <div class="pull-right">
+                          <c:forEach var="cartItem" items="${sessionScope.cart}">
                                     <c:set var="subtotalCount" value="${cartItem.quantity}"/>
                                     <c:set var="subtotal" value="${subtotal+cartItem.quantity}"/>
-                        </c:forEach>
+                          </c:forEach>
                         <a href="product_summary.jsp"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> ${subtotal} Itemes in your cart </span> </a>
                     </div>
                 </div>
@@ -65,17 +64,17 @@
                     <span class="icon-bar"></span>
                 </a>
                 <div class="navbar-inner">
-                    <a class="brand" href="index.html">SE15 Shop</a>
+                    <a class="brand" href="index.jsp">SE15 Shop</a>
                     <form class="form-inline navbar-search" method="post" action="products.html">
                         <input id="srchFld" class="srchTxt" type="text" />
                         <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
                     </form>
                     <ul id="topMenu" class="nav pull-right">
-                        <li class=""><a href="allProduct.html">All Products</a></li>
-                        <li class=""><a href="contact.html">Contact</a></li>
-                        <li class=""><a href="contact.html">Profile</a></li>
+                        <li class=""><a href="productList.jsp">All Products</a></li>
+                        <li class=""><a href="contact.jsp">Contact</a></li>
+                        <li class=""><a href="user_profile.jsp">Profile</a></li>
                         <li class="">
-                            <a href="register.html" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Signup</span></a>
+                            <a href="signupForm.jsp" role="button" style="padding-right:0"><span class="btn btn-large btn-success">Signup</span></a>
                         </li>
                         <li class="">
                             <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
@@ -96,11 +95,13 @@
                                             <label class="checkbox">
 											<input type="checkbox"> Remember me
 											</label>
+                                        </div>
+                                        <div class="control-group">
                                             <a href="#"><img width="30" height="30" src="themes/images/google.png" title="Login with Google" alt="Google Login" /></a>
                                         </div>
-                                        <button type="submit" class="btn btn-success">Sign in</button>
-                                        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
                                     </form>
+                                    <button type="submit" class="btn btn-success">Sign in</button>
+                                    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
                                 </div>
                             </div>
                         </li>
@@ -115,17 +116,17 @@
             <div class="carousel-inner">
                 <div class="item active">
                     <div class="container">
-                        <a href="register.html"><img style="width:100%" src="themes/images/carousel/1.png" alt="" /></a>
+                        <a href="signupForm.jsp"><img style="width:100%" src="themes/images/carousel/1.png" alt="" /></a>
                     </div>
                 </div>
                 <div class="item">
                     <div class="container">
-                        <a href="register.html"><img style="width:100%" src="themes/images/carousel/2.png" alt="" /></a>
+                        <a href="signupForm.jsp"><img style="width:100%" src="themes/images/carousel/2.png" alt="" /></a>
                     </div>
                 </div>
                 <div class="item">
                     <div class="container">
-                        <a href="register.html"><img src="themes/images/carousel/3.png" alt="" /></a>
+                        <a href="signupForm.jsp"><img src="themes/images/carousel/3.png" alt="" /></a>
                     </div>
                 </div>
             </div>
@@ -140,168 +141,79 @@
                 <div id="sidebar" class="span3">
                     <div class="well well-small">
                         <c:forEach var="cartItem" items="${sessionScope.cart}">
-                            <c:set var="total" value="${total + (cartItem.quantity * cartItem.product.price)}"/>
-                        </c:forEach>
-                        <a id="myCart" href="product_summary.jsp"><img src="themes/images/ico-cart.png" alt="cart">${subtotal} Items in your cart <span class="badge badge-warning pull-right">${total}</span></a>
+                                    <c:set var="subtotalCount" value="${cartItem.quantity}"/>
+                                    <c:set var="subtotal" value="${subtotal+cartItem.quantity}"/>
+                                </c:forEach>
+                         <c:set var="total" value="${total + (cartItem.quantity * cartItem.product.price)}"/>
+                        <a id="myCart" href="product_summary.html"><img src="themes/images/ico-cart.png" alt="cart">${subtotal} Items in your cart <span class="badge badge-warning pull-right">${total}</span></a>
                     </div>
                     <ul id="sideManu" class="nav nav-tabs nav-stacked">
-                        <li><a href="products.html">All</a></li>
-                        <li><a href="products.html">iPhone</a></li>
-                        <li><a href="products.html">iPad</a></li>
-                        <li><a href="products.html">Mac</a></li>
-                        <li><a href="products.html">Accessory</a></li>
+                        <li><a href="ViewProductController?categoryID=&status=True">All</a></li>
+                        <li><a href="ViewProductController?categoryID=IP&status=True">iPhone</a></li>
+                        <li><a href="ViewProductController?categoryID=ID&status=True">iPad</a></li>
+                        <li><a href="ViewProductController?categoryID=MB&status=True">Mac</a></li>
+                        <li><a href="ViewProductController?categoryID=AW&status=True">Apple Watch</a></li>
+                        <li><a href="ViewProductController?categoryID=AS&status=True">Accessory</a></li>
                     </ul>
                     <br/>
                 </div>
                 <!-- Sidebar end=============================================== -->
                 <div class="span9">
                     <ul class="breadcrumb">
-                        <li><a href="index.html">Home</a> <span class="divider">/</span></li>
-                        <li class="active"> SHOPPING CART</li>
+                        <li><a href="index.jsp">Home</a> <span class="divider">/</span></li>
+                        <li class="active">Edit Profile</li>
                     </ul>
-                    <h3> SHOPPING CART [ <small>${subtotal} Item(s) </small>]<a href="ViewProductController?categoryID=&status=True" class="btn btn-large pull-right"><i class="icon-arrow-left"></i> Continue Shopping </a></h3>
-                    <hr class="soft" />
-                    <table class="table table-bordered">
-                        <tr>
-                            <th> I AM ALREADY REGISTERED </th>
-                        </tr>
-                        <tr>
-                            <td>
-                                <form class="form-horizontal">
-                                    <div class="control-group">
-                                        <label class="control-label" for="inputUsername">Username</label>
-                                        <div class="controls">
-                                            <input type="text" id="inputUsername" placeholder="Username">
-                                        </div>
-                                    </div>
-                                    <div class="control-group">
-                                        <label class="control-label" for="inputPassword1">Password</label>
-                                        <div class="controls">
-                                            <input type="password" id="inputPassword1" placeholder="Password">
-                                        </div>
-                                    </div>
-                                    <div class="control-group">
-                                        <div class="controls">
-                                            <button type="submit" class="btn">Sign in</button> OR <a href="register.html" class="btn">Register Now!</a>
-                                        </div>
-                                    </div>
-                                    <div class="control-group">
-                                        <div class="controls">
-                                            <a href="forgetpass.html" style="text-decoration:underline">Forgot password ?</a>
-                                        </div>
-                                    </div>
-                                </form>
-                            </td>
-                        </tr>
-                    </table>
+                    <h3> Edit Profile</h3>
+                    <div class="well">
+                        <form class="form-horizontal" action="MainController" method="post" accept-charset="UTF-8">
+                         <c:if test="${requestScope.UpSuccess !=null}"><span class="notify-update"><i class="fas fa-check-circle"></i>
+                            ${requestScope.UpSuccess}</span></c:if>   
+                            <fieldset>
+                                <div class="control-group">
+                                    <label class="control-label" for="input01">Fullname</label>
+                                    <div class="controls">
+                                        <input type="text" class="input-xlarge" id="input01" placeholder="Input Name" name="name" value="${sessionScope.user.name}" readonly>
 
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Product</th>
-                                <th>Description</th>
-                                <th>Quantity/Update</th>
-                                <th>Price</th>
-                                <th>Discount</th>
-                                <th>Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        <c:set var="total" value="0"/>
-                        <c:choose>
-                            <c:when test="${sessionScope.cart != null}">
-                            <c:forEach var="cartItem" items="${sessionScope.cart}">
-                            <tr>
-                                <td> <img width="60" src="${cartItem.product.image}" alt="Item" /></td>
-                                <td>${cartItem.product.name}<br/>Color : black</td>
-                                <td>
-                                    <div class="input-append"><input class="span1" style="max-width:34px" id="appendedInputButtons" size="16" type="text" value="${cartItem.quantity}">
-                                        <button class="btn" type="button"><i class="icon-minus"></i></button>
-                                        <button class="btn" type="button"><i class="icon-plus"></i></button>
-                                        <button class="btn btn-danger" type="button">
-                                            <a class="remove" href="MainController?action=RemoveCart&specID=${cartItem.product.specID.trim()}">
-                                            <i class="icon-remove icon-white"></i>
-                                            </a>
-                                        </button>
                                     </div>
-                                </td>
-                                <td><fmt:formatNumber type="number" maxFractionDigits = "0" value="${cartItem.quantity * cartItem.product.price}"/> VND</td>
-                                <td>100,000 VND</td>
-                                <td><fmt:formatNumber type="number" maxFractionDigits = "0" value="${cartItem.quantity * cartItem.product.price}"/> VND</td>
-                                <c:set var="total" value="${total + (cartItem.quantity * cartItem.product.price)}"/>
-                            </tr>
-                            </c:forEach>
-                            </c:when>
-                            <c:otherwise>
-                                <h1>no item in the cart</h1>
-                            </c:otherwise>
-                        </c:choose>
-                            <tr>
-                                <td colspan="5" style="text-align:right">Total Price: </td>
-                                <td> <fmt:formatNumber type="number" maxFractionDigits = "0" value="${total}"/> VND</td>
-                            </tr>
-                            <tr>
-                                <td colspan="5" style="text-align:right">Total Discount: </td>
-                                <td> discount money VND</td>
-                            </tr>
-                            <tr>
-                                <td colspan="5" style="text-align:right"><strong>TOTAL (<fmt:formatNumber type="number" maxFractionDigits = "0" value="${total}"/> VND - discount money VND) =</strong></td>
-                                <td class="label label-important" style="display:block"> <strong><fmt:formatNumber type="number" maxFractionDigits = "0" value="${total}"/> VND</strong></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="input02">Email</label>
+                                    <div class="controls">
+                                        <input type="text" class="input-xlarge" id="input02" placeholder="Input Email" name="email" value="${sessionScope.user.email}" readonly>
 
-
-                    <table class="table table-bordered">
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <form class="form-horizontal">
-                                        <div class="control-group">
-                                            <label class="control-label"><strong> SALE CODE: </strong> </label>
-                                            <div class="controls">
-                                                <input type="text" class="input-medium" placeholder="CODE">
-                                                <button type="submit" class="btn"> ADD </button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-
-                    <table class="table table-bordered">
-                        <tr>
-                            <th>SHIPPING ADDRESS</th>
-                        </tr>
-                        <tr>
-                            <td>
-                                <form class="form-horizontal">
-                                    <div class="control-group">
-                                        <label class="control-label" for="">Your shipping address </label>
-                                        <div class="controls">
-                                            <input type="text" id="inputAddress" placeholder="123, A Street, District 2">
-                                        </div>
                                     </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="input03">Address</label>
+                                    <div class="controls">
+                                        <input type="text" class="input-xlarge" id="input03" placeholder="Input Address" name="address" value="${sessionScope.user.address}"> 
 
-                                    <div class="control-group" style="margin-left: -10rem;">
-                                        <div class="controls">
-                                            <label class="radio">
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
-                                                Pay after delivery (Using the billing address above as shipping address)
-                                                <br/>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" checked="">
-                                                Pay at SE15 Shop
-                                            </label>
-                                        </div>
                                     </div>
-                                </form>
-                            </td>
-                        </tr>
-                    </table>
-                    <a href="products.html" class="btn btn-large"><i class="icon-arrow-left"></i> Continue Shopping </a>
-                    <a href="login.html" class="btn btn-large pull-right">Next <i class="icon-arrow-right"></i></a>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="input04">Phone</label>
+                                    <div class="controls">
+                                        <input type="text" class="input-xlarge" id="input04" name="phone" value="${sessionScope.user.phone}">
+
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <a href="newPass.jsp" role="button" style="padding-right:0"><span class="btn btn-primary btn-success">Reset New Password</span></a>
+                                    </div>
+                                </div>
+                                         <input type="hidden"  name="userID" value="${sessionScope.user.userID}" >
+                            <input type="hidden"  name="action" value="UpdateProfile" >
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                        <button class="btn">Cancel</button>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+
+                    </div>
 
                 </div>
             </div>
@@ -314,15 +226,15 @@
             <div class="row">
                 <div class="span3">
                     <h5>ACCOUNT</h5>
-                    <a href="login.html">LOGIN</a>
-                    <a href="login.html">PROFILE</a>
-                    <a href="login.html">CART</a>
-                    <a href="login.html">ORDER HISTORY</a>
+                    <a href="loginForm.jsp">LOGIN</a>
+                    <a href="loginForm.jsp">PROFILE</a>
+                    <a href="loginForm.jsp">CART</a>
+                    <a href="loginForm.jsp">ORDER HISTORY</a>
                 </div>
                 <div class="span3">
                     <h5>INFORMATION</h5>
-                    <a href="contact.html">CONTACT</a>
-                    <a href="register.html">REGISTRATION</a>
+                    <a href="contact.jsp">CONTACT</a>
+                    <a href="signupForm.jsp">REGISTRATION</a>
                     <a href="legal_notice.html">LEGAL NOTICE</a>
                     <a href="tac.html">TERMS AND CONDITIONS</a>
                 </div>
