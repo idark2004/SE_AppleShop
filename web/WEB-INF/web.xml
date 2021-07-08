@@ -36,7 +36,7 @@
     </servlet>
     <servlet>
         <servlet-name>ViewProductController</servlet-name>
-        <servlet-class>controller.ViewProductController</servlet-class>
+        <servlet-class>controllers_backup.ViewProductController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddToCartController</servlet-name>
@@ -48,7 +48,7 @@
     </servlet>
     <servlet>
         <servlet-name>ProductDetailController</servlet-name>
-        <servlet-class>controller.ProductDetailController</servlet-class>
+        <servlet-class>controllers_backup.ProductDetailController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>BuyItemController</servlet-name>
