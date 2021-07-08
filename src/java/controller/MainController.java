@@ -25,7 +25,6 @@ public class MainController extends HttpServlet {
 
     private static final String ERROR = "error.jsp";
     private static final String LOGIN = "LoginController";
-    private static final String SIGNUP = "SignupController";
     private static final String USERDETAIL = "UserDetailController";
     private static final String UPDATEUSER = "UpdateUserController";
     private static final String PRODUCTDETAIL = "ProductDetailController";
@@ -63,9 +62,6 @@ public class MainController extends HttpServlet {
                     break;
                 case "Login":
                     url=LOGIN;
-                    break;
-                case "Sign Up":
-                    url=SIGNUP;
                     break;
                 case "UserDetail":
                     url=USERDETAIL;

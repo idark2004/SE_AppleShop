@@ -179,14 +179,14 @@
                                 <div class="control-group">
                                     <label class="control-label" for="inputPassword1">Password <sup>*</sup></label>
                                     <div class="controls">
-                                        <input type="password" id="inputPassword1" name="password" placeholder="Password">
+                                        <input type="password" minlength="4" maxlength="10" id="inputPassword1" name="password" placeholder="Password">
                                     </div>
                                 </div>
 
                                 <div class="control-group">
                                     <label class="control-label" for="confirmPassword">Confirm Password <sup>*</sup></label>
                                     <div class="controls">
-                                        <input type="password" id="confirmPassword" name="confirm" placeholder="Password">
+                                        <input type="password" minlength="4" maxlength="10" id="confirmPassword" name="confirm" placeholder="Password">
                                     </div>
                                 </div>                                                                                   
                                 <c:if test="${requestScope.SIGNUP_ERROR != null}">

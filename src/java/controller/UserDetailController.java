@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
  */
 public class UserDetailController extends HttpServlet {
 
-    private static final String SUCCESS ="user_profile.jsp";
+    private static final String SUCCESS ="userProfile.jsp";
     private static final String ERROR = "error.html";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -32,7 +32,7 @@ public class UserDetailController extends HttpServlet {
         try{
             UserDAO uDao = new UserDAO();
             UserDTO user = uDao.getUserProfile(request.getParameter("userid"));
-            session.setAttribute("user",user);
+            session.setAttribute("USER",user);
             url=SUCCESS;
             
         } catch (Exception e) {

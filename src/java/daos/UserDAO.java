@@ -25,20 +25,20 @@ import utils.DBSupport;
 public class UserDAO {
 
     public UserDTO checkLogin(String email, String password) throws NamingException, SQLException {
-        Connection c = null; //doi tuong ket noi
-        PreparedStatement ps = null; //doi tuong truy van
+        Connection conn = null; //doi tuong ket noi
+        PreparedStatement stm = null; //doi tuong truy van
         ResultSet rs = null;//doi tuong nhan ket qua
 
         String sql = "SELECT * FROM tblUsers WHERE userEmail=? AND password=? ";
 
         try {
-            c = DBConnect.makeConnection(); // tao doi tuong connection qua DBConnection
+            conn = DBConnect.makeConnection(); // tao doi tuong connection qua DBConnection
 
-            if (c != null) {
-                ps = c.prepareStatement(sql); // tao truy van
-                ps.setString(1, email); //gan tham so 1 la bien truyen vao
-                ps.setString(2, password);
-                rs = ps.executeQuery();
+            if (conn != null) {
+                stm = conn.prepareStatement(sql); // tao truy van
+                stm.setString(1, email); //gan tham so 1 la bien truyen vao
+                stm.setString(2, password);
+                rs = stm.executeQuery();
 
                 while (rs.next()) {
                     String id = rs.getString("userID");
@@ -59,31 +59,31 @@ public class UserDAO {
                 rs.close();
             }
 
-            if (ps != null) {
-                ps.close();
+            if (stm != null) {
+                stm.close();
             }
 
-            if (c != null) {
-                c.close();
+            if (conn != null) {
+                conn.close();
             }
         }
         return null;
     }
 
     public UserDTO getUserProfile(String uid) throws NamingException, SQLException {
-        Connection c = null; //doi tuong ket noi
-        PreparedStatement ps = null; //doi tuong truy van
+        Connection conn = null; //doi tuong ket noi
+        PreparedStatement stm = null; //doi tuong truy van
         ResultSet rs = null;//doi tuong nhan ket qua
 
         String sql = "SELECT * FROM tblUsers WHERE userID=?";
 
         try {
-            c = DBConnect.makeConnection(); // tao doi tuong connection qua DBConnection
+            conn = DBConnect.makeConnection(); // tao doi tuong connection qua DBConnection
 
-            if (c != null) {
-                ps = c.prepareStatement(sql); // tao truy van
-                ps.setString(1, uid); //gan tham so 1 la bien truyen vao
-                rs = ps.executeQuery();
+            if (conn != null) {
+                stm = conn.prepareStatement(sql); // tao truy van
+                stm.setString(1, uid); //gan tham so 1 la bien truyen vao
+                rs = stm.executeQuery();
 
                 while (rs.next()) {
                     String id = rs.getString("userID");
@@ -106,39 +106,39 @@ public class UserDAO {
                 rs.close();
             }
 
-            if (ps != null) {
-                ps.close();
+            if (stm != null) {
+                stm.close();
             }
 
-            if (c != null) {
-                c.close();
+            if (conn != null) {
+                conn.close();
             }
         }
         return null;
     }
 
     public UserDTO findByEmail(String email) throws NamingException, SQLException {
-        Connection c = null; //doi tuong ket noi
-        PreparedStatement ps = null; //doi tuong truy van
+        Connection conn = null; //doi tuong ket noi
+        PreparedStatement stm = null; //doi tuong truy van
         ResultSet rs = null;//doi tuong nhan ket qua
 
-        String sql = "SELECT * FROM tblUsers WHERE email=?";
+        String sql = "SELECT * FROM tblUsers WHERE userEmail=?";
 
         try {
-            c = DBConnect.makeConnection(); // tao doi tuong connection qua DBConnection
+            conn = DBConnect.makeConnection(); // tao doi tuong connection qua DBConnection
 
-            if (c != null) {
-                ps = c.prepareStatement(sql); // tao truy van
-                ps.setString(1, email); //gan tham so 1 la bien truyen vao
-                rs = ps.executeQuery();
+            if (conn != null) {
+                stm = conn.prepareStatement(sql); // tao truy van
+                stm.setString(1, email); //gan tham so 1 la bien truyen vao
+                rs = stm.executeQuery();
 
                 while (rs.next()) {
                     String id = rs.getString("userID");
                     String n = rs.getString("name");
-                    String un = rs.getString("email");
+                    String un = rs.getString("userEmail");
                     String p = rs.getString("password");
-                    String pn = rs.getString("phoneNumber");
-                    String a = rs.getString("address");
+                    String pn = rs.getString("userPhoneNumber");
+                    String a = rs.getString("userAddress");
                     String rid = rs.getString("roleID");
 
                     UserDTO u = new UserDTO(id, n, un, p, pn, a, rid);
@@ -153,73 +153,73 @@ public class UserDAO {
                 rs.close();
             }
 
-            if (ps != null) {
-                ps.close();
+            if (stm != null) {
+                stm.close();
             }
 
-            if (c != null) {
-                c.close();
+            if (conn != null) {
+                conn.close();
             }
         }
         return null;
     }
 
     public boolean UpdateUserDetail(UserDTO u) throws NamingException, SQLException {
-        Connection c = null;
-        PreparedStatement ps = null;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        boolean check =false;
         String sql = "UPDATE tblUsers SET userPhoneNumber=?, userAddress=? WHERE userID=?";
         try {
-            c = DBConnect.makeConnection();
+            conn = DBConnect.makeConnection();
 
-            if (c != null) {
-                ps = c.prepareStatement(sql);
+            if (conn != null) {
+                stm = conn.prepareStatement(sql);
 
-                ps.setString(1, u.getPhone());
-                ps.setString(2, u.getAddress());
-                ps.setString(3, u.getUserID());
+                stm.setString(1, u.getPhone());
+                stm.setString(2, u.getAddress());
+                stm.setString(3, u.getUserID());
 
-                ps.executeUpdate();
-                return true;
+                check = stm.executeUpdate() > 0;                
             }
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         } finally {
-            if (ps != null) {
-                ps.close();
+            if (stm != null) {
+                stm.close();
             }
-            if (c != null) {
-                c.close();
+            if (conn != null) {
+                conn.close();
             }
         }
-        return false;
+        return check;
     }
 
     public boolean UpdateUserPassword(UserDTO u) throws NamingException, SQLException {
-        Connection c = null;
-        PreparedStatement ps = null;
+        Connection conn = null;
+        PreparedStatement stm = null;
         String sql = "UPDATE tblUsers SET password=? WHERE userID=?";
         try {
-            c = DBConnect.makeConnection();
+            conn = DBConnect.makeConnection();
 
-            if (c != null) {
-                ps = c.prepareStatement(sql);
+            if (conn != null) {
+                stm = conn.prepareStatement(sql);
 
-                ps.setString(1, u.getPassword());
-                ps.setString(2, u.getUserID());
+                stm.setString(1, u.getPassword());
+                stm.setString(2, u.getUserID());
 
-                ps.executeUpdate();
+                stm.executeUpdate();
                 return true;
             }
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         } finally {
-            if (ps != null) {
-                ps.close();
+            if (stm != null) {
+                stm.close();
             }
-            if (c != null) {
-                c.close();
+            if (conn != null) {
+                conn.close();
             }
         }
         return false;
@@ -233,7 +233,7 @@ public class UserDAO {
             if (conn != null) {
                 DBSupport db = new DBSupport();
                 String userID="US-";
-                String sql = "INSERT INTO tblUsers(userID, name, email, password, phoneNumber, address, roleID, status)"
+                String sql = "INSERT INTO tblUsers(userID, name, userEmail, password, userPhoneNumber, userAddress, roleID, userStatus)"
                         + " VALUES(?,?,?,?,?,?,?,?)";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, userID+db.getNumbRows("userID", "tblUsers"));
@@ -295,7 +295,7 @@ public class UserDAO {
         try {
             conn = DBConnect.makeConnection();
             if (conn != null) {
-                String sql = "SELECT userID, name, email, password, phoneNumber, address, roleID"
+                String sql = "SELECT userID, name, userEmail, password, userPhoneNumber, userAddress, roleID"
                         + " FROM tblUsers "
                         + " WHERE roleID LIKE ?";
                 stm = conn.prepareStatement(sql);
@@ -304,10 +304,10 @@ public class UserDAO {
                 while (rs.next()) {
                     String userID = rs.getString("userID");
                     String name = rs.getString("name");
-                    String emai = rs.getString("email");
+                    String emai = rs.getString("userEmail");
                     String password = rs.getString("password");
-                    String phone = rs.getString("phoneNumber");
-                    String address = rs.getString("address");
+                    String phone = rs.getString("userPhoneNumber");
+                    String address = rs.getString("userAddress");
                     if (list == null) {
                         list = new ArrayList<>();
                     }
