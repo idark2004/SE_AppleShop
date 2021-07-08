@@ -43,6 +43,7 @@ public class MainController extends HttpServlet {
     private static final String SALECODE="SaleCodeController";
     private static final String ORDERLIST="OrderListController";
     private static final String USER = "UserController";
+    private static final String PRODUCT= "ProductController";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {        
@@ -54,7 +55,7 @@ public class MainController extends HttpServlet {
         //System.out.println(session.getAttribute("username"));
         try {
             if (action==null){
-                url="Homepage.jsp";
+                url="index.jsp";
             }
             switch (action){
                 case "LoginForm":
@@ -122,9 +123,12 @@ public class MainController extends HttpServlet {
                     break;
                 case "User Manage":
                     url = USER;
-                    break;                    
+                    break;
+                case "Product":
+                    url = PRODUCT;
+                    break;
                 default:
-                    url="Homepage.jsp";
+                    url="index.jsp";
                     break;
             }
         } catch (Exception e) {

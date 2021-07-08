@@ -126,6 +126,10 @@
         <servlet-name>UserController</servlet-name>
         <servlet-class>controller.UserController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProductController</servlet-name>
+        <servlet-class>controller.ProductController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>OrderListController</servlet-name>
         <url-pattern>/OrderListController</url-pattern>
@@ -262,6 +266,10 @@
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
         <url-pattern>/UserController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductController</servlet-name>
+        <url-pattern>/ProductController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

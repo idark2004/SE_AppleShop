@@ -57,7 +57,7 @@
                                     <c:set var="subtotalCount" value="${cartItem.quantity}"/>
                                     <c:set var="subtotal" value="${subtotal+cartItem.quantity}"/>
                           </c:forEach>
-                        <a href="product_summary.html"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> ${subtotal} Itemes in your cart </span> </a>
+                        <a href="product_summary.jsp"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> ${subtotal} Itemes in your cart </span> </a>
                     </div>
                 </div>
             </div>
@@ -75,9 +75,9 @@
                         <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
                     </form>
                     <ul id="topMenu" class="nav pull-right">
-                        <li class=""><a href="ViewProductController">All Products</a></li>
+                        <li class=""><a href="MainController?action=Product&perform=ViewProduct">All Products</a></li>
                         <li class=""><a href="contact.jsp">Contact</a></li>
-                        <li class=""><a href="user_profile.jsp">Profile</a></li>
+                        <li class=""><a href="userProfile.jsp">Profile</a></li>
                         <li class="">
                             <a href="signupForm.jsp" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Signup</span></a>
                         </li>
@@ -91,17 +91,18 @@
                                 <div class="modal-body">
                                     <form class="form-horizontal loginFrm" action="MainController" method="post">
                                         <div class="control-group">
-                                            <input type="text" id="inputEmail" placeholder="Enter Email" name="uname" required>
+                                            <input type="text" id="inputEmail" placeholder="Enter Email" name="email" required>
                                         </div>
                                         <div class="control-group">
-                                            <input type="password" id="inputPassword" placeholder="Enter Password" name="psw" required>
+                                            <input type="password" id="inputPassword" placeholder="Enter Password" name="password" required>
                                         </div>
                                         <div class="control-group">
                                             <label class="checkbox">
 											<input type="checkbox"> Remember me
 											</label>
                                             <div class="g-signin2" data-onsuccess="onSignIn"></div>
-                                            <button type="submit" class="btn btn-success" name="action" value="Login">Sign in</button>
+                                            <input type="hidden" name="action" value="User Manage"/>
+                                            <button type="submit" class="btn btn-success" name="perform" value="Log in">Sign in</button>
                                             <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
                                         </div>
                                     </form>
@@ -144,19 +145,18 @@
                 <div id="sidebar" class="span3">
                     <div class="well well-small">
                         <c:forEach var="cartItem" items="${sessionScope.cart}">
-                                    <c:set var="subtotalCount" value="${cartItem.quantity}"/>
-                                    <c:set var="subtotal" value="${subtotal+cartItem.quantity}"/>
-                                </c:forEach>
+                            <c:set var="total" value="${total + (cartItem.quantity * cartItem.product.price)}"/>
+                        </c:forEach>
                          <c:set var="total" value="${total + (cartItem.quantity * cartItem.product.price)}"/>
-                        <a id="myCart" href="product_summary.html"><img src="themes/images/ico-cart.png" alt="cart">${subtotal} Items in your cart <span class="badge badge-warning pull-right">${total}</span></a>
+                        <a id="myCart" href="product_summary.jsp"><img src="themes/images/ico-cart.png" alt="cart">${subtotal} Items in your cart <span class="badge badge-warning pull-right">${total}</span></a>
                     </div>
                     <ul id="sideManu" class="nav nav-tabs nav-stacked">
-                        <li><a href="ViewProductController">All</a></li>
-                        <li><a href="ViewProductController?categoryID=IP&status=True">iPhone</a></li>
-                        <li><a href="ViewProductController?categoryID=ID&status=True">iPad</a></li>
-                        <li><a href="ViewProductController?categoryID=MB&status=True">Mac</a></li>
-                        <li><a href="ViewProductController?categoryID=AW&status=True">Apple Watch</a></li>
-                        <li><a href="ViewProductController?categoryID=AS&status=True">Accessory</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct">All</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=IP&status=True">iPhone</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=ID&status=True">iPad</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=MB&status=True">Mac</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AW&status=True">Apple Watch</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AS&status=True">Accessory</a></li>
                     </ul>
                     <br/>
                 </div>
@@ -201,14 +201,14 @@
                                     <p>
                                         Input content here, bitches!
                                     </p>-->
-                                    <a class="btn btn-small pull-right" href="MainController?action=ProductDetail&productID=${product.productID}">View Details</a>
+                                    <a class="btn btn-small pull-right" href="MainController?action=Product&perform=ViewDetail&productID=${product.productID}">View Details</a>
                                     <br class="clr" />
                                 </div>
                                 <div class="span3 alignR">
                                     <form class="form-horizontal qtyFrm">
                                         <h3><fmt:formatNumber type="number" maxFractionDigits = "0" value="${product.price}" /></h3>
 
-                                        <a href="MainController?action=ProductDetail&productID=${product.productID}" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
+                                        <a href="MainController?action=Product&perform=ViewDetail&productID=${product.productID}" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
                                         <a href="product_details.html" class="btn btn-large"><i class="icon-zoom-in"></i></a>
 
                                     </form>
@@ -230,14 +230,14 @@
                                         <c:forEach var="product" items="${requestScope.PRODUCT_LIST}">    
                                             <li class="span3 product-item">
                                                 <div class="thumbnail">
-                                                    <a href="MainController?action=ProductDetail&productID=${product.productID}"><img src="${product.image}" alt="" /></a>
+                                                    <a href="MainController?action=Product&perform=ViewDetail&productID=${product.productID}"><img src="${product.image}" alt="" /></a>
                                                     <div class="caption">
                                                         <h5 id="product-name" class="product-name">${product.name}d</h5>
                                                         <p class="product-price">
                                                             <fmt:formatNumber type="number" maxFractionDigits = "0" value="${product.price}" />
                                                         </p>
                                                         <h4 style="text-align:center">
-                                                            <a class="btn" href="MainController?action=ProductDetail&productID=${product.productID}"> <i class="icon-zoom-in"></i></a> <a class="btn" href="MainController?action=ProductDetail&productID=${product.productID}">Add to <i class="icon-shopping-cart"></i></a>
+                                                            <a class="btn" href="MainController?action=Product&perform=ViewDetail&productID=${product.productID}"> <i class="icon-zoom-in"></i></a> <a class="btn" href="MainController?action=ProductDetail&productID=${product.productID}">Add to <i class="icon-shopping-cart"></i></a>
                                                         </h4>
                                                     </div>
                                                 </div>
@@ -258,13 +258,13 @@
                     <div class="pagination">
                         <ul>
                             <li><a <c:if test="${requestScope.curPage == 1 }">style="cursor:default;pointer-events: none; "</c:if>
-                                    href="ViewProductController?pageNum=${requestScope.curPage - 1}&CategoryID=${requestScope.cateID}&status=True">&lsaquo;</a></li>
+                                    href="MainController?action=Product&perform=ViewProduct&pageNum=${requestScope.curPage - 1}&CategoryID=${requestScope.cateID}&status=True">&lsaquo;</a></li>
                                 <c:forEach var="pageNum" begin="1" end="${requestScope.pages}">                           
                                 <li 
                                     ><a <c:if test="${requestScope.curPage == pageNum}">style="color:red;"</c:if> href="ViewProductController?pageNum=${pageNum}&CategoryID=${requestScope.cateID}&status=True">${pageNum}</a></li>
                             </c:forEach>
                             <li><a <c:if test="${requestScope.curPage == requestScope.pages }">style="cursor:default;pointer-events: none; "</c:if>
-                                    href="ViewProductController?pageNum=${requestScope.curPage + 1}&CategoryID=${requestScope.cateID}&status=True">&rsaquo;</a></li>
+                                    href="MainController?action=Product&perform=ViewProduct&pageNum=${requestScope.curPage + 1}&CategoryID=${requestScope.cateID}&status=True">&rsaquo;</a></li>
                         </ul>
                     </div>
                     <br class="clr" />

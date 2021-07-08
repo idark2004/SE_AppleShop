@@ -71,7 +71,7 @@
                     <ul id="topMenu" class="nav pull-right">
                         <li class=""><a href="ViewProductController">All Products</a></li>
                         <li class=""><a href="contact.jsp">Contact</a></li>
-                        <li class=""><a href="user_profile.jsp">Profile</a></li>
+                        <li class=""><a href="userProfile.jsp">Profile</a></li>
                         <li class="">
                             <a href="signupForm.jsp" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Signup</span></a>
                         </li>

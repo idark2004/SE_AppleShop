@@ -75,11 +75,11 @@
                         <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
                     </form>
                     <ul id="topMenu" class="nav pull-right">
-                        <li class=""><a href="ViewProductController">All Products</a></li>
+                        <li class=""><a href="MainController?action=Product&perform=ViewProduct">All Products</a></li>
                         <li class=""><a href="contact.jsp">Contact</a></li>
                         <li class=""><a href="user_profile.jsp">Profile</a></li>
                         <li class="">
-                            <a href="register.jsp" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Signup</span></a>
+                            <a href="signupForm.jsp" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Signup</span></a>
                         </li>
                         <li class="">
                             <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
@@ -144,19 +144,18 @@
                 <div id="sidebar" class="span3">
                     <div class="well well-small">
                         <c:forEach var="cartItem" items="${sessionScope.cart}">
-                                    <c:set var="subtotalCount" value="${cartItem.quantity}"/>
-                                    <c:set var="subtotal" value="${subtotal+cartItem.quantity}"/>
-                                </c:forEach>
+                            <c:set var="total" value="${total + (cartItem.quantity * cartItem.product.price)}"/>
+                        </c:forEach>
                          <c:set var="total" value="${total + (cartItem.quantity * cartItem.product.price)}"/>
                         <a id="myCart" href="product_summary.jsp"><img src="themes/images/ico-cart.png" alt="cart">${subtotal} Items in your cart <span class="badge badge-warning pull-right">${total}</span></a>
                     </div>
                     <ul id="sideManu" class="nav nav-tabs nav-stacked">
-                              <li><a href="ViewProductController">All</a></li>
-                        <li><a href="ViewProductController?categoryID=IP&status=True">iPhone</a></li>
-                        <li><a href="ViewProductController?categoryID=ID&status=True">iPad</a></li>
-                        <li><a href="ViewProductController?categoryID=MB&status=True">Mac</a></li>
-                        <li><a href="ViewProductController?categoryID=AW&status=True">Apple Watch</a></li>
-                        <li><a href="ViewProductController?categoryID=AS&status=True">Accessory</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct">All</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=IP&status=True">iPhone</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=ID&status=True">iPad</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=MB&status=True">Mac</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AW&status=True">Apple Watch</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AS&status=True">Accessory</a></li>
                     </ul>
                     <br/>
                 </div>
