@@ -83,22 +83,22 @@
                                     <h3>Login In</h3>
                                 </div>
                                 <div class="modal-body">
-                                    <form class="form-horizontal loginFrm">
+                                    <form class="form-horizontal loginFrm" action="MainController" method="post">
                                         <div class="control-group">
-                                            <input type="text" id="inputEmail" placeholder="Email">
+                                            <input type="text" id="inputEmail" placeholder="Enter Email" name="uname" required>
                                         </div>
                                         <div class="control-group">
-                                            <input type="password" id="inputPassword" placeholder="Password">
+                                            <input type="password" id="inputPassword" placeholder="Enter Password" name="psw" required>
                                         </div>
                                         <div class="control-group">
                                             <label class="checkbox">
 											<input type="checkbox"> Remember me
 											</label>
-                                            <a href="#"><img width="30" height="30" src="themes/images/google.png" title="Login with Google" alt="Google Login" /></a>
+                                            <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                                            <button type="submit" class="btn btn-success" name="action" value="Login">Sign in</button>
+                                            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
                                         </div>
                                     </form>
-                                    <button type="submit" class="btn btn-success">Sign in</button>
-                                    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
                                 </div>
                             </div>
                         </li>
@@ -168,34 +168,7 @@
                                                     </div>
                                                 </div>
                                             </li>
-                                            <li class="span3">
-                                                <div class="thumbnail">
-                                                    <i class="tag"></i>
-                                                    <a href="product_details.html"><img src="themes/images/products/6.jpg" alt=""></a>
-                                                    <div class="caption">
-                                                        <h5>Product name</h5>
-                                                        <h4 style="font-size: small;"><a class="btn" href="product_details.html">VIEW</a> <span class="pull-right">115,000,000 VND</span></h4>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="span3">
-                                                <div class="thumbnail">
-                                                    <a href="product_details.html"><img src="themes/images/products/7.jpg" alt=""></a>
-                                                    <div class="caption">
-                                                        <h5>Product name</h5>
-                                                        <h4 style="font-size: small;"><a class="btn" href="product_details.html">VIEW</a> <span class="pull-right">115,000,000 VND</span></h4>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="span3">
-                                                <div class="thumbnail">
-                                                    <a href="product_details.html"><img src="themes/images/products/8.jpg" alt=""></a>
-                                                    <div class="caption">
-                                                        <h5>Product name</h5>
-                                                        <h4 style="font-size: small;"><a class="btn" href="product_details.html">VIEW</a> <span class="pull-right">115,000,000 VND</span></h4>
-                                                    </div>
-                                                </div>
-                                            </li>
+                                           <!--random 4 san pham -->
                                         </ul>
                                     </div>
 
@@ -210,33 +183,7 @@
                                                     </div>
                                                 </div>
                                             </li>
-                                            <li class="span3">
-                                                <div class="thumbnail">
-                                                    <a href="product_details.html"><img src="themes/images/products/3.jpg" alt=""></a>
-                                                    <div class="caption">
-                                                        <h5>Product name</h5>
-                                                        <h4 style="font-size: small;"><a class="btn" href="product_details.html">VIEW</a> <span class="pull-right">115,000,000 VND</span></h4>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="span3">
-                                                <div class="thumbnail">
-                                                    <a href="product_details.html"><img src="themes/images/products/4.jpg" alt=""></a>
-                                                    <div class="caption">
-                                                        <h5>Product name</h5>
-                                                        <h4 style="font-size: small;"><a class="btn" href="product_details.html">VIEW</a> <span class="pull-right">115,000,000 VND</span></h4>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="span3">
-                                                <div class="thumbnail">
-                                                    <a href="product_details.html"><img src="themes/images/products/5.jpg" alt=""></a>
-                                                    <div class="caption">
-                                                        <h5>Product name</h5>
-                                                        <h4 style="font-size: small;"><a class="btn" href="product_details.html">VIEW</a> <span class="pull-right">115,000,000 VND</span></h4>
-                                                    </div>
-                                                </div>
-                                            </li>
+                                            <!--random 4 san pham -->
                                         </ul>
                                     </div>
                                 </div>
@@ -256,15 +203,15 @@
             <div class="row">
                 <div class="span3">
                     <h5>ACCOUNT</h5>
-                    <a href="login.html">LOGIN</a>
-                    <a href="login.html">PROFILE</a>
-                    <a href="login.html">CART</a>
-                    <a href="login.html">ORDER HISTORY</a>
+                    <a href="signinForm.jsp">LOGIN</a>
+                    <a href="user_profile.jsp">PROFILE</a>
+                    <a href="product_summary.jsp">CART</a>
+                    <a href="order_history.jsp">ORDER HISTORY</a>
                 </div>
                 <div class="span3">
                     <h5>INFORMATION</h5>
-                    <a href="contact.html">CONTACT</a>
-                    <a href="register.html">REGISTRATION</a>
+                    <a href="contact.jsp">CONTACT</a>
+                    <a href="signupForm.jsp">REGISTRATION</a>
                     <a href="legal_notice.html">LEGAL NOTICE</a>
                     <a href="tac.html">TERMS AND CONDITIONS</a>
                 </div>

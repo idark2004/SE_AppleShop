@@ -74,23 +74,23 @@
                                         <h3>Login In</h3>
                                     </div>
                                     <div class="modal-body">
-                                        <form class="form-horizontal loginFrm">
-                                            <div class="control-group">
-                                                <input type="text" id="inputEmail" placeholder="Email">
-                                            </div>
-                                            <div class="control-group">
-                                                <input type="password" id="inputPassword" placeholder="Password">
-                                            </div>
-                                            <div class="control-group">
-                                                <label class="checkbox">
-                                                    <input type="checkbox"> Remember me
-                                                </label>
-                                                <a href="#"><img width="30" height="30" src="themes/images/google.png" title="Login with Google" alt="Google Login" /></a>
-                                            </div>
-                                        </form>
-                                        <button type="submit" class="btn btn-success">Sign in</button>
-                                        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                                    </div>
+                                    <form class="form-horizontal loginFrm" action="MainController" method="post">
+                                        <div class="control-group">
+                                            <input type="text" id="inputEmail" placeholder="Enter Email" name="uname" required>
+                                        </div>
+                                        <div class="control-group">
+                                            <input type="password" id="inputPassword" placeholder="Enter Password" name="psw" required>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="checkbox">
+											<input type="checkbox"> Remember me
+											</label>
+                                            <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                                            <button type="submit" class="btn btn-success" name="action" value="Login">Sign in</button>
+                                            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                                        </div>
+                                    </form>
+                                </div>
                                 </div>
                             </li>
                         </ul>

@@ -64,15 +64,15 @@
                     <span class="icon-bar"></span>
                 </a>
                 <div class="navbar-inner">
-                    <a class="brand" href="index.html">SE15 Shop</a>
+                    <a class="brand" href="index.jsp">SE15 Shop</a>
                     <form class="form-inline navbar-search"  action="MainController" method="post">
                         <input id="srchFld" class="srchTxt" type="text" />
                         <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
                     </form>
                     <ul id="topMenu" class="nav pull-right">
-                        <li class=""><a href="allProduct.html">All Products</a></li>
+                        <li class=""><a href="ViewProductController">All Products</a></li>
                         <li class=""><a href="contact.jsp">Contact</a></li>
-                        <li class=""><a href="contact.jsp">Profile</a></li>
+                        <li class=""><a href="user_profile.jsp">Profile</a></li>
                         <li class="">
                             <a href="signupForm.jsp" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Signup</span></a>
                         </li>
@@ -84,22 +84,22 @@
                                     <h3>Login In</h3>
                                 </div>
                                 <div class="modal-body">
-                                    <form class="form-horizontal loginFrm">
+                                    <form class="form-horizontal loginFrm" action="MainController" method="post">
                                         <div class="control-group">
-                                            <input type="text" id="inputEmail" placeholder="Email">
+                                            <input type="text" id="inputEmail" placeholder="Enter Email" name="uname" required>
                                         </div>
                                         <div class="control-group">
-                                            <input type="password" id="inputPassword" placeholder="Password">
+                                            <input type="password" id="inputPassword" placeholder="Enter Password" name="psw" required>
                                         </div>
                                         <div class="control-group">
                                             <label class="checkbox">
 											<input type="checkbox"> Remember me
 											</label>
-                                            <a href="#"><img width="30" height="30" src="themes/images/google.png" title="Login with Google" alt="Google Login" /></a>
+                                            <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                                            <button type="submit" class="btn btn-success" name="action" value="Login">Sign in</button>
+                                            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
                                         </div>
                                     </form>
-                                    <button type="submit" class="btn btn-success">Sign in</button>
-                                    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
                                 </div>
                             </div>
                         </li>

@@ -85,21 +85,21 @@
                                     <h3>Login In</h3>
                                 </div>
                                 <div class="modal-body">
-                                    <form class="form-horizontal loginFrm">
+                                    <form class="form-horizontal loginFrm" action="MainController" method="post">
                                         <div class="control-group">
-                                            <input type="text" id="inputEmail" placeholder="Email">
+                                            <input type="text" id="inputEmail" placeholder="Enter Email" name="uname" required>
                                         </div>
                                         <div class="control-group">
-                                            <input type="password" id="inputPassword" placeholder="Password">
+                                            <input type="password" id="inputPassword" placeholder="Enter Password" name="psw" required>
                                         </div>
                                         <div class="control-group">
                                             <label class="checkbox">
 											<input type="checkbox"> Remember me
 											</label>
-                                            <a href="#"><img width="30" height="30" src="themes/images/google.png" title="Login with Google" alt="Google Login" /></a>
+                                            <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                                            <button type="submit" class="btn btn-success" name="action" value="Login">Sign in</button>
+                                            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
                                         </div>
-                                        <button type="submit" class="btn btn-success">Sign in</button>
-                                        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
                                     </form>
                                 </div>
                             </div>
@@ -313,19 +313,19 @@
         <div class="container">
             <div class="row">
                 <div class="span3">
-                    <h5>ACCOUNT</h5>
-                    <a href="login.html">LOGIN</a>
-                    <a href="login.html">PROFILE</a>
-                    <a href="login.html">CART</a>
-                    <a href="login.html">ORDER HISTORY</a>
-                </div>
-                <div class="span3">
-                    <h5>INFORMATION</h5>
-                    <a href="contact.html">CONTACT</a>
-                    <a href="register.html">REGISTRATION</a>
-                    <a href="legal_notice.html">LEGAL NOTICE</a>
-                    <a href="tac.html">TERMS AND CONDITIONS</a>
-                </div>
+                        <h5>ACCOUNT</h5>
+                        <a href="loginForm.jsp">LOGIN</a>
+                        <a href="user_profile.jsp">PROFILE</a>
+                        <a href="product_summary.jsp">CART</a>
+                        <a href="order_history.jsp">ORDER HISTORY</a>
+                    </div>
+                    <div class="span3">
+                        <h5>INFORMATION</h5>
+                        <a href="contact.jsp">CONTACT</a>
+                        <a href="signupForm.jsp">REGISTRATION</a>
+                        <a href="legal_notice.html">LEGAL NOTICE</a>
+                        <a href="tac.html">TERMS AND CONDITIONS</a>
+                    </div>
                 <div id="socialMedia" class="span3 pull-right">
                     <h5>SOCIAL MEDIA </h5>
                     <a href="#"><img width="60" height="60" src="themes/images/facebook.png" title="facebook" alt="facebook" /></a>

@@ -29,7 +29,7 @@ public class UserDAO {
         PreparedStatement ps = null; //doi tuong truy van
         ResultSet rs = null;//doi tuong nhan ket qua
 
-        String sql = "SELECT * FROM tblUsers WHERE email=? AND password=?";
+        String sql = "SELECT * FROM tblUsers WHERE userEmail=? AND password=? ";
 
         try {
             c = DBConnect.makeConnection(); // tao doi tuong connection qua DBConnection
@@ -43,9 +43,9 @@ public class UserDAO {
                 while (rs.next()) {
                     String id = rs.getString("userID");
                     String n = rs.getString("name");
-                    String un = rs.getString("email");
-                    String pn = rs.getString("phoneNumber");
-                    String a = rs.getString("address");
+                    String un = rs.getString("userEmail");
+                    String pn = rs.getString("userPhoneNumber");
+                    String a = rs.getString("userAddress");
                     String rid = rs.getString("roleID");
                     UserDTO u = new UserDTO(id, n, un, "", pn, a, rid);
 
@@ -88,10 +88,10 @@ public class UserDAO {
                 while (rs.next()) {
                     String id = rs.getString("userID");
                     String n = rs.getString("name");
-                    String un = rs.getString("email");
+                    String un = rs.getString("userEmail");
                     String p = rs.getString("password");
-                    String pn = rs.getString("phoneNumber");
-                    String a = rs.getString("address");
+                    String pn = rs.getString("userPhoneNumber");
+                    String a = rs.getString("userAddress");
                     String rid = rs.getString("roleID");
 
                     UserDTO u = new UserDTO(id, n, un, p, pn, a, rid);
@@ -167,7 +167,7 @@ public class UserDAO {
     public boolean UpdateUserDetail(UserDTO u) throws NamingException, SQLException {
         Connection c = null;
         PreparedStatement ps = null;
-        String sql = "UPDATE tblUsers SET phoneNumber=?, address=? WHERE userID=?";
+        String sql = "UPDATE tblUsers SET userPhoneNumber=?, userAddress=? WHERE userID=?";
         try {
             c = DBConnect.makeConnection();
 

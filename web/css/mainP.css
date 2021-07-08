@@ -115,7 +115,7 @@
     width: 80%;
     transform: translateX(12%);
     border-radius: 3px;
-    padding-left: 10px;
+    padding: 10px;
 }
 .form__user-profile{
     margin: auto;

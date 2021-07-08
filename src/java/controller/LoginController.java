@@ -22,7 +22,7 @@ public class LoginController extends HttpServlet {
 
 //    private static final String SUCCESS = "MainController";
 //    private static final String ERROR = "MainController?action=LoginForm";
-    private static final String USER = "Homepage.jsp";
+    private static final String USER = "index.jsp";
     private static final String ERROR = "loginForm.jsp";
     private static final String MAD = "dashBoard.jsp";
 

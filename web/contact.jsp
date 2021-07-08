@@ -47,7 +47,11 @@
                 <div class="span6">Welcome!<strong> ${sessionScope.user.name}</strong></div>
                 <div class="span6">
                     <div class="pull-right">
-                        <a href="product_summary.jsp"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> [ 3 ] Itemes in your cart </span> </a>
+                          <c:forEach var="cartItem" items="${sessionScope.cart}">
+                                    <c:set var="subtotalCount" value="${cartItem.quantity}"/>
+                                    <c:set var="subtotal" value="${subtotal+cartItem.quantity}"/>
+                          </c:forEach>
+                        <a href="product_summary.jsp"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> ${subtotal} Itemes in your cart </span> </a>
                     </div>
                 </div>
             </div>
