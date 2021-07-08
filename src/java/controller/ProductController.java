@@ -5,7 +5,6 @@
  */
 package controller;
 
-import static controller.ViewProductController.SUCCESS;
 import daos.ProductDAO;
 import dtos.ErrorDTO;
 import dtos.ProductDTO;

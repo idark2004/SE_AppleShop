@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package controllers_backup;
 
 import daos.ProductDAO;
 import dtos.ProductDTO;
@@ -63,7 +63,7 @@ public class ViewProductController extends HttpServlet {
             } else {
                 page = 1;
             } 
-            int product_per_page = 2;// set product per page here
+            int product_per_page = 10;// set product per page here
             int pNum = list.size();
             int pages = 0;
             if (pNum % product_per_page == 0) {
