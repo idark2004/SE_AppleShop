@@ -55,7 +55,7 @@ public class ProductDAO {
                     if (list == null) {
                         list = new ArrayList<>();
                     }
-        list.add(new ProductDTO(id, name, "", price, 0, 0, Boolean.parseBoolean("status"), image, "", "", ""));
+                    list.add(new ProductDTO(id, name, "", price, 0, 0, Boolean.parseBoolean("status"), image, "", "", ""));
                 }
             }
         } catch (Exception e) {

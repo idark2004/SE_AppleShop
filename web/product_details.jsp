@@ -171,7 +171,41 @@
                                 <a href="${requestScope.product.image}" title="iPhone 12 Pro Max">
                                     <img src="${requestScope.product.image}" style="width:100%" alt="iPhone 12 Pro Max" />
                                 </a>
+                                <div id="differentview" class="moreOptopm carousel slide">
+                                    <div class="carousel-inner">
+                                        <div class="item active">
+                                            <a href="${requestScope.product.image}"> <img style="width:29%" src="${requestScope.product.image}" alt="" /></a>
+                                            <a href="${requestScope.product.image}"> <img style="width:29%" src="${requestScope.product.image}" alt="" /></a>
+                                            <a href="${requestScope.product.image}"> <img style="width:29%" src="${requestScope.product.image}" alt="" /></a>
                                 
+                            </div>
+                            <form  action="MainController" method="POST">  
+                                <div class="span6">
+                                    <input type="hidden" name="productID" value="${requestScope.product.productID.trim()}" />
+                                    <h3>${requestScope.product.name}</h3>
+                                    <small>-Ceramic Shield front | Glass back and aluminum design</small>
+                                    <hr class="soft" />
+                                    <div class="form-horizontal qtyFrm">
+                                        <div class="control-group">
+                                            <label class="control-label">
+                                                <c:if test="${requestScope.colorChosen==null}">
+                                                    <h4>Select a Color</h4>
+                                                </c:if>
+                                                <c:if test="${requestScope.spec==null}">
+                                                    <h4>Select a spec</h4>
+                                                </c:if>
+                                                <c:if test="${requestScope.spec!=null}">
+                                                    <span><fmt:setLocale value="vi_VN" />
+                                                        <fmt:formatNumber value="${requestScope.spec.price}" type="currency" /></span>
+                                                    </c:if>
+                                            </label>
+                                            <div class="controls">
+                                                <input type="number" name="Quantity" class="span1" placeholder="Qty." />
+                                                <button type="submit" name="action" value="Add to cart" class="btn btn-large btn-primary pull-right"> Add to cart <i class=" icon-shopping-cart"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <form  action="MainController" method="POST">  
                                 <div class="span6">
@@ -240,7 +274,11 @@
                                             </c:if>
                                         </div>
                                     </div>
-                                 
+                                    <hr class="soft clr" />
+                                    <a class="btn btn-small pull-right" href="#detail">More Details</a>
+                                    <br class="clr" />
+                                    <a href="#" name="detail"></a>
+                                    <hr class="soft" />
                                 </div>
                             </form>
 
@@ -344,20 +382,6 @@
                 </div>
             </div>
         </div>
-
-    </div>
-    <!-- MainBody End ============================= -->
-    <!-- Footer ================================================================== -->
-    <div id="footerSection">
-        <div class="container">
-            <div class="row">
-                <div class="span3">
-                    <h5>ACCOUNT</h5>
-                    <a href="loginForm.jsp">LOGIN</a>
-                    <a href="user-profile.jsp">PROFILE</a>
-                    <a href="product_details">CART</a>
-                    <a href="orderHistory.jsp">ORDER HISTORY</a>
-
         <!-- MainBody End ============================= -->
         <!-- Footer ================================================================== -->
         <div id="footerSection">
@@ -383,37 +407,7 @@
                         <a href="#"><img width="60" height="60" src="themes/images/gmail.png" title="gmail" alt="gmail" /></a>
                         <a href="#"><img width="60" height="60" src="themes/images/youtube.png" title="youtube" alt="youtube" /></a>
                     </div>
-
                 </div>
-                <div class="span3">
-                    <h5>INFORMATION</h5>
-                    <a href="contact.jsp">CONTACT</a>
-                    <a href="signupForm.jsp">REGISTRATION</a>
-                    <a href="legal_notice.html">LEGAL NOTICE</a>
-                    <a href="tac.html">TERMS AND CONDITIONS</a>
-
-            </div>
-            <!-- Container End -->
-        </div>
-        <!-- Placed at the end of the document so the pages load faster ============================================= -->
-        <script src="themes/js/jquery.js" type="text/javascript"></script>
-        <script src="themes/js/bootstrap.min.js" type="text/javascript"></script>
-        <script src="themes/js/google-code-prettify/prettify.js"></script>
-
-        <script src="themes/js/bootshop.js"></script>
-        <script src="themes/js/jquery.lightbox-0.5.js"></script>
-
-        <!-- Themes switcher section ============================================================================================= -->
-        <div id="secectionBox">
-            <link rel="stylesheet" href="themes/switch/themeswitch.css" type="text/css" media="screen" />
-            <script src="themes/switch/theamswitcher.js" type="text/javascript" charset="utf-8"></script>
-            <div id="themeContainer">
-                <div id="hideme" class="themeTitle">Style Selector</div>
-                <div class="themeName">Oregional Skin</div>
-                <div class="images style">
-                    <a href="themes/css/#" name="bootshop"><img src="themes/switch/images/clr/bootshop.png" alt="bootstrap business templates" class="active"></a>
-                    <a href="themes/css/#" name="businessltd"><img src="themes/switch/images/clr/businessltd.png" alt="bootstrap business templates" class="active"></a>
-
                 </div>
                 <div class="themeName">Bootswatch Skins (11)</div>
                 <div class="images style">
@@ -462,3 +456,24 @@
     </body>
 
 </html>
+            </div>
+            <!-- Container End -->
+        </div>
+        <!-- Placed at the end of the document so the pages load faster ============================================= -->
+        <script src="themes/js/jquery.js" type="text/javascript"></script>
+        <script src="themes/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="themes/js/google-code-prettify/prettify.js"></script>
+
+        <script src="themes/js/bootshop.js"></script>
+        <script src="themes/js/jquery.lightbox-0.5.js"></script>
+
+        <!-- Themes switcher section ============================================================================================= -->
+        <div id="secectionBox">
+            <link rel="stylesheet" href="themes/switch/themeswitch.css" type="text/css" media="screen" />
+            <script src="themes/switch/theamswitcher.js" type="text/javascript" charset="utf-8"></script>
+            <div id="themeContainer">
+                <div id="hideme" class="themeTitle">Style Selector</div>
+                <div class="themeName">Oregional Skin</div>
+                <div class="images style">
+                    <a href="themes/css/#" name="bootshop"><img src="themes/switch/images/clr/bootshop.png" alt="bootstrap business templates" class="active"></a>
+                    <a href="themes/css/#" name="businessltd"><img src="themes/switch/images/clr/businessltd.png" alt="bootstrap business templates" class="active"></a>
