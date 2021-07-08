@@ -178,36 +178,13 @@
                                             <a href="${requestScope.product.image}"> <img style="width:29%" src="${requestScope.product.image}" alt="" /></a>
                                             <a href="${requestScope.product.image}"> <img style="width:29%" src="${requestScope.product.image}" alt="" /></a>
                                 
-                            </div>
-                            <form  action="MainController" method="POST">  
-                                <div class="span6">
-                                    <input type="hidden" name="productID" value="${requestScope.product.productID.trim()}" />
-                                    <h3>${requestScope.product.name}</h3>
-                                    <small>-Ceramic Shield front | Glass back and aluminum design</small>
-                                    <hr class="soft" />
-                                    <div class="form-horizontal qtyFrm">
-                                        <div class="control-group">
-                                            <label class="control-label">
-                                                <c:if test="${requestScope.colorChosen==null}">
-                                                    <h4>Select a Color</h4>
-                                                </c:if>
-                                                <c:if test="${requestScope.spec==null}">
-                                                    <h4>Select a spec</h4>
-                                                </c:if>
-                                                <c:if test="${requestScope.spec!=null}">
-                                                    <span><fmt:setLocale value="vi_VN" />
-                                                        <fmt:formatNumber value="${requestScope.spec.price}" type="currency" /></span>
-                                                    </c:if>
-                                            </label>
-                                            <div class="controls">
-                                                <input type="number" name="Quantity" class="span1" placeholder="Qty." />
-                                                <button type="submit" name="action" value="Add to cart" class="btn btn-large btn-primary pull-right"> Add to cart <i class=" icon-shopping-cart"></i></button>
-                                            </div>
                                         </div>
+                           
+                             
                                     </div>
                                 </div>
                             </div>
-                            <form  action="MainController" method="POST">  
+                             <form  action="MainController" method="POST">  
                                 <div class="span6">
                                     <input type="hidden" name="productID" value="${requestScope.product.productID.trim()}" />
                                     <h3>${requestScope.product.name}</h3>
@@ -280,7 +257,9 @@
                                     <a href="#" name="detail"></a>
                                     <hr class="soft" />
                                 </div>
-                            </form>
+                            </form>                
+                        </div>                    
+                           
 
                             <div class="span9">
                                 <ul id="productDetail" class="nav nav-tabs">
