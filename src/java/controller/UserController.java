@@ -14,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -31,39 +32,77 @@ public class UserController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     private static final String ERROR = "error.jsp";
-    private static final String FAIL_SIGNUP="signupForm.jsp";
-    private static final String SIGNUP = "index.jsp";
+    private static final String FAIL_SIGNUP = "signupForm.jsp";
+    private static final String INDEX = "index.jsp";
+    private static final String MND = "dashBoard.jsp";
+    private static final String UPDATE_SUCCESS = "userProfile.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession();
         String url = ERROR;
         ErrorDTO error = new ErrorDTO();
         String perform = request.getParameter("perform");
+        String emaill = request.getParameter("email");
+        String password = request.getParameter("password");
+        UserDTO user = new UserDTO();
+        UserDAO dao = new UserDAO();
         try {
             switch (perform) {
                 case "Sign Up":
-                    String emaill = request.getParameter("email");
-                    String password = request.getParameter("password");
+
                     String confirm = request.getParameter("confirm");
                     String name = request.getParameter("name");
                     String address = request.getParameter("address");
                     String phoneNumber = request.getParameter("phone");
                     if (confirm.equals(password)) {
-                        UserDTO user = new UserDTO(emaill, name, password, address, phoneNumber, "US");
-                        UserDAO dao = new UserDAO();
-                        dao.insert(user);                        
-                        url = SIGNUP;
+                        user = new UserDTO(emaill, name, password, address, phoneNumber, "US");
+                        dao.insert(user);
+                        url = INDEX;
                     } else {
                         error.setPasswordError("Passwords don't match");
                         request.setAttribute("SIGNUP_ERROR", error);
                         url = FAIL_SIGNUP;
                     }
                     break;
+
+                case "Log in":
+                    boolean IsAUser = false;
+                    user = dao.checkLogin(emaill, password);
+                    if (user != null) {
+                        IsAUser = true;
+                    }
+                    if (IsAUser) {//neu co trong db
+                        session.setAttribute("USER", user);
+                        if (user.getRoleID().contains("AD") || user.getRoleID().contains("MN")) {
+                            url = MND;
+                        } else {
+                            url = INDEX;
+                        }
+                        request.setAttribute("success", "true");
+                        request.setAttribute("username", user.getName());
+                        request.setAttribute("userid", user.getUserID());
+                    } else {//khong co
+                        System.out.println("WRONG");
+                        error.setLoginError("Invalid username or password");
+                        request.setAttribute("LOGIN_ERROR", error);
+                    }
+                    break;
+                case "Update Profile":
+                    user = (UserDTO) session.getAttribute("USER");
+                    user.setAddress(request.getParameter("address"));
+                    user.setPhone(request.getParameter("phone"));
+                    if (dao.UpdateUserDetail(user)) {
+                        url = UPDATE_SUCCESS;
+                        request.setAttribute("UPDATE_SUCCESS", "Update successfully");
+                    } else{
+                    request.setAttribute("ERROR", "No user found to update");
+                    }
             }
         } catch (Exception e) {
             request.setAttribute("ERROR", e.toString());
-        }finally{
+        } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }

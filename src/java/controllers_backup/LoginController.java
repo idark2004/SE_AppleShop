@@ -3,24 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package controllers_backup;
 
 import daos.UserDAO;
 import dtos.UserDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author phath
+ * @author ADMIN
  */
-public class ManageUserDetail extends HttpServlet {
-    private static final String ERROR = "error.jsp";
-    private static final String SUCCESS = "UserDetailManager.jsp";
+public class LoginController extends HttpServlet {
+
+//    private static final String SUCCESS = "MainController";
+//    private static final String ERROR = "MainController?action=LoginForm";
+    private static final String USER = "Homepage.jsp";
+    private static final String ERROR = "loginForm.jsp";
+    private static final String MAD = "dashBoard.jsp";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -32,18 +37,40 @@ public class ManageUserDetail extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        System.err.println("Run Through LoginController");
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String userID = request.getParameter("userID");
-            UserDAO dao = new UserDAO();
-            UserDTO user = dao.getUserProfile(userID);
-            if(user != null){
-                request.setAttribute("USER_DETAIL", user);
-                url=SUCCESS;
+            String uname = request.getParameter("uname");
+            String psw = request.getParameter("psw");
+
+            boolean IsAUser = false; //xac thuc co hay khong
+            UserDAO ud = new UserDAO();
+
+            UserDTO u = ud.checkLogin(uname, psw);
+            if (u != null) {
+                IsAUser = true;
+            }
+
+            if (IsAUser) {//neu co trong db
+                session.setAttribute("user", u);
+                if (u.getRoleID().contains("AD") || u.getRoleID().contains("MN")) {
+                    url = MAD;
+                } else {
+                    url = USER;
+                }
+                request.setAttribute("success", "true");
+                request.setAttribute("username", u.getName());
+                request.setAttribute("userid", u.getUserID());
+            } else {//khong co
+                System.out.println("WRONG");
+                request.setAttribute("ERROR", "Invalid username or password");
             }
         } catch (Exception e) {
-        }finally{
+            log("ERROR at LoginController: " + e.getMessage());
+        } finally {
+            System.out.println("This is the user: " + session.getAttribute("user"));
             request.getRequestDispatcher(url).forward(request, response);
         }
     }

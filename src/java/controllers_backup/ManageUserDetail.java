@@ -3,57 +3,47 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package controllers_backup;
 
-import daos.CommentDAO;
-import dtos.CommentDTO;
+import daos.UserDAO;
 import dtos.UserDTO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author ADMIN
+ * @author phath
  */
-public class AddCommentController extends HttpServlet {
-
+public class ManageUserDetail extends HttpServlet {
     private static final String ERROR = "error.jsp";
-
+    private static final String SUCCESS = "UserDetailManager.jsp";
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
         response.setContentType("text/html;charset=UTF-8");
-        System.out.println("go through?");
         String url = ERROR;
         try {
-            String aaaaaaaaaaaaaaaaaaa;
-            String productId = request.getParameter("productID");
-            String ownerName = request.getParameter("reviewer-name");
-            String description = request.getParameter("pComment");
-            CommentDTO newComment = new CommentDTO();
-            CommentDAO dao = new CommentDAO();
-            UserDTO user;
-            newComment.setProductID(productId);
-            newComment.setOwnerName(ownerName);
-            newComment.setDescription(description);
-            if (session.getAttribute("user") != null) {
-                user = (UserDTO) session.getAttribute("user");
-                newComment.setUserID(user.getUserID());
-            } else {
-                newComment.setUserID(null);
-            }            
-            if (dao.CreateComment(newComment)) {
-                url = "MainController?action=ProductDetail&productID=" + productId;
-                System.out.println("comment success");
+            String userID = request.getParameter("userID");
+            UserDAO dao = new UserDAO();
+            UserDTO user = dao.getUserProfile(userID);
+            if(user != null){
+                request.setAttribute("USER_DETAIL", user);
+                url=SUCCESS;
             }
-
         } catch (Exception e) {
-            log("ERROR at CreateSpecController: " + e.getMessage());
-        } finally {
+        }finally{
             request.getRequestDispatcher(url).forward(request, response);
         }
     }
