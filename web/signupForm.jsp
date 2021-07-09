@@ -39,19 +39,25 @@
     <div id="header">
         <div class="container">
           <div id="welcomeLine" class="row">
-                    <div class="span6">Welcome!<strong>${sessionScope.USER.name}</strong></div>                       
+                    <div class="span6">Welcome!
+                        <c:choose>
+                            <c:when test="${sessionScope.USER != null}">
+                                <strong>${USER.name}</strong>
+                            </c:when>
+                            <c:otherwise>
+                                <strong> User</strong>
+                            </c:otherwise>
+                        </c:choose></div>
                     <div class="span6">
-                    <div class="pull-right">
-                        
-                          <c:forEach var="cartItem" items="${sessionScope.cart}">
-                                    <c:set var="subtotalCount" value="${cartItem.quantity}"/>
-                                    <c:set var="subtotal" value="${subtotal+cartItem.quantity}"/>
-                          </c:forEach>
-                        <a href="cartDetail.jsp"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> ${subtotal}
-                        <c:if test="${sessionScope.cart == null}">No</c:if>  Itemes in your cart </span> </a>
+                        <div class="pull-right">
+                            <c:forEach var="cartItem" items="${sessionScope.cart}">
+                                <c:set var="subtotalCount" value="${cartItem.quantity}"/>
+                                <c:set var="subtotal" value="${subtotal+cartItem.quantity}"/>
+                            </c:forEach>
+                            <a href="cartDetail.jsp"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> ${subtotal} Itemes in your cart </span> </a>
+                        </div>
                     </div>
-                    </div>
-            </div>
+                </div>
             <!-- Navbar ================================================== -->
             <div id="logoArea" class="navbar">
                 <a id="smallScreen" data-target="#topMenu" data-toggle="collapse" class="btn btn-navbar">
