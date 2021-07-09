@@ -3,67 +3,49 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package controllers_backup;
 
 import daos.UserDAO;
-import dtos.ErrorDTO;
 import dtos.UserDTO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author ADMIN
  */
-public class SignupController extends HttpServlet {
+public class UpdateUserController extends HttpServlet {
 
-    public static final String SUCCESS="loginForm.jsp";
-    public static final String ERROR = "signupForm.jsp";
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    private static final String SUCCESS ="user_profile.jsp";
+    private static final String ERROR = "error.jsp";
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
         response.setContentType("text/html;charset=UTF-8");
-       String url = ERROR;
-        ErrorDTO error = new ErrorDTO();
-        try {
-            String emaill= request.getParameter("email");
-            String password= request.getParameter("password");
-            String confirm= request.getParameter("confirm");
-            String name= request.getParameter("name");
-            String address= request.getParameter("address");
-            String phoneNumber= request.getParameter("pnum");
-            if(confirm.equals(password)){
-                UserDTO user = new UserDTO(emaill, name, password, address, phoneNumber, "US");
-                UserDAO dao = new UserDAO();
-                dao.insert(user);
-                request.setAttribute("signup","SignUp Succesful");
-                url = SUCCESS;
-           } else{
-                error.setPasswordError("Passwords don't match");
-                request.setAttribute("SIGNUP_ERROR", error);
+        String url = ERROR;
+        try{  
+            UserDTO user= (UserDTO) session.getAttribute("user");
+            user.setAddress(request.getParameter("address"));
+            user.setPhone(request.getParameter("phone"));
+            UserDAO ud=new UserDAO();
+            if(ud.UpdateUserDetail(user)){
+                url=SUCCESS;
+                request.setAttribute("UpSuccess","Update successfully");
             }
+            request.setAttribute("error","No user found to update");
         } catch (Exception e) {
-            log("Error at SignUpController " + e.toString());
-            if(e.toString().contains("duplicate")){
-                error.setEmailError("E-mail has already been used");
-                request.setAttribute("SIGNUP_ERROR", error);                
-            }
-        }
-        finally{
+            log ("ERROR at UpdateUserController: " + e.getMessage());
+        } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

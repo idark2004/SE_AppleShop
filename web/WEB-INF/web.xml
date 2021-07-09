@@ -24,7 +24,7 @@
     </servlet>
     <servlet>
         <servlet-name>SignupController</servlet-name>
-        <servlet-class>controller.SignupController</servlet-class>
+        <servlet-class>controllers_backup.SignupController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UserDetailController</servlet-name>
@@ -32,7 +32,7 @@
     </servlet>
     <servlet>
         <servlet-name>UpdateUserController</servlet-name>
-        <servlet-class>controller.UpdateUserController</servlet-class>
+        <servlet-class>controllers_backup.UpdateUserController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ViewProductController</servlet-name>
@@ -129,6 +129,10 @@
     <servlet>
         <servlet-name>ProductController</servlet-name>
         <servlet-class>controller.ProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CartController</servlet-name>
+        <servlet-class>controller.CartController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>OrderListController</servlet-name>
@@ -270,6 +274,10 @@
     <servlet-mapping>
         <servlet-name>ProductController</servlet-name>
         <url-pattern>/ProductController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CartController</servlet-name>
+        <url-pattern>/CartController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

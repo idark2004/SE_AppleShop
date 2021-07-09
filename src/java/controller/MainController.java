@@ -10,7 +10,6 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -23,10 +22,7 @@ import javax.servlet.http.HttpSession;
 )
 public class MainController extends HttpServlet {
 
-    private static final String ERROR = "error.jsp";
-    private static final String LOGIN = "LoginController";
-    private static final String USERDETAIL = "UserDetailController";
-    private static final String UPDATEUSER = "UpdateUserController";
+    private static final String ERROR = "error.jsp";    
     private static final String PRODUCTDETAIL = "ProductDetailController";
     private static final String ADDCART = "AddToCartController";
     private static final String BUYITEM = "BuyItemController";
@@ -44,6 +40,7 @@ public class MainController extends HttpServlet {
     private static final String ORDERLIST="OrderListController";
     private static final String USER = "UserController";
     private static final String PRODUCT= "ProductController";
+    private static final String CART = "CartController";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {        
@@ -57,19 +54,7 @@ public class MainController extends HttpServlet {
             if (action==null){
                 url="index.jsp";
             }
-            switch (action){
-                case "LoginForm":
-                    url="loginForm.jsp";
-                    break;
-                case "Login":
-                    url=LOGIN;
-                    break;
-                case "UserDetail":
-                    url=USERDETAIL;
-                    break;
-                case "UpdateProfile":
-                    url=UPDATEUSER;
-                    break;
+            switch (action){                                
                 case "ProductDetail":
                     url=PRODUCTDETAIL;
                     break;
@@ -126,6 +111,9 @@ public class MainController extends HttpServlet {
                     break;
                 case "Product":
                     url = PRODUCT;
+                    break;
+                case "Cart":
+                    url = CART;
                     break;
                 default:
                     url="index.jsp";

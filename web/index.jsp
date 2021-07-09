@@ -60,7 +60,7 @@
                                 <c:set var="subtotalCount" value="${cartItem.quantity}"/>
                                 <c:set var="subtotal" value="${subtotal+cartItem.quantity}"/>
                             </c:forEach>
-                            <a href="product_summary.jsp"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> ${subtotal} Itemes in your cart </span> </a>
+                            <a href="cartDetail.jsp"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> ${subtotal} Itemes in your cart </span> </a>
                         </div>
                     </div>
                 </div>
@@ -150,7 +150,7 @@
                             <c:set var="total" value="${total + (cartItem.quantity * cartItem.product.price)}"/>
                         </c:forEach>
                          <c:set var="total" value="${total + (cartItem.quantity * cartItem.product.price)}"/>
-                        <a id="myCart" href="product_summary.jsp"><img src="themes/images/ico-cart.png" alt="cart">${subtotal} Items in your cart <span class="badge badge-warning pull-right">${total}</span></a>
+                        <a id="myCart" href="cartDetail.jsp"><img src="themes/images/ico-cart.png" alt="cart">${subtotal} Items in your cart <span class="badge badge-warning pull-right">${total}</span></a>
                         </div>
                         <ul id="sideManu" class="nav nav-tabs nav-stacked">
                         <li><a href="MainController?action=Product&perform=ViewProduct">All</a></li>
@@ -220,7 +220,7 @@
                     <h5>ACCOUNT</h5>
                     <a href="loginForm.jsp">LOGIN</a>
                     <a href="user_profile.jsp">PROFILE</a>
-                    <a href="product_summary.jsp">CART</a>
+                    <a href="cartDetail.jsp">CART</a>
                     <a href="order_history.jsp">ORDER HISTORY</a>
                 </div>
                 <div class="span3">

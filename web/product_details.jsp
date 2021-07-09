@@ -50,14 +50,14 @@
         <div id="header">
             <div class="container">
                 <div id="welcomeLine" class="row">
-                    <div class="span6">Welcome!<strong>${sessionScope.user.name}</strong></div>                       
+                    <div class="span6">Welcome!<strong>${sessionScope.USER.name}</strong></div>                       
                     <div class="span6">
                         <div class="pull-right">
                             <c:forEach var="cartItem" items="${sessionScope.cart}">
                                 <c:set var="subtotalCount" value="${cartItem.quantity}"/>
                                 <c:set var="subtotal" value="${subtotal+cartItem.quantity}"/>
                             </c:forEach>
-                            <a href="product_summary.jsp"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> ${subtotal} Itemes in your cart </span> </a>
+                            <a href="cartDetail.jsp"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> ${subtotal} Itemes in your cart </span> </a>
                         </div>
                        
                       
@@ -148,7 +148,7 @@
                             <c:forEach var="cartItem" items="${sessionScope.cart}">
                                 <c:set var="total" value="${total + (cartItem.quantity * cartItem.product.price)}"/>
                             </c:forEach>
-                            <a id="myCart" href="product_summary.jsp"><img src="themes/images/ico-cart.png" alt="cart">${subtotal} Items in your cart <span class="badge badge-warning pull-right">${total}</span></a>
+                            <a id="myCart" href="cartDetail.jsp"><img src="themes/images/ico-cart.png" alt="cart">${subtotal} Items in your cart <span class="badge badge-warning pull-right">${total}</span></a>
                         </div>
                         <ul id="sideManu" class="nav nav-tabs nav-stacked">
                             <li><a href="MainController?action=Product&perform=ViewProduct">All</a></li>
@@ -182,9 +182,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <form  action="MainController" method="POST">  
+                            <form  action="AddToCartController" method="POST">  
                                 <div class="span6">
-                                    <input type="hidden" name="productID" value="${requestScope.product.productID.trim()}" />
+                                    <input type="hidden" name="productID" value="${requestScope.product.productID.trim()}"/>
                                     <h3>${requestScope.product.name}</h3>
                                    
                                     <hr class="soft" />
@@ -192,10 +192,10 @@
                                         <div class="control-group">
                                             <label class="control-label">
                                                 <c:if test="${requestScope.colorChosen==null}">
-                                                    <h4>Select a Color</h4>
+                                                    <h4>1. Select a Color</h4>
                                                 </c:if>
                                                 <c:if test="${requestScope.spec==null}">
-                                                    <h4>Select a spec</h4>
+                                                    <h4>2. Select a spec</h4>
                                                 </c:if>
                                                 <c:if test="${requestScope.spec!=null}">
                                                     <span><fmt:setLocale value="vi_VN" />
@@ -203,8 +203,8 @@
                                                     </c:if>
                                             </label>
                                             <div class="controls">
-                                                <input type="number" name="Quantity" class="span1" placeholder="Qty." />
-                                                <button type="submit" name="action" value="Add to cart" class="btn btn-large btn-primary pull-right"> Add to cart <i class=" icon-shopping-cart"></i></button>
+                                                <input type="number" name="Quantity" max="6" class="span1" placeholder="Qty." />
+                                                <button type="submit" name="perform" value="Add to cart" class="btn btn-large btn-primary pull-right"> Add to cart <i class=" icon-shopping-cart"></i></button>
                                             </div>
                                         </div>
                                     </div>
@@ -250,6 +250,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                                    <input type="hidden" name="action" value="Product"/>
                             </form>                
                         </div>                    
                            
@@ -362,8 +363,8 @@
                 <div class="span3">
                     <h5>ACCOUNT</h5>
                     <a href="loginForm.jsp">LOGIN</a>
-                    <a href="user_profile.jsp">PROFILE</a>
-                    <a href="product_summary.jsp">CART</a>
+                    <a href="userProfile.jsp">PROFILE</a>
+                    <a href="cartDetail.jsp">CART</a>
                     <a href="order_history.jsp">ORDER HISTORY</a>
                 </div>
                 <div class="span3">

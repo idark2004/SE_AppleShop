@@ -93,7 +93,7 @@ public class CompleteOrderController extends HttpServlet {
                 MailMessage = "Your billing was sent to Email."+email;
                 OrderDTO neworder;
                 neworder =dao.completeOrder(cart, address, name, email, phone, userID, codeID, method, price);
-                dao.addOrder(cart);
+                dao.addOrderDetail(cart,neworder.getOrderID());
                 request.setAttribute("msg", "Thank you.Your order was recieved");
                 request.setAttribute("mailMsg",MailMessage);
                 request.setAttribute("newOrder",neworder);

@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import javax.naming.NamingException;
+import utils.DBSupport;
 
 /**
  *
@@ -302,30 +303,33 @@ public class ProductDAO {
     }
 
     public OrderDTO completeOrder(List<CartItemDTO> cart, String address, String name, String email, String phone, String userID, String codeID, String method, double price) throws SQLException {
-        long d = System.currentTimeMillis();
-        DateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        Date currentDate = new Date(d);
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime currentDateTime = LocalDateTime.now();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        String orderCreateDate = currentDateTime.format(dtf);
+        DBSupport db = new DBSupport();
+        OrderDTO newOrder = new OrderDTO();
         Connection conn = null;
         PreparedStatement stm = null;
         try {
             conn = DBConnect.makeConnection();
             if (conn != null) {
-                String sql = "INSERT INTO tblOrders(orderID,cusName,orderAddress,orderDate,codeID,userID,orderPrice,payMethod,orderStatus,ggUserID) "
-                        + "VALUES(?,?,?,?,?,?,?,?)";
+                String sql = "INSERT INTO tblOrders(orderID,cusName,orderAddress,orderCreateDate,codeID,userID,orderPrice,payMethod,orderStatus,ggUserID) "
+                        + "VALUES(?,?,?,?,?,?,?,?,?,?)";
                 stm = conn.prepareStatement(sql);
-                stm.setString(1, "TEST31");
+                String orderID = "ORD-"+db.getNumbRows("orderID", "tblOrders");
+                stm.setString(1, orderID);
                 stm.setString(2, name);
                 stm.setString(3, address);
-                stm.setString(4, formatter.format(currentDate));
+                stm.setString(4, orderCreateDate);
                 stm.setString(5, codeID);
                 stm.setString(6, userID);
                 stm.setDouble(7, price);
                 stm.setString(8, method);
-                stm.executeQuery();
+                stm.setString(9, "Accepted");
+                stm.setString(10, null);
+                stm.executeUpdate();
+                newOrder = new OrderDTO(orderID, name, address, phone, email, orderCreateDate, codeID, userID, price, method, "True");
             }
-        } catch (Exception e) {
         } finally {
             if (stm != null) {
                 stm.close();
@@ -334,33 +338,32 @@ public class ProductDAO {
                 conn.close();
             }
         }
-        OrderDTO newOrder = new OrderDTO("TEST", name, address, phone, email, formatter.format(currentDate), codeID, userID, price, method, "True");
+        
         return newOrder;
     }
 
-    public void addOrder(List<CartItemDTO> cart) throws SQLException {
-
+    public boolean addOrderDetail(List<CartItemDTO> cart,String orderID) throws SQLException {
+        boolean check=false;
         Connection conn = null;
         PreparedStatement stm = null;
+        DBSupport db = new DBSupport();
         try {
             conn = DBConnect.makeConnection();
             if (conn != null) {
-
+                
                 String detailQuery = "INSERT INTO tblOrderDetail(orderDetailID,orderID,orderQuantity,specID)"
-                        + " VALUES(?,?,?,?,?)";
+                        + " VALUES(?,?,?,?)";
                 stm = conn.prepareStatement(detailQuery);
-                conn.setAutoCommit(false);
                 for (CartItemDTO items : cart) {
-                    stm.setString(1, "TEST");
-                    stm.setString(2,"sadfsf");
+                    String detailID = "ORDDE-"+db.getNumbRows("orderDetailID", "tblOrderDetail");
+                    stm.setString(1, detailID);
+                    stm.setString(2,orderID);
                     stm.setInt(3, items.getQuantity());
                     stm.setString(4, items.getProduct().getSpecID());
-                    stm.addBatch();
+                    check = stm.executeUpdate()>0;
                 }
-                stm.executeBatch();
-                conn.commit();
+                
             }
-        } catch (Exception e) {
         } finally {
             if (stm != null) {
                 stm.close();
@@ -369,6 +372,7 @@ public class ProductDAO {
                 conn.close();
             }
         }
+        return check;
     }
 
     public List<ProductDTO> viewProductManagement(String categoryID) throws SQLException {

@@ -19,9 +19,9 @@ public class DBConnect {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url = "jdbc:sqlserver://localhost:1433;databaseName=SE15_Apple_Store";
             //Connection con = DriverManager.getConnection(url, "Quang", "230201");
-            Connection con = DriverManager.getConnection(url, "phuchqse1", "Phuc@05012001");
-            //Connection con=DriverManager.getConnection(url, "sa", "74178965P");
-            return con;
+            //Connection con = DriverManager.getConnection(url, "phuchqse1", "Phuc@05012001");
+            Connection conn=DriverManager.getConnection(url, "sa", "74178965P");
+            return conn;
         } catch (ClassNotFoundException e) {
             // TODO: handle exception
             e.printStackTrace();

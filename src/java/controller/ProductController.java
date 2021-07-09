@@ -26,7 +26,8 @@ public class ProductController extends HttpServlet {
 
     private static final String ERROR = "error.jsp";
     private static final String VIEW = "productList.jsp";
-    private static final String DETAIL ="product_details.jsp";
+    private static final String DETAIL = "product_details.jsp";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -44,12 +45,11 @@ public class ProductController extends HttpServlet {
         ErrorDTO error = new ErrorDTO();
         String perform = request.getParameter("perform");
         try {
-            switch (perform){
+            switch (perform) {
                 case "ViewProduct":
                     ViewProductErrorDTO msg = new ViewProductErrorDTO();
                     ProductDAO dao = new ProductDAO();
                     String categoryID = request.getParameter("categoryID");
-
 
                     if (request.getParameter("categoryID") == null) {
                         categoryID = "";
@@ -61,15 +61,14 @@ public class ProductController extends HttpServlet {
 
                     List<ProductDTO> list = dao.viewProduct(categoryID, status); //qq nay null nè
 
-
-                     //Pagination
+                    //Pagination
                     String pageNum = request.getParameter("pageNum");
                     int page = 0;
                     if (pageNum != null) {
                         page = Integer.parseInt(pageNum);
                     } else {
                         page = 1;
-                    } 
+                    }
                     int product_per_page = 10;// set product per page here
                     int pNum = list.size();
                     int pages = 0;
@@ -111,22 +110,24 @@ public class ProductController extends HttpServlet {
                     String id = request.getParameter("productID").trim();
                     String colorChoosen = request.getParameter("color");
                     String specChosen = request.getParameter("specID");
-                    
-                    ProductDAO pDAO= new ProductDAO();   
-            
-                    ProductDTO product= pDAO.getProduct(id);
-                    List<ProductDTO> color= pDAO.getAllColor(id);
-                    ProductDTO spec=pDAO.getPriceAndQuantity(id, colorChoosen, specChosen);
-                    List<ProductDTO> hardware= pDAO.getAllHardwareWithColor(id, colorChoosen);
 
+                    ProductDAO pDAO = new ProductDAO();
+
+                    ProductDTO product = pDAO.getProduct(id);
+                    List<ProductDTO> color = pDAO.getAllColor(id);
+                    if (colorChoosen != null) {
+                        ProductDTO spec = pDAO.getPriceAndQuantity(id, colorChoosen, specChosen);
+                        List<ProductDTO> hardware = pDAO.getAllHardwareWithColor(id, colorChoosen);
+                        request.setAttribute("colorChosen", colorChoosen);
+                        request.setAttribute("hardware", hardware);
+                        request.setAttribute("spec", spec);
+                        request.setAttribute("specID", specChosen);
+                    }
                     request.setAttribute("product", product);
                     request.setAttribute("color", color);
-                    request.setAttribute("colorChosen", colorChoosen);
-                    request.setAttribute("hardware", hardware);
-                    request.setAttribute("specID", specChosen);
-                    request.setAttribute("spec", spec);
-                    url=DETAIL;
-                    break;
+
+                    url = DETAIL;
+                    break;   
             }
         } catch (Exception e) {
             request.setAttribute("ERROR", e.toString());

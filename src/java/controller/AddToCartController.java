@@ -26,7 +26,7 @@ public class AddToCartController extends HttpServlet {
 //    cart.add(new CartItemDTO(prDAO.findSpec(request.getParameter("productID"), 
 //                        request.getParameter("color"), request.getParameter("ram"), 
 //                        request.getParameter("storage")), 1));
-    private static final String SUCCESS ="MainController?action=ProductDetail";
+    private static final String SUCCESS ="MainController?action=Product&perform=ViewDetail";
     private static final String ERROR = "error.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -52,7 +52,7 @@ public class AddToCartController extends HttpServlet {
                     if(session.getAttribute("cart")==null){
                         List<CartItemDTO> cart = new ArrayList<CartItemDTO>();
                         cart.add(new CartItemDTO(prDAO.GetSpec( 
-                                specID), 1));
+                                specID), qty));
                         session.setAttribute("cart", cart);
                         url=SUCCESS +"&productID="+productID+"&color="+color+"&specID="+specID;
                     }
