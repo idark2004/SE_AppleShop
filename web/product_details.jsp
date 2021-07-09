@@ -172,15 +172,7 @@
                                 <a href="${requestScope.product.image}" title="iPhone 12 Pro Max">
                                     <img src="${requestScope.product.image}" style="width:100%" alt="iPhone 12 Pro Max" />
                                 </a>
-                                <div id="differentview" class="moreOptopm carousel slide">
-                                    <div class="carousel-inner">
-                                        <div class="item active">
-                                            <a href="${requestScope.product.image}"> <img style="width:29%" src="${requestScope.product.image}" alt="" /></a>
-                                            <a href="${requestScope.product.image}"> <img style="width:29%" src="${requestScope.product.image}" alt="" /></a>
-                                            <a href="${requestScope.product.image}"> <img style="width:29%" src="${requestScope.product.image}" alt="" /></a>                                
-                                        </div>
-                                    </div>
-                                </div>
+                                
                             </div>
                             <form  action="AddToCartController" method="POST">  
                                 <div class="span6">
