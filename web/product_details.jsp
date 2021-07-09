@@ -57,10 +57,8 @@
                                 <c:set var="subtotalCount" value="${cartItem.quantity}"/>
                                 <c:set var="subtotal" value="${subtotal+cartItem.quantity}"/>
                             </c:forEach>
-                            <a href="cartDetail.jsp"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> ${subtotal} Itemes in your cart </span> </a>
+                        <a id="myCart" href="cartDetail.jsp"><img src="themes/images/ico-cart.png" alt="cart">${subtotal} Items in your cart <span class="badge badge-warning pull-right">${total}</span></a>
                         </div>
-                       
-                      
                     </div>
                 </div>
                 <!-- Navbar ================================================== -->
@@ -183,18 +181,16 @@
                                     <div class="form-horizontal qtyFrm">
                                         <div class="control-group">
                                             <label class="control-label">
-                                                <c:if test="${requestScope.colorChosen==null}">
-                                                    <h4>1. Select a Color</h4>
-                                                </c:if>
-                                                <c:if test="${requestScope.spec==null}">
-                                                    <h4>2. Select a spec</h4>
-                                                </c:if>
+                                                
+                                                
                                                 <c:if test="${requestScope.spec!=null}">
                                                     <span><fmt:setLocale value="vi_VN" />
                                                         <fmt:formatNumber value="${requestScope.spec.price}" type="currency" /></span>
                                                     </c:if>
                                             </label>
+                                            
                                             <div class="controls">
+                                                <h4>Select quantity</h4>
                                                 <input type="number" name="Quantity" max="6" class="span1" placeholder="Qty." />
                                                 <button type="submit" name="perform" value="Add to cart" class="btn btn-large btn-primary pull-right"> Add to cart <i class=" icon-shopping-cart"></i></button>
                                             </div>
@@ -202,11 +198,16 @@
                                     </div>
 
                                     <hr class="soft" />
-                                    <h4>100 items in stock</h4>
+                                    
+                                    
                                     <div class="form-horizontal qtyFrm pull-right">
                                         <div class="control-group">
+                                            <c:if test="${requestScope.colorChosen==null}">
+                                                    <h4>1. Select a Color</h4>
+                                            </c:if>
                                             <label class="control-label"><span>Color</span></label>
                                             <div class="controls">
+                                                
                                                 <select name="color" class="span2" onchange="window.location = 'MainController?action=Product&perform=ViewDetail&productID=${product.productID.trim()}&color=' + this.value">
                                                     <c:if test="${requestScope.colorChosen == null}">
                                                         <option value="" selected="selected"></option>
@@ -221,7 +222,11 @@
                                                     </c:forEach>
                                                 </select>
                                             </div>
+                                                <c:if test="${requestScope.spec == null && requestScope.colorChosen != null}">
+                                                    <h4>2. Select a spec</h4>
+                                                 </c:if>  
                                             <c:if test="${requestScope.colorChosen!=null}">
+                                                <h4 class="addToCreateSpece" style="margin-top: 40px;"> </h4>
                                                 <label class="control-label"><span>Spec</span></label>
                                                 <div class="controls">
                                                     <select name="hardware" class="span2" onchange="window.location = 'MainController?action=Product&perform=ViewDetail&productID=${product.productID.trim()}&color=${requestScope.colorChosen}&specID=' + this.value">
