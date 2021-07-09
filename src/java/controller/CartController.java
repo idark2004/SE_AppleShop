@@ -9,8 +9,10 @@ import daos.ProductDAO;
 import dtos.CartItemDTO;
 import dtos.ErrorDTO;
 import dtos.OrderDTO;
+import dtos.ProductDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -57,19 +59,90 @@ public class CartController extends HttpServlet {
                     String userID = null;
                     if (cart != null) {
                         newOrder = dao.completeOrder(cart, address, cusName, email, phone, userID, null, payMethod, total);
+                        System.out.println("Go");
                         String orderID = newOrder.getOrderID();
                         boolean check = dao.addOrderDetail(cart, orderID);
+                        System.out.println("Thru");
                         if (check) {
                             session.removeAttribute("cart");
                             url = ORDERED;
                         }
                     }
+                    break;
+                case "AddItem":
+                    ProductDAO prDAO=new ProductDAO();
+                    String productID= request.getParameter("productID").trim();
+                    String color= request.getParameter("color").trim();
+                    String specID= request.getParameter("hardware").trim();
+                    int qty = Integer.parseInt(request.getParameter("Quantity"));
+                    
+                    ProductDTO product=prDAO.GetSpec(specID);
+                    if(prDAO.GetSpec(specID)==null) System.err.println("null spec");
+                    else System.err.println("not null");
+                    if (product!=null){
+                        for(int i=0; i<qty; i++){
+                            if(session.getAttribute("cart")==null){
+                                cart = new ArrayList<CartItemDTO>();
+                                cart.add(new CartItemDTO(prDAO.GetSpec( 
+                                        specID), 1));
+                                session.setAttribute("cart", cart);
+                                url="MainController?action=Product&perform=ViewDetail&productID="+productID+"&color="+color+"&specID="+specID;
+                            }
+                            else {
+                                int index = isExisting( 
+                                        specID, cart);
+                                if (index == -1){
+                                    cart.add(new CartItemDTO(prDAO.GetSpec(
+                                        specID), 1));
+                                }
+                                else {
+                                    int quantity = cart.get(index).getQuantity() + 1;
+                                    cart.get(index).setQuantity(quantity);
+                                }
+                                session.setAttribute("cart", cart);
+                                url="MainController?action=Product&perform=ViewDetail&productID="+productID+"&color="+color+"&specID="+specID;
+                            }
+                        }
+                    } else {
+                        request.setAttribute("error", "the item isnt exist");
+                    }
+                    break;
+                case "RemoveItem":
+                    int index = isExisting(request.getParameter("specID")
+                            , cart);
+                    cart.remove(index);
+
+                    if (cart.isEmpty())
+                        cart=null;
+
+                    System.out.println("REMOVE SUCCESS!!!");
+
+                    session.setAttribute("cart", cart);
+                    url="cartDetail.jsp";
+                    if(request.getParameter("page")!=null){
+                        url=request.getParameter("page");
+                    }
+                    break;
             }
         } catch (Exception e) {
             request.setAttribute("ERROR", e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
+    }
+    
+    private int isExisting(String specID, List<CartItemDTO> cart){
+        System.out.println("isExisting do work");
+        for (int i = 0; i < cart.size(); i++){
+            if( cart.get(i).getProduct().getSpecID().trim().equalsIgnoreCase(specID)){
+                System.out.println("the index is: " + i);
+                int quantity = cart.get(i).getQuantity() + 1;
+                System.out.println("with this quantity:" + quantity);
+                return i;
+            }
+        }
+        System.out.println("can`t find one!");
+        return -1;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

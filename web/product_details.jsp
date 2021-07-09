@@ -189,7 +189,7 @@
                                 </a>
                                 
                             </div>
-                            <form  action="AddToCartController" method="POST">  
+                            <form  action="MainController" method="POST">  
                                 <div class="span6">
                                     <input type="hidden" name="productID" value="${requestScope.product.productID.trim()}"/>
                                     <h3>${requestScope.product.name}</h3>
@@ -209,7 +209,8 @@
                                             <div class="controls">
                                                 <h4>Select quantity</h4>
                                                 <input type="number" name="Quantity" max="6" class="span1" placeholder="Qty."  required="Need to add quantity"/>
-                                                <button type="submit" name="perform" value="Add to cart" class="btn btn-large btn-primary pull-right"> Add to cart <i class=" icon-shopping-cart"></i></button>
+                                                <input type="hidden" name="action" value="Cart"/>
+                                                <button type="submit" name="perform" value="AddItem" class="btn btn-large btn-primary pull-right"> Add to cart <i class=" icon-shopping-cart"></i></button>
                                             </div>
                                         </div>
                                     </div>
@@ -264,7 +265,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                                    <input type="hidden" name="action" value="Product"/>
+                                                    <!--<input type="hidden" name="action" value="Product"/>-->
                             </form>                
                         </div>                    
                            
