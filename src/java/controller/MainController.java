@@ -40,6 +40,7 @@ public class MainController extends HttpServlet {
     private static final String ORDERLIST="OrderListController";
     private static final String USER = "UserController";
     private static final String PRODUCT= "ProductController";
+    private static final String SEARCHPRODUCT= "SearchProductController";
     private static final String CART = "CartController";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -58,6 +59,9 @@ public class MainController extends HttpServlet {
                 case "ProductDetail":
                     url=PRODUCTDETAIL;
                     break;
+                case "SearchProduct":
+                    url= SEARCHPRODUCT;
+                    break;    
                 case "AddItem":
                     url=ADDCART;
                     break;

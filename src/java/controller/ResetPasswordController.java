@@ -85,7 +85,7 @@ public class ResetPasswordController extends HttpServlet {
             UserDAO uDAO = new UserDAO();
             UserDTO user = new UserDTO();
             user = uDAO.findByEmail(recipient);
-
+            if(user!=null){
             String newPassword = AlphaNumericString(10);
 
             user.setPassword(newPassword);
@@ -99,7 +99,7 @@ public class ResetPasswordController extends HttpServlet {
            
             EmailUtility.sendEmail(host, port, email, name, pass, recipient, subject, content);
             message = "Your password has been reset. Please check your e-mail.";
-            
+            }else{message = "Email:"+recipient+" is not exist";}
         } catch (Exception ex) {
             ex.printStackTrace();
             message = "There were an error: " + ex.getMessage();

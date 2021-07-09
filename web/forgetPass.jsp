@@ -41,7 +41,7 @@
     <style type="text/css" id="enject"></style>
 </head>
 
-<body>
+<body onload="<c:if test="${message != null}">ResetPassLoad()</c:if>">
     <div id="header">
         <div class="container">
             <div id="welcomeLine" class="row">
@@ -73,8 +73,9 @@
                 </a>
                 <div class="navbar-inner">
                     <a class="brand" href="index.jsp">SE15 Shop</a>
-                    <form class="form-inline navbar-search" action="ResetPasswordController" method="post">
-                        <input id="srchFld" class="srchTxt" placeholder="Enter your recovery email" type="text" name="email" />
+                    <form class="form-inline navbar-search" method="post" action="MainController">
+                        <input id="srchFld" class="srchTxt" type="text" name="keyWord"/>
+                        <input type="hidden" value="SearchProduct" name="action"/>
                         <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
                     </form>
                     <ul id="topMenu" class="nav pull-right">
@@ -177,11 +178,11 @@
                             <div class="well">
                                 <h5>Reset your password</h5><br/> Please enter the email address for your account. A random password will be generated and sent to you. Once you have received the new password, you will be able to login in your account, then
                                 you can change your own one.<br/><br/><br/>
-                                <form>
+                                <form action="ResetPasswordController" method="post">
                                     <div class="control-group">
                                         <label class="control-label" for="inputEmail1">E-mail address</label>
                                         <div class="controls">
-                                            <input class="span3" type="text" id="inputEmail1" placeholder="Email">
+                                            <input class="span3" placeholder="Enter your recovery email" type="text" name="email" id="email" id="inputEmail1" required>
                                         </div>
                                     </div>
                                     <div class="controls">
@@ -289,5 +290,33 @@
     </div>
     <span id="themesBtn"></span>
 </body>
-
+<script type="text/javascript">
+    function ResetPassLoad()	{
+                    var notify;
+                    notify = "${message}";
+                <c:if test="${message == 'There were an error: Could not convert socket to TLS' }">
+                    <c:set scope="page" var="anti" value="Please turn off your antivirus software"></c:set>
+                notify = "${anti}";
+                </c:if>
+                alert(notify);
+                }
+    $(document).ready(function() {
+        $("#resetForm").validate({
+            rules: {
+                email: {
+                    required: true,
+                    email: true
+                }      
+            },
+             
+            messages: {
+                email: {
+                    required: "Please enter email",
+                    email: "Please enter a valid email address"
+                }
+            }
+        });
+ 
+    });
+</script>
 </html>

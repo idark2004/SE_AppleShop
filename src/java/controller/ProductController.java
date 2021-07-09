@@ -44,13 +44,14 @@ public class ProductController extends HttpServlet {
         String url = ERROR;
         ErrorDTO error = new ErrorDTO();
         String perform = request.getParameter("perform");
+        
         try {
             switch (perform) {
                 case "ViewProduct":
+                    
                     ViewProductErrorDTO msg = new ViewProductErrorDTO();
                     ProductDAO dao = new ProductDAO();
-                    String categoryID = request.getParameter("categoryID");
-
+                    String categoryID = request.getParameter("categoryID");                   
                     if (request.getParameter("categoryID") == null) {
                         categoryID = "";
                     }
@@ -58,9 +59,10 @@ public class ProductController extends HttpServlet {
                     if (request.getParameter("status") == null) {
                         status = "True";
                     }
-
+                    
                     List<ProductDTO> list = dao.viewProduct(categoryID, status); //qq nay null nè
-
+                 
+                   
                     //Pagination
                     String pageNum = request.getParameter("pageNum");
                     int page = 0;
@@ -69,7 +71,7 @@ public class ProductController extends HttpServlet {
                     } else {
                         page = 1;
                     }
-                    int product_per_page = 10;// set product per page here
+                    int product_per_page = 1;// set product per page here
                     int pNum = list.size();
                     int pages = 0;
                     if (pNum % product_per_page == 0) {
@@ -99,6 +101,7 @@ public class ProductController extends HttpServlet {
                         request.setAttribute("pages", pages);
                         request.setAttribute("curPage", page);
                         //end pagination      
+                        
                         request.setAttribute("cateID", categoryID);
                     } else {
                         msg.setMsg("Sorry our shop currently doesn't have these products in stock !!");

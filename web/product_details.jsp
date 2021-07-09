@@ -78,10 +78,11 @@
                     </a>
                     <div class="navbar-inner">
                         <a class="brand" href="index.jsp">SE15 Shop</a>
-                        <form class="form-inline navbar-search" method="post" action="products.html">
-                            <input id="srchFld" class="srchTxt" type="text" />
-                            <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
-                        </form>
+                        <form class="form-inline navbar-search" method="post" action="MainController">
+                        <input id="srchFld" class="srchTxt" type="text" name="keyWord"/>
+                        <input type="hidden" value="SearchProduct" name="action"/>
+                        <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
+                         </form>
                         <ul id="topMenu" class="nav pull-right">
                             <li class=""><a href="MainController?action=Product&perform=ViewProduct">All Products</a></li>
                             <li class=""><a href="contact.jsp">Contact</a></li>

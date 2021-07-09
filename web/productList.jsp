@@ -78,8 +78,9 @@
                 </a>
                 <div class="navbar-inner">
                     <a class="brand" href="index.jsp">SE15 Shop</a>
-                    <form class="form-inline navbar-search" method="post" action="products.html">
-                        <input id="srchFld" class="srchTxt" type="text" />
+                    <form class="form-inline navbar-search" method="post" action="MainController">
+                        <input id="srchFld" class="srchTxt" type="text" name="keyWord"/>
+                        <input type="hidden" value="SearchProduct" name="action"/>
                         <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
                     </form>
                     <ul id="topMenu" class="nav pull-right">
@@ -271,18 +272,38 @@
                             <hr class="soft" />
                         </div>
                     </div>
+                <c:choose>    
+                <c:when test="${requestScope.keyWord!=null}">
+<!--                    pagination  search-->
                     <div class="pagination">
                         <ul>
                             <li><a <c:if test="${requestScope.curPage == 1 }">style="cursor:default;pointer-events: none; "</c:if>
-                                    href="MainController?action=Product&perform=ViewProduct&pageNum=${requestScope.curPage - 1}&CategoryID=${requestScope.cateID}&status=True">&lsaquo;</a></li>
+                                href="MainController?action=SearchProduct&keyWord=${requestScope.keyWord}&pageNum=${requestScope.curPage - 1}">&lsaquo;</a></li>
                                 <c:forEach var="pageNum" begin="1" end="${requestScope.pages}">                           
                                 <li 
-                                    ><a <c:if test="${requestScope.curPage == pageNum}">style="color:red;"</c:if> href="ViewProductController?pageNum=${pageNum}&CategoryID=${requestScope.cateID}&status=True">${pageNum}</a></li>
+                                    ><a <c:if test="${requestScope.curPage == pageNum}">style="color:red;"</c:if> href="MainController?action=SearchProduct&keyWord=${requestScope.keyWord}&pageNum=${pageNum}">${pageNum}</a></li>
+                            </c:forEach>
+                            <li><a <c:if test="${requestScope.curPage == requestScope.pages }">style="cursor:default;pointer-events: none; "</c:if>
+                                    href="MainController?action=SearchProduct&keyWord=${requestScope.keyWord}&pageNum=${requestScope.curPage + 1}">&rsaquo;</a></li>
+                        </ul>
+                    </div>
+                </c:when>   
+                    <c:otherwise>
+<!--                        pagination by category-->
+                    <div class="pagination">
+                        <ul>
+                            <li><a <c:if test="${requestScope.curPage == 1 }">style="cursor:default;pointer-events: none; "</c:if>
+                                href="MainController?action=Product&perform=ViewProduct&pageNum=${requestScope.curPage - 1}&CategoryID=${requestScope.cateID}&status=True">&lsaquo;</a></li>
+                                <c:forEach var="pageNum" begin="1" end="${requestScope.pages}">                           
+                                <li 
+                                    ><a <c:if test="${requestScope.curPage == pageNum}">style="color:red;"</c:if> href="MainController?action=Product&perform=ViewProduct&pageNum=${pageNum}&CategoryID=${requestScope.cateID}&status=True">${pageNum}</a></li>
                             </c:forEach>
                             <li><a <c:if test="${requestScope.curPage == requestScope.pages }">style="cursor:default;pointer-events: none; "</c:if>
                                     href="MainController?action=Product&perform=ViewProduct&pageNum=${requestScope.curPage + 1}&CategoryID=${requestScope.cateID}&status=True">&rsaquo;</a></li>
                         </ul>
                     </div>
+                    </c:otherwise>
+                </c:choose>
                     <br class="clr" />
                 </div>
             </div>
