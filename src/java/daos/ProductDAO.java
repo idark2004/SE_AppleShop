@@ -351,7 +351,7 @@ public class ProductDAO {
             conn = DBConnect.makeConnection();
             if (conn != null) {
                 
-                String detailQuery = "INSERT INTO tblOrderDetail(orderDetailID,orderID,orderQuantity,specID)"
+                String detailQuery = "INSERT INTO tblOrderDetail(orderDetailID, orderID, orderQuantity, specID)"
                         + " VALUES(?,?,?,?)";
                 stm = conn.prepareStatement(detailQuery);
                 for (CartItemDTO items : cart) {

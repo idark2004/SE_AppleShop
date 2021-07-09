@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package controllers_backup;
 
 import daos.ProductDAO;
 import dtos.CartItemDTO;
@@ -52,7 +52,7 @@ public class AddToCartController extends HttpServlet {
                     if(session.getAttribute("cart")==null){
                         List<CartItemDTO> cart = new ArrayList<CartItemDTO>();
                         cart.add(new CartItemDTO(prDAO.GetSpec( 
-                                specID), qty));
+                                specID), 1));
                         session.setAttribute("cart", cart);
                         url=SUCCESS +"&productID="+productID+"&color="+color+"&specID="+specID;
                     }

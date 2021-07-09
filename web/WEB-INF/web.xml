@@ -40,11 +40,11 @@
     </servlet>
     <servlet>
         <servlet-name>AddToCartController</servlet-name>
-        <servlet-class>controller.AddToCartController</servlet-class>
+        <servlet-class>controllers_backup.AddToCartController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>RemoveCartItemController</servlet-name>
-        <servlet-class>controller.RemoveCartItemController</servlet-class>
+        <servlet-class>controllers_backup.RemoveCartItemController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ProductDetailController</servlet-name>
@@ -52,11 +52,11 @@
     </servlet>
     <servlet>
         <servlet-name>BuyItemController</servlet-name>
-        <servlet-class>controller.BuyItemController</servlet-class>
+        <servlet-class>controllers_backup.BuyItemController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ViewCartController</servlet-name>
-        <servlet-class>controller.ViewCartController</servlet-class>
+        <servlet-class>controllers_backup.ViewCartController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CompleteOrderController</servlet-name>
