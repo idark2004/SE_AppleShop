@@ -10,11 +10,13 @@ import dtos.ErrorDTO;
 import dtos.UserDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import utils.EmailUtility;
 
 /**
  *
@@ -36,6 +38,23 @@ public class UserController extends HttpServlet {
     private static final String INDEX = "index.jsp";
     private static final String MND = "dashBoard.jsp";
     private static final String UPDATE_SUCCESS = "userProfile.jsp";
+    
+    private String host;
+    private String port;
+    private String email;
+    private String name;
+    private String pass;
+ 
+    @Override
+    public void init() {
+        // reads SMTP server setting from web.xml file
+        ServletContext context = getServletContext();
+        host = context.getInitParameter("host");
+        port = context.getInitParameter("port");
+        email = context.getInitParameter("email");
+        name = context.getInitParameter("name");
+        pass = context.getInitParameter("pass");
+    }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -99,6 +118,23 @@ public class UserController extends HttpServlet {
                     } else{
                     request.setAttribute("ERROR", "No user found to update");
                     }
+                    break;
+                case "Contact":
+                    String userName = request.getParameter("fullname");
+                    String userEmail = request.getParameter("email");
+                    String subject = request.getParameter("subject");
+                    String description = request.getParameter("description");
+
+                    String message = "";
+                    
+                    String content = "From Customer: " + userName
+                        + "\nEmail for Contract: " + userEmail
+                        + "\nDescription: " + description;
+                    
+                    EmailUtility.sendEmail(host, port, email, "Shop Email", pass, email, subject, content);
+                    System.out.println(content);
+                    url="contact.jsp";
+                    break;
             }
         } catch (Exception e) {
             request.setAttribute("ERROR", e.toString());

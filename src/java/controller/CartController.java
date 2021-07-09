@@ -123,6 +123,40 @@ public class CartController extends HttpServlet {
                         url=request.getParameter("page");
                     }
                     break;
+                case "AddOneItem":
+                    int AddIndex = isExisting(request.getParameter("specID")
+                            , cart);
+                    int AddQuantity = cart.get(AddIndex).getQuantity() + 1;
+                    cart.get(AddIndex).setQuantity(AddQuantity);
+
+                    if (cart.isEmpty())
+                        cart=null;
+
+                    System.out.println("REMOVE SUCCESS!!!");
+
+                    session.setAttribute("cart", cart);
+                    url="cartDetail.jsp";
+                    if(request.getParameter("page")!=null){
+                        url=request.getParameter("page");
+                    }
+                    break;
+                case "RemoveOneItem":
+                    int RemovedIndex = isExisting(request.getParameter("specID")
+                            , cart);
+                    int RemovedQuantity = cart.get(RemovedIndex).getQuantity() - 1;
+                    cart.get(RemovedIndex).setQuantity(RemovedQuantity);
+
+                    if (cart.isEmpty())
+                        cart=null;
+
+                    System.out.println("REMOVE SUCCESS!!!");
+
+                    session.setAttribute("cart", cart);
+                    url="cartDetail.jsp";
+                    if(request.getParameter("page")!=null){
+                        url=request.getParameter("page");
+                    }
+                    break;
             }
         } catch (Exception e) {
             request.setAttribute("ERROR", e.toString());

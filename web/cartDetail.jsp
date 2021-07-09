@@ -200,7 +200,7 @@
                                         </div>
                                         <div class="control-group">
                                             <div class="controls">
-                                                <a href="forgetpass.html" style="text-decoration:underline">Forgot password ?</a>
+                                                <a href="forgetPass.jsp" style="text-decoration:underline">Forgot password ?</a>
                                             </div>
                                         </div>
                                     </form>
@@ -229,8 +229,16 @@
                                                 <td>${cartItem.product.name}<br/>Color : black</td>
                                                 <td>
                                                     <div class="input-append"><input class="span1" style="max-width:34px" id="appendedInputButtons" size="16" type="text" value="${cartItem.quantity}">
-                                                        <button class="btn" type="button"><i class="icon-minus"></i></button>
-                                                        <button class="btn" type="button"><i class="icon-plus"></i></button>
+                                                        <button class="btn" type="button">
+                                                            <a href="MainController?action=Cart&perform=RemoveOneItem&specID=${cartItem.product.specID.trim()}">
+                                                                <i class="icon-minus"></i>
+                                                            </a>
+                                                        </button>
+                                                        <button class="btn" type="button">
+                                                            <a href="MainController?action=Cart&perform=AddOneItem&specID=${cartItem.product.specID.trim()}">
+                                                                <i class="icon-plus"></i>
+                                                            </a>
+                                                        </button>
                                                         <button class="btn btn-danger" type="button">
                                                             <a class="remove" href="MainController?action=Cart&perform=RemoveItem&specID=${cartItem.product.specID.trim()}">
                                                                 <i class="icon-remove icon-white"></i>
