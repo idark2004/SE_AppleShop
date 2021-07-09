@@ -3,6 +3,7 @@
     Created on : Jul 6, 2021, 4:26:41 PM
     Author     : anime
 --%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -45,15 +46,26 @@
     <div id="header">
         <div class="container">
             <div id="welcomeLine" class="row">
-                <div class="span6">
-                     <div class="pull-right">
+                    <div class="span6">Welcome!
+                        <c:choose>
+                            <c:when test="${sessionScope.USER != null}">
+                                <strong>${USER.name}</strong>
+                            </c:when>
+                            <c:otherwise>
+                                <strong> User</strong>
+                            </c:otherwise>
+                        </c:choose></div>                 
+                    <div class="span6">
+                    <div class="pull-right">
+                        
                           <c:forEach var="cartItem" items="${sessionScope.cart}">
                                     <c:set var="subtotalCount" value="${cartItem.quantity}"/>
                                     <c:set var="subtotal" value="${subtotal+cartItem.quantity}"/>
                           </c:forEach>
-                        <a href="product_summary.jsp"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> ${subtotal} Itemes in your cart </span> </a>
+                        <a href="cartDetail.jsp"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> ${subtotal}
+                        <c:if test="${sessionScope.cart == null}">No</c:if>  Itemes in your cart </span> </a>
                     </div>
-                </div>
+                    </div>
             </div>
             <!-- Navbar ================================================== -->
             <div id="logoArea" class="navbar">
@@ -78,6 +90,7 @@
         </div>
     </div>
     <!-- Header End====================================================================== -->
+    <!-- Slide====================================================================== -->
     <div id="carouselBlk">
         <div id="myCarousel" class="carousel slide">
             <div class="carousel-inner">
@@ -101,17 +114,27 @@
             <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
         </div>
     </div>
+    <!-- Slide End====================================================================== -->
+    <!-- Main body====================================================================== -->
     <div id="mainBody">
         <div class="container">
             <div class="row">
                 <!-- Sidebar ================================================== -->
                 <div id="sidebar" class="span3">
                     <div class="well well-small">
-                        <c:forEach var="cartItem" items="${sessionScope.cart}">
-                            <c:set var="total" value="${total + (cartItem.quantity * cartItem.product.price)}"/>
-                        </c:forEach>
-                         <c:set var="total" value="${total + (cartItem.quantity * cartItem.product.price)}"/>
-                        <a id="myCart" href="product_summary.jsp"><img src="themes/images/ico-cart.png" alt="cart">${subtotal} Items in your cart <span class="badge badge-warning pull-right">${total}</span></a>
+                            <c:forEach var="cartItem" items="${sessionScope.cart}">
+                                <c:set var="total" value="${total + (cartItem.quantity * cartItem.product.price)}"/>
+                            </c:forEach>
+                            <a id="myCart" href="cartDetail.jsp"><img src="themes/images/ico-cart.png" alt="cart">${subtotal} 
+                            <c:if test="${sessionScope.cart == null}">No</c:if> 
+                            Items in your cart
+                            <c:if test="${sessionScope.cart != null}">
+                            <span class="badge badge-warning pull-right"> 
+                                    <fmt:setLocale value="vi_VN" />
+                                    <fmt:formatNumber value="${total}" type="currency" />
+                            </span>
+                            </c:if>
+                            </a>
                     </div>
                     <ul id="sideManu" class="nav nav-tabs nav-stacked">
                         <li><a href="MainController?action=Product&perform=ViewProduct">All</a></li>
@@ -195,7 +218,7 @@
                     <h5>ACCOUNT</h5>
                     <a href="loginForm.jsp">LOGIN</a>
                     <a href="userProfile.jsp">PROFILE</a>
-                    <a href="product_summary.jsp">CART</a>
+                    <a href="cartDetail.jsp">CART</a>
                     <a href="loginForm.jsp">ORDER HISTORY</a>
                 </div>
                 <div class="span3">

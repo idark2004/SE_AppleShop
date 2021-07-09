@@ -50,14 +50,22 @@
         <div id="header">
             <div class="container">
                 <div id="welcomeLine" class="row">
-                    <div class="span6">Welcome!<strong>${sessionScope.USER.name}</strong></div>                       
+                    <div class="span6">Welcome!
+                        <c:choose>
+                            <c:when test="${sessionScope.USER != null}">
+                                <strong>${USER.name}</strong>
+                            </c:when>
+                            <c:otherwise>
+                                <strong> User</strong>
+                            </c:otherwise>
+                        </c:choose></div>
                     <div class="span6">
                         <div class="pull-right">
                             <c:forEach var="cartItem" items="${sessionScope.cart}">
                                 <c:set var="subtotalCount" value="${cartItem.quantity}"/>
                                 <c:set var="subtotal" value="${subtotal+cartItem.quantity}"/>
                             </c:forEach>
-                        <a id="myCart" href="cartDetail.jsp"><img src="themes/images/ico-cart.png" alt="cart">${subtotal} Items in your cart <span class="badge badge-warning pull-right">${total}</span></a>
+                            <a href="cartDetail.jsp"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> ${subtotal} Itemes in your cart </span> </a>
                         </div>
                     </div>
                 </div>
@@ -146,7 +154,16 @@
                             <c:forEach var="cartItem" items="${sessionScope.cart}">
                                 <c:set var="total" value="${total + (cartItem.quantity * cartItem.product.price)}"/>
                             </c:forEach>
-                            <a id="myCart" href="cartDetail.jsp"><img src="themes/images/ico-cart.png" alt="cart">${subtotal} Items in your cart <span class="badge badge-warning pull-right">${total}</span></a>
+                            <a id="myCart" href="cartDetail.jsp"><img src="themes/images/ico-cart.png" alt="cart">${subtotal} 
+                            <c:if test="${sessionScope.cart == null}">No</c:if> 
+                            Items in your cart
+                            <c:if test="${sessionScope.cart != null}">
+                            <span class="badge badge-warning pull-right"> 
+                                    <fmt:setLocale value="vi_VN" />
+                                    <fmt:formatNumber value="${total}" type="currency" />
+                            </span>
+                            </c:if>
+                            </a>
                         </div>
                         <ul id="sideManu" class="nav nav-tabs nav-stacked">
                             <li><a href="MainController?action=Product&perform=ViewProduct">All</a></li>
@@ -191,7 +208,7 @@
                                             
                                             <div class="controls">
                                                 <h4>Select quantity</h4>
-                                                <input type="number" name="Quantity" max="6" class="span1" placeholder="Qty." />
+                                                <input type="number" name="Quantity" max="6" class="span1" placeholder="Qty."  required="Need to add quantity"/>
                                                 <button type="submit" name="perform" value="Add to cart" class="btn btn-large btn-primary pull-right"> Add to cart <i class=" icon-shopping-cart"></i></button>
                                             </div>
                                         </div>
@@ -226,7 +243,7 @@
                                                     <h4>2. Select a spec</h4>
                                                  </c:if>  
                                             <c:if test="${requestScope.colorChosen!=null}">
-                                                <h4 class="addToCreateSpece" style="margin-top: 40px;"> </h4>
+                                                <h4 class="addToCreateSpece" style="margin-top: 20px;"> </h4>
                                                 <label class="control-label"><span>Spec</span></label>
                                                 <div class="controls">
                                                     <select name="hardware" class="span2" onchange="window.location = 'MainController?action=Product&perform=ViewDetail&productID=${product.productID.trim()}&color=${requestScope.colorChosen}&specID=' + this.value">

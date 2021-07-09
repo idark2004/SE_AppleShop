@@ -41,9 +41,9 @@ public class ProductDAO {
             conn =  DBConnect.makeConnection();
             if (conn != null) {
                 String sql = "SELECT p.productID, p.productName, p.image, Min(s.specPrice) as price "
-                        + "FROM tblProducts p, tblProductSpec s "
-                        + "WHERE p.productID = s.productID AND p.categoryID LIKE ? AND s.specStatus = ? "
-                        + "GROUP BY p.productID, p.productName, p.image ";
+                        + " FROM tblProducts p, tblProductSpec s "
+                        + " WHERE p.productID = s.productID AND p.categoryID LIKE ? AND s.specStatus = ? "
+                        + " GROUP BY p.productID, p.productName, p.image ";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, "%" + categoryID + "%");
                 stm.setBoolean(2, Boolean.parseBoolean(status));

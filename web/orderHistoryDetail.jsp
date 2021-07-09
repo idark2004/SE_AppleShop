@@ -3,7 +3,8 @@
     Created on : Jul 8, 2021, 7:41:40 PM
     Author     : anime
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,12 +47,26 @@
     <div id="header">
         <div class="container">
             <div id="welcomeLine" class="row">
-                <div class="span6">Welcome!<strong> User</strong></div>
-                <div class="span6">
+                    <div class="span6">Welcome!
+                        <c:choose>
+                            <c:when test="${sessionScope.USER != null}">
+                                <strong>${USER.name}</strong>
+                            </c:when>
+                            <c:otherwise>
+                                <strong> User</strong>
+                            </c:otherwise>
+                        </c:choose></div>                      
+                    <div class="span6">
                     <div class="pull-right">
-                        <a href="product_summary.html"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> [ 3 ] Itemes in your cart </span> </a>
+                        
+                          <c:forEach var="cartItem" items="${sessionScope.cart}">
+                                    <c:set var="subtotalCount" value="${cartItem.quantity}"/>
+                                    <c:set var="subtotal" value="${subtotal+cartItem.quantity}"/>
+                          </c:forEach>
+                        <a href="cartDetail.jsp"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> ${subtotal}
+                        <c:if test="${sessionScope.cart == null}">No</c:if>  Itemes in your cart </span> </a>
                     </div>
-                </div>
+                    </div>
             </div>
             <!-- Navbar ================================================== -->
             <div id="logoArea" class="navbar">
@@ -136,15 +151,28 @@
             <div class="row">
                 <!-- Sidebar ================================================== -->
                 <div id="sidebar" class="span3">
-                    <div class="well well-small">
-                        <a id="myCart" href="product_summary.html"><img src="themes/images/ico-cart.png" alt="cart">3 Items in your cart <span class="badge badge-warning pull-right">445,000VND</span></a>
-                    </div>
+                      <div class="well well-small">
+                            <c:forEach var="cartItem" items="${sessionScope.cart}">
+                                <c:set var="total" value="${total + (cartItem.quantity * cartItem.product.price)}"/>
+                            </c:forEach>
+                            <a id="myCart" href="cartDetail.jsp"><img src="themes/images/ico-cart.png" alt="cart">${subtotal} 
+                            <c:if test="${sessionScope.cart == null}">No</c:if> 
+                            Items in your cart
+                            <c:if test="${sessionScope.cart != null}">
+                            <span class="badge badge-warning pull-right"> 
+                                    <fmt:setLocale value="vi_VN" />
+                                    <fmt:formatNumber value="${total}" type="currency" />
+                            </span>
+                            </c:if>
+                            </a>
+                        </div>
                     <ul id="sideManu" class="nav nav-tabs nav-stacked">
-                        <li><a href="products.html">All</a></li>
-                        <li><a href="products.html">iPhone</a></li>
-                        <li><a href="products.html">iPad</a></li>
-                        <li><a href="products.html">Mac</a></li>
-                        <li><a href="products.html">Accessory</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct">All</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=IP&status=True">iPhone</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=ID&status=True">iPad</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=MB&status=True">Mac</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AW&status=True">Apple Watch</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AS&status=True">Accessory</a></li>
                     </ul>
                     <br/>
                 </div>
@@ -164,26 +192,29 @@
                                 <div class="well span8">
                                     <form>
                                         <p class="small">
-                                            Order ID: <span><strong>abc123</strong></span>
+                                            Order ID: <span><strong>${requestScope.order.orderID}</strong></span>
                                         </p>
                                         <p class="small">
-                                            Fullname: <span><strong>Trần Văn A</strong></span>
+                                            Fullname: <span><strong>${requestScope.order.cusName}</strong></span>
                                         </p>
                                         <p class="small">
-                                            Address: <span><strong>69 Phú Mỹ Hưng P.Tân Hưng Q.7 </strong></span>
+                                            Email: <span><strong>${requestScope.order.email}</strong></span>
                                         </p>
                                         <p class="small">
-                                            Phone: <span><strong>0914123456</strong></span>
+                                            Address: <span><strong>${requestScope.order.address} </strong></span>
+                                        </p>
+                                        <p class="small">
+                                            Phone: <span><strong> ${requestScope.order.phone}</strong></span>
                                         </p>
                                         <br>
                                         <p class="small">
-                                            Created: <span><strong>2020/08/12, 20:00</strong></span>
+                                            Created: <span><strong>${requestScope.order.orderDate}</strong></span>
                                         </p>
                                         <p class="small">
-                                            Payment method: <span><strong>Pay on delivery</strong></span>
+                                            Payment method: <span><strong>${requestScope.order.payMethod}</strong></span>
                                         </p>
                                         <p class="small">
-                                            Payment status: <span><strong>Charging</strong></span>
+                                           Order status: <span><strong>${requestScope.order.status}</strong></span>
                                         </p>
                                     </form>
                                 </div>
@@ -201,48 +232,29 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                     <c:choose>
+                                <c:when test="${requestScope.detail != null}">
+                                    <c:forEach var="detail" items="${requestScope.detail}">
                                     <tr>
                                         <td> <img width="60" src="themes/images/products/4.jpg" alt="" /></td>
-                                        <td>iPad Pro<br/>Color : black</td>
+                                        <td>${detail.product.name}<br/>Color : ${detail.product.color}<br/>
+                                            Ram:${detail.product.ram}<br/>Storage:${detail.product.storage}</td>
                                         <td>
-                                            1
+                                            ${detail.quantity}
                                         </td>
-                                        <td>10,000,000 VND</td>
+                                        <td><fmt:formatNumber type="number" maxFractionDigits = "0" value="${detail.product.price * detail.quantity}"/></td>
                                         <td>100,000 VND</td>
-                                        <td>9,900,000 VND</td>
+                                        <td><fmt:formatNumber type="number" maxFractionDigits = "0" value="${detail.product.price * detail.quantity}"/></td>
                                     </tr>
+                               </c:forEach>
+                                </c:when>
+                                    <c:otherwise>
+                                        <h1>${requestScope.EMPTY_LIST}</h1>
+                                    </c:otherwise>
+                                </c:choose>
                                     <tr>
-                                        <td> <img width="60" src="themes/images/products/8.jpg" alt="" /></td>
-                                        <td>Wired Ear Phone<br/>Color : white</td>
-                                        <td>
-                                            2
-                                        </td>
-                                        <td>100,000 VND</td>
-                                        <td>--</td>
-                                        <td>200,000 VND</td>
-                                    </tr>
-                                    <tr>
-                                        <td> <img width="60" src="themes/images/products/3.jpg" alt="" /></td>
-                                        <td>iPad Air 2<br/>Color : white</td>
-                                        <td>
-                                            1
-                                        </td>
-                                        <td>10,000,000 VND</td>
-                                        <td>100,000 VND</td>
-                                        <td>9,900,000 VND</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td colspan="5" style="text-align:right">Total Price: </td>
-                                        <td> 20,100,000 VND</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="5" style="text-align:right">Total Discount: </td>
-                                        <td> 200,000 VND</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="5" style="text-align:right"><strong>TOTAL (20,200,000 VND - 200,000 VND) =</strong></td>
-                                        <td class="label label-important" style="display:block"> <strong> 20,000,000 VND </strong></td>
+                                        <td colspan="5" style="text-align:right"><strong>TOTAL (<fmt:formatNumber type="number" maxFractionDigits = "0" value="${detail.product.price * detail.quantity}"/> - 200,000 VND) =</strong></td>
+                                        <td class="label label-important" style="display:block"> <strong><fmt:formatNumber type="number" maxFractionDigits = "0" value="${detail.product.price * detail.quantity}"/></strong></td>
                                     </tr>
                                 </tbody>
                             </table>

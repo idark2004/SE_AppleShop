@@ -48,17 +48,25 @@
     <div id="header">
         <div class="container">
             <div id="welcomeLine" class="row">
-                <div class="span6">Welcome!<strong> User</strong></div>
-                <div class="span6">
-                   <div class="pull-right">
-                          <c:forEach var="cartItem" items="${sessionScope.cart}">
-                                    <c:set var="subtotalCount" value="${cartItem.quantity}"/>
-                                    <c:set var="subtotal" value="${subtotal+cartItem.quantity}"/>
-                          </c:forEach>
-                        <a href="product_summary.jsp"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> ${subtotal} Itemes in your cart </span> </a>
+                    <div class="span6">Welcome!
+                        <c:choose>
+                            <c:when test="${sessionScope.USER != null}">
+                                <strong>${USER.name}</strong>
+                            </c:when>
+                            <c:otherwise>
+                                <strong> User</strong>
+                            </c:otherwise>
+                        </c:choose></div>
+                    <div class="span6">
+                        <div class="pull-right">
+                            <c:forEach var="cartItem" items="${sessionScope.cart}">
+                                <c:set var="subtotalCount" value="${cartItem.quantity}"/>
+                                <c:set var="subtotal" value="${subtotal+cartItem.quantity}"/>
+                            </c:forEach>
+                            <a href="cartDetail.jsp"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> ${subtotal} Itemes in your cart </span> </a>
+                        </div>
                     </div>
                 </div>
-            </div>
             <!-- Navbar ================================================== -->
             <div id="logoArea" class="navbar">
                 <a id="smallScreen" data-target="#topMenu" data-toggle="collapse" class="btn btn-navbar">
@@ -75,7 +83,7 @@
                     <ul id="topMenu" class="nav pull-right">
                         <li class=""><a href="ViewProductController">All Products</a></li>
                         <li class=""><a href="contact.jsp">Contact</a></li>
-                        <li class=""><a href="user_profile.jsp">Profile</a></li>
+                        <li class=""><a href="userProfile.jsp">Profile</a></li>
                         <li class="">
                             <a href="signupForm.jsp" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Signup</span></a>
                         </li>
@@ -140,14 +148,21 @@
             <div class="row">
                 <!-- Sidebar ================================================== -->
                 <div id="sidebar" class="span3">
-                    <div class="well well-small">
-                        <c:forEach var="cartItem" items="${sessionScope.cart}">
-                                    <c:set var="subtotalCount" value="${cartItem.quantity}"/>
-                                    <c:set var="subtotal" value="${subtotal+cartItem.quantity}"/>
-                                </c:forEach>
-                         <c:set var="total" value="${total + (cartItem.quantity * cartItem.product.price)}"/>
-                        <a id="myCart" href="product_summary.html"><img src="themes/images/ico-cart.png" alt="cart">${subtotal} Items in your cart <span class="badge badge-warning pull-right">${total}</span></a>
-                    </div>
+                      <div class="well well-small">
+                            <c:forEach var="cartItem" items="${sessionScope.cart}">
+                                <c:set var="total" value="${total + (cartItem.quantity * cartItem.product.price)}"/>
+                            </c:forEach>
+                            <a id="myCart" href="cartDetail.jsp"><img src="themes/images/ico-cart.png" alt="cart">${subtotal} 
+                            <c:if test="${sessionScope.cart == null}">No</c:if> 
+                            Items in your cart
+                            <c:if test="${sessionScope.cart != null}">
+                            <span class="badge badge-warning pull-right"> 
+                                    <fmt:setLocale value="vi_VN" />
+                                    <fmt:formatNumber value="${total}" type="currency" />
+                            </span>
+                            </c:if>
+                            </a>
+                        </div>
                     <ul id="sideManu" class="nav nav-tabs nav-stacked">
                         <li><a href="ViewProductController">All</a></li>
                         <li><a href="ViewProductController?categoryID=IP&status=True">iPhone</a></li>
@@ -245,8 +260,8 @@
                 <div class="span3">
                     <h5>ACCOUNT</h5>
                     <a href="loginForm.jsp">LOGIN</a>
-                    <a href="user_profile.jsp">PROFILE</a>
-                    <a href="product_summary.jsp">CART</a>
+                    <a href="userProfile.jsp">PROFILE</a>
+                    <a href="cartDetail.jsp">CART</a>
                     <a href="order_history.jsp">ORDER HISTORY</a>
                 </div>
                 <div class="span3">

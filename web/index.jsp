@@ -145,12 +145,20 @@
                 <div class="row">
                     <!-- Sidebar ================================================== -->
                     <div id="sidebar" class="span3">
-                        <div class="well well-small">
+                         <div class="well well-small">
                             <c:forEach var="cartItem" items="${sessionScope.cart}">
-                            <c:set var="total" value="${total + (cartItem.quantity * cartItem.product.price)}"/>
-                        </c:forEach>
-                         <c:set var="total" value="${total + (cartItem.quantity * cartItem.product.price)}"/>
-                        <a id="myCart" href="cartDetail.jsp"><img src="themes/images/ico-cart.png" alt="cart">${subtotal} Items in your cart <span class="badge badge-warning pull-right">${total}</span></a>
+                                <c:set var="total" value="${total + (cartItem.quantity * cartItem.product.price)}"/>
+                            </c:forEach>
+                            <a id="myCart" href="cartDetail.jsp"><img src="themes/images/ico-cart.png" alt="cart">${subtotal} 
+                            <c:if test="${sessionScope.cart == null}">No</c:if> 
+                            Items in your cart
+                            <c:if test="${sessionScope.cart != null}">
+                            <span class="badge badge-warning pull-right"> 
+                                    <fmt:setLocale value="vi_VN" />
+                                    <fmt:formatNumber value="${total}" type="currency" />
+                            </span>
+                            </c:if>
+                            </a>
                         </div>
                         <ul id="sideManu" class="nav nav-tabs nav-stacked">
                         <li><a href="MainController?action=Product&perform=ViewProduct">All</a></li>
@@ -201,8 +209,7 @@
                                             <!--random 4 san pham -->
                                         </ul>
                                     </div>
-                                    <a class="left carousel-control" href="#featured" data-slide="prev">‹</a>
-                                    <a class="right carousel-control" href="#featured" data-slide="next">›</a>
+                                   
                                 </div>
                             </div>
                         </div>

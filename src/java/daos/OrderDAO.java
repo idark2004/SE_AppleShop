@@ -118,9 +118,9 @@ public class OrderDAO {
         PreparedStatement ps = null; //doi tuong truy van
         ResultSet rs = null;//doi tuong nhan ket qua
 
-        String sql = "SELECT orderID, cusName, orderDate, payMethod, status, email, phone "
-                + "FROM tblOrders "
-                + "WHERE orderID=?";
+        String sql = "SELECT orderID, cusName, orderDate, orderPrice , orderAddress, payMethod, orderStatus "
+                + " FROM tblOrders "
+                + " WHERE orderID=?";
 
         try {
             DBConnect db = new DBConnect();
@@ -137,9 +137,10 @@ public class OrderDAO {
                     o.setCusName(rs.getString("cusName"));
                     o.setOrderDate(rs.getString("orderDate"));
                     o.setPayMethod(rs.getString("payMethod"));
-                    o.setStatus(rs.getString("status"));
-                    o.setEmail(rs.getString("email"));
-                    o.setPhone(rs.getString("phone"));
+                    o.setPrice(rs.getDouble("orderPrice"));
+                    o.setAddress(rs.getString("orderAddress"));
+                    o.setPayMethod(rs.getString("payMethod"));
+                    o.setStatus(rs.getString("orderStatus"));
 
                     return o;
                 }
@@ -167,9 +168,9 @@ public class OrderDAO {
         PreparedStatement ps = null;
         ResultSet rs = null;
 
-        String sql = "SELECT p.name, s.color, s.ram, s.storage, o.quantity, s.price "
-                + "FROM tblProducts p, tblProductSpec s, tblOrderDetail o "
-                + "WHERE o.orderID=? AND o.productID=p.productID AND o.specID=s.specID;";
+        String sql = "SELECT p.productName, s.color, s.ram, s.storage, o.orderQuantity, s.specPrice "
+                + " FROM tblProducts p, tblProductSpec s, tblOrderDetail o "
+                + " WHERE o.orderID= ? AND o.productID = p.productID AND o.specID = s.specID;";
 
         ArrayList<OrderDetailDTO> lst = new ArrayList<>();
 

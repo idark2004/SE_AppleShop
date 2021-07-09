@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class OrderDetailController extends HttpServlet {
 
-    private static final String SUCCESS ="orderDetail.jsp";
+    private static final String SUCCESS ="orderHistoryDetail.jsp";
     private static final String ERROR = "error.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
