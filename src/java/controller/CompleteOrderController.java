@@ -32,7 +32,7 @@ import utils.EmailUtility;
 public class CompleteOrderController extends HttpServlet {
 
     public static final String ERROR = "cartForm.jsp";
-    public static final String SUCCESS = "orderCompletion1.jsp";
+    public static final String SUCCESS = "orderCompletion.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -107,6 +107,7 @@ public class CompleteOrderController extends HttpServlet {
                 + "<td><b>Address<b></td>"
                 + "<td><b>Email<b></td>"
                 + "<td><b>Order time<b></td>"
+                + "<td><b>Expected Day<b></td>"          
                 + "<td><b>Total<b></td>"     
                 + "<td><b>Method<b></td>"           
                 + "</tr>"
@@ -115,7 +116,8 @@ public class CompleteOrderController extends HttpServlet {
                 + "<td><b>"+neworder.getCusName()+"<b></td>"
                 + "<td><b>"+neworder.getAddress()+"<b></td>"
                 + "<td><b>"+neworder.getEmail()+"<b></td>"
-                + "<td><b>"+neworder.getOrderDate()+"<b></td>"
+                + "<td><b>"+neworder.getOrderCreateDate()+"<b></td>"
+                + "<td><b>"+neworder.getOrderExpectDate()+"<b></td>"
                 + "<td><b>"+formatPrice(neworder.getPrice())+"<b></td>"     
                 + "<td><b>"+neworder.getPayMethod()+"<b></td>"           
                 + "</tr>";           

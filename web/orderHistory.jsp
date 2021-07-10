@@ -165,12 +165,21 @@
                             </a>
                         </div>
                     <ul id="sideManu" class="nav nav-tabs nav-stacked">
-                        <li><a href="ViewProductController">All</a></li>
-                        <li><a href="ViewProductController?categoryID=IP&status=True">iPhone</a></li>
-                        <li><a href="ViewProductController?categoryID=ID&status=True">iPad</a></li>
-                        <li><a href="ViewProductController?categoryID=MB&status=True">Mac</a></li>
-                        <li><a href="ViewProductController?categoryID=AW&status=True">Apple Watch</a></li>
-                        <li><a href="ViewProductController?categoryID=AS&status=True">Accessory</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct">All</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=IP&status=True">iPhone</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=ID&status=True">iPad</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=MB&status=True">Mac</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AW&status=True">Apple Watch</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AS&status=True">Accessory</a></li>
+                        <c:if test="${sessionScope.USER.roleID == 'MN        ' || sessionScope.USER.roleID == 'AD        '}">
+                        <li class="subMenu"><a>Shop Manager</a>
+                            <ul style="display:none">
+                                <li><a href="dashboard_Manager.html"><i class="icon-chevron-right"></i>Dashboard</a></li>
+                                <li><a href="product_details_Manager.html"><i class="icon-chevron-right"></i>Add Product</a></li>
+                                <li><a href="customers_Manager.html"><i class="icon-chevron-right"></i>Customer List</a></li>
+                            </ul>
+                        </li>
+                        </c:if>
                     </ul>
                     <br/>
                 </div>
@@ -236,7 +245,8 @@
                             </table>
                         </div>
                     </div>
-
+                <c:choose>
+                    <c:when test="${requestScope.user != null}">
                     <div class="pagination">
                         <ul>
                             <li><a <c:if test="${requestScope.curPage == 1 }">style="cursor:default;pointer-events: none; "</c:if>
@@ -246,9 +256,25 @@
                                     ><a <c:if test="${requestScope.curPage == pageNum}">style="color:red;"</c:if> href="OrderHistoryController?pageNum=${pageNum}&userid=${requestScope.user.userID}">${pageNum}</a></li>
                             </c:forEach>
                             <li><a <c:if test="${requestScope.curPage == requestScope.pages }">style="cursor:default;pointer-events: none; "</c:if>
-                                    href="ViewProductController?pageNum=${requestScope.curPage + 1}&userid=${requestScope.user.userID}">&rsaquo;</a></li>
+                                    href="OrderHistoryController?pageNum=${requestScope.curPage + 1}&userid=${requestScope.user.userID}">&rsaquo;</a></li>
                         </ul>
                     </div>
+                    </c:when>
+                    <c:otherwise>
+                        <div class="pagination">
+                        <ul>
+                            <li><a <c:if test="${requestScope.curPage == 1 }">style="cursor:default;pointer-events: none; "</c:if>
+                                                                              href="OrderListController?pageNum=${requestScope.curPage - 1}">&lsaquo;</a></li>
+                                <c:forEach var="pageNum" begin="1" end="${requestScope.pages}">                           
+                                <li 
+                                    ><a <c:if test="${requestScope.curPage == pageNum}">style="color:red;"</c:if> href="OrderListController?pageNum=${pageNum}">${pageNum}</a></li>
+                            </c:forEach>
+                            <li><a <c:if test="${requestScope.curPage == requestScope.pages }">style="cursor:default;pointer-events: none; "</c:if>
+                                    href="OrderListController?pageNum=${requestScope.curPage + 1}">&rsaquo;</a></li>
+                        </ul>
+                    </div>
+                    </c:otherwise>
+                </c:choose>    
                 </div>
             </div>
         </div>

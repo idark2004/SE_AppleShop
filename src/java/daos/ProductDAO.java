@@ -305,7 +305,13 @@ public class ProductDAO {
     public OrderDTO completeOrder(List<CartItemDTO> cart, String address, String name, String email, String phone, String userID, String codeID, String method, double price) throws SQLException {
         LocalDateTime currentDateTime = LocalDateTime.now();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         String orderCreateDate = currentDateTime.format(dtf);
+          Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, +7);
+        java.util.Date orderExpectDate = cal.getTime();
+        String orderExpectedDay = dateFormat.format(orderExpectDate) ;
+        System.out.println("Tao xong date ");
         DBSupport db = new DBSupport();
         OrderDTO newOrder = new OrderDTO();
         Connection conn = null;
@@ -313,22 +319,24 @@ public class ProductDAO {
         try {
             conn = DBConnect.makeConnection();
             if (conn != null) {
-                String sql = "INSERT INTO tblOrders(orderID,cusName,orderAddress,orderCreateDate,codeID,userID,orderPrice,payMethod,orderStatus,ggUserID) "
-                        + "VALUES(?,?,?,?,?,?,?,?,?,?)";
+                String sql = "INSERT INTO tblOrders(orderID,cusName,orderAddress,orderCreateDate,orderExpectDate,codeID,userID,orderPrice,payMethod,orderStatus,ggUserID) "
+                        + "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
                 stm = conn.prepareStatement(sql);
                 String orderID = "ORD-"+db.getNumbRows("orderID", "tblOrders");
                 stm.setString(1, orderID);
                 stm.setString(2, name);
                 stm.setString(3, address);
                 stm.setString(4, orderCreateDate);
-                stm.setString(5, codeID);
-                stm.setString(6, userID);
-                stm.setDouble(7, price);
-                stm.setString(8, method);
-                stm.setString(9, "Accepted");
-                stm.setString(10, null);
+                stm.setString(5, orderExpectedDay);
+                stm.setString(6, codeID);
+                stm.setString(7, userID);
+                stm.setDouble(8, price);
+                stm.setString(9, method);
+                stm.setString(10, "Accepted");
+                stm.setString(11, null);
                 stm.executeUpdate();
-                newOrder = new OrderDTO(orderID, name, address, phone, email, orderCreateDate, codeID, userID, price, method, "True");
+                newOrder = new OrderDTO(orderID, name, address, phone, email, orderCreateDate,orderExpectedDay, codeID, userID, price, method, "True");
+                System.out.println("Add completeOrder success ");
             }
         } finally {
             if (stm != null) {

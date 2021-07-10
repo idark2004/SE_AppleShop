@@ -45,7 +45,7 @@ public class CartController extends HttpServlet {
         String url = ERROR;
         ProductDAO dao = new ProductDAO();
         OrderDTO newOrder = new OrderDTO();
-        List<CartItemDTO> cart = (List<CartItemDTO>) session.getAttribute("cart");
+        ArrayList<CartItemDTO> cart = (ArrayList<CartItemDTO>) session.getAttribute("cart");
         String perform = request.getParameter("perform");
         try {
             switch (perform) {
@@ -57,6 +57,7 @@ public class CartController extends HttpServlet {
                     String payMethod = request.getParameter("payMethod");
                     double total = Double.parseDouble(request.getParameter("total"));
                     String userID = null;
+                    if (cart != null) System.out.println("cart <> null");
                     if (cart != null) {
                         newOrder = dao.completeOrder(cart, address, cusName, email, phone, userID, null, payMethod, total);
                         System.out.println("Go");

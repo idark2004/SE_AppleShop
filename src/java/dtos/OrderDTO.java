@@ -17,7 +17,9 @@ public class OrderDTO {
     private String address;
     private String phone;
     private String email;
-    private String orderDate;
+    private String orderExpectDate;
+    private String completedDate;
+    private String orderCreateDate;
     private String codeID;
     private String userID;
     private double price;
@@ -27,18 +29,59 @@ public class OrderDTO {
     public OrderDTO() {
     }
 
-    public OrderDTO(String orderID, String cusName, String address, String phone, String email, String orderDate, String codeID, String userID, double price, String payMethod, String status) {
+    public OrderDTO(String orderID, String cusName, String address, String phone, String email, String orderCreateDate,String orderExpectDate,String completedDate, String codeID, String userID, double price, String payMethod, String status) {
         this.orderID = orderID;
         this.cusName = cusName;
         this.address = address;
         this.phone = phone;
         this.email = email;
-        this.orderDate = orderDate;
+        this.completedDate = completedDate;
+        this.orderExpectDate = orderExpectDate;
+        this.completedDate = completedDate;
         this.codeID = codeID;
         this.userID = userID;
         this.price = price;
         this.payMethod = payMethod;
         this.status = status;
+    }
+    public OrderDTO(String orderID, String cusName, String address, String phone, String email, String orderCreateDate,String orderExpectDate, String codeID, String userID, double price, String payMethod, String status) {
+        this.orderID = orderID;
+        this.cusName = cusName;
+        this.address = address;
+        this.phone = phone;
+        this.email = email;
+        this.completedDate = completedDate;
+        this.orderExpectDate = orderExpectDate;
+        this.completedDate = completedDate;
+        this.codeID = codeID;
+        this.userID = userID;
+        this.price = price;
+        this.payMethod = payMethod;
+        this.status = status;
+    }
+
+    public String getOrderExpectDate() {
+        return orderExpectDate;
+    }
+
+    public void setOrderExpectDate(String orderExpectDate) {
+        this.orderExpectDate = orderExpectDate;
+    }
+
+    public String getCompletedDate() {
+        return completedDate;
+    }
+
+    public void setCompletedDate(String completedDate) {
+        this.completedDate = completedDate;
+    }
+
+    public String getOrderCreateDate() {
+        return orderCreateDate;
+    }
+
+    public void setOrderCreateDate(String orderCreateDate) {
+        this.orderCreateDate = orderCreateDate;
     }
 
     
@@ -67,14 +110,7 @@ public class OrderDTO {
         this.address = address;
     }
 
-    public String getOrderDate() {
-        return orderDate;
-    }
-
-    public void setOrderDate(String orderDate) {
-        this.orderDate = orderDate;
-    }
-
+    
     public String getCodeID() {
         return codeID;
     }

@@ -3,7 +3,9 @@
     Created on : Jul 8, 2021, 8:01:50 PM
     Author     : anime
 --%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -149,28 +151,35 @@
             <div class="row">
                 <!-- Sidebar ================================================== -->
                 <div id="sidebar" class="span3">
-                    <div class="well well-small">
+                      <div class="well well-small">
                             <c:forEach var="cartItem" items="${sessionScope.cart}">
                                 <c:set var="total" value="${total + (cartItem.quantity * cartItem.product.price)}"/>
                             </c:forEach>
-                            <a id="myCart" href="cartDetail.jsp"><img src="themes/images/ico-cart.png" alt="cart">${subtotal} Items in your cart <span class="badge badge-warning pull-right"> 
+                            <a id="myCart" href="cartDetail.jsp"><img src="themes/images/ico-cart.png" alt="cart">${subtotal} 
+                            <c:if test="${sessionScope.cart == null}">No</c:if> 
+                            Items in your cart
+                            <c:if test="${sessionScope.cart != null}">
+                            <span class="badge badge-warning pull-right"> 
                                     <fmt:setLocale value="vi_VN" />
-                                    <fmt:formatNumber value="${total}" type="currency" /></span>
+                                    <fmt:formatNumber value="${total}" type="currency" />
+                            </span>
+                            </c:if>
                             </a>
-                    </div>
+                        </div>
                     <ul id="sideManu" class="nav nav-tabs nav-stacked">
-                        <li><a href="products.html">All</a></li>
-                        <li><a href="products.html">iPhone</a></li>
-                        <li><a href="products.html">iPad</a></li>
-                        <li><a href="products.html">Mac</a></li>
-                        <li><a href="products.html">Accessory</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct">All</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=IP&status=True">iPhone</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=ID&status=True">iPad</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=MB&status=True">Mac</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AW&status=True">Apple Watch</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AS&status=True">Accessory</a></li>
                     </ul>
                     <br/>
                 </div>
                 <!-- Sidebar end=============================================== -->
                 <div class="span9">
                     <ul class="breadcrumb">
-                        <li><a href="index.html">Home</a> <span class="divider">/</span></li>
+                        <li><a href="index.jsp">Home</a> <span class="divider">/</span></li>
                         <li class="active">Order History</li>
                     </ul>
                     <div class="row">
@@ -180,82 +189,37 @@
                                     <tr>
                                         <th><span>Created</span></th>
                                         <th>Order ID</th>
-                                        <th><span>Product</span></th>
-                                        <th><span> Total Price</span></th>
-                                        <th><span> Status</span></th>
+                                        <th><span>Ship Address</span></th>
+                                        <th><span>Total Price</span></th>
+                                        <th><span>Status</span></th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <c:choose>
+                                    <c:when test="${requestScope.ORDER_LIST != null}">
+                                        <c:forEach var="order" items="${requestScope.ORDER_LIST}">
                                     <tr>
-                                        <td>2020/08/12, 20:00</td>
+                                        <td>${order.orderDate}</td>
 
-                                        <td>abc123</td>
+                                        <td>${order.orderID}</td>
                                         <td>
-                                            <p>iPhone 12 Pro Max <span><strong>x1</strong></span></p>
-                                            <p>iPad Air 2 <span><strong>x1</strong></span></p>
-                                            <p>Wired Earphone <span><strong>x2</strong></span></p>
+                                           ${order.address}
                                         </td>
                                         <td>
-                                            20,000,000 VND
+                                           <fmt:formatNumber type="number" maxFractionDigits = "0" value="${order.price}"/>
                                         </td>
                                         <td>
-                                            Completed
+                                           ${order.status}
                                         </td>
                                         <td>
-                                            <a href="order_details.html" class="table-link text-info" title="More Detail">
+                                            <a href="OrderDetailController?orderID=${order.orderID}" class="table-link text-info" title="More Detail">
                                                 <span class="fa-stack">
                                                     <i class="fa fa-square fa-stack-2x"></i>
                                                     <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
                                                 </span>
                                             </a>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>2021/03/22, 20:00</td>
-
-                                        <td>abc124</td>
-                                        <td>
-                                            <p>Apple Watch <span><strong>x1</strong></span></p>
-                                        </td>
-                                        <td>
-                                            10,900,000 VND
-                                        </td>
-                                        <td>
-                                            Delivering
-                                        </td>
-                                        <td>
-                                            <a href="order_details.html" class="table-link text-info" title="More Detail">
-                                                <span class="fa-stack">
-                                                    <i class="fa fa-square fa-stack-2x"></i>
-                                                    <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
-                                                </span>
-                                            </a>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>2021/03/22, 20:00</td>
-
-                                        <td>abc124</td>
-                                        <td>
-                                            <p>iPhone 12 Pro Max <span><strong>x1</strong></span></p>
-                                        </td>
-                                        <td>
-                                            9,900,000 VND
-                                        </td>
-                                        <td>
-                                            In charge
-                                        </td>
-                                        <td>
-                                            <a href="customer_details_Manager.html" class="table-link text-info" title="More Detail">
-                                                <span class="fa-stack">
-                                                    <i class="fa fa-square fa-stack-2x"></i>
-                                                    <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
-                                                </span>
-                                            </a>
-                                            <a href="" class="table-link danger" title="Cancel">
+                                            <a href="OrderCancelController" class="table-link danger" title="Cancel">
                                                 <span class="fa-stack">
                                                     <i class="fa fa-square fa-stack-2x"></i>
                                                     <i class="fa fa-trash fa-stack-1x fa-inverse"></i>
@@ -263,20 +227,27 @@
                                             </a>
                                         </td>
                                     </tr>
+                                    </c:forEach>
+                                     </c:when>
+                                    <c:otherwise>
+                                        <h2>${requestScope.EMPTY_LIST.msg}</h2>
+                                    </c:otherwise>
+                                    </c:choose>
+                                  
                                 </tbody>
                             </table>
                         </div>
                     </div>
-
                     <div class="pagination">
                         <ul>
-                            <li><a href="#">&lsaquo;</a></li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">...</a></li>
-                            <li><a href="#">&rsaquo;</a></li>
+                            <li><a <c:if test="${requestScope.curPage == 1 }">style="cursor:default;pointer-events: none; "</c:if>
+                                                                              href="OrderHistoryController?pageNum=${requestScope.curPage - 1}&userid=${requestScope.user.userID}">&lsaquo;</a></li>
+                                <c:forEach var="pageNum" begin="1" end="${requestScope.pages}">                           
+                                <li 
+                                    ><a <c:if test="${requestScope.curPage == pageNum}">style="color:red;"</c:if> href="OrderHistoryController?pageNum=${pageNum}&userid=${requestScope.user.userID}">${pageNum}</a></li>
+                            </c:forEach>
+                            <li><a <c:if test="${requestScope.curPage == requestScope.pages }">style="cursor:default;pointer-events: none; "</c:if>
+                                    href="ViewProductController?pageNum=${requestScope.curPage + 1}&userid=${requestScope.user.userID}">&rsaquo;</a></li>
                         </ul>
                     </div>
                 </div>

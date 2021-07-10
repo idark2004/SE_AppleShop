@@ -157,7 +157,7 @@
                             </c:forEach>
                             <a id="myCart" href="cartDetail.jsp"><img src="themes/images/ico-cart.png" alt="cart">${subtotal} 
                             <c:if test="${sessionScope.cart == null}">No</c:if> 
-                            Items in your cart
+                            Items 
                             <c:if test="${sessionScope.cart != null}">
                             <span class="badge badge-warning pull-right"> 
                                     <fmt:setLocale value="vi_VN" />
@@ -167,13 +167,13 @@
                             </a>
                         </div>
                         <ul id="sideManu" class="nav nav-tabs nav-stacked">
-                            <li><a href="MainController?action=Product&perform=ViewProduct">All</a></li>
-                            <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=IP&status=True">iPhone</a></li>
-                            <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=ID&status=True">iPad</a></li>
-                            <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=MB&status=True">Mac</a></li>
-                            <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AW&status=True">Apple Watch</a></li>
-                            <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AS&status=True">Accessory</a></li>
-                        </ul>
+                        <li><a href="MainController?action=Product&perform=ViewProduct">All</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=IP&status=True">iPhone</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=ID&status=True">iPad</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=MB&status=True">Mac</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AW&status=True">Apple Watch</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AS&status=True">Accessory</a></li>
+                    </ul>
                         <br/>
                     </div>
                     <!-- Sidebar end=============================================== -->

@@ -26,7 +26,7 @@ public class OrderDAO {
         PreparedStatement ps = null;
         ResultSet rs = null;
 
-        String sql = "SELECT orderID, orderDate, cusName, price, address, payMethod, status FROM tblOrders ";
+        String sql = "SELECT orderID, orderDate, cusName, orderPrice, orderAddress, payMethod, orderStatus FROM tblOrders ";
 
         ArrayList<OrderDTO> lst = new ArrayList<>();
 
@@ -44,10 +44,10 @@ public class OrderDAO {
                     o.setOrderID(rs.getString("orderID"));
                     o.setOrderDate(rs.getString("orderDate"));
                     o.setCusName(rs.getString("cusName"));
-                    o.setPrice(rs.getDouble("price"));
-                    o.setAddress(rs.getString("address"));
+                    o.setPrice(rs.getDouble("orderPrice"));
+                    o.setAddress(rs.getString("orderAddress"));
                     o.setPayMethod(rs.getString("payMethod"));
-                    o.setStatus(rs.getString("status"));
+                    o.setStatus(rs.getString("orderStatus"));
                     
                     lst.add(o);
                 }
@@ -94,8 +94,7 @@ public class OrderDAO {
                     o.setPrice(rs.getDouble("orderPrice"));
                     o.setAddress(rs.getString("orderAddress"));
                     o.setPayMethod(rs.getString("payMethod"));
-                    o.setStatus(rs.getString("orderStatus"));
-                    
+                    o.setStatus(rs.getString("orderStatus"));                
                     lst.add(o);
                 }
             }
@@ -170,7 +169,7 @@ public class OrderDAO {
 
         String sql = "SELECT p.productName, s.color, s.ram, s.storage, o.orderQuantity, s.specPrice "
                 + " FROM tblProducts p, tblProductSpec s, tblOrderDetail o "
-                + " WHERE o.orderID= ? AND o.productID = p.productID AND o.specID = s.specID;";
+                + " WHERE o.orderID = ? AND o.specID = s.specID AND p.productID = s.productID ";
 
         ArrayList<OrderDetailDTO> lst = new ArrayList<>();
 
@@ -183,15 +182,15 @@ public class OrderDAO {
 
                 while (rs.next()) {
                     ProductDTO p = new ProductDTO();
-                    p.setName(rs.getString("name"));
+                    p.setName(rs.getString("productName"));
                     p.setColor(rs.getString("color"));
                     p.setRam(rs.getString("ram"));
                     p.setStorage(rs.getString("storage"));
-                    p.setPrice(rs.getDouble("price"));
+                    p.setPrice(rs.getDouble("specPrice"));
                     
                     OrderDetailDTO od = new OrderDetailDTO();
                     od.setOrderID(oid);
-                    od.setQuantity(rs.getInt("quantity"));
+                    od.setQuantity(rs.getInt("orderQuantity"));
                     od.setProduct(p);
                     
                     lst.add(od);

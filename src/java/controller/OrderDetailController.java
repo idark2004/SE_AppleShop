@@ -46,6 +46,7 @@ public class OrderDetailController extends HttpServlet {
             url=SUCCESS;
         } catch (Exception e) {
             log ("ERROR at OrderDetailController: " + e.getMessage());
+            request.setAttribute("ERROR", e.getMessage());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

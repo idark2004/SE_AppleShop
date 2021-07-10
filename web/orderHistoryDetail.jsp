@@ -40,6 +40,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="themes/images/ico/apple.png">
     <link rel="apple-touch-icon-precomposed" href="themes/images/ico/apple.png">
     <style type="text/css" id="enject"></style>
+    <script src="js/main.js"></script>
     <link rel="stylesheet" href="themes/font-awesome-4.7.0/css/font-awesome.min.css">
 </head>
 
@@ -227,9 +228,9 @@
                                         <th>Product</th>
                                         <th>Description</th>
                                         <th>Quantity/Update</th>
-                                        <th>Price</th>
+                                        <th>Price Per Product</th>
                                         <th>Discount</th>
-                                        <th>Total</th>
+                                        <th>Row Total</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -243,10 +244,11 @@
                                         <td>
                                             ${detail.quantity}
                                         </td>
-                                        <td><fmt:formatNumber type="number" maxFractionDigits = "0" value="${detail.product.price * detail.quantity}"/></td>
+                                        <td><fmt:formatNumber type="number" maxFractionDigits = "0" value="${detail.product.price}"/></td>
                                         <td>100,000 VND</td>
                                         <td><fmt:formatNumber type="number" maxFractionDigits = "0" value="${detail.product.price * detail.quantity}"/></td>
                                     </tr>
+                                    <c:set var="total" value="${total + (detail.product.price * detail.quantity)}" ></c:set>
                                </c:forEach>
                                 </c:when>
                                     <c:otherwise>
@@ -254,12 +256,12 @@
                                     </c:otherwise>
                                 </c:choose>
                                     <tr>
-                                        <td colspan="5" style="text-align:right"><strong>TOTAL (<fmt:formatNumber type="number" maxFractionDigits = "0" value="${detail.product.price * detail.quantity}"/> - 200,000 VND) =</strong></td>
-                                        <td class="label label-important" style="display:block"> <strong><fmt:formatNumber type="number" maxFractionDigits = "0" value="${detail.product.price * detail.quantity}"/></strong></td>
+                                        <td colspan="5" style="text-align:right"><strong>TOTAL ( <fmt:formatNumber type="number" maxFractionDigits = "0" value="${total}"/> - 200,000 VND) =</strong></td>
+                                        <td class="label label-important" style="display:block"> <strong> <fmt:formatNumber type="number" maxFractionDigits = "0" value="${total}"/></strong></td>
                                     </tr>
                                 </tbody>
                             </table>
-                            <a href="order_history.html" class="btn btn-large"><i class="icon-arrow-left"></i> Back </a>
+                                    <button onclick="PrevPage();" href="" class="btn btn-large"><i class="icon-arrow-left"></i> Back </button>
                         </div>
                     </div>
                 </div>
@@ -359,5 +361,9 @@
     </div>
     <span id="themesBtn"></span>
 </body>
-
+<script>
+     function PrevPage(){
+                window.history.back();
+            }    
+</script>
 </html>
