@@ -50,9 +50,8 @@ public class OrderDTO {
         this.address = address;
         this.phone = phone;
         this.email = email;
-        this.completedDate = completedDate;
+        this.orderCreateDate = orderCreateDate;
         this.orderExpectDate = orderExpectDate;
-        this.completedDate = completedDate;
         this.codeID = codeID;
         this.userID = userID;
         this.price = price;

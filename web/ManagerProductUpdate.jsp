@@ -191,12 +191,12 @@
                         <div class="span6">
                             <h3>iPhone 12 Pro Max</h3>
                             <hr class="soft" />
-                            <form class="form-horizontal qtyFrm">
+                            
 
                                 <div class="">
                                     <h5>Product Editor</h5>
                                     <br>
-                                    <form>
+                                    <form id="productUpdate">
                                         <div class="control-group">
                                             <label class="control-label" for="">Product Name</label>
                                             <div class="controls">
@@ -237,11 +237,15 @@
                                                 </select>
                                             </div>
                                         </div>
+                                        <div class="controls">
+                                                <input class="btn btn-primary btn-success" type="submit" value="Submit">
+                                        </div>
                                     </form>
                                     <hr class="soft" />
+                                    <form class="form-horizontal qtyFrm">
                                     <h5>Create new spec</h5>
                                     <br>
-                                    <form>
+                                    
                                         <div class="control-group">
                                             <label class="control-label" for="">Spec ID</label>
                                             <div class="controls">
@@ -302,14 +306,10 @@
                                     <div class="control-group">
                                         <label class="control-label" for="textarea">Description</label>
                                         <div class="controls">
-                                            <textarea class="input-xlarge" id="textarea" rows="3" style="height:10rem; width:97%;" placeholder="Input description here."></textarea>
+                                            <textarea form="productUpdate" class="input-xlarge" id="textarea" rows="3" style="height:10rem; width:97%;" placeholder="Input description here."></textarea>
                                         </div>
                                     </div>
-                                    <div class="control-group">
-                                        <div class="controls">
-                                            <input class="btn btn-primary btn-success" type="submit" value="Submit">
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                                 <div class="tab-pane fade" id="profile">
 

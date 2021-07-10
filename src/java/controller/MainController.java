@@ -42,7 +42,8 @@ public class MainController extends HttpServlet {
     private static final String PRODUCT= "ProductController";
     private static final String SEARCHPRODUCT= "SearchProductController";
     private static final String CART = "CartController";
-    
+    private static final String ORDERCHANGE= "OrderChangeStatusController";
+    private static final String ORDERDETAIL= "OrderDetailController";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {        
         System.out.println("Run through MainController");
@@ -107,9 +108,15 @@ public class MainController extends HttpServlet {
                 case"SaleCode":
                     url = SALECODE;
                     break;
+                case "ChangeStatus":
+                    url = ORDERCHANGE;
+                    break;    
                 case "OrderList":
                     url = ORDERLIST;
                     break;
+                case "OrderDetail":
+                    url = ORDERDETAIL;
+                    break;    
                 case "User Manage":
                     url = USER;
                     break;

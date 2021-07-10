@@ -1,11 +1,16 @@
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%-- 
+    Document   : AdminUserList
+    Created on : Jul 10, 2021, 10:48:45 PM
+    Author     : anime
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
-    <title>SE15 Shop | Order Summary</title>
+    <title>SE15 Shop | Customers</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -21,7 +26,6 @@
     <!-- Bootstrap style -->
     <link id="callCss" rel="stylesheet" href="themes/bootshop/bootstrap.min.css" media="screen" />
     <link href="themes/css/base.css" rel="stylesheet" media="screen" />
-    <link href="themes/css/comment.css" rel="stylesheet" media="screen" />
     <!-- Bootstrap style responsive -->
     <link href="themes/css/bootstrap-responsive.min.css" rel="stylesheet" />
     <link href="themes/css/font-awesome.css" rel="stylesheet" type="text/css">
@@ -41,25 +45,13 @@
     <div id="header">
         <div class="container">
             <div id="welcomeLine" class="row">
-                    <div class="span6">Welcome!
-                        <c:choose>
-                            <c:when test="${sessionScope.USER != null}">
-                                <strong>${USER.name}</strong>
-                            </c:when>
-                            <c:otherwise>
-                                <strong> User</strong>
-                            </c:otherwise>
-                        </c:choose></div>
-                    <div class="span6">
-                        <div class="pull-right">
-                            <c:forEach var="cartItem" items="${sessionScope.cart}">
-                                <c:set var="subtotalCount" value="${cartItem.quantity}"/>
-                                <c:set var="subtotal" value="${subtotal+cartItem.quantity}"/>
-                            </c:forEach>
-                            <a href="cartDetail.jsp"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> ${subtotal} Itemes in your cart </span> </a>
-                        </div>
+                <div class="span6">Welcome!<strong> User</strong></div>
+                <div class="span6">
+                    <div class="pull-right">
+                        <a href="product_summary_Manager.html"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> [ 3 ] Itemes in your cart </span> </a>
                     </div>
                 </div>
+            </div>
             <!-- Navbar ================================================== -->
             <div id="logoArea" class="navbar">
                 <a id="smallScreen" data-target="#topMenu" data-toggle="collapse" class="btn btn-navbar">
@@ -68,16 +60,47 @@
                     <span class="icon-bar"></span>
                 </a>
                 <div class="navbar-inner">
-                    <a class="brand" href="index.jsp">SE15 Shop</a>
-                    <form class="form-inline navbar-search" method="post" action="MainController">
-                        <input id="srchFld" class="srchTxt" type="text" name="keyWord"/>
-                        <input type="hidden" value="SearchProduct" name="action"/>
+                    <a class="brand" href="index_Manager.html">SE15 Shop</a>
+                    <form class="form-inline navbar-search" method="post" action="products.html">
+                        <input id="srchFld" class="srchTxt" type="text" />
                         <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
                     </form>
                     <ul id="topMenu" class="nav pull-right">
-                        <li class=""><a href="productList.jsp">All Products</a></li>
-                        <li class=""><a href="contact.jsp">Contact</a></li>
-                        <li class=""><a href="userProfile.jsp">Profile</a></li>                        
+                        <li class=""><a href="products_Manager.html">All Products</a></li>
+                        <li class=""><a href="contact.html">Contact</a></li>
+                        <li class=""><a href="user_profile.html">Profile</a></li>
+                        <li class="">
+                            <a href="register.html" role="button" style="padding-right:0"><span class="btn btn-large btn-success">Signup</span></a>
+                        </li>
+                        <li class="">
+                            <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
+                            <div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <h3>Login In</h3>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="form-horizontal loginFrm">
+                                        <div class="control-group">
+                                            <input type="text" id="inputEmail" placeholder="Email">
+                                        </div>
+                                        <div class="control-group">
+                                            <input type="password" id="inputPassword" placeholder="Password">
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="checkbox">
+											<input type="checkbox"> Remember me
+											</label>
+                                        </div>
+                                        <div class="control-group">
+                                            <a href="#"><img width="30" height="30" src="themes/images/google.png" title="Login with Google" alt="Google Login" /></a>
+                                        </div>
+                                    </form>
+                                    <button type="submit" class="btn btn-success">Sign in</button>
+                                    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                                </div>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -89,17 +112,17 @@
             <div class="carousel-inner">
                 <div class="item active">
                     <div class="container">
-                        <a href="signupForm.jsp"><img style="width:100%" src="themes/images/carousel/1.png" alt="" /></a>
+                        <a href="register.html"><img style="width:100%" src="themes/images/carousel/1.png" alt="" /></a>
                     </div>
                 </div>
                 <div class="item">
                     <div class="container">
-                        <a href="signupForm.jsp"><img style="width:100%" src="themes/images/carousel/2.png" alt="" /></a>
+                        <a href="register.html"><img style="width:100%" src="themes/images/carousel/2.png" alt="" /></a>
                     </div>
                 </div>
                 <div class="item">
                     <div class="container">
-                        <a href="signupForm.jsp"><img src="themes/images/carousel/3.png" alt="" /></a>
+                        <a href="register.html"><img src="themes/images/carousel/3.png" alt="" /></a>
                     </div>
                 </div>
             </div>
@@ -112,131 +135,113 @@
             <div class="row">
                 <!-- Sidebar ================================================== -->
                 <div id="sidebar" class="span3">
-                      <div class="well well-small">
-                            <c:forEach var="cartItem" items="${sessionScope.cart}">
-                                <c:set var="total" value="${total + (cartItem.quantity * cartItem.product.price)}"/>
-                            </c:forEach>
-                            <a id="myCart" href="cartDetail.jsp"><img src="themes/images/ico-cart.png" alt="cart">${subtotal} 
-                            <c:if test="${sessionScope.cart == null}">No</c:if> 
-                            Items in your cart
-                            <c:if test="${sessionScope.cart != null}">
-                            <span class="badge badge-warning pull-right"> 
-                                    <fmt:setLocale value="vi_VN" />
-                                    <fmt:formatNumber value="${total}" type="currency" />
-                            </span>
-                            </c:if>
-                            </a>
-                        </div>
+                    <div class="well well-small">
+                        <a id="myCart" href="product_summary_Manager.html"><img src="themes/images/ico-cart.png" alt="cart">3 Items in your cart <span class="badge badge-warning pull-right">445,000VND</span></a>
+                    </div>
                     <ul id="sideManu" class="nav nav-tabs nav-stacked">
-                        <li><a href="MainController?action=Product&perform=ViewProduct">All</a></li>
-                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=IP&status=True">iPhone</a></li>
-                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=ID&status=True">iPad</a></li>
-                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=MB&status=True">Mac</a></li>
-                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AW&status=True">Apple Watch</a></li>
-                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AS&status=True">Accessory</a></li>
+                        <li><a href="products_Manager.html">All</a></li>
+                        <li><a href="products_Manager.html">iPhone</a></li>
+                        <li><a href="products_Manager.html">iPad</a></li>
+                        <li><a href="products_Manager.html">Mac</a></li>
+                        <li><a href="products_Manager.html">Accessory</a></li>
+                        <li class="subMenu"><a>Shop Manager</a>
+                            <ul style="display:none">
+                                <li><a href="dashboard_Manager.html"><i class="icon-chevron-right"></i>Dashboard</a></li>
+                                <li><a href="product_details_Manager.html"><i class="icon-chevron-right"></i>Add Product</a></li>
+                                <li><a href="customers_Manager.html"><i class="icon-chevron-right"></i>Customer List</a></li>
+                            </ul>
+                        </li>
                     </ul>
                     <br/>
                 </div>
                 <!-- Sidebar end=============================================== -->
                 <div class="span9">
                     <ul class="breadcrumb">
-                        <li><a href="index.jsp">Home</a> <span class="divider">/</span></li>
-                        <li><a href="product_summary.jsp">Products</a> <span class="divider">/</span></li>
-                        <li class="active">Receipt</li>
+                        <li><a href="index_Manager.html">Home</a> <span class="divider">/</span></li>
+                        <li class="active">Customers</li>
                     </ul>
                     <div class="row">
                         <div class="span9">
-                            <h3>Thank you for your order!</h3>
-                            <hr class="soft" />
-                            <form class="form-horizontal qtyFrm">
-                                <div class="">
-                                    <c:set var="order" value="${requestScope.newOrder}" scope="page"></c:set>
-                                    <p class="small">
-                                        Thank you for choosing SE15 Shop. In 15 minutes, we will SMS or Call to confirm the order.
-                                    </p>
-                                    <p class="small">
-                                        * For the orders from <span><strong>21:30 pm to 8 am</strong></span> the next day, we will contact you before 10 pm on the same day.
-                                    </p>
-                                    <p class="small">
-                                        If you need any assistance, please contact <span><strong>0914123456</strong></span>. Thank you very much!
-                                    </p>
-                                    <p class="small">
-                                        <strong> We also send billing email to ${order.email}.</strong>
-                                    </p>
-                                </div>
-                                
-                                <hr class="soft" />
-                                <h5> Order Details</h5>
-                                <div class="well span8">
-                                    <form>
-                                        <p class="small">
-                                            Order ID: <span><strong>${order.orderID}</strong></span>
-                                        </p>
-                                        <p class="small">
-                                            Fullname: <span><strong>${order.cusName}</strong></span>
-                                        </p>
-                                        <p class="small">
-                                            Address: <span><strong>${order.address}</strong></span>
-                                        </p>
-                                        <p class="small">
-                                            Phone: <span><strong>${order.email}</strong></span>
-                                        </p>
-                                        <br>
-                                        <p class="small">
-                                            Created: <span><strong>${order.orderCreateDate}</strong></span>
-                                        </p>
-                                        <p class="small">
-                                            Expect Date: <span><strong>${order.orderExpectDate}</strong></span>
-                                        </p>
-                                        <p class="small">
-                                            Payment method: <span><strong>${order.payMethod}</strong></span>
-                                        </p>
-                                    </form>
-                                </div>
-                            </form>
-
-                             <table class="table table-bordered">
+                            <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Product</th>
-                                        <th>Description</th>
-                                        <th>Quantity/Update</th>
-                                        <th>Price Per Product</th>
-                                        <th>Discount</th>
-                                        <th>Row Total</th>
+
+                                        <th><span>User</span></th>
+                                        <th>Id</th>
+                                        <th><span>Created</span></th>
+                                        <th><span>Address</span></th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                     <c:choose>
-                                <c:when test="${requestScope.detail != null}">
-                                    <c:forEach var="detail" items="${requestScope.detail}">
                                     <tr>
-                                        <td> <img width="60" src="themes/images/products/4.jpg" alt="" /></td>
-                                        <td>${detail.product.name}<br/>Color : ${detail.product.color}<br/>
-                                            Ram:${detail.product.ram}<br/>Storage:${detail.product.storage}</td>
+
                                         <td>
-                                            ${detail.quantity}
+                                            <a href="customer_details_Manager.html">Tien Tri Vu Tru Tran Dan</a>
                                         </td>
-                                        <td><fmt:formatNumber type="number" maxFractionDigits = "0" value="${detail.product.price}"/></td>
-                                        <td>100,000 VND</td>
-                                        <td><fmt:formatNumber type="number" maxFractionDigits = "0" value="${detail.product.price * detail.quantity}"/></td>
+                                        <td>trandan123</td>
+                                        <td>2020/08/12</td>
+                                        <td>
+                                            123 Little Saigon, California, USA
+                                        </td>
+                                        <td>
+                                            <a href="customer_details_Manager.html" class="table-link text-info" title="More Detail">
+                                                <span class="fa-stack">
+                                                    <i class="fa fa-square fa-stack-2x"></i>
+                                                    <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+                                                </span>
+                                            </a>
+                                            <a href="" class="table-link danger" title="Hide This Customer">
+                                                <span class="fa-stack">
+                                                    <i class="fa fa-square fa-stack-2x"></i>
+                                                    <i class="fa fa-eye fa-stack-1x fa-inverse"></i>
+                                                </span>
+                                            </a>
+                                        </td>
                                     </tr>
-                                    <c:set var="total" value="${total + (detail.product.price * detail.quantity)}" ></c:set>
-                               </c:forEach>
-                                </c:when>
-                                    <c:otherwise>
-                                        <h1>${requestScope.EMPTY_LIST}</h1>
-                                    </c:otherwise>
-                                </c:choose>
+
                                     <tr>
-                                        <td colspan="5" style="text-align:right"><strong>TOTAL ( <fmt:formatNumber type="number" maxFractionDigits = "0" value="${total}"/> - 200,000 VND) =</strong></td>
-                                        <td class="label label-important" style="display:block"> <strong> <fmt:formatNumber type="number" maxFractionDigits = "0" value="${total}"/></strong></td>
+                                        <td>
+                                            <a href="customer_details_Manager.html">Maria Ozawa</a>
+                                        </td>
+                                        <td>ozawakimochi</td>
+                                        <td>2020/08/12</td>
+                                        <td>
+                                            123 Yamate Kudasai, Tokyo, Japan
+                                        </td>
+                                        <td>
+                                            <a href="customer_details_Manager.html" class="table-link  text-info" title="More Detail">
+                                                <span class="fa-stack">
+                                                    <i class="fa fa-square fa-stack-2x"></i>
+                                                    <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+                                                </span>
+                                            </a>
+                                            <a href="#" class="table-link danger" title="Hide This Customer">
+                                                <span class="fa-stack">
+                                                    <i class="fa fa-square fa-stack-2x"></i>
+                                                    <i class="fa fa-eye fa-stack-1x fa-inverse"></i>
+                                                </span>
+                                            </a>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
-                            <a href="index.jsp" class="btn btn-large pull-right">Finish <i class="icon-arrow-right"></i></a>
                         </div>
                     </div>
+
+                    <div class="pagination">
+                        <ul>
+                            <li><a href="#">&lsaquo;</a></li>
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">...</a></li>
+                            <li><a href="#">&rsaquo;</a></li>
+                        </ul>
+                    </div>
+                    <p><a href="#" class="btn btn-primary">Manager List</a> <a href="add_manager_admin.html" class="btn">Add new manager</a></p>
+
                 </div>
             </div>
         </div>

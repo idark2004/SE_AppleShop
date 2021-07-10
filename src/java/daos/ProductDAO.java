@@ -302,15 +302,15 @@ public class ProductDAO {
         return null;
     }
 
-    public OrderDTO completeOrder(List<CartItemDTO> cart, String address, String name, String email, String phone, String userID, String codeID, String method, double price) throws SQLException {
-        LocalDateTime currentDateTime = LocalDateTime.now();
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        String orderCreateDate = currentDateTime.format(dtf);
-          Calendar cal = Calendar.getInstance();
+    public OrderDTO completeOrder(List<CartItemDTO> cart, String address, String name, String email, String phone, String userID, String codeID, String method, double price) throws SQLException {        
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        DateFormat dateFormat1 = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Calendar cal = Calendar.getInstance();
+        java.util.Date getOrderCreateDate = cal.getTime();
+        String orderCreateDate = dateFormat1.format(getOrderCreateDate) ;
         cal.add(Calendar.DATE, +7);
-        java.util.Date orderExpectDate = cal.getTime();
-        String orderExpectedDay = dateFormat.format(orderExpectDate) ;
+        java.util.Date getOrderExpectDate = cal.getTime();
+        String orderExpectedDay = dateFormat.format(getOrderExpectDate) ;
         System.out.println("Tao xong date ");
         DBSupport db = new DBSupport();
         OrderDTO newOrder = new OrderDTO();
@@ -336,8 +336,8 @@ public class ProductDAO {
                 stm.setString(11, null);
                 stm.executeUpdate();
                 newOrder = new OrderDTO(orderID, name, address, phone, email, orderCreateDate,orderExpectedDay, codeID, userID, price, method, "True");
-                System.out.println("Add completeOrder success ");
-            }
+                
+            }System.out.println("Add completeOrder success ");
         } finally {
             if (stm != null) {
                 stm.close();

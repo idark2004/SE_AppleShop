@@ -26,7 +26,7 @@ public class OrderDAO {
         PreparedStatement ps = null;
         ResultSet rs = null;
 
-        String sql = "SELECT orderID, orderDate, cusName, orderPrice, orderAddress, payMethod, orderStatus FROM tblOrders ";
+        String sql = "SELECT orderID, orderCreateDate,orderExpectDate,completedDate, cusName, orderPrice, orderAddress, payMethod, orderStatus FROM tblOrders ";
 
         ArrayList<OrderDTO> lst = new ArrayList<>();
 
@@ -42,7 +42,9 @@ public class OrderDAO {
                 while (rs.next()) {
                     OrderDTO o = new OrderDTO();
                     o.setOrderID(rs.getString("orderID"));
-                    o.setOrderDate(rs.getString("orderDate"));
+                    o.setOrderCreateDate(rs.getString("orderCreateDate"));
+                    o.setOrderExpectDate(rs.getString("orderExpectDate"));
+                    o.setCompletedDate(rs.getString("completedDate"));
                     o.setCusName(rs.getString("cusName"));
                     o.setPrice(rs.getDouble("orderPrice"));
                     o.setAddress(rs.getString("orderAddress"));
@@ -65,13 +67,45 @@ public class OrderDAO {
         }
         return lst;
     }
-    
+    public boolean ChangeStatus(String oid,String status)throws NamingException, SQLException{
+        boolean check=false; 
+        Connection c = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        String sql="UPDATE tblOrders " +
+        " SET orderStatus = ?" +
+        " WHERE orderID = ?";
+         try {
+            c = DBConnect.makeConnection();
+                if (c != null) {
+                    ps = c.prepareStatement(sql);
+                    ps.setString(1, status);
+                    ps.setString(2, oid);
+                    check = ps.executeUpdate()>0;
+                }
+            } catch (Exception e) {
+            e.printStackTrace();
+             } 
+            finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (c != null) {
+                c.close();
+            }
+        }
+         return check;
+    }
     public ArrayList<OrderDTO> getAllUserOrder(String userID) throws NamingException, SQLException {
         Connection c = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
 
-        String sql = "SELECT orderID, orderDate, cusName, orderPrice, orderAddress, payMethod, orderStatus FROM tblOrders WHERE userID=?";
+        String sql = "SELECT orderID, orderCreateDate,orderExpectDate,completedDate, cusName, orderPrice, orderAddress, payMethod, orderStatus FROM tblOrders WHERE userID=?";
 
         ArrayList<OrderDTO> lst = new ArrayList<>();
 
@@ -83,13 +117,14 @@ public class OrderDAO {
                 rs = ps.executeQuery();
                 
                 
-                if(rs != null) System.out.println("rs <> null");
-                else System.out.println("rs null");
+                
                 
                 while (rs.next()) {
                     OrderDTO o = new OrderDTO();
                     o.setOrderID(rs.getString("orderID"));
-                    o.setOrderDate(rs.getString("orderDate"));
+                    o.setOrderCreateDate(rs.getString("orderCreateDate"));
+                    o.setOrderExpectDate(rs.getString("orderExpectDate"));
+                    o.setCompletedDate(rs.getString("completedDate"));
                     o.setCusName(rs.getString("cusName"));
                     o.setPrice(rs.getDouble("orderPrice"));
                     o.setAddress(rs.getString("orderAddress"));
@@ -117,7 +152,7 @@ public class OrderDAO {
         PreparedStatement ps = null; //doi tuong truy van
         ResultSet rs = null;//doi tuong nhan ket qua
 
-        String sql = "SELECT orderID, cusName, orderDate, orderPrice , orderAddress, payMethod, orderStatus "
+        String sql = "SELECT orderID, userID,cusName, orderCreateDate,orderExpectDate,completedDate, orderPrice , orderAddress, payMethod, orderStatus "
                 + " FROM tblOrders "
                 + " WHERE orderID=?";
 
@@ -133,8 +168,11 @@ public class OrderDAO {
                 while (rs.next()) {
                     OrderDTO o = new OrderDTO();
                     o.setOrderID(oid);
+                    o.setUserID(rs.getString("userID"));
                     o.setCusName(rs.getString("cusName"));
-                    o.setOrderDate(rs.getString("orderDate"));
+                    o.setOrderCreateDate(rs.getString("orderCreateDate"));
+                    o.setOrderExpectDate(rs.getString("orderExpectDate"));
+                    o.setCompletedDate(rs.getString("completedDate"));
                     o.setPayMethod(rs.getString("payMethod"));
                     o.setPrice(rs.getDouble("orderPrice"));
                     o.setAddress(rs.getString("orderAddress"));

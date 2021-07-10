@@ -1,18 +1,16 @@
 <%-- 
-    Document   : orderHistory
-    Created on : Jul 8, 2021, 7:45:26 PM
+    Document   : ManagerAddProduct
+    Created on : Jul 10, 2021, 10:25:50 PM
     Author     : anime
 --%>
-<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
-    <title>SE15 Shop | Order Success</title>
+    <title>SE15 Shop | Product Editor</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -75,18 +73,18 @@
                     <span class="icon-bar"></span>
                 </a>
                 <div class="navbar-inner">
-                    <a class="brand" href="index.jsp">SE15 Shop</a>
+                    <a class="brand" href="index_Manager.html">SE15 Shop</a>
                     <form class="form-inline navbar-search" method="post" action="MainController">
                         <input id="srchFld" class="srchTxt" type="text" name="keyWord"/>
                         <input type="hidden" value="SearchProduct" name="action"/>
                         <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
                     </form>
                     <ul id="topMenu" class="nav pull-right">
-                        <li class=""><a href="ViewProductController">All Products</a></li>
-                        <li class=""><a href="contact.jsp">Contact</a></li>
-                        <li class=""><a href="userProfile.jsp">Profile</a></li>
+                        <li class=""><a href="products_Manager.html">All Products</a></li>
+                        <li class=""><a href="contact.html">Contact</a></li>
+                        <li class=""><a href="user_profile.html">Profile</a></li>
                         <li class="">
-                            <a href="signupForm.jsp" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Signup</span></a>
+                            <a href="register.html" role="button" style="padding-right:0"><span class="btn btn-large btn-success">Signup</span></a>
                         </li>
                         <li class="">
                             <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
@@ -96,22 +94,24 @@
                                     <h3>Login In</h3>
                                 </div>
                                 <div class="modal-body">
-                                    <form class="form-horizontal loginFrm" action="MainController" method="post">
+                                    <form class="form-horizontal loginFrm">
                                         <div class="control-group">
-                                            <input type="text" id="inputEmail" placeholder="Enter Email" name="uname" required>
+                                            <input type="text" id="inputEmail" placeholder="Email">
                                         </div>
                                         <div class="control-group">
-                                            <input type="password" id="inputPassword" placeholder="Enter Password" name="psw" required>
+                                            <input type="password" id="inputPassword" placeholder="Password">
                                         </div>
                                         <div class="control-group">
                                             <label class="checkbox">
 											<input type="checkbox"> Remember me
 											</label>
-                                            <div class="g-signin2" data-onsuccess="onSignIn"></div>
-                                            <button type="submit" class="btn btn-success" name="action" value="Login">Sign in</button>
-                                            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                                        </div>
+                                        <div class="control-group">
+                                            <a href="#"><img width="30" height="30" src="themes/images/google.png" title="Login with Google" alt="Google Login" /></a>
                                         </div>
                                     </form>
+                                    <button type="submit" class="btn btn-success">Sign in</button>
+                                    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
                                 </div>
                             </div>
                         </li>
@@ -126,17 +126,17 @@
             <div class="carousel-inner">
                 <div class="item active">
                     <div class="container">
-                        <a href="signupForm.jsp"><img style="width:100%" src="themes/images/carousel/1.png" alt="" /></a>
+                        <a href="register.html"><img style="width:100%" src="themes/images/carousel/1.png" alt="" /></a>
                     </div>
                 </div>
                 <div class="item">
                     <div class="container">
-                        <a href="signupForm.jsp"><img style="width:100%" src="themes/images/carousel/2.png" alt="" /></a>
+                        <a href="register.html"><img style="width:100%" src="themes/images/carousel/2.png" alt="" /></a>
                     </div>
                 </div>
                 <div class="item">
                     <div class="container">
-                        <a href="signupForm.jsp"><img src="themes/images/carousel/3.png" alt="" /></a>
+                        <a href="register.html"><img src="themes/images/carousel/3.png" alt="" /></a>
                     </div>
                 </div>
             </div>
@@ -149,29 +149,21 @@
             <div class="row">
                 <!-- Sidebar ================================================== -->
                 <div id="sidebar" class="span3">
-                      <div class="well well-small">
+                    <div class="well well-small">
                             <c:forEach var="cartItem" items="${sessionScope.cart}">
                                 <c:set var="total" value="${total + (cartItem.quantity * cartItem.product.price)}"/>
                             </c:forEach>
-                            <a id="myCart" href="cartDetail.jsp"><img src="themes/images/ico-cart.png" alt="cart">${subtotal} 
-                            <c:if test="${sessionScope.cart == null}">No</c:if> 
-                            Items in your cart
-                            <c:if test="${sessionScope.cart != null}">
-                            <span class="badge badge-warning pull-right"> 
+                            <a id="myCart" href="cartDetail.jsp"><img src="themes/images/ico-cart.png" alt="cart">${subtotal} Items in your cart <span class="badge badge-warning pull-right"> 
                                     <fmt:setLocale value="vi_VN" />
-                                    <fmt:formatNumber value="${total}" type="currency" />
-                            </span>
-                            </c:if>
+                                    <fmt:formatNumber value="${total}" type="currency" /></span>
                             </a>
-                        </div>
+                    </div>
                     <ul id="sideManu" class="nav nav-tabs nav-stacked">
-                        <li><a href="MainController?action=Product&perform=ViewProduct">All</a></li>
-                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=IP&status=True">iPhone</a></li>
-                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=ID&status=True">iPad</a></li>
-                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=MB&status=True">Mac</a></li>
-                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AW&status=True">Apple Watch</a></li>
-                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AS&status=True">Accessory</a></li>
-                        <c:if test="${sessionScope.USER.roleID.trim() == 'MN' || sessionScope.USER.roleID.trim() == 'AD'}">
+                        <li><a href="products_Manager.html">All</a></li>
+                        <li><a href="products_Manager.html">iPhone</a></li>
+                        <li><a href="products_Manager.html">iPad</a></li>
+                        <li><a href="products_Manager.html">Mac</a></li>
+                        <li><a href="products_Manager.html">Accessory</a></li>
                         <li class="subMenu"><a>Shop Manager</a>
                             <ul style="display:none">
                                 <li><a href="dashboard_Manager.html"><i class="icon-chevron-right"></i>Dashboard</a></li>
@@ -179,101 +171,155 @@
                                 <li><a href="customers_Manager.html"><i class="icon-chevron-right"></i>Customer List</a></li>
                             </ul>
                         </li>
-                        </c:if>
                     </ul>
                     <br/>
                 </div>
                 <!-- Sidebar end=============================================== -->
                 <div class="span9">
                     <ul class="breadcrumb">
-                        <li><a href="index.jsp">Home</a> <span class="divider">/</span></li>
-                        <li class="active">Order History</li>
+                        <li><a href="index_Manager.html">Home</a> <span class="divider">/</span></li>
+                        <li><a href="products_Manager.html">Products</a> <span class="divider">/</span></li>
+                        <li class="active">iPhone 12 Pro Max</li>
                     </ul>
                     <div class="row">
-                        <div class="span9">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th><span>Created</span></th>
-                                        <th>Order ID</th>
-                                        <th><span>Ship Address</span></th>
-                                        <th><span>Total Price</span></th>
-                                        <th><span>Status</span></th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <c:choose>
-                                    <c:when test="${requestScope.ORDER_LIST != null}">
-                                        <c:forEach var="order" items="${requestScope.ORDER_LIST}">
-                                    <tr>
-                                        <td>${order.orderCreateDate}</td>
-
-                                        <td>${order.orderID}</td>
-                                        <td>
-                                           ${order.address}
-                                        </td>
-                                        <td>
-                                           <fmt:formatNumber type="number" maxFractionDigits = "0" value="${order.price}"/>
-                                        </td>
-                                        <td>
-                                           ${order.status}
-                                        </td>
-                                        <td>
-                                            
-                                            <a href="OrderDetailController?orderID=${order.orderID}" class="table-link text-info" title="More Detail">
-                                                <span class="fa-stack">
-                                                    <i class="fa fa-square fa-stack-2x"></i>
-                                                    <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
-                                                </span>
-                                            </a>
-                                                
-                             
-                                        </td>
-                                    </tr>
-                                    </c:forEach>
-                                     </c:when>
-                                    <c:otherwise>
-                                        <h2>${requestScope.EMPTY_LIST.msg}</h2>
-                                    </c:otherwise>
-                                    </c:choose>
-                                  
-                                </tbody>
-                            </table>
+                        <div id="gallery" class="span3">
+                            <a href="themes/images/products/detail/1.jpg" title="iPhone 12 Pro Max">
+                                <img src="themes/images/products/detail/1.jpg" style="width:100%" alt="iPhone 12 Pro Max" />
+                                <input class="file-input" type="file">
+                            </a>
                         </div>
+                        <div class="span6">
+                            <h3>iPhone 12 Pro Max</h3>
+                            <hr class="soft" />
+                            
+
+                                <div class="">
+                                    <h5>Product Editor</h5>
+                                    <br>
+                                    <form id="productUpdate">
+                                        <div class="control-group">
+                                            <label class="control-label" for="">Product Name</label>
+                                            <div class="controls">
+                                                <input class="span3" type="text" id="inputProductName" placeholder="Product Name" maxlength="30">
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label" for="">Price</label>
+                                            <div class="controls">
+                                                <input class="span3" type="text" id="inputPrice" placeholder="Price" maxlength="11">
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label" for="">Quantity</label>
+                                            <div class="controls">
+                                                <input class="span3" type="number" id="inputPrice" placeholder="Quantity">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="controls">
+                                                <input class="btn btn-primary btn-success" type="submit" value="Submit">
+                                        </div>
+                                    </form>
+                                    <hr class="soft" />
+                                    
+                                </div>
+
+                            
+
+                        </div>
+
+                        <div class="span9">
+                            <ul id="productDetail" class="nav nav-tabs">
+                                <li class="active"><a href="#home" data-toggle="tab">Product Details</a></li>
+                                <li><a href="#profile" data-toggle="tab">Comment</a></li>
+                            </ul>
+                            <div id="myTabContent" class="tab-content">
+                                <div class="tab-pane fade active in" id="home">
+                                    <h4>Product Information</h4>
+                                    <div class="control-group">
+                                        <label class="control-label" for="textarea">Description</label>
+                                        <div class="controls">
+                                            <textarea form="productUpdate" class="input-xlarge" id="textarea" rows="3" style="height:10rem; width:97%;" placeholder="Input description here."></textarea>
+                                        </div>
+                                    </div>
+                                   
+                                </div>
+                                <div class="tab-pane fade" id="profile">
+
+                                    <div class="container__review">
+                                        <h3 class="review__tittle">Comment</h3>
+
+                                        <div class="form-comment__container">
+                                            <form action="MainController" class="form-review">
+                                                <lable for="reviewer-name" class="name-lable">Full Name</lable>
+                                                <input placeholder="Input your Name" type="text" id="reviewer-name" class="cName" name="reviewer-name">
+                                                <lable for="pComment" class="comment-lable">Comment</lable>
+                                                <textarea type="text" class="pComment" id="pComment" name="pComment" placeholder="Input detail your comment"></textarea>
+                                                <input type="hidden" name="productID" value="${requestScope.product.productID}" />
+                                                <input type="submit" name="action" class="btn btn-small" value="Submit comment">
+                                            </form>
+                                        </div>
+                                        <div class="review-list">
+                                            <div review-item__container>
+                                                <div class="reivew-row">
+                                                    <span class="review__reviewer-name">
+                                                    Khach hang
+                                                    </span>
+                                                    <p class="review__reviewer-comment">
+                                                        Cho mình hòi Galaxy A51 đã sử dụng hơn 1 năm, shop có xem xét áp dụng chương trình trợ giá đổi qua IP 12 bản 256GB không ạ? và có áp dụng thêm chương trình trả góp qua thẻ tín dụng của HSBC không ạ? và kì hạn hỗ trợ tối đa là bao nhiêu? mình cảm ơn shope.
+                                                    </p>
+                                                </div>
+                                                <ul class="review-option">
+                                                    <form method="POST" class="reply-form d-none" id="comment-1-reply-form">
+                                                        <textarea class="input-reply" placeholder="Reply to comment" rows="4"></textarea>
+                                                        <button class="reply-submit" type="submit">Submit</button>
+                                                        <button type="button" onclick="closeForm(this)">Cancel</button>
+                                                    </form>
+                                                </ul>
+
+
+                                                <div id="reply-1" class="reply-item__container">
+
+                                                    <div class="reivew-row">
+                                                        <span class="fas fa-share review__reviewer-name">
+                                                        Customer
+                                                        </span>
+
+                                                        <p class="review__reviewer-comment">
+                                                            Shop xin chào anh Galaxy A51 hiện chưa được áp dụng cái kiểu chương trình này ạ.
+                                                        </p>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <hr class="soft" />
+                                            <div review-item__container>
+                                                <li class="reivew-row">
+                                                    <span class="review__reviewer-name">
+                                                    Thang anh 69
+                                                    </span>
+                                                    <p class="review__reviewer-comment">
+                                                        Ngành IT Việt Nam hiện nay ở đầu của sự phát triển. Có thể nói IT là vua của các nghề. Vừa có tiền, có quyền. Vừa kiếm được nhiều $ lại được xã hội trọng vọng. Thằng em mình học bách khoa cơ khí, sinh năm 96. Tự mày mò học code rồi đi làm remote cho công
+                                                        ty Mỹ 2 năm nay. Mỗi tối online 3-4 giờ là xong việc. Lương tháng 3k6. Nhưng thu nhập chính vẫn là từ nhận các project bên ngoài làm thêm. Tuần làm 2,3 cái nhẹ nhàng 9,10k tiền tươi thóc thật không
+                                                        phải đóng thuế. Làm gần được 3 năm mà nhà xe nó đã mua đủ cả. Nghĩ mà thèm.
+                                                    </p>
+                                                </li>
+                                                <ul class="review-option">
+                                                    <form method="POST" class="reply-form d-none" id="comment-1-reply-form">
+                                                        <textarea class="input-reply" placeholder="Reply to comment" rows="4"></textarea>
+                                                        <button class="reply-submit" type="submit">Submit</button>
+                                                        <button type="button" onclick="closeForm(this)">Cancel</button>
+                                                    </form>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
-                <c:choose>
-                    <c:when test="${requestScope.user != null}">
-<!--                    Customer pagination-->
-                        <div class="pagination">
-                        <ul>
-                            <li><a <c:if test="${requestScope.curPage == 1 }">style="cursor:default;pointer-events: none; "</c:if>
-                                                                              href="OrderHistoryController?pageNum=${requestScope.curPage - 1}&userid=${requestScope.user.userID}">&lsaquo;</a></li>
-                                <c:forEach var="pageNum" begin="1" end="${requestScope.pages}">                           
-                                <li 
-                                    ><a <c:if test="${requestScope.curPage == pageNum}">style="color:red;"</c:if> href="OrderHistoryController?pageNum=${pageNum}&userid=${requestScope.user.userID}">${pageNum}</a></li>
-                            </c:forEach>
-                            <li><a <c:if test="${requestScope.curPage == requestScope.pages }">style="cursor:default;pointer-events: none; "</c:if>
-                                    href="OrderHistoryController?pageNum=${requestScope.curPage + 1}&userid=${requestScope.user.userID}">&rsaquo;</a></li>
-                        </ul>
-                    </div>
-                    </c:when>
-                    <c:otherwise>
-<!--                        admin pagination-->
-                        <div class="pagination">
-                        <ul>
-                            <li><a <c:if test="${requestScope.curPage == 1 }">style="cursor:default;pointer-events: none; "</c:if>
-                                                                              href="OrderListController?pageNum=${requestScope.curPage - 1}">&lsaquo;</a></li>
-                                <c:forEach var="pageNum" begin="1" end="${requestScope.pages}">                           
-                                <li 
-                                    ><a <c:if test="${requestScope.curPage == pageNum}">style="color:red;"</c:if> href="OrderListController?pageNum=${pageNum}">${pageNum}</a></li>
-                            </c:forEach>
-                            <li><a <c:if test="${requestScope.curPage == requestScope.pages }">style="cursor:default;pointer-events: none; "</c:if>
-                                    href="OrderListController?pageNum=${requestScope.curPage + 1}">&rsaquo;</a></li>
-                        </ul>
-                    </div>
-                    </c:otherwise>
-                </c:choose>    
                 </div>
             </div>
         </div>
@@ -285,15 +331,15 @@
             <div class="row">
                 <div class="span3">
                     <h5>ACCOUNT</h5>
-                    <a href="loginForm.jsp">LOGIN</a>
-                    <a href="userProfile.jsp">PROFILE</a>
-                    <a href="cartDetail.jsp">CART</a>
-                    <a href="order_history.jsp">ORDER HISTORY</a>
+                    <a href="login.html">LOGIN</a>
+                    <a href="login.html">PROFILE</a>
+                    <a href="login.html">CART</a>
+                    <a href="login.html">ORDER HISTORY</a>
                 </div>
                 <div class="span3">
                     <h5>INFORMATION</h5>
-                    <a href="contact.jsp">CONTACT</a>
-                    <a href="signupForm.jsp">REGISTRATION</a>
+                    <a href="contact.html">CONTACT</a>
+                    <a href="register.html">REGISTRATION</a>
                     <a href="legal_notice.html">LEGAL NOTICE</a>
                     <a href="tac.html">TERMS AND CONDITIONS</a>
                 </div>

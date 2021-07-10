@@ -5,21 +5,28 @@
  */
 package controller;
 
+import daos.OrderDAO;
 import daos.ProductDAO;
 import dtos.CartItemDTO;
 import dtos.ErrorDTO;
 import dtos.OrderDTO;
+import dtos.OrderDetailDTO;
 import dtos.ProductDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Currency;
 import java.util.List;
+import java.util.Locale;
+import javax.mail.MessagingException;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
+import utils.EmailUtility;
 /**
  *
  * @author phath
@@ -28,7 +35,22 @@ public class CartController extends HttpServlet {
 
     public static final String ERROR = "error.jsp";
     public static final String ORDERED = "orderCompletion.jsp";
-
+    private static String host;
+    private static String port;
+    private static String emailSender;
+    private static String nameSender;
+    private static String pass;
+ 
+    @Override
+    public void init() {
+        // reads SMTP server setting from web.xml file
+        ServletContext context = getServletContext();
+        host = context.getInitParameter("host");
+        port = context.getInitParameter("port");
+        emailSender = context.getInitParameter("email");
+        nameSender = context.getInitParameter("name");
+        pass = context.getInitParameter("pass");
+    }
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -45,7 +67,8 @@ public class CartController extends HttpServlet {
         String url = ERROR;
         ProductDAO dao = new ProductDAO();
         OrderDTO newOrder = new OrderDTO();
-        ArrayList<CartItemDTO> cart = (ArrayList<CartItemDTO>) session.getAttribute("cart");
+        OrderDAO oDAO= new OrderDAO();
+        List<CartItemDTO> cart = (List<CartItemDTO>) session.getAttribute("cart");
         String perform = request.getParameter("perform");
         try {
             switch (perform) {
@@ -58,12 +81,18 @@ public class CartController extends HttpServlet {
                     double total = Double.parseDouble(request.getParameter("total"));
                     String userID = null;
                     if (cart != null) System.out.println("cart <> null");
+                    else System.out.println("cart null");
                     if (cart != null) {
                         newOrder = dao.completeOrder(cart, address, cusName, email, phone, userID, null, payMethod, total);
                         System.out.println("Go");
                         String orderID = newOrder.getOrderID();
                         boolean check = dao.addOrderDetail(cart, orderID);
+                       
                         System.out.println("Thru");
+                        request.setAttribute("newOrder",newOrder);
+                        ArrayList<OrderDetailDTO> orderDetail = oDAO.getAllOrderDetail(orderID);
+                        sendEmail(orderDetail,newOrder, email);
+                        request.setAttribute("detail", orderDetail);
                         if (check) {
                             session.removeAttribute("cart");
                             url = ORDERED;
@@ -144,6 +173,77 @@ public class CartController extends HttpServlet {
         }
         System.out.println("can`t find one!");
         return -1;
+    }
+    private static  void sendEmail(ArrayList<OrderDetailDTO> orderDetail,OrderDTO newOrder,String email) throws MessagingException, IOException{
+                //send Mail
+                double total=0;
+                String MailMessage = "Your billing was sent to Email."+email;
+                 String subject = "Your billing at SE15AppleShop";
+                  String content = "<h2>Bill Infor</h2>"
+                +"<table width='100%' border='1' align='center'>"
+                + "<tr align='center'>"
+                + "<td><b>OrderID<b></td>"
+                + "<td><b>CustomerName<b></td>"
+                + "<td><b>Address<b></td>"
+                + "<td><b>Email<b></td>"
+                + "<td><b>Order time<b></td>"
+                + "<td><b>Expected Day<b></td>"          
+                + "<td><b>Total<b></td>"     
+                + "<td><b>Method<b></td>"           
+                + "</tr>"
+                + "<tr align='center'>"
+                + "<td><b>"+newOrder.getOrderID()+"<b></td>"
+                + "<td><b>"+newOrder.getCusName()+"<b></td>"
+                + "<td><b>"+newOrder.getAddress()+"<b></td>"
+                + "<td><b>"+newOrder.getEmail()+"<b></td>"
+                + "<td><b>"+newOrder.getOrderCreateDate()+"<b></td>"
+                + "<td><b>"+newOrder.getOrderExpectDate()+"<b></td>"
+                + "<td><b>"+formatPrice(newOrder.getPrice())+"<b></td>"     
+                + "<td><b>"+newOrder.getPayMethod()+"<b></td>"           
+                + "</tr>"   
+                +"</table>"         
+                +"<br/>" ;
+                 
+                content+="<h2>Bill Detail</h2>"          
+                +"<table width='100%' border='1' align='center'>"
+                + "<tr align='center'>"          
+                + "<td><b>ProductName<b></td>"
+                + "<td><b>Description<b></td>"
+                + "<td><b>Quantity<b></td>"
+                + "<td><b>Price Per Product<b></td>"
+                + "<td><b>Discount<b></td>"
+                + "<td><b>Row Total<b></td>"
+                + "</tr>" ;      
+                for (OrderDetailDTO orderDetailDTO : orderDetail) {
+                   
+                content+= "<tr align='center'>"
+                + "<td><b>"+orderDetailDTO.getProduct().getName()+"<b></td>"
+                + "<td><b>"+"Color: "+orderDetailDTO.getProduct().getColor()
+                    +"<br/>Ram: "+orderDetailDTO.getProduct().getRam()
+                    +"<br/>Storage: "+orderDetailDTO.getProduct().getStorage()+"<b></td>"
+                + "<td><b>"+orderDetailDTO.getQuantity()+"<b></td>"
+                + "<td><b>"+formatPrice(orderDetailDTO.getProduct().getPrice())+"<b></td>"
+                + "<td><b>"+""+"<b></td>"
+                + "<td><b>"+formatPrice(orderDetailDTO.getProduct().getPrice()*orderDetailDTO.getQuantity())+"<b></td>"
+                + "</tr>"; 
+                
+                total += orderDetailDTO.getProduct().getPrice()*orderDetailDTO.getQuantity(); 
+                }
+               content+="<td colspan=\"6\" style=\"text-align:right\"><strong>TOTAL "+formatPrice(total)+" </strong></td>\n" 
+               +"</table>";
+            EmailUtility.sendEmail_1(host, port, emailSender, nameSender, pass, email, subject, content);
+                //end send Mail
+                
+    }
+    public static String formatPrice(double price){
+        
+        // Create a new Locale
+        Locale VietNam = new Locale("nv", "VN");
+        // Create a Currency instance for the Locale
+        Currency vietnamDong = Currency.getInstance(VietNam);
+        // Create a formatter given the Locale
+        NumberFormat vndFormat = NumberFormat.getCurrencyInstance(VietNam);
+        return vndFormat.format(price);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

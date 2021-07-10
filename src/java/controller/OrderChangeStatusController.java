@@ -6,13 +6,8 @@
 package controller;
 
 import daos.OrderDAO;
-import daos.UserDAO;
-import dtos.OrderDTO;
-import dtos.OrderDetailDTO;
-import dtos.UserDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,42 +15,38 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author ADMIN
+ * @author anime
  */
-public class OrderDetailController extends HttpServlet {
+public class OrderChangeStatusController extends HttpServlet {
 
-    private static final String SUCCESS ="orderHistoryDetail.jsp";
-    private static final String ERROR = "error.jsp";
-    
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    public static final String ERROR = "error.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url=ERROR;
         String id = request.getParameter("orderID").trim();
-        try {
-            OrderDAO oDAO= new OrderDAO();
-            UserDAO uDAO = new UserDAO();
-            UserDTO  u = new UserDTO();
-            OrderDTO order= oDAO.getOrder(id);
-            ArrayList<OrderDetailDTO> orderDetail = oDAO.getAllOrderDetail(id);
-            
-            u = uDAO.getUserProfile(order.getUserID());
-            System.out.println(u.getEmail()+"dd");
-            request.setAttribute("order", order);
-            if(u!=null){request.setAttribute("userDetail",u);}
-            else System.out.println("user null");
-            //request.setAttribute("detail", orderDetail);
-            if(orderDetail != null){
-                request.setAttribute("detail", orderDetail);
-            } else{
-                request.setAttribute("EMPTY_LIST", "no product in this order");
-            }
-            url=SUCCESS;
-        } catch (Exception e) {
-            log ("ERROR at OrderDetailController: " + e.getMessage());
-            request.setAttribute("ERROR", e.getMessage());
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+        String status = request.getParameter("orderStatus");
+        OrderDAO oDAO=new OrderDAO();
+        String url=ERROR;
+        try {            
+           boolean check = oDAO.ChangeStatus(id, status);
+             if (check) {
+            url="MainController?action=OrderDetail&orderID="+id;
+             }
+        }catch(Exception ex){
+            request.setAttribute("message", ex.toString());
+            request.setAttribute("ERROR", ex.toString());
+        }finally{
+        request.getRequestDispatcher(url).forward(request, response);
+
         }
     }
 

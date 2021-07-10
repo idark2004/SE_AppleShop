@@ -169,7 +169,7 @@
                         <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=MB&status=True">Mac</a></li>
                         <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AW&status=True">Apple Watch</a></li>
                         <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AS&status=True">Accessory</a></li>
-                        <c:if test="${USER.roleID eq 'MN        ' || USER.roleID eq 'AD        '}">
+                        <c:if test="${USER.roleID.trim() eq 'MN' || USER.roleID.trim() eq 'AD'}">
                         <li class="subMenu"><a>Shop Manager</a>
                             <ul style="display:none">
                                 <li><a href="dashboard_Manager.html"><i class="icon-chevron-right"></i>Dashboard</a></li>

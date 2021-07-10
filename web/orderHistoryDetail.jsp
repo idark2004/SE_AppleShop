@@ -189,10 +189,11 @@
                         <div class="span9">
                             <h3>Thank you for your order!</h3>
                             <hr class="soft" />
-                            <form class="form-horizontal qtyFrm">
+                            
                                 <h5> Order Details</h5>
+                                
                                 <div class="well span8">
-                                    <form>
+                                    
                                         <p class="small">
                                             Order ID: <span><strong>${requestScope.order.orderID}</strong></span>
                                         </p>
@@ -200,17 +201,20 @@
                                             Fullname: <span><strong>${requestScope.order.cusName}</strong></span>
                                         </p>
                                         <p class="small">
-                                            Email: <span><strong>${requestScope.order.email}</strong></span>
+                                            Email: <span><strong>${requestScope.userDetail.email}</strong></span>
                                         </p>
                                         <p class="small">
                                             Address: <span><strong>${requestScope.order.address} </strong></span>
                                         </p>
                                         <p class="small">
-                                            Phone: <span><strong> ${requestScope.order.phone}</strong></span>
+                                            Phone: <span><strong> ${requestScope.userDetail.phone}</strong></span>
                                         </p>
                                         <br>
                                         <p class="small">
-                                            Created: <span><strong>${requestScope.order.orderDate}</strong></span>
+                                            Created: <span><strong>${requestScope.order.orderCreateDate}</strong></span>
+                                        </p>
+                                        <p class="small">
+                                            Complete Date: <span><strong>${requestScope.order.completedDate}</strong></span>
                                         </p>
                                         <p class="small">
                                             Payment method: <span><strong>${requestScope.order.payMethod}</strong></span>
@@ -218,9 +222,40 @@
                                         <p class="small">
                                            Order status: <span><strong>${requestScope.order.status}</strong></span>
                                         </p>
-                                    </form>
+                                        
+                                        <c:if test="${requestScope.order.status.trim() != 'Completed'}">
+                                        <c:if test="${requestScope.order.status.trim() != 'Cancel'}">    
+                                        <form method="post" action="MainController">
+                                            <lable for="status" >Change Status</lable>
+                                            <input value="${requestScope.order.orderID}" name="orderID" type="hidden">
+                                            <input value="ChangeStatus" name="action" type="hidden">
+
+                                            <select name="orderStatus" id="status" 
+                                                   
+                                                    >
+                                                <option selected disabled value>-Choose a Status-</option>
+                                                <option value="Cancel" 
+                                                        <c:if test="${sessionScope.USER.roleID.trim() == 'AD'}">
+                                                           hidden 
+                                                        </c:if>
+                                                >Cancel</option>
+                                                <option value="Shipping"
+                                                        <c:if test="${sessionScope.USER.roleID.trim() == 'CU'}">
+                                                           hidden 
+                                                        </c:if>
+                                                        >Shipping</option>
+                                                <option value="Completed" 
+                                                        <c:if test="${sessionScope.USER.roleID.trim() == 'CU'}">
+                                                           hidden 
+                                                        </c:if>
+                                                        >Completed</option>
+                                            </select>
+                                            <button type="submit">Change</button>
+                                        </form>  
+                                        </c:if>   
+                                        </c:if>
                                 </div>
-                            </form>
+                           
 
                             <table class="table table-bordered">
                                 <thead>
@@ -261,7 +296,11 @@
                                     </tr>
                                 </tbody>
                             </table>
-                                    <button onclick="PrevPage();" href="" class="btn btn-large"><i class="icon-arrow-left"></i> Back </button>
+                                        <a  <c:choose>
+                                                <c:when test="sessionScope.USER.roleID.trim() == 'CU'">href="OrderHistoryController?userid=${sessionScope.USER.userID.trim()}"</c:when>
+                                               <c:otherwise>href="OrderListController"</c:otherwise>
+                                           </c:choose> 
+                                       class="btn btn-large"> <i class="icon-arrow-left"></i> Back </a>
                         </div>
                     </div>
                 </div>
@@ -363,7 +402,11 @@
 </body>
 <script>
      function PrevPage(){
+                
                 window.history.back();
+                if ( window.history.replaceState ) {
+                window.history.replaceState( null, null, window.location.href );
+                }
             }    
 </script>
 </html>
