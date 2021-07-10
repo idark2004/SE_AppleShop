@@ -92,7 +92,7 @@
                                     <h3>Login In</h3>
                                 </div>
                                 <div class="modal-body">
-                                    <form class="form-horizontal loginFrm">
+                                    <form class="form-horizontal loginFrm" action="MainController" method="post">
                                         <div class="control-group">
                                             <input type="text" id="inputEmail" placeholder="Email">
                                         </div>
@@ -145,29 +145,30 @@
                     <!-- Email Contact -->
                     <!-- Thích thì dùng, không thích có thể bỏ -->
                     <h4>Email Us</h4>
-                    <form class="form-horizontal">
+                    <form class="form-horizontal" action="MainController" method="post">
                         <fieldset>
                             <div class="control-group">
 
-                                <input type="text" placeholder="Fullname" class="input-xlarge" />
+                                <input type="text" placeholder="Fullname" class="input-xlarge" name="fullname" />
 
                             </div>
                             <div class="control-group">
 
-                                <input type="text" placeholder="Email" class="input-xlarge" />
+                                <input type="text" placeholder="Email" class="input-xlarge" name="email" />
 
                             </div>
                             <div class="control-group">
 
-                                <input type="text" placeholder="Subject" class="input-xlarge" />
+                                <input type="text" placeholder="Subject" class="input-xlarge" name="subject"/>
 
                             </div>
                             <div class="control-group">
-                                <textarea rows="3" id="textarea" class="input-xlarge"></textarea>
+                                <textarea rows="3" id="textarea" class="input-xlarge" name="description"></textarea>
 
                             </div>
-
-                            <button class="btn btn-large" type="submit">Send Messages</button>
+                            
+                            <input type="hidden" name="action" value="User Manage"/>
+                            <button class="btn btn-large" type="submit" name="perform" value="Contact">Send Messages</button>
 
                         </fieldset>
                     </form>

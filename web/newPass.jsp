@@ -86,7 +86,7 @@
                     <ul id="topMenu" class="nav pull-right">
                         <li class=""><a href="MainController?action=Product&perform=ViewProduct">All Products</a></li>
                         <li class=""><a href="contact.jsp">Contact</a></li>
-                        <li class=""><a href="user_profile.jsp">Profile</a></li>
+                        <li class=""><a href="userProfile.jsp">Profile</a></li>
                         <li class="">
                             <a href="signupForm.jsp" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Signup</span></a>
                         </li>
@@ -100,17 +100,18 @@
                                 <div class="modal-body">
                                     <form class="form-horizontal loginFrm" action="MainController" method="post">
                                         <div class="control-group">
-                                            <input type="text" id="inputEmail" placeholder="Enter Email" name="uname" required>
+                                            <input type="text" id="inputEmail" placeholder="Enter Email" name="email" required>
                                         </div>
                                         <div class="control-group">
-                                            <input type="password" id="inputPassword" placeholder="Enter Password" name="psw" required>
+                                            <input type="password" id="inputPassword" placeholder="Enter Password" name="password" required>
                                         </div>
                                         <div class="control-group">
                                             <label class="checkbox">
 											<input type="checkbox"> Remember me
 											</label>
                                             <div class="g-signin2" data-onsuccess="onSignIn"></div>
-                                            <button type="submit" class="btn btn-success" name="action" value="Login">Sign in</button>
+                                            <input type="hidden" name="action" value="User Manage"/>
+                                            <button type="submit" class="btn btn-success" name="perform" value="Log in">Sign in</button>
                                             <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
                                         </div>
                                     </form>

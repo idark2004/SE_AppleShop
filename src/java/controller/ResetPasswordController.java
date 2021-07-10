@@ -86,20 +86,51 @@ public class ResetPasswordController extends HttpServlet {
             UserDTO user = new UserDTO();
             user = uDAO.findByEmail(recipient);
             if(user!=null){
-            String newPassword = AlphaNumericString(10);
+                if (user.getRoleID().trim().equals("US")){
+                    String newPassword = AlphaNumericString(10);
 
-            user.setPassword(newPassword);
-            uDAO.UpdateUserPassword(user);
+                    user.setPassword(newPassword);
+                    uDAO.UpdateUserPassword(user);
 
-            String content = "Hi, this is your new password: " + newPassword;
-            content += "\nNote: for security reason, "
-                    + "you must change your password after logging in.";            
-         
-         
-           
-            EmailUtility.sendEmail(host, port, email, name, pass, recipient, subject, content);
-            message = "Your password has been reset. Please check your e-mail.";
-            }else{message = "Email:"+recipient+" is not exist";}
+                    String content = "Hi, this is your new password: " + newPassword;
+                    content += "\nNote: for security reason, "
+                            + "you must change your password after logging in.";            
+
+                    EmailUtility.sendEmail(host, port, email, name, pass, recipient, subject, content);
+                    message = "Your password has been reset. Please check your e-mail.";
+                }
+                else if (request.getParameter("key")==null){
+                    request.setAttribute("Role", user.getRoleID().trim());
+                    request.setAttribute("Email", recipient);
+                    request.setAttribute("message", "Enter the key");
+                }
+                else {
+                    String key = uDAO.GetRoleKey(user.getRoleID().trim());
+                    String enteredKey=request.getParameter("key");
+                    if (key.trim().equals(enteredKey)){
+                        String newPassword = AlphaNumericString(10);
+
+                        user.setPassword(newPassword);
+                        uDAO.UpdateUserPassword(user);
+
+                        String content = "Hi, this is your new password: " + newPassword;
+                        content += "\nNote: for security reason, "
+                                + "you must change your password after logging in."
+                                + "\n\nAlso dont lose Your pass again";            
+
+                        EmailUtility.sendEmail(host, port, email, name, pass, recipient, subject, content);
+                        message = "Your password has been reset. Please check your e-mail.";
+                    }
+                    else {
+                        request.setAttribute("Role", user.getRoleID().trim());
+                        request.setAttribute("Email", recipient);
+                        request.setAttribute("message", "Wrong key man");
+                    }
+                }
+            }
+            else{
+                message = "Email:"+recipient+" is not exist";
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
             message = "There were an error: " + ex.getMessage();

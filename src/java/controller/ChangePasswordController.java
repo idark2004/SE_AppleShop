@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
  */
 public class ChangePasswordController extends HttpServlet {
 
-    private static final String SUCCESS ="user_profile.jsp";
+    private static final String SUCCESS ="userProfile.jsp";
     private static final String ERROR = "error.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -30,7 +30,8 @@ public class ChangePasswordController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try{
-            UserDTO user= (UserDTO) session.getAttribute("user");
+            UserDTO user= (UserDTO) session.getAttribute("USER");
+            System.out.println(user.getPassword());
             String password=request.getParameter("password");
             String psw=request.getParameter("psw");
             if (password.equals(psw)){

@@ -182,7 +182,10 @@
                                     <div class="control-group">
                                         <label class="control-label" for="inputEmail1">E-mail address</label>
                                         <div class="controls">
-                                            <input class="span3" placeholder="Enter your recovery email" type="text" name="email" id="email" id="inputEmail1" required>
+                                            <input class="span3" placeholder="Enter your recovery email" type="text" name="email" id="email" id="inputEmail1" value="${requestScope.Email}" required>
+                                            <c:if test="${requestScope.Role.equals('AD') || requestScope.Role.equals('MN')}">
+                                                <input class="span3" placeholder="Enter your Key" type="text" name="key" id="email" id="inputEmail1" required>
+                                            </c:if>
                                         </div>
                                     </div>
                                     <div class="controls">
