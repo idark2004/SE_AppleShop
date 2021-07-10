@@ -97,6 +97,7 @@ public class DashBoardController extends HttpServlet {
         String url = ERROR;
         try {
             OrderDAO dao = new OrderDAO();
+            int highestDailyRevenue=0;
             List<AreaChartDTO> areaList = new ArrayList<AreaChartDTO>();
             String date;
             for(int i=0; i<14; i++){
@@ -116,9 +117,11 @@ public class DashBoardController extends HttpServlet {
                     areaData=noData;
                 }
                 areaData.setDate(date);
+                if(highestDailyRevenue<areaData.getRevenue()) highestDailyRevenue=areaData.getRevenue();
                 areaList.add(areaData);
             }
             
+            int highestMonthlyRevenue=0;
             List<BarChartDTO> list = new ArrayList<BarChartDTO>();
             for (int i=0; i<12; i++){
                 BarChartDTO data = dao.getMonthlyRevenue(i+1);
@@ -128,6 +131,7 @@ public class DashBoardController extends HttpServlet {
                     noData.setMonth(i+1);
                     data=noData;
                 }
+                if(highestMonthlyRevenue<data.getRevenue()) highestMonthlyRevenue=data.getRevenue();
                 list.add(data);
             }
             if(list != null && areaList != null){
@@ -140,6 +144,8 @@ public class DashBoardController extends HttpServlet {
                     System.out.println("Revenue: " + areaList.get(i).getRevenue() + " Date: " + areaList.get(i).getDate());
                 }
                 
+                request.setAttribute("highestDaily", highestDailyRevenue);
+                request.setAttribute("highestMonthly", highestMonthlyRevenue);
                 request.setAttribute("AreaChart", areaList);
                 request.setAttribute("BarChart", list);
                 url=SUCCESS;

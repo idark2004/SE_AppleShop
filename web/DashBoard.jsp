@@ -192,7 +192,7 @@
                                         <canvas id="myBarChart" width="100" height="50"></canvas>
                                     </div>
                                     <div class="col-sm-2 text-center my-auto">
-                                        <div class="h4 mb-0 text-primary">$${total}</div>
+                                        <div class="h4 mb-0 text-primary">${total} VND</div>
                                         <div class="small text-muted">YTD Revenue</div>
                                         <hr>
                                         <div class="h4 mb-0 text-warning">$18,474</div>
@@ -411,7 +411,7 @@
                 yAxes: [{
                     ticks: {
                         min: 0,
-                        max: 40000,
+                        max: ${requestScope.highestDaily},
                         maxTicksLimit: 5
                     },
                     gridLines: {
@@ -462,7 +462,7 @@
                 yAxes: [{
                     ticks: {
                         min: 0,
-                        max: 50000,
+                        max: ${requestScope.highestMonthly},
                         maxTicksLimit: 10
                     },
                     gridLines: {
