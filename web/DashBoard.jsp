@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -49,7 +50,7 @@
                                     <c:set var="subtotalCount" value="${cartItem.quantity}"/>
                                     <c:set var="subtotal" value="${subtotal+cartItem.quantity}"/>
                           </c:forEach>
-                        <a href="product_summary.jsp"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> ${subtotal} Itemes in your cart </span> </a>
+                        <a href="cartDetail.jsp"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> ${subtotal} Itemes in your cart </span> </a>
                     </div>
                 </div>
             </div>
@@ -69,8 +70,8 @@
                     </form>
                     <ul id="topMenu" class="nav pull-right">
                         <li class=""><a href="products_Manager.html">All Products</a></li>
-                        <li class=""><a href="contact.html">Contact</a></li>
-                        <li class=""><a href="user_profile.html">Profile</a></li>
+                        <li class=""><a href="contact.jsp">Contact</a></li>
+                        <li class=""><a href="userProfile.jsp">Profile</a></li>
                         <li class="">
                             <a href="register.html" role="button" style="padding-right:0"><span class="btn btn-large btn-success">Signup</span></a>
                         </li>
@@ -176,6 +177,10 @@
                         </div>
                         <br>
 
+                        <c:set var="total" value="0"/>
+                        <c:forEach var="data" items="${requestScope.BarChart}">
+                            <c:set var="total" value="${total + data.revenue}"/>
+                        </c:forEach>
 
                         <!--Bar Chart Card-->
                         <div class="card mb-3">
@@ -187,7 +192,7 @@
                                         <canvas id="myBarChart" width="100" height="50"></canvas>
                                     </div>
                                     <div class="col-sm-2 text-center my-auto">
-                                        <div class="h4 mb-0 text-primary">$34,693</div>
+                                        <div class="h4 mb-0 text-primary">$${total}</div>
                                         <div class="small text-muted">YTD Revenue</div>
                                         <hr>
                                         <div class="h4 mb-0 text-warning">$18,474</div>
@@ -274,15 +279,15 @@
             <div class="row">
                 <div class="span3">
                     <h5>ACCOUNT</h5>
-                    <a href="login.html">LOGIN</a>
-                    <a href="login.html">PROFILE</a>
-                    <a href="login.html">CART</a>
+                    <a href="loginForm.jsp">LOGIN</a>
+                    <a href="userProfile.jsp">PROFILE</a>
+                    <a href="cartDetail.jsp">CART</a>
                     <a href="login.html">ORDER HISTORY</a>
                 </div>
                 <div class="span3">
                     <h5>INFORMATION</h5>
-                    <a href="contact.html">CONTACT</a>
-                    <a href="register.html">REGISTRATION</a>
+                    <a href="contact.jsp">CONTACT</a>
+                    <a href="signupForm.jsp">REGISTRATION</a>
                     <a href="legal_notice.html">LEGAL NOTICE</a>
                     <a href="tac.html">TERMS AND CONDITIONS</a>
                 </div>
@@ -362,7 +367,6 @@
 </body>
 
 </html>
-
 <script>
     Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
     Chart.defaults.global.defaultFontColor = '#292b2c';
@@ -370,8 +374,10 @@
     var ctx = document.getElementById("myAreaChart");
     var myLineChart = new Chart(ctx, {
         type: 'line',
-        data: {
-            labels: ["Mar 1", "Mar 2", "Mar 3", "Mar 4", "Mar 5", "Mar 6", "Mar 7", "Mar 8", "Mar 9", "Mar 10", "Mar 11", "Mar 12", "Mar 13"],
+        data: { 
+            labels: [<c:forEach var="data" items="${requestScope.AreaChart}">
+                    "${data.date}",
+                </c:forEach>],
             datasets: [{
                 label: "Sessions",
                 lineTension: 0.3,
@@ -384,7 +390,9 @@
                 pointHoverBackgroundColor: "rgba(2,117,216,1)",
                 pointHitRadius: 20,
                 pointBorderWidth: 2,
-                data: [10000, 30162, 26263, 18394, 18287, 28682, 31274, 33259, 25849, 24159, 32651, 31984, 38451],
+                data: [<c:forEach var="data" items="${requestScope.AreaChart}">
+                    ${data.revenue},
+                </c:forEach>],
             }],
         },
         options: {
@@ -421,12 +429,21 @@
     var myLineChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ["January", "February", "March", "April", "May", "June"],
+            labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
             datasets: [{
                 label: "Revenue",
                 backgroundColor: "rgba(2,117,216,1)",
                 borderColor: "rgba(2,117,216,1)",
-                data: [4215, 5312, 6251, 7841, 9821, 14984],
+                data: [<c:forEach var="data" items="${requestScope.BarChart}">
+                    ${data.revenue},
+                </c:forEach>]
+            //    data: [4215, 5312, 6251, 7841, 9821, 14984, 1234, 1235, 5432, 4241, 2341, 5314],
+            //labels: ["January", "February", "March", "April", "May", "June"],
+            //datasets: [{
+            //    label: "Revenue",
+            //    backgroundColor: "rgba(2,117,216,1)",
+            //    borderColor: "rgba(2,117,216,1)",
+            //    data: [4215, 5312, 6251, 7841, 9821, 14984],
             }],
         },
         options: {
@@ -439,14 +456,14 @@
                         display: false
                     },
                     ticks: {
-                        maxTicksLimit: 6
+                        maxTicksLimit: 12
                     }
                 }],
                 yAxes: [{
                     ticks: {
                         min: 0,
-                        max: 15000,
-                        maxTicksLimit: 5
+                        max: 50000,
+                        maxTicksLimit: 10
                     },
                     gridLines: {
                         display: true

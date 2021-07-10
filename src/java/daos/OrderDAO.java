@@ -5,6 +5,8 @@
  */
 package daos;
 
+import dtos.AreaChartDTO;
+import dtos.BarChartDTO;
 import utils.DBConnect;
 import dtos.OrderDTO;
 import dtos.OrderDetailDTO;
@@ -209,5 +211,81 @@ public class OrderDAO {
             }
         }
         return lst;
+    }
+    
+    public BarChartDTO getMonthlyRevenue(int month) throws NamingException, SQLException {
+        Connection c = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        String sql = "SELECT SUM(orderPrice) as price, MONTH(completedDate) AS Months "
+                + "FROM tblOrders "
+                + "WHERE MONTH(completedDate) = ? AND orderStatus != 'Cancelled' "
+                + "GROUP BY Month(completedDate)";
+        
+        try {
+            c = DBConnect.makeConnection();
+            if (c != null) {
+                ps = c.prepareStatement(sql);
+                ps.setInt(1, month);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    BarChartDTO data=new BarChartDTO();
+                    data.setRevenue(rs.getInt("price"));
+                    data.setMonth(rs.getInt("Months"));
+                    return data;
+                }
+                    //System.out.println("Revenue: "+lst.get(i-1).getRevenue());
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (c != null) {
+                c.close();
+            }
+        }
+        return null;
+    }
+    
+    public AreaChartDTO getDailyRevenue(int month, int day) throws NamingException, SQLException {
+        Connection c = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        String sql = "SELECT SUM(orderPrice) as price , CAST(completedDate AS DATE) as date "
+                + "FROM tblOrders "
+                + "WHERE orderStatus != 'Cancelled' AND DAY(completedDate)=? AND MONTH(completedDate)=? "
+                + "GROUP BY CAST(completedDate AS DATE)";
+        
+        try {
+            c = DBConnect.makeConnection();
+            if (c != null) {
+                ps = c.prepareStatement(sql);
+                ps.setInt(1, day);
+                ps.setInt(2, month);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    AreaChartDTO data=new AreaChartDTO();
+                    data.setRevenue(rs.getInt("price"));
+                    return data;
+                }
+                    //System.out.println("Revenue: "+lst.get(i-1).getRevenue());
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (c != null) {
+                c.close();
+            }
+        }
+        return null;
     }
 }
