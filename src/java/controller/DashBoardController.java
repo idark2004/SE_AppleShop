@@ -80,7 +80,7 @@ public class DashBoardController extends HttpServlet {
         };
         return date;
     }
-    private static final String SUCCESS ="dashBoard.jsp";
+    private static final String SUCCESS ="DashBoard.jsp";
     private static final String ERROR = "error.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

@@ -163,6 +163,45 @@ public class UserDAO {
         }
         return null;
     }
+    
+    public String GetRoleKey(String roleID) throws NamingException, SQLException {
+        Connection conn = null; //doi tuong ket noi
+        PreparedStatement stm = null; //doi tuong truy van
+        ResultSet rs = null;//doi tuong nhan ket qua
+
+        String sql = "SELECT roleKey FROM tblRoles WHERE roleID=?";
+
+        try {
+            conn = DBConnect.makeConnection(); // tao doi tuong connection qua DBConnection
+
+            if (conn != null) {
+                stm = conn.prepareStatement(sql); // tao truy van
+                stm.setString(1, roleID); //gan tham so 1 la bien truyen vao
+                rs = stm.executeQuery();
+
+                while (rs.next()) {
+                    String key = rs.getString("roleKey");
+
+                    return key;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+
+            if (stm != null) {
+                stm.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return null;
+    }
 
     public boolean UpdateUserDetail(UserDTO u) throws NamingException, SQLException {
         Connection conn = null;
