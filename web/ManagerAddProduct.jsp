@@ -204,9 +204,9 @@
                                             </div>
                                         </div>
                                         <div class="control-group">
-                                            <label class="control-label" for="">Price</label>
+                                            <label class="control-label" for="">CategoryID</label>
                                             <div class="controls">
-                                                <input class="span3" type="text" id="inputPrice" placeholder="Price" maxlength="11">
+                                                <input class="span3" type="text" id="inputPrice" placeholder="CategoryID" maxlength="11">
                                             </div>
                                         </div>
                                         <div class="control-group">
@@ -221,7 +221,53 @@
                                         </div>
                                     </form>
                                     <hr class="soft" />
+                                    <form class="form-horizontal qtyFrm">
+                                    <h5>Create new spec</h5>
+                                    <br>
                                     
+                                        <div class="control-group">
+                                            <label class="control-label" for="">Spec ID</label>
+                                            <div class="controls">
+                                                <input class="span3" type="text" id="" placeholder="Spec ID">
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label" for="">New Color</label>
+                                            <div class="controls">
+                                                <input class="span3" type="text" id="" placeholder="New Color">
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label" for="">RAM</label>
+                                            <div class="controls">
+                                                <input class="span3" type="text" id="" placeholder="Ram">
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label" for="">Storage</label>
+                                            <div class="controls">
+                                                <input class="span3" type="text" id="" placeholder="Storage">
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label" for="">Price</label>
+                                            <div class="controls">
+                                                <input class="span3" type="text" id="inputPrice" placeholder="Price" maxlength="11">
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label" for="">Quantity</label>
+                                            <div class="controls">
+                                                <input class="span3" type="number" id="inputPrice" placeholder="Quantity">
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <input class="btn btn-primary btn-success" type="submit" value="Submit">
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <hr class="soft" />
                                 </div>
 
                             
