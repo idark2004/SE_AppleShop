@@ -9,7 +9,6 @@ import daos.UserDAO;
 import dtos.ErrorDTO;
 import dtos.UserDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -36,7 +35,7 @@ public class UserController extends HttpServlet {
     private static final String ERROR = "error.jsp";
     private static final String FAIL_SIGNUP = "signupForm.jsp";
     private static final String INDEX = "index.jsp";
-    private static final String MND = "dashBoard.jsp";
+    private static final String MND = "managerIndex.jsp";
     private static final String UPDATE_SUCCESS = "userProfile.jsp";
     
     private String host;

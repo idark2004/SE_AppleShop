@@ -157,14 +157,15 @@
                             </a>
                     </div>
                     <ul id="sideManu" class="nav nav-tabs nav-stacked">
-                        <li><a href="products_Manager.html">All</a></li>
-                        <li><a href="products_Manager.html">iPhone</a></li>
-                        <li><a href="products_Manager.html">iPad</a></li>
-                        <li><a href="products_Manager.html">Mac</a></li>
-                        <li><a href="products_Manager.html">Accessory</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=">All</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=IP&status=True">iPhone</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=ID&status=True">iPad</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=MB&status=True">Mac</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AW&status=True">Apple Watch</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AS&status=True">Accessory</a></li>
                         <li class="subMenu"><a>Shop Manager</a>
                             <ul style="display:none">
-                                <li><a href="dashboard_Manager.html"><i class="icon-chevron-right"></i>Dashboard</a></li>
+                                <li><a href="managerIndex.jsp"><i class="icon-chevron-right"></i>Dashboard</a></li>
                                 <li><a href="product_details_Manager.html"><i class="icon-chevron-right"></i>Add Product</a></li>
                                 <li><a href="customers_Manager.html"><i class="icon-chevron-right"></i>Customer List</a></li>
                             </ul>

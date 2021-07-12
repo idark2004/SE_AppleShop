@@ -9,7 +9,6 @@ import daos.OrderDAO;
 import dtos.AreaChartDTO;
 import dtos.BarChartDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
