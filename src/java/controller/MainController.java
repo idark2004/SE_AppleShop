@@ -131,7 +131,7 @@ public class MainController extends HttpServlet {
                     break;
             }
         } catch (Exception e) {
-            log ("ERROR at MainController: " + e.getMessage());
+            request.setAttribute("ERROR", e.toString());
         } finally {
             System.out.println(url);
             request.getRequestDispatcher(url).forward(request, response);

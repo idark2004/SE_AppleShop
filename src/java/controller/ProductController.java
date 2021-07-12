@@ -8,10 +8,12 @@ package controller;
 import daos.ProductDAO;
 import dtos.ErrorDTO;
 import dtos.ProductDTO;
+import dtos.UserDTO;
 import dtos.ViewProductErrorDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.List;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +29,7 @@ public class ProductController extends HttpServlet {
     private static final String ERROR = "error.jsp";
     private static final String VIEW = "productList.jsp";
     private static final String DETAIL = "product_details.jsp";
+    private static final String MN_VIEW = "managerProductList.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,27 +45,21 @@ public class ProductController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
         String url = ERROR;
-        ErrorDTO error = new ErrorDTO();
         String perform = request.getParameter("perform");
-        
+        ViewProductErrorDTO msg = new ViewProductErrorDTO();
         try {
             switch (perform) {
                 case "ViewProduct":
-                    
-                    ViewProductErrorDTO msg = new ViewProductErrorDTO();
+                    UserDTO user = (UserDTO) session.getAttribute("USER");
+
                     ProductDAO dao = new ProductDAO();
-                    String categoryID = request.getParameter("categoryID");                   
-                    if (request.getParameter("categoryID") == null) {
-                        categoryID = "";
-                    }
+                    String categoryID = request.getParameter("categoryID");
                     String status = request.getParameter("status");
                     if (request.getParameter("status") == null) {
                         status = "True";
                     }
-                    
-                    List<ProductDTO> list = dao.viewProduct(categoryID, status); //qq nay null nè
-                 
-                   
+
+                    List<ProductDTO> list = dao.viewProduct(categoryID, status);
                     //Pagination
                     String pageNum = request.getParameter("pageNum");
                     int page = 0;
@@ -101,13 +98,20 @@ public class ProductController extends HttpServlet {
                         request.setAttribute("pages", pages);
                         request.setAttribute("curPage", page);
                         //end pagination      
-                        
+
                         request.setAttribute("cateID", categoryID);
                     } else {
                         msg.setMsg("Sorry our shop currently doesn't have these products in stock !!");
                         request.setAttribute("EMPTY_LIST", msg);
+                        url = VIEW;
                     }
-                    url = VIEW;
+                    if (user == null) {
+                        url = VIEW;
+                    } else {
+                        if (user.getRoleID().contains("MN") || user.getRoleID().contains("AD")) {
+                            url = MN_VIEW;
+                        }
+                    }
                     break;
                 case "ViewDetail":
                     String id = request.getParameter("productID").trim();
@@ -130,9 +134,14 @@ public class ProductController extends HttpServlet {
                     request.setAttribute("color", color);
 
                     url = DETAIL;
-                    break;   
+                    break;
             }
         } catch (Exception e) {
+            if (e.toString().contains("NullPointerException")) {
+                msg.setMsg("Sorry our shop currently doesn't have these products in stock !!");
+                request.setAttribute("EMPTY_LIST", msg);
+                url=VIEW;
+            }
             request.setAttribute("ERROR", e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
