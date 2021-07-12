@@ -5,7 +5,7 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -95,7 +95,7 @@
                             <div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                    <h3>Login In</h3>
+                                    <h3>Log In</h3>
                                 </div>
                                 <div class="modal-body">
                                     <form class="form-horizontal loginFrm" action="MainController" method="post">
@@ -110,7 +110,7 @@
 											<input type="checkbox"> Remember me
 											</label>
                                             <div class="g-signin2" data-onsuccess="onSignIn"></div>
-                                            <input type="hidden" name="action" value="User Manage"/>
+                                            <input type="hidden" name="action" value="User">
                                             <button type="submit" class="btn btn-success" name="perform" value="Log in">Sign in</button>
                                             <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
                                         </div>
@@ -168,7 +168,7 @@
                             </a>
                     </div>
                     <ul id="sideManu" class="nav nav-tabs nav-stacked">
-                        <li><a href="MainController?action=Product&perform=ViewProduct">All</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=">All</a></li>
                         <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=IP&status=True">iPhone</a></li>
                         <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=ID&status=True">iPad</a></li>
                         <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=MB&status=True">Mac</a></li>
@@ -183,7 +183,7 @@
                         <li><a href="index.jsp">Home</a> <span class="divider">/</span></li>
                         <li class="active">All Products</li>
                     </ul>
-                    <h3> Products Name <small class="pull-right"> 40 products are available </small></h3>
+                    <h3> Products Name <small class="pull-right"> ${fn:length(PRODUCT_LIST)} products are available </small></h3>
                     <form class="form-horizontal span6">
                         <div class="control-group">
                             <label class="control-label alignL">Sort By </label>
@@ -254,7 +254,7 @@
                                                             <fmt:formatNumber type="number" maxFractionDigits = "0" value="${product.price}" />
                                                         </p>
                                                         <h4 style="text-align:center">
-                                                            <a class="btn" href="MainController?action=Product&perform=ViewDetail&productID=${product.productID}"> <i class="icon-zoom-in"></i></a> <a class="btn" href="MainController?action=ProductDetail&productID=${product.productID}">Add to <i class="icon-shopping-cart"></i></a>
+                                                            <a class="btn" href="MainController?action=Product&perform=ViewDetail&productID=${product.productID}"> <i class="icon-zoom-in"></i></a> 
                                                         </h4>
                                                     </div>
                                                 </div>

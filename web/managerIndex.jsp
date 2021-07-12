@@ -78,41 +78,7 @@
                         <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
                     </form>
                     <ul id="topMenu" class="nav pull-right">
-                        <li class=""><a href="products_Manager.html">All Products</a></li>
-                        <li class=""><a href="contact.html">Contact</a></li>
-                        <li class=""><a href="user_profile.html">Profile</a></li>
-                        <li class="">
-                            <a href="register.html" role="button" style="padding-right:0"><span class="btn btn-large btn-success">Signup</span></a>
-                        </li>
-                        <li class="">
-                            <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
-                            <div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                    <h3>Login In</h3>
-                                </div>
-                                <div class="modal-body">
-                                    <form class="form-horizontal loginFrm">
-                                        <div class="control-group">
-                                            <input type="text" id="inputEmail" placeholder="Email">
-                                        </div>
-                                        <div class="control-group">
-                                            <input type="password" id="inputPassword" placeholder="Password">
-                                        </div>
-                                        <div class="control-group">
-                                            <label class="checkbox">
-											<input type="checkbox"> Remember me
-											</label>
-                                        </div>
-                                        <div class="control-group">
-                                            <a href="#"><img width="30" height="30" src="themes/images/google.png" title="Login with Google" alt="Google Login" /></a>
-                                        </div>
-                                    </form>
-                                    <button type="submit" class="btn btn-success">Sign in</button>
-                                    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                                </div>
-                            </div>
-                        </li>
+                        <li class=""><a href="products_Manager.html">All Products</a></li>                                                
                     </ul>
                 </div>
             </div>
@@ -157,12 +123,12 @@
                             </a>
                     </div>
                     <ul id="sideManu" class="nav nav-tabs nav-stacked">
-                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=">All</a></li>
-                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=IP&status=True">iPhone</a></li>
-                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=ID&status=True">iPad</a></li>
-                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=MB&status=True">Mac</a></li>
-                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AW&status=True">Apple Watch</a></li>
-                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AS&status=True">Accessory</a></li>
+                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=">All</a></li>
+                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=IP">iPhone</a></li>
+                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=ID">iPad</a></li>
+                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=MB">Mac</a></li>
+                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=AW">Apple Watch</a></li>
+                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=AS">Accessory</a></li>
                         <li class="subMenu"><a>Shop Manager</a>
                             <ul style="display:none">
                                 <li><a href="managerIndex.jsp"><i class="icon-chevron-right"></i>Dashboard</a></li>

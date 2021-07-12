@@ -63,20 +63,8 @@
         <servlet-class>controller.CompleteOrderController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ProductListManagementController</servlet-name>
-        <servlet-class>controller.ProductListManagementController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ProductListManagement</servlet-name>
-        <servlet-class>controller.ProductListManagementController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ProductDetailManagementController</servlet-name>
         <servlet-class>controller.ProductDetailManagementController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>UpdateProductController</servlet-name>
-        <servlet-class>controller.UpdateProductController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CreateSpecController</servlet-name>
@@ -137,6 +125,10 @@
     <servlet>
         <servlet-name>OrderChangeStatusController</servlet-name>
         <servlet-class>controller.OrderChangeStatusController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManageProductController</servlet-name>
+        <servlet-class>controller.ManageProductController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>OrderListController</servlet-name>
@@ -200,20 +192,8 @@
         <url-pattern>/CompleteOrderController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ProductListManagementController</servlet-name>
-        <url-pattern>/ProductListManagementController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ProductListManagement</servlet-name>
-        <url-pattern>/ProductListManagement</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>ProductDetailManagementController</servlet-name>
         <url-pattern>/ProductDetailManagementController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>UpdateProductController</servlet-name>
-        <url-pattern>/UpdateProductController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CreateSpecController</servlet-name>
@@ -286,6 +266,10 @@
     <servlet-mapping>
         <servlet-name>OrderChangeStatusController</servlet-name>
         <url-pattern>/OrderChangeStatusController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageProductController</servlet-name>
+        <url-pattern>/ManageProductController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

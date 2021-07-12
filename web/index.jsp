@@ -91,7 +91,7 @@
                             <div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                    <h3>Login In</h3>
+                                    <h3>Log In</h3>
                                 </div>
                                 <div class="modal-body">
                                     <form class="form-horizontal loginFrm" action="MainController" method="post">
@@ -106,7 +106,8 @@
 											<input type="checkbox"> Remember me
 											</label>
                                             <div class="g-signin2" data-onsuccess="onSignIn"></div>
-                                            <button type="submit" class="btn btn-success" name="action" value="Login">Sign in</button>
+                                            <input type="hidden" name="perform" value="Log in">
+                                            <button type="submit" class="btn btn-success" name="action" value="User">Sign in</button>
                                             <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
                                         </div>
                                     </form>

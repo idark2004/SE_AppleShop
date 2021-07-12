@@ -9,21 +9,24 @@ import daos.ProductDAO;
 import dtos.ProductDTO;
 import dtos.ProductErrorDTO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author ADMIN
+ * @author phath
  */
-public class ProductController extends HttpServlet {
+public class ManageProductController extends HttpServlet {
 
+    private static final String ALL = "managerProductList.jsp";
+    private static final String DETAIL = "managerProductDetail.jsp";
+    private static final String UPDATE_FAIL="updateProduct.jsp";
     private static final String ERROR = "error.jsp";
-    private static final String VIEW = "productList.jsp";
-    private static final String DETAIL = "product_details.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,19 +41,16 @@ public class ProductController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
+        ProductDAO dao = new ProductDAO();
+        ProductErrorDTO error = new ProductErrorDTO();
+        HttpSession session = request.getSession();
+        String productID = request.getParameter("productID");
+        String categoryID = request.getParameter("categoryID");
         String perform = request.getParameter("perform");
-        ProductErrorDTO msg = new ProductErrorDTO();
         try {
             switch (perform) {
-                case "ViewProduct":
-                    ProductDAO dao = new ProductDAO();
-                    String categoryID = request.getParameter("categoryID");
-                    String status = request.getParameter("status");
-                    if (request.getParameter("status") == null) {
-                        status = "True";
-                    }
-
-                    List<ProductDTO> list = dao.viewProduct(categoryID, status);
+                case "Get":
+                    List<ProductDTO> list = dao.viewAllProduct(categoryID);
                     //Pagination
                     String pageNum = request.getParameter("pageNum");
                     int page = 0;
@@ -84,45 +84,54 @@ public class ProductController extends HttpServlet {
                             request.setAttribute("PRODUCT_LIST", subList);
                         }
                     }
-                    request.setAttribute("pages", pages);
-                    request.setAttribute("curPage", page);
-                    //end pagination      
-
-                    request.setAttribute("cateID", categoryID);
-
-                    url = VIEW;
-
+                    url = ALL;
                     break;
-                case "ViewDetail":
-                    String id = request.getParameter("productID").trim();
-                    String colorChoosen = request.getParameter("color");
-                    String specChosen = request.getParameter("specID");
-
-                    ProductDAO pDAO = new ProductDAO();
-
-                    ProductDTO product = pDAO.getProduct(id);
-                    List<ProductDTO> color = pDAO.getAllColor(id);
-                    if (colorChoosen != null) {
-                        ProductDTO spec = pDAO.getPriceAndQuantity(id, colorChoosen, specChosen);
-                        List<ProductDTO> hardware = pDAO.getAllHardwareWithColor(id, colorChoosen);
-                        request.setAttribute("colorChosen", colorChoosen);
-                        request.setAttribute("hardware", hardware);
-                        request.setAttribute("spec", spec);
-                        request.setAttribute("specID", specChosen);
+                    
+                case "Manage Detail":
+                    List<ProductDTO> specList = dao.getAllSpec(productID);
+                    ProductDTO pro = dao.getBasicDetail(productID);
+                    if (specList == null) {
+                        error.setMsg("NO SPEC FOUND");
+                        request.setAttribute("ERROR", error);
+                    } else {
+                        session.setAttribute("SPEC_LIST", specList);
+                        session.setAttribute("BASIC", pro);
+                        url = DETAIL;
                     }
-                    request.setAttribute("product", product);
-                    request.setAttribute("color", color);
-
-                    url = DETAIL;
+                    break;
+                    
+                case "Update Spec":
+                    String specID = request.getParameter("specID");
+                    String color = request.getParameter("color");
+                    String ram = request.getParameter("ram");
+                    String storage = request.getParameter("storage");
+                    int specQuantity = Integer.parseInt(request.getParameter("specQuantity"));
+                    double price = Double.parseDouble(request.getParameter("specPrice"));
+                    boolean status = Boolean.parseBoolean(request.getParameter("specStatus"));
+                    pro = new ProductDTO(price, status, ram, storage, color, specID, specQuantity);
+                    if(dao.updateSpec(pro)){
+                        request.setAttribute("UPDATED", specID);
+                        url = "ManageProductController?perform=Manage+Detail&productID="+productID;
+                    }else{
+                        request.setAttribute("FAILED", specID);
+                        url=UPDATE_FAIL;
+                    }
+                    break;
+                    
+                case "Update Basic":
+                    String productName = request.getParameter("productName");
+                    String description = request.getParameter("description");
+                    String image = request.getParameter("image");
                     break;
             }
         } catch (Exception e) {
             if (e.toString().contains("NullPointerException")) {
-                msg.setMsg("Sorry our shop currently doesn't have these products in stock !!");
-                request.setAttribute("EMPTY_LIST", msg);
-                url = VIEW;
+                error.setMsg("Sorry our shop currently doesn't have these products in stock !!");
+                request.setAttribute("EMPTY_LIST", error);
+                url = ALL;
             } else {
-                request.setAttribute("Error at ProductController", e.toString());
+                error.setMsg("Error at ManageProductController: " + e.toString());
+                request.setAttribute("ERROR", error);
             }
         } finally {
             request.getRequestDispatcher(url).forward(request, response);

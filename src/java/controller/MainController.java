@@ -22,15 +22,14 @@ import javax.servlet.http.HttpServletResponse;
 )
 public class MainController extends HttpServlet {
 
-    private static final String ERROR = "error.jsp";    
-    private static final String PRODUCTDETAIL = "ProductDetailController";
+    private static final String ERROR = "error.jsp";        
     private static final String ADDCART = "AddToCartController";
     private static final String BUYITEM = "BuyItemController";
     private static final String REMOVECART = "RemoveCartItemController";
     private static final String VIEWCART = "ViewCartController";
     private static final String COMPLETEORDER="CompleteOrderController";
     private static final String PRODUCTLISTMANAGEMENT="ProductListManagementController";
-    private static final String PRODUCTMANAGEMENT="ProductDetailManagementController";
+    private static final String PRODUCTMANAGEMENT="ManageProductController";
     private static final String UPDATEPRODUCT="UpdateProductController";
     private static final String CREATESPEC="CreateSpecController";
     private static final String SUBMITCOMMENT="AddCommentController";
@@ -52,14 +51,8 @@ public class MainController extends HttpServlet {
         String action = request.getParameter("action");
         System.out.println(action);
         //System.out.println(session.getAttribute("username"));
-        try {
-            if (action==null){
-                url="index.jsp";
-            }
+        try {           
             switch (action){                                
-                case "ProductDetail":
-                    url=PRODUCTDETAIL;
-                    break;
                 case "SearchProduct":
                     url= SEARCHPRODUCT;
                     break;    
@@ -84,10 +77,7 @@ public class MainController extends HttpServlet {
                 case "ProductListManagement":
                     url=PRODUCTLISTMANAGEMENT;
                     break;
-                case "UpdateProductManagement":
-                    url=PRODUCTMANAGEMENT;
-                    break;
-                case "ProductDetailManagement":
+                case "Manage Product":
                     url=PRODUCTMANAGEMENT;
                     break;
                 case "Update Product Detail":
@@ -117,7 +107,7 @@ public class MainController extends HttpServlet {
                 case "OrderDetail":
                     url = ORDERDETAIL;
                     break;    
-                case "User Manage":
+                case "User":
                     url = USER;
                     break;
                 case "Product":

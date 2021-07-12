@@ -7,7 +7,7 @@ package controllers_backup;
 
 import daos.ProductDAO;
 import dtos.ProductDTO;
-import dtos.ViewProductErrorDTO;
+import dtos.ProductErrorDTO;
 import java.io.IOException;
 
 import java.util.List;
@@ -38,7 +38,7 @@ public class ViewProductController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-        ViewProductErrorDTO msg = new ViewProductErrorDTO();
+        ProductErrorDTO msg = new ProductErrorDTO();
         try {
             ProductDAO dao = new ProductDAO();
             String categoryID = request.getParameter("categoryID");

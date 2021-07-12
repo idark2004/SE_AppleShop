@@ -84,24 +84,25 @@
                             <div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                    <h3>Login In</h3>
+                                    <h3>Log In</h3>
                                 </div>
                                 <div class="modal-body">
-                                    <form class="form-horizontal loginFrm">
+                                    <form class="form-horizontal loginFrm" action="MainController">
                                         <div class="control-group">
-                                            <input type="text" id="inputEmail" placeholder="Email">
+                                            <input type="text" id="inputEmail" placeholder="Email" name="email">
                                         </div>
                                         <div class="control-group">
-                                            <input type="password" id="inputPassword" placeholder="Password">
+                                            <input type="password" id="inputPassword" placeholder="Password" name="password">
                                         </div>
                                         <div class="control-group">
                                             <label class="checkbox">
 											<input type="checkbox"> Remember me
-											</label>
-                                            <a href="#"><img width="30" height="30" src="themes/images/google.png" title="Login with Google" alt="Google Login" /></a>
+											</label>                                            
                                         </div>
+                                        <input type="hidden" name="perform" value="Log in">
+                                        <button type="submit" class="btn btn-success" name="action" value="User">Log in</button>
                                     </form>
-                                    <button type="submit" class="btn btn-success">Sign in</button>
+                                    
                                     <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
                                 </div>
                             </div>
@@ -212,7 +213,7 @@
                                                 <strong>Warning:</strong> ${requestScope.LOGIN_ERROR.loginError}
                                             </div>
                                         </c:if>
-                                        <input type="hidden" name="action" value="User Manage"/>
+                                        <input type="hidden" name="action" value="User"/>
                                         <div class="control-group">
                                             <div class="controls">
                                                 <button type="submit" class="btn" name="perform" value="Log in">Log in</button> <a href="forgetPass.jsp">Forget password?</a>
