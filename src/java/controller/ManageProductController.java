@@ -13,7 +13,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -187,10 +186,10 @@ public class ManageProductController extends HttpServlet {
                     System.out.println(imgUrl.length());
                     System.out.println(imgUrl);
                     if (imgUrl.length()<=7){
-                        dao.UpdateProduct(productID, productName);
+                        dao.UpdateProduct(productID, productName,description);
                     }
                     else {
-                        dao.UpdateProductWithImage(productID, productName, imgUrl);
+                        dao.UpdateProductWithImage(productID, productName, imgUrl, description);
                     }
                     url = "ManageProductController?perform=Manage+Detail&productID="+productID;
                     

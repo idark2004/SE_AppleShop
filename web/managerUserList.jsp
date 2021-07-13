@@ -53,16 +53,7 @@
                             <c:otherwise>
                                 <strong> User</strong>
                             </c:otherwise>
-                        </c:choose></div>
-                    <div class="span6">
-                        <div class="pull-right">
-                            <c:forEach var="cartItem" items="${sessionScope.cart}">
-                                <c:set var="subtotalCount" value="${cartItem.quantity}"/>
-                                <c:set var="subtotal" value="${subtotal+cartItem.quantity}"/>
-                            </c:forEach>
-                            <a href="cartDetail.jsp"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> ${subtotal} Itemes in your cart </span> </a>
-                        </div>
-                    </div>
+                        </c:choose></div>                    
                 </div>
             <!-- Navbar ================================================== -->
             <div id="logoArea" class="navbar">
@@ -79,84 +70,19 @@
                         <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
                     </form>
                     <ul id="topMenu" class="nav pull-right">
-                        <li class=""><a href="products_Manager.html">All Products</a></li>
-                        <li class=""><a href="contact.html">Contact</a></li>
-                        <li class=""><a href="user_profile.html">Profile</a></li>
-                        <li class="">
-                            <a href="register.html" role="button" style="padding-right:0"><span class="btn btn-large btn-success">Signup</span></a>
-                        </li>
-                        <li class="">
-                            <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
-                            <div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                    <h3>Login In</h3>
-                                </div>
-                                <div class="modal-body">
-                                    <form class="form-horizontal loginFrm">
-                                        <div class="control-group">
-                                            <input type="text" id="inputEmail" placeholder="Email">
-                                        </div>
-                                        <div class="control-group">
-                                            <input type="password" id="inputPassword" placeholder="Password">
-                                        </div>
-                                        <div class="control-group">
-                                            <label class="checkbox">
-											<input type="checkbox"> Remember me
-											</label>
-                                        </div>
-                                        <div class="control-group">
-                                            <a href="#"><img width="30" height="30" src="themes/images/google.png" title="Login with Google" alt="Google Login" /></a>
-                                        </div>
-                                    </form>
-                                    <button type="submit" class="btn btn-success">Sign in</button>
-                                    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                                </div>
-                            </div>
-                        </li>
+                        <li class=""><a href="products_Manager.html">All Products</a></li>                                               
                     </ul>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Header End====================================================================== -->
-    <div id="carouselBlk">
-        <div id="myCarousel" class="carousel slide">
-            <div class="carousel-inner">
-                <div class="item active">
-                    <div class="container">
-                        <a href="register.html"><img style="width:100%" src="themes/images/carousel/1.png" alt="" /></a>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="container">
-                        <a href="register.html"><img style="width:100%" src="themes/images/carousel/2.png" alt="" /></a>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="container">
-                        <a href="register.html"><img src="themes/images/carousel/3.png" alt="" /></a>
-                    </div>
-                </div>
-            </div>
-            <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-            <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
-        </div>
-    </div>
+    
     <div id="mainBody">
         <div class="container">
             <div class="row">
                 <!-- Sidebar ================================================== -->
                 <div id="sidebar" class="span3">
-                    <div class="well well-small">
-                            <c:forEach var="cartItem" items="${sessionScope.cart}">
-                                <c:set var="total" value="${total + (cartItem.quantity * cartItem.product.price)}"/>
-                            </c:forEach>
-                            <a id="myCart" href="cartDetail.jsp"><img src="themes/images/ico-cart.png" alt="cart">${subtotal} Items in your cart <span class="badge badge-warning pull-right"> 
-                                    <fmt:setLocale value="vi_VN" />
-                                    <fmt:formatNumber value="${total}" type="currency" /></span>
-                            </a>
-                    </div>
+                    
                     <ul id="sideManu" class="nav nav-tabs nav-stacked">
                         <li><a href="products_Manager.html">All</a></li>
                         <li><a href="products_Manager.html">iPhone</a></li>
@@ -176,7 +102,7 @@
                 <!-- Sidebar end=============================================== -->
                 <div class="span9">
                     <ul class="breadcrumb">
-                        <li><a href="index_Manager.html">Home</a> <span class="divider">/</span></li>
+                        <li><a href="managerIndex.jsp">Home</a> <span class="divider">/</span></li>
                         <li class="active">Customers</li>
                     </ul>
                     <div class="row">
@@ -185,9 +111,8 @@
                                 <thead>
                                     <tr>
 
-                                        <th><span>User</span></th>
-                                        <th>Id</th>
-                                        <th><span>Created</span></th>
+                                        <th><span>Name</span></th>
+                                        <th>Id</th>                                        
                                         <th><span>Address</span></th>
                                         <th>Action</th>
                                     </tr>
@@ -218,31 +143,7 @@
                                             </a>
                                         </td>
                                     </tr>
-
-                                    <tr>
-                                        <td>
-                                            <a href="customer_details_Manager.html">Maria Ozawa</a>
-                                        </td>
-                                        <td>ozawakimochi</td>
-                                        <td>2020/08/12</td>
-                                        <td>
-                                            123 Yamate Kudasai, Tokyo, Japan
-                                        </td>
-                                        <td>
-                                            <a href="customer_details_Manager.html" class="table-link  text-info" title="More Detail">
-                                                <span class="fa-stack">
-                                                    <i class="fa fa-square fa-stack-2x"></i>
-                                                    <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
-                                                </span>
-                                            </a>
-                                            <a href="#" class="table-link danger" title="Hide This Customer">
-                                                <span class="fa-stack">
-                                                    <i class="fa fa-square fa-stack-2x"></i>
-                                                    <i class="fa fa-eye fa-stack-1x fa-inverse"></i>
-                                                </span>
-                                            </a>
-                                        </td>
-                                    </tr>
+                                    
                                 </tbody>
                             </table>
                         </div>

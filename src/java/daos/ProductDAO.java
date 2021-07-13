@@ -9,17 +9,12 @@ import utils.DBConnect;
 import dtos.CartItemDTO;
 import dtos.OrderDTO;
 import dtos.ProductDTO;
-import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Types;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -512,10 +507,11 @@ public class ProductDAO {
         return null;
     }
 
-    public boolean UpdateProduct(String productID, String name) throws NamingException, SQLException {
+    public boolean UpdateProduct(String productID, String name, String description) throws NamingException, SQLException {
+        boolean check = false;
         Connection c = null;
         PreparedStatement ps = null;
-        String sql = "UPDATE tblProducts SET productName=? WHERE productID=?";
+        String sql = "UPDATE tblProducts SET productName=?, description = ? WHERE productID=?";
         try {
             c = DBConnect.makeConnection();
 
@@ -523,14 +519,14 @@ public class ProductDAO {
                 ps = c.prepareStatement(sql);
 
                 ps.setString(1, name);
-                ps.setString(2, productID);
+                ps.setString(2, description);
+                ps.setString(3, productID);
 
-                ps.executeUpdate();
-                return true;
+                check= ps.executeUpdate()>0;
+                
             }
         } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+            e.printStackTrace();            
         } finally {
             if (ps != null) {
                 ps.close();
@@ -539,13 +535,13 @@ public class ProductDAO {
                 c.close();
             }
         }
-        return false;
+        return check;
     }
 
-    public boolean UpdateProductWithImage(String productID, String name, String image) throws NamingException, SQLException {
+    public boolean UpdateProductWithImage(String productID, String name, String image, String description) throws NamingException, SQLException {
         Connection c = null;
         PreparedStatement ps = null;
-        String sql = "UPDATE tblProducts SET productName=?, image=? WHERE productID=?";
+        String sql = "UPDATE tblProducts SET productName=?, image=?, description = ? WHERE productID=?";
         try {
             c = DBConnect.makeConnection();
 
@@ -554,7 +550,8 @@ public class ProductDAO {
 
                 ps.setString(1, name);
                 ps.setString(2, image);
-                ps.setString(3, productID);
+                ps.setString(3, description);
+                ps.setString(4, productID);
 
                 ps.executeUpdate();
                 return true;
