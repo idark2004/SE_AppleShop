@@ -84,22 +84,23 @@
                                 <div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                        <h3>Login In</h3>
+                                        <h3>Log In</h3>
                                     </div>
                                     <div class="modal-body">
                                     <form class="form-horizontal loginFrm" action="MainController" method="post">
                                         <div class="control-group">
-                                            <input type="text" id="inputEmail" placeholder="Enter Email" name="uname" required>
+                                            <input type="text" id="inputEmail" placeholder="Enter Email" name="email" required>
                                         </div>
                                         <div class="control-group">
-                                            <input type="password" id="inputPassword" placeholder="Enter Password" name="psw" required>
+                                            <input type="password" id="inputPassword" placeholder="Enter Password" name="password" required>
                                         </div>
                                         <div class="control-group">
                                             <label class="checkbox">
 											<input type="checkbox"> Remember me
 											</label>
-                                            <div class="g-signin2" data-onsuccess="onSignIn"></div>
-                                            <button type="submit" class="btn btn-success" name="action" value="Login">Sign in</button>
+                                            
+                                            <input type="hidden" name="perform" value="Log in">
+                                            <button type="submit" class="btn btn-success" name="action" value="User">Sign in</button>
                                             <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
                                         </div>
                                     </form>
@@ -242,7 +243,7 @@
 
                                 <div class="control-group">
                                     <div class="controls">
-                                        <input type="hidden" name="action" value="User Manage"/>
+                                        <input type="hidden" name="action" value="User"/>
                                         <input class="btn btn-large btn-success" type="submit" name="perform" value="Sign Up" />
                                     </div>
                                 </div>

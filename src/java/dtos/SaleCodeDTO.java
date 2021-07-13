@@ -37,7 +37,7 @@ public class SaleCodeDTO {
         this.expDate = expDate;
     }
 
-    public boolean isCodeStatus() {
+    public boolean getCodeStatus() {
         return codeStatus;
     }
 

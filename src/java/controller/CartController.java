@@ -7,11 +7,13 @@ package controller;
 
 import daos.OrderDAO;
 import daos.ProductDAO;
+import daos.SaleCodeDAO;
 import dtos.CartItemDTO;
 import dtos.ErrorDTO;
 import dtos.OrderDTO;
 import dtos.OrderDetailDTO;
 import dtos.ProductDTO;
+import dtos.SaleCodeDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.NumberFormat;
@@ -66,6 +68,7 @@ public class CartController extends HttpServlet {
         HttpSession session = request.getSession();
         String url = ERROR;
         ProductDAO dao = new ProductDAO();
+        SaleCodeDAO sDAO = new SaleCodeDAO();
         OrderDTO newOrder = new OrderDTO();
         OrderDAO oDAO= new OrderDAO();
         List<CartItemDTO> cart = (List<CartItemDTO>) session.getAttribute("cart");
@@ -78,12 +81,13 @@ public class CartController extends HttpServlet {
                     String phone = request.getParameter("phone");
                     String email = request.getParameter("email");
                     String payMethod = request.getParameter("payMethod");
+                    String codeSale = request.getParameter("saleCode");
                     double total = Double.parseDouble(request.getParameter("total"));
                     String userID = null;
                     if (cart != null) System.out.println("cart <> null");
                     else System.out.println("cart null");
                     if (cart != null) {
-                        newOrder = dao.completeOrder(cart, address, cusName, email, phone, userID, null, payMethod, total);
+                        newOrder = dao.completeOrder(cart, address, cusName, email, phone, userID, codeSale, payMethod, total);
                         System.out.println("Go");
                         String orderID = newOrder.getOrderID();
                         boolean check = dao.addOrderDetail(cart, orderID);
@@ -185,6 +189,19 @@ public class CartController extends HttpServlet {
                     url="cartDetail.jsp";
                     if(request.getParameter("page")!=null){
                         url=request.getParameter("page");
+                    }
+                    break;
+                case "addSaleCode":
+                    String saleCode = request.getParameter("saleCode");
+                    SaleCodeDTO sale=sDAO.ApplyCode(saleCode);
+                    System.out.println(sale.getCodeID()+" "+sale.getPercentage());
+                    if (sale!=null){
+                        request.setAttribute("sale", sale);
+                        url="cartDetail.jsp";
+                    }
+                    else {
+                        request.setAttribute("message", "The code does not exist or expired");
+                        url="cartDetail.jsp";
                     }
                     break;
             }

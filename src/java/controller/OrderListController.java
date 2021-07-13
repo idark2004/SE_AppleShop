@@ -7,9 +7,8 @@ package controller;
 
 import daos.OrderDAO;
 import dtos.OrderDTO;
-import dtos.ViewProductErrorDTO;
+import dtos.ProductErrorDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -38,7 +37,7 @@ public class OrderListController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-        ViewProductErrorDTO msg = new ViewProductErrorDTO();
+        ProductErrorDTO msg = new ProductErrorDTO();
         try {
             OrderDAO dao = new OrderDAO();
             ArrayList<OrderDTO> list = dao.getAllOrder();

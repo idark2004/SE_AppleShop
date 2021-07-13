@@ -9,13 +9,13 @@ package dtos;
  *
  * @author phath
  */
-public class ViewProductErrorDTO {
+public class ProductErrorDTO {
     private String msg;
 
-    public ViewProductErrorDTO() {
+    public ProductErrorDTO() {
     }
 
-    public ViewProductErrorDTO(String msg) {
+    public ProductErrorDTO(String msg) {
         this.msg = msg;
     }
 

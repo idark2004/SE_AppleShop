@@ -208,6 +208,10 @@
                             </tr>
                         </table>
 
+                        <c:set var="discount" value="${requestScope.sale.percentage}"/>
+                        <c:if test="${requestScope.sale ==null}">
+                            <c:set var="discount" value="0"/>
+                        </c:if>
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
@@ -221,6 +225,8 @@
                             </thead>
                             <tbody>
                                 <c:set var="total" value="0"/>
+                                <c:set var="totalDiscount" value="0"/>
+                                <c:set var="Price" value="0"/>
                                 <c:choose>
                                     <c:when test="${sessionScope.cart != null}">
                                         <c:forEach var="cartItem" items="${sessionScope.cart}">
@@ -248,10 +254,12 @@
                                                 </td>
                                                 <td><fmt:formatNumber type="number" maxFractionDigits = "0" value="${cartItem.quantity * cartItem.product.price}"/> VND</td>
                                                 <td>
-                                                    0
+                                                    <fmt:formatNumber type="number" maxFractionDigits = "0" value="${cartItem.quantity * cartItem.product.price * discount / 100}"/> VND
                                                 </td>
-                                                <td><fmt:formatNumber type="number" maxFractionDigits = "0" value="${cartItem.quantity * cartItem.product.price}"/> VND</td>
-                                                <c:set var="total" value="${total + (cartItem.quantity * cartItem.product.price)}"/>
+                                                <td><fmt:formatNumber type="number" maxFractionDigits = "0" value="${cartItem.quantity * cartItem.product.price - cartItem.quantity * cartItem.product.price * discount / 100}"/> VND</td>
+                                                <c:set var="total" value="${total + (cartItem.quantity * cartItem.product.price - cartItem.quantity * cartItem.product.price * discount / 100)}"/>
+                                                <c:set var="totalDiscount" value="${totalDiscount + (cartItem.quantity * cartItem.product.price * discount / 100)}"/>
+                                                <c:set var="Price" value="${Price + (cartItem.quantity * cartItem.product.price)}"/>
                                             </tr>
                                         </c:forEach>
                                     </c:when>
@@ -261,14 +269,14 @@
                             </c:choose>
                             <tr>
                                 <td colspan="5" style="text-align:right">Total Price: </td>
-                                <td> <fmt:formatNumber type="number" maxFractionDigits = "0" value="${total}"/> VND</td>
+                                <td> <fmt:formatNumber type="number" maxFractionDigits = "0" value="${Price}"/> VND</td>
                             </tr>
                             <tr>
                                 <td colspan="5" style="text-align:right">Total Discount: </td>
-                                <td> discount money VND</td>
+                                <td> <fmt:formatNumber type="number" maxFractionDigits = "0" value="${totalDiscount}"/></td>
                             </tr>
                             <tr>
-                                <td colspan="5" style="text-align:right"><strong>TOTAL (<fmt:formatNumber type="number" maxFractionDigits = "0" value="${total}"/> VND - discount money VND) =</strong></td>
+                                <td colspan="5" style="text-align:right"><strong>TOTAL (<fmt:formatNumber type="number" maxFractionDigits = "0" value="${Price}"/> VND - ${totalDiscount} VND) =</strong></td>
                                 <td class="label label-important" style="display:block"> <strong><fmt:formatNumber type="number" maxFractionDigits = "0" value="${total}"/> VND</strong></td>
                             </tr>
                             </tbody>
@@ -279,12 +287,14 @@
                             <tbody>
                                 <tr>
                                     <td>
-                                        <form class="form-horizontal">
+                                        <form class="form-horizontal" action="MainController" method="post">
                                             <div class="control-group">
+                                                ${requestScope.message}
                                                 <label class="control-label"><strong> SALE CODE: </strong> </label>
                                                 <div class="controls">
-                                                    <input type="text" class="input-medium" placeholder="CODE">
-                                                    <button type="submit" class="btn"> ADD </button>
+                                                    <input type="text" class="input-medium" placeholder="CODE" name="saleCode">
+                                                    <input type="hidden" name="action" value="Cart">
+                                                    <button type="submit" class="btn" name="perform" value="addSaleCode"> ADD </button>
                                                 </div>
                                             </div>
                                         </form>
@@ -339,6 +349,7 @@
                                         </div>
                                         <input type="hidden" name="action" value="Cart"/>
                                         <input type="hidden" name="total" value="${total}"/>
+                                        <input type="hidden" name="saleCode" value="${requestScope.sale.codeID}"/>
                                         <button class="btn btn-large pull-right" type="submit" name="perform" value="Order Complete">Next <i class="icon-arrow-right"></i></button>
                                         <a href="MainController?action=Product&perform=ViewProduct" class="btn btn-large"><i class="icon-arrow-left"></i> Continue Shopping </a>                                        
                                     </form>

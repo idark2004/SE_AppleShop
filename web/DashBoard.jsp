@@ -158,6 +158,7 @@
                                 <li><a href="dashboard_Manager.html"><i class="icon-chevron-right"></i>Dashboard</a></li>
                                 <li><a href="product_details_Manager.html"><i class="icon-chevron-right"></i>Add Product</a></li>
                                 <li><a href="customers_Manager.html"><i class="icon-chevron-right"></i>Customer List</a></li>
+                                <li><a href="sales_Manager.html"><i class="icon-chevron-right"></i>Sale Code List</a></li>
                             </ul>
                         </li>
                     </ul>

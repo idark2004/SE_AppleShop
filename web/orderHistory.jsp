@@ -24,7 +24,8 @@
 	-->
     <!--<link rel="stylesheet/less" type="text/css" href="themes/less/bootshop.less">
 	<script src="themes/js/less.js" type="text/javascript"></script> -->
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="js/hideManagerBar.js"></script>
     <!-- Bootstrap style -->
     <link id="callCss" rel="stylesheet" href="themes/bootshop/bootstrap.min.css" media="screen" />
     <link href="themes/css/base.css" rel="stylesheet" media="screen" />
@@ -41,6 +42,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="themes/images/ico/apple.png">
     <link rel="apple-touch-icon-precomposed" href="themes/images/ico/apple.png">
     <style type="text/css" id="enject"></style>
+       
     <link rel="stylesheet" href="themes/font-awesome-4.7.0/css/font-awesome.min.css">
 </head>
 
@@ -172,14 +174,15 @@
                         <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AW&status=True">Apple Watch</a></li>
                         <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AS&status=True">Accessory</a></li>
                         <c:if test="${sessionScope.USER.roleID.trim() == 'MN' || sessionScope.USER.roleID.trim() == 'AD'}">
-                        <li class="subMenu"><a>Shop Manager</a>
+                        
+                        </c:if>
+                        <li class="subMenu" id="manaLi"> aa<a>Shop Manager</a>
                             <ul style="display:none">
                                 <li><a href="dashboard_Manager.html"><i class="icon-chevron-right"></i>Dashboard</a></li>
                                 <li><a href="product_details_Manager.html"><i class="icon-chevron-right"></i>Add Product</a></li>
                                 <li><a href="customers_Manager.html"><i class="icon-chevron-right"></i>Customer List</a></li>
                             </ul>
                         </li>
-                        </c:if>
                     </ul>
                     <br/>
                 </div>
@@ -371,5 +374,14 @@
     </div>
     <span id="themesBtn"></span>
 </body>
-
+<script type="text/javascript">
+//                $( document ).ready( function() {
+//                var role = "${sessionScope.USER.roleID.trim()}" ;
+//                var aa = $('#manaLi');
+//                if(role==="MN"){
+//                aa.hide();             
+//                }               
+//              });    
+//            
+</script>
 </html>

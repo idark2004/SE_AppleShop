@@ -53,6 +53,24 @@ public class ProductDTO {
         this.specID = specID;
     }
 
+    public ProductDTO(double price, boolean status,String ram, String storage, String color, String specID, int specQuantity) {
+        this.price = price;
+        this.status = status;
+        this.ram = ram;
+        this.storage = storage;
+        this.color = color;
+        this.specID = specID;
+        this.specQuantity = specQuantity;
+    }
+
+    public ProductDTO(String productID, String name, String description, String image) {
+        this.productID = productID;
+        this.name = name;
+        this.description = description;
+        this.image = image;
+    }    
+        
+
     public int getSpecQuantity() {
         return specQuantity;
     }

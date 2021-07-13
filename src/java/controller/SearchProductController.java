@@ -7,9 +7,8 @@ package controller;
 
 import daos.ProductDAO;
 import dtos.ProductDTO;
-import dtos.ViewProductErrorDTO;
+import dtos.ProductErrorDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,7 +39,7 @@ public class SearchProductController extends HttpServlet {
         String keyWord = request.getParameter("keyWord");
         String url = ERROR;
         try {
-            ViewProductErrorDTO msg = new ViewProductErrorDTO();
+            ProductErrorDTO msg = new ProductErrorDTO();
             ProductDAO dao = new ProductDAO();
             List<ProductDTO> list = dao.viewProduct("","True");
             for(int i=0;i<list.size();i++) {

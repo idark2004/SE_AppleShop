@@ -94,7 +94,7 @@
                                     <h3>Login In</h3>
                                 </div>
                                 <div class="modal-body">
-                                    <form class="form-horizontal loginFrm">
+                                    <form class="form-horizontal loginFrm"  method="POST">
                                         <div class="control-group">
                                             <input type="text" id="inputEmail" placeholder="Email">
                                         </div>
@@ -183,89 +183,76 @@
                     </ul>
                     <div class="row">
                         <div id="gallery" class="span3">
-                            <a href="themes/images/products/detail/1.jpg" title="iPhone 12 Pro Max">
+                           
                                 <img src="themes/images/products/detail/1.jpg" style="width:100%" alt="iPhone 12 Pro Max" />
-                                <input class="file-input" type="file">
-                            </a>
+                                <input form="addProduct" name="img" class="file-input" type="file" required="">
+                            
                         </div>
                         <div class="span6">
-                            <h3>iPhone 12 Pro Max</h3>
-                            <hr class="soft" />
-                            
-
                                 <div class="">
-                                    <h5>Product Editor</h5>
+                                    <h5>Add product</h5>
                                     <br>
-                                    <form id="productUpdate">
+                                    <form id="addProduct" method="post" enctype="multipart/form-data" action="MainController">
                                         <div class="control-group">
                                             <label class="control-label" for="">Product Name</label>
                                             <div class="controls">
-                                                <input class="span3" type="text" id="inputProductName" placeholder="Product Name" maxlength="30">
+                                                <input class="span3" type="text" name="pname" id="inputProductName" placeholder="Product Name" maxlength="30">
                                             </div>
                                         </div>
                                         <div class="control-group">
                                             <label class="control-label" for="">CategoryID</label>
                                             <div class="controls">
-                                                <input class="span3" type="text" id="inputPrice" placeholder="CategoryID" maxlength="11">
+                                                <input class="span3" type="text" name="cateID" id="inputPrice" placeholder="CategoryID" maxlength="11">
                                             </div>
                                         </div>
                                         <div class="control-group">
                                             <label class="control-label" for="">Quantity</label>
                                             <div class="controls">
-                                                <input class="span3" type="number" id="inputPrice" placeholder="Quantity">
+                                                <input class="span3" type="number" name="quantity" id="inputPrice" placeholder="Quantity">
                                             </div>
                                         </div>
-                                        
                                         <div class="controls">
-                                                <input class="btn btn-primary btn-success" type="submit" value="Submit">
+                                            <input type="hidden" value="Product" name="action" >
+                                            <input class="btn btn-primary btn-success"  type="submit" >
                                         </div>
-                                    </form>
+                                   
                                     <hr class="soft" />
-                                    <form class="form-horizontal qtyFrm">
+                                    
                                     <h5>Create new spec</h5>
                                     <br>
                                     
-                                        <div class="control-group">
-                                            <label class="control-label" for="">Spec ID</label>
-                                            <div class="controls">
-                                                <input class="span3" type="text" id="" placeholder="Spec ID">
-                                            </div>
-                                        </div>
+                                        
                                         <div class="control-group">
                                             <label class="control-label" for="">New Color</label>
                                             <div class="controls">
-                                                <input class="span3" type="text" id="" placeholder="New Color">
+                                                <input class="span3" name="newColor" type="text" id="" placeholder="New Color">
                                             </div>
                                         </div>
                                         <div class="control-group">
                                             <label class="control-label" for="">RAM</label>
                                             <div class="controls">
-                                                <input class="span3" type="text" id="" placeholder="Ram">
+                                                <input class="span3" name="newRam" type="text" id="" placeholder="Ram">
                                             </div>
                                         </div>
                                         <div class="control-group">
                                             <label class="control-label" for="">Storage</label>
                                             <div class="controls">
-                                                <input class="span3" type="text" id="" placeholder="Storage">
+                                                <input class="span3" name="newStorage" type="text" id="" placeholder="Storage">
                                             </div>
                                         </div>
                                         <div class="control-group">
                                             <label class="control-label" for="">Price</label>
                                             <div class="controls">
-                                                <input class="span3" type="text" id="inputPrice" placeholder="Price" maxlength="11">
+                                                <input class="span3"name="newPrice" type="text" id="inputPrice" placeholder="Price" maxlength="11">
                                             </div>
                                         </div>
                                         <div class="control-group">
                                             <label class="control-label" for="">Quantity</label>
                                             <div class="controls">
-                                                <input class="span3" type="number" id="inputPrice" placeholder="Quantity">
+                                                <input class="span3" name="newQuantity" type="number" id="inputPrice" placeholder="Quantity">
                                             </div>
                                         </div>
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <input class="btn btn-primary btn-success" type="submit" value="Submit">
-                                            </div>
-                                        </div>
+                                    <input type="hidden" name="perform" value="addProduct">   
                                     </form>
                                     <hr class="soft" />
                                 </div>
@@ -285,7 +272,7 @@
                                     <div class="control-group">
                                         <label class="control-label" for="textarea">Description</label>
                                         <div class="controls">
-                                            <textarea form="productUpdate" class="input-xlarge" id="textarea" rows="3" style="height:10rem; width:97%;" placeholder="Input description here."></textarea>
+                                            <textarea form="addProduct" name="des" class="input-xlarge" id="textarea" rows="3" style="height:10rem; width:97%;" placeholder="Input description here."></textarea>
                                         </div>
                                     </div>
                                    

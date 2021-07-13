@@ -31,9 +31,9 @@
                 
                 //var rates = document.getElementById('rates').value;
             }
-            $('#myForm input').on('change', function() {
-                alert($('input[name=number]:checked', '#myForm').val()); 
-             });
+//            $('#myForm input').on('change', function() {
+//                alert($('input[name=number]:checked', '#myForm').val()); 
+//             });
              function priceChange(){
                  var price = document.getElementsByName('hardware');
                  
@@ -61,5 +61,11 @@
                 }
             function PrevPage(){
                 window.history.back();
-            }    
+            } 
+            $(window).on( 'load', function() {
+                alert("hhll");
+              });    
+            $( document ).ready(function() {
+             alert("hhll11111");
+            });  
 		

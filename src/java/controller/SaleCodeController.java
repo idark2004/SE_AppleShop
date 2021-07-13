@@ -8,6 +8,7 @@ package controller;
 import daos.SaleCodeDAO;
 import dtos.SaleCodeDTO;
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -22,8 +23,8 @@ import javax.servlet.http.HttpSession;
 public class SaleCodeController extends HttpServlet {
 
     private static final String ERROR = "error.jsp";
-    private static final String LIST = "saleCodeList.jsp";
-    private static final String VIEW = "saleCodeDetail.jsp";
+    private static final String LIST = "ManagerSaleCodeList.jsp";
+    private static final String VIEW = "ManagerSaleCodeDetail.jsp";
     private static final String SUCCESS = "SaleCodeController";
 
     /**
@@ -42,7 +43,10 @@ public class SaleCodeController extends HttpServlet {
         response.setContentType("text/html; charset=UTF-8");
         String url = ERROR;
         String perform = request.getParameter("perform");
-        boolean codeStatus = Boolean.parseBoolean(request.getParameter("codeStatus"));
+        String codeStatus = request.getParameter("codeStatus");
+        if (codeStatus==null){
+            codeStatus="true";
+        }
         String codeID = request.getParameter("codeID");
 
         try {
@@ -57,7 +61,7 @@ public class SaleCodeController extends HttpServlet {
                 if (list != null) {
                     request.setAttribute("ERROR", "list not null");
 
-                    session.setAttribute("CODE_LIST", list);
+                    request.setAttribute("CODE_LIST", list);
                     url = LIST;
                 } else {
                     request.setAttribute("ERROR", "list null");
@@ -68,6 +72,7 @@ public class SaleCodeController extends HttpServlet {
                     case "View":
                         code = dao.getCode(codeID);
                         request.setAttribute("CODE_DETAIL", code);
+                        request.setAttribute("perform", "View");
                         url = VIEW;
                         break;
                     case "Update":
@@ -78,7 +83,7 @@ public class SaleCodeController extends HttpServlet {
                         code = new SaleCodeDTO(codeID, codeName, percentage, expDate);
                         check = dao.updateSaleCode(code, newCodeID);
                         if (check) {
-                            url = VIEW;
+                            url="MainController?action=SaleCode&perform=View&codeID="+codeID;
                         }
                         break;
                     case "DeActive":
@@ -94,6 +99,25 @@ public class SaleCodeController extends HttpServlet {
                                 request.setAttribute("ERROR", "list null");
                             }
                         }
+                        break;
+                    case "addCode":
+                        request.setAttribute("perform", "addCode");
+                        url = VIEW;
+                        break;
+                    case "Add":
+                        String newCodeId = request.getParameter("newCodeID");
+                        String newCodeName = request.getParameter("codeName");
+                        String newPercentage = request.getParameter("percentage");
+                        String newExpDate = request.getParameter("expDate");
+                        
+                        Calendar cal = Calendar.getInstance();
+                        cal.add(Calendar.DATE, 0);
+                        String createDate=(cal.getTime().getMonth()+1)+"/"+cal.getTime().getDate()+"/"+(cal.getTime().getYear()+1900);
+                        
+                        SaleCodeDTO newCode = new SaleCodeDTO(newCodeId, newCodeName, newPercentage, createDate, newExpDate, true);
+                        
+                        dao.createSaleCode(newCode);
+                        url="SaleCodeController";
                         break;
                 }
             }

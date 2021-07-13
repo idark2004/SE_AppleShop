@@ -240,12 +240,12 @@
                                                         </c:if>
                                                 >Cancel</option>
                                                 <option value="Shipping"
-                                                        <c:if test="${sessionScope.USER.roleID.trim() == 'CU'}">
+                                                        <c:if test="${sessionScope.USER.roleID.trim() == 'US'}">
                                                            hidden 
                                                         </c:if>
                                                         >Shipping</option>
                                                 <option value="Completed" 
-                                                        <c:if test="${sessionScope.USER.roleID.trim() == 'CU'}">
+                                                        <c:if test="${sessionScope.USER.roleID.trim() == 'US'}">
                                                            hidden 
                                                         </c:if>
                                                         >Completed</option>

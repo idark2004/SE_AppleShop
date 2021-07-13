@@ -8,18 +8,15 @@ package controller;
 import daos.OrderDAO;
 import daos.UserDAO;
 import dtos.OrderDTO;
-import dtos.ProductDTO;
 import dtos.UserDTO;
-import dtos.ViewProductErrorDTO;
+import dtos.ProductErrorDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -39,11 +36,10 @@ public class OrderHistoryController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        HttpSession session = request.getSession();
+            throws ServletException, IOException {        
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-        ViewProductErrorDTO msg = new ViewProductErrorDTO();
+        ProductErrorDTO msg = new ProductErrorDTO();
         try {
             UserDAO uDao = new UserDAO();
             UserDTO user = uDao.getUserProfile(request.getParameter("userid"));
