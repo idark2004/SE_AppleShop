@@ -183,7 +183,7 @@
                     </ul>
                     <div class="row">
                         <div id="gallery" class="span3">
-                            <a href="themes/images/products/detail/1.jpg" title="iPhone 12 Pro Max">
+                            <a href="images/GucciGang.jpg" title="iPhone 12 Pro Max">
                                 <img src="themes/images/products/detail/1.jpg" style="width:100%" alt="iPhone 12 Pro Max" />
                                 <input class="file-input" type="file">
                             </a>
