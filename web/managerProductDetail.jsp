@@ -126,7 +126,7 @@
                                 <div class="row">
                                     <h3>${fn:trim(sessionScope.BASIC.name)}</h3>
                                     <hr class="soft" />
-                                    <form action="MainController">
+                                    <form action="MainController" method="post" enctype="multipart/form-data">
                                         <div id="gallery" class="span3">
                                             <a href="${sessionScope.BASIC.image}" title="${sessionScope.BASIC.name}">
                                                 <img src="${sessionScope.BASIC.image}" style="width:100%" alt="${sessionScope.BASIC.name}" />                                

@@ -51,6 +51,9 @@ public class MainController extends HttpServlet {
         String action = request.getParameter("action");
         System.out.println(action);
         //System.out.println(session.getAttribute("username"));
+        if (action == null){
+            url="index.jsp";
+        }
         try {           
             switch (action){                                
                 case "SearchProduct":

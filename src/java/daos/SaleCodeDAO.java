@@ -20,7 +20,7 @@ import utils.DBConnect;
  */
 public class SaleCodeDAO {
 
-    public List<SaleCodeDTO> getSaleCodeList(boolean codeStatus) throws SQLException {
+    public List<SaleCodeDTO> getSaleCodeList(String codeStatus) throws SQLException {
         List<SaleCodeDTO> list = null;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -33,7 +33,7 @@ public class SaleCodeDAO {
                         + " FROM tblSaleCode WHERE codeStatus = ?";
 
                 stm = conn.prepareStatement(sql);
-                stm.setBoolean(1, codeStatus);
+                stm.setBoolean(1, Boolean.parseBoolean(codeStatus));
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     String codeID = rs.getString("codeID");
@@ -44,7 +44,7 @@ public class SaleCodeDAO {
                     if (list == null) {
                         list = new ArrayList<>();
                     }
-                    list.add(new SaleCodeDTO(codeID, codeName, percentage, createDate, expDate, codeStatus));
+                    list.add(new SaleCodeDTO(codeID, codeName, percentage, createDate, expDate, Boolean.parseBoolean(codeStatus)));
                 }
             }
         } finally {
@@ -89,6 +89,34 @@ public class SaleCodeDAO {
         return code;
     }
 
+    public SaleCodeDTO ApplyCode(String codeID) {
+        SaleCodeDTO code = null;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBConnect.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT codeName, percentage, createDate, expDate, codeStatus "
+                        + " FROM tblSaleCode WHERE codeID=? AND expDate>GETDATE()";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, codeID);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    String codeName = rs.getString("codeName");
+                    String percentage = rs.getString("percentage");
+                    String createDate = rs.getString("createDate");
+                    String expDate = rs.getString("expDate");
+                    boolean codeStatus = rs.getBoolean("codeStatus");
+                    code = new SaleCodeDTO(codeID, codeName, percentage, createDate, expDate, codeStatus);
+                }
+            }
+
+        } catch (Exception e) {
+        }
+        return code;
+    }
+    
     public boolean updateSaleCode(SaleCodeDTO code, String newCodeID) throws SQLException {
         boolean check = false;
         Connection conn = null;
@@ -96,14 +124,13 @@ public class SaleCodeDAO {
         try {
             conn = DBConnect.makeConnection();
             if (conn != null) {
-                String sql = "UPDATE tblSaleCode SET percentage = ?, codeName = ?, expDate = ? , userID = ?"
+                String sql = "UPDATE tblSaleCode SET percentage = ?, codeName = ?, expDate = ? "
                         + "WHERE codeID = ? ";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, code.getPercentage());
                 stm.setString(2, code.getCodeName());
                 stm.setString(3, code.getExpDate());
-                stm.setString(4, newCodeID);
-                stm.setString(5, code.getCodeID());
+                stm.setString(4, code.getCodeID());
                 check = stm.executeUpdate() > 0;
             }
         } finally {
@@ -115,6 +142,34 @@ public class SaleCodeDAO {
             }
         }
         return check;
+    }
+    
+    public void createSaleCode(SaleCodeDTO code) throws SQLException {
+        Connection conn = null;
+        PreparedStatement stm = null;
+        try {
+            conn = DBConnect.makeConnection();
+            if (conn != null) {
+                System.out.println("HEY");
+                String sql = "INSERT INTO tblSaleCode(codeID, codeName, createDate, expDate, percentage, codeStatus) "
+                        + "VALUES(?, ?, ?, ?, ?, ?) ";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, code.getCodeID());
+                stm.setString(2, code.getCodeName());
+                stm.setString(3, code.getCreateDate());
+                stm.setString(4, code.getExpDate());
+                stm.setString(5, code.getPercentage());
+                stm.setBoolean(6, code.getCodeStatus());
+                stm.executeUpdate();
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
     }
 
     public boolean deactiveSaleCode(String codeID) throws SQLException {

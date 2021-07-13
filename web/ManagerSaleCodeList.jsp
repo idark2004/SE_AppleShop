@@ -179,22 +179,28 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <c:forEach var="sale" items="${requestScope.CODE_LIST}">
                                     <tr>
-                                        <td>trandan123</td>
+                                        <td>${sale.codeID}</td>
                                         <td>
-                                            <a href="sale_details_Manager.html">Tien Tri Vu Tru Tran Dan</a>
+                                            <a href="MainController?action=SaleCode&perform=View&codeID=${sale.codeID}">${sale.codeName}</a>
                                         </td>
 
-                                        <td>2020/08/12</td>
-                                        <td>2021/08/12</td>
+                                        <td>${sale.createDate}</td>
+                                        <td>${sale.expDate}</td>
                                         <td>
-                                            50%
+                                            ${sale.percentage}%
                                         </td>
                                         <td>
-                                            ---
+                                                <c:if test="${sale.codeStatus == true}">
+                                                    Available
+                                                </c:if>
+                                                <c:if test="${sale.codeStatus == false}">
+                                                    Not Available
+                                                </c:if>
                                         </td>
                                         <td>
-                                            <a href="sale_details_Manager.html" class="table-link text-info" title="More Detail">
+                                            <a href="MainController?action=SaleCode&perform=View&codeID=${sale.codeID}" class="table-link text-info" title="More Detail">
                                                 <span class="fa-stack">
                                                     <i class="fa fa-square fa-stack-2x"></i>
                                                     <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
@@ -208,34 +214,7 @@
                                             </a>
                                         </td>
                                     </tr>
-
-                                    <tr>
-                                        <td>ozawakimochi</td>
-                                        <td>
-                                            <a href="sale_details_Manager.html">Maria Ozawa</a>
-                                        </td>
-
-                                        <td>2020/08/12</td>
-                                        <td>2020/10/12</td>
-                                        <td>
-                                            5%
-                                        </td>
-
-                                        <td>
-                                            <a href="sale_details_Manager.html" class="table-link  text-info" title="More Detail">
-                                                <span class="fa-stack">
-                                                    <i class="fa fa-square fa-stack-2x"></i>
-                                                    <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
-                                                </span>
-                                            </a>
-                                            <a href="" class="table-link danger" title="Hide This Code">
-                                                <span class="fa-stack">
-                                                    <i class="fa fa-square fa-stack-2x"></i>
-                                                    <i class="fa fa-eye fa-stack-1x fa-inverse"></i>
-                                                </span>
-                                            </a>
-                                        </td>
-                                    </tr>
+                                    </c:forEach>
                                 </tbody>
                             </table>
                         </div>
@@ -253,7 +232,7 @@
                         </ul>
                     </div>
 
-                    <a href="sale_details_Manager.html" role="button" style="padding-right:0"><span class="btn btn-primary btn-success">Add new code</span></a>
+                    <a href="MainController?action=SaleCode&perform=addCode" role="button" style="padding-right:0"><span class="btn btn-primary btn-success">Add new code</span></a>
 
                 </div>
             </div>

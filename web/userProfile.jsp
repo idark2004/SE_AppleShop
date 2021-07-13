@@ -190,7 +190,7 @@
                                 <div class="control-group">
                                     <div class="controls">
                                         <a href="newPass.jsp" role="button" style="padding-right:0"><span class="btn btn-primary btn-success">Reset New Password</span></a>
-                                        <a href="order_history.html" role="button" style="padding-right:0"><span class="btn btn-primary btn-info">Order History</span></a>
+                                        <a href="OrderHistoryController?userid=${sessionScope.USER.userID}" role="button" style="padding-right:0"><span class="btn btn-primary btn-info">Order History</span></a>
                                     </div>
                                 </div>
                                          <input type="hidden"  name="userID" value="${sessionScope.USER.userID}" >

@@ -96,10 +96,10 @@
                                 <div class="modal-body">
                                     <form class="form-horizontal loginFrm" action="MainController" method="post">
                                         <div class="control-group">
-                                            <input type="text" id="inputEmail" placeholder="Enter Email" name="uname" required>
+                                            <input type="text" id="inputEmail" placeholder="Enter Email" name="email" required>
                                         </div>
                                         <div class="control-group">
-                                            <input type="password" id="inputPassword" placeholder="Enter Password" name="psw" required>
+                                            <input type="password" id="inputPassword" placeholder="Enter Password" name="password" required>
                                         </div>
                                         <div class="control-group">
                                             <label class="checkbox">
