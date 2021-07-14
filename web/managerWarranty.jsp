@@ -60,7 +60,7 @@
                     <span class="icon-bar"></span>
                 </a>
                 <div class="navbar-inner">
-                    <a class="brand" href="index_Manager.html">SE15 Shop</a>
+                    <a class="brand" href="MainController?action=Product&perform=Index">SE15 Shop</a>
                     <form class="form-inline navbar-search" method="post" action="products.html">
                         <input id="srchFld" class="srchTxt" type="text" />
                         <button type="submit" id="submitButton" class="btn btn-primary">Go</button>

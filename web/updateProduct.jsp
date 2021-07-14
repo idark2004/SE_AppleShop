@@ -54,10 +54,10 @@
                         <span class="icon-bar"></span>                        
                     </a>
                     <div class="navbar-inner">
-                        <a class="brand" href="index_Manager.html">SE15 Shop</a>
+                        <a class="brand" href="MainController?action=Product&perform=Index">SE15 Shop</a>
 
                         <ul id="topMenu" class="nav pull-right">
-                            <li class=""><a href="products_Manager.html">All Products</a></li>                                                
+                            <li class=""><a href="MainController?action=Product&perform=ViewProduct">All Products</a></li>                                                
                         </ul>
                     </div>
                 </div>

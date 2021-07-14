@@ -234,7 +234,7 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <a href="index.jsp" class="btn btn-large pull-right">Finish <i class="icon-arrow-right"></i></a>
+                            <a href="MainController?action=Product&perform=Index" class="btn btn-large pull-right">Homepage <i class="icon-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>

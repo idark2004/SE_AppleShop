@@ -3,7 +3,7 @@
     Created on : Jul 5, 2021, 10:52:09 AM
     Author     : anime
 --%>
-
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 ﻿<!DOCTYPE html>
@@ -23,6 +23,7 @@
         -->
         <!--<link rel="stylesheet/less" type="text/css" href="themes/less/bootshop.less">
             <script src="themes/js/less.js" type="text/javascript"></script> -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" type="text/javascript"></script>
 
         <!-- Bootstrap style -->
         <link id="callCss" rel="stylesheet" href="themes/bootshop/bootstrap.min.css" media="screen" />
@@ -73,7 +74,7 @@
                     <span class="icon-bar"></span>
                 </a>
                   <div class="navbar-inner">
-                    <a class="brand" href="index.jsp">SE15 Shop</a>
+                    <a class="brand" href="MainController?action=Product&perform=Index">SE15 Shop</a>
                     <form class="form-inline navbar-search" method="post" action="MainController">
                         <input id="srchFld" class="srchTxt" type="text" name="keyWord"/>
                         <input type="hidden" value="SearchProduct" name="action"/>
@@ -170,15 +171,13 @@
                         <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=MB&status=True">Mac</a></li>
                         <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AW&status=True">Apple Watch</a></li>
                         <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AS&status=True">Accessory</a></li>
-                        <c:if test="${USER.roleID.trim() eq 'MN' || USER.roleID.trim() eq 'AD'}">
-                        <li class="subMenu"><a>Shop Manager</a>
+                        <li class="subMenu" id="manaLi"><a>Shop Manager</a>
                             <ul style="display:none">
                                 <li><a href="dashboard_Manager.html"><i class="icon-chevron-right"></i>Dashboard</a></li>
                                 <li><a href="product_details_Manager.html"><i class="icon-chevron-right"></i>Add Product</a></li>
                                 <li><a href="customers_Manager.html"><i class="icon-chevron-right"></i>Customer List</a></li>
                             </ul>
                         </li>
-                        </c:if>
                         </ul>
                         <br/>
                     </div>
@@ -188,40 +187,51 @@
                             <h4>Featured Products <small class="pull-right">200+ featured products</small></h4>
                             <div class="row-fluid">
                                 <div id="featured" class="carousel slide">
-                                    <div class="carousel-inner">
+                                     <div class="carousel-inner">
                                         <div class="item active">
-                                            <ul class="thumbnails">
-                                                <li class="span3">
-                                                    <div class="thumbnail">
-                                                        <i class="tag"></i>
-                                                        <a href="product_details.html"><img src="themes/images/products/5.jpg" alt=""></a>
-                                                        <div class="caption">
-                                                            <h5>Product name</h5>
-                                                            <h4 style="font-size: small;"><a class="btn" href="product_details.html">VIEW</a> <span class="pull-right">115,000,000 VND</span></h4>
-                                                        </div>
+                                        <ul class="thumbnails">
+                                        <c:forEach begin="1" end="4" items="${requestScope.hotProducts}" var="hotP">
+                                            <li class="span3">
+                                                <div class="thumbnail">
+                                                    <i class="tag"></i>
+                                                    <a href="MainController?action=Product&perform=ViewDetail&productID=${hotP.productID}"><img src="${hotP.image}" alt=""></a>
+                                                    <div class="caption">
+                                                        <h5>${hotP.name}</h5>
+                                                        <h4 style="font-size: small;"><a class="btn" href="MainController?action=Product&perform=ViewDetail&productID=${hotP.productID}">VIEW</a> <span class="pull-right">
+                                                        <fmt:formatNumber type="number" maxFractionDigits = "0" value="${hotP.price}" />VND</span></h4>
                                                     </div>
                                                 </div>
                                             </li>
-                                           <!--random 4 san pham -->
+                                        </c:forEach>
                                         </ul>
                                     </div>
 
-                                        <div class="item">
-                                            <ul class="thumbnails">
-                                                <li class="span3">
-                                                    <div class="thumbnail">
-                                                        <a href="product_details.html"><img src="themes/images/products/2.jpg" alt=""></a>
-                                                        <div class="caption">
-                                                            <h5>Product name</h5>
-                                                            <h4 style="font-size: small;"><a class="btn" href="product_details.html">VIEW</a> <span class="pull-right">115,000,000 VND</span></h4>
-                                                        </div>
+                                    <div class="item">
+                                        <ul class="thumbnails">
+                                            <c:forEach begin="5" end="8" items="${requestScope.hotProducts}" var="hotP">
+                                            <li class="span3">
+                                                <div class="thumbnail">
+                                                    <i class="tag"></i>
+                                                    <a href="ProductController?perform=ViewDetail&ProductID=${requestScope.productID}"><img src="${hotP.image}" alt=""></a>
+                                                    <div class="caption">
+                                                        <h5>${hotP.name}</h5>
+                                                        <h4 style="font-size: small;"><a class="btn" href="MainController?action=Product&perform=ViewDetail&productID=${product.productID}">VIEW</a> <span class="pull-right">
+                                                        <fmt:formatNumber type="number" maxFractionDigits = "0" value="${hotP.price}" />VND</span></h4>
+    
+                                                            </span></h4>
                                                     </div>
                                                 </div>
                                             </li>
-                                            <!--random 4 san pham -->
+                                        </c:forEach>
+                                         
                                         </ul>
                                     </div>
-                                   
+                                </div>
+                                <c:if test="${requestScope.hotProducts == null}">
+                                   <h2 style="text-align: center;">This list is under maintaince</h2>
+                                </c:if>  
+                                   <a class="left carousel-control" href="#featured" data-slide="prev">‹</a>
+                                <a class="right carousel-control" href="#featured" data-slide="next">›</a>
                                 </div>
                             </div>
                         </div>
@@ -323,10 +333,16 @@
     </div>
     <span id="themesBtn"></span>
     </body>
-<script type="text/javascript" >
-     $( document ).ready( function() {
-               alert("${requestScope.ERROR}");
-              });    
-</script>
 
+<script type="text/javascript">
+                $( document ).ready( function() {
+                var role = "${sessionScope.USER.roleID.trim()}" ;
+                var aa = $('#manaLi');
+                if(role === "CU"){
+                aa.hide();             
+                }
+                
+              });    
+            
+</script>
 </html>

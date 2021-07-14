@@ -26,11 +26,11 @@ import utils.DBSupport;
  * @author ADMIN
  */
 public class ProductController extends HttpServlet {
-  private static final String UPLOAD_DIR = "images";
+    private static final String UPLOAD_DIR = "images";
     private static final String ERROR = "error.jsp";
     private static final String VIEW = "productList.jsp";
     private static final String DETAIL = "product_details.jsp";
-
+    private static final String INDEX = "index.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -45,9 +45,23 @@ public class ProductController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         String perform = request.getParameter("perform");
+        System.out.println(perform);
         ProductErrorDTO msg = new ProductErrorDTO();
         try {
             switch (perform) {
+                case "Index":
+                    ProductDAO dao1 = new ProductDAO();
+                  
+                    System.out.println("CB tao list");
+                    List<ProductDTO> list = dao1.getTopProduct();
+                    
+                    if(list != null){
+                        System.out.println(list.get(1).getImage());
+                        request.setAttribute("hotProducts",list);
+                    }
+                    
+                    url= INDEX;
+                    break;
                 case "ViewProduct":
                     ProductDAO dao = new ProductDAO();
                     String categoryID = request.getParameter("categoryID");
@@ -56,7 +70,7 @@ public class ProductController extends HttpServlet {
                         status = "True";
                     }
 
-                    List<ProductDTO> list = dao.viewProduct(categoryID, status);
+                   list = dao.viewProduct(categoryID, status);
                     //Pagination
                     String pageNum = request.getParameter("pageNum");
                     int page = 0;
@@ -100,6 +114,8 @@ public class ProductController extends HttpServlet {
 
                     break;
                 case "ViewDetail":
+                    
+                    System.out.println( request.getParameter("productID").trim());
                     String id = request.getParameter("productID").trim();
                     String colorChoosen = request.getParameter("color");
                     String specChosen = request.getParameter("specID");
@@ -150,7 +166,7 @@ public class ProductController extends HttpServlet {
                     pDAO = new ProductDAO();
                     System.out.println("productID="+cateID+"-"+a);    
                     if (pDAO.CreateSpec1(newProductSpec) || pDAO.addProduct(pname, cateID, des, imgUrl)){
-                        url="MainController?action=ProductController&perform=ViewDetail&productID="+cateID+"-"+a;
+                        url="MainController?action=Product&perform=ViewDetail&productID="+cateID+"-"+a;
                         System.out.println("Add thanh cong va productID="+cateID+"-"+a); 
                         System.out.println("success");
                     }
@@ -164,11 +180,14 @@ public class ProductController extends HttpServlet {
                 msg.setMsg("Sorry our shop currently doesn't have these products in stock !!");
                 request.setAttribute("EMPTY_LIST", msg);
                 request.setAttribute(e.toString(), "ERROR");
+                System.out.println(e.toString());
                 url = VIEW;
             } else {
                 request.setAttribute("Error at ProductController", e.toString());
             }
         } finally {
+            System.out.println(url);
+            
             request.getRequestDispatcher(url).forward(request, response);
         }
         

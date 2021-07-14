@@ -35,7 +35,7 @@ public class UserController extends HttpServlet {
     private static final String ERROR = "error.jsp";
     private static final String FAIL_SIGNUP = "signupForm.jsp";
     private static final String INDEX = "index.jsp";
-    private static final String MND = "orderHistory.jsp";
+    private static final String MND = "DashBoard.jsp";
     private static final String UPDATE_SUCCESS = "userProfile.jsp";
     
     private String host;
@@ -66,6 +66,7 @@ public class UserController extends HttpServlet {
         String password = request.getParameter("password");
         UserDTO user = new UserDTO();
         UserDAO dao = new UserDAO();
+        System.out.println("user controller perform"+perform);
         try {
             switch (perform) {
                 case "Sign Up":
@@ -96,7 +97,7 @@ public class UserController extends HttpServlet {
                         if (user.getRoleID().contains("AD") || user.getRoleID().contains("MN")) {
                             url = MND;
                         } else {
-                            url = INDEX;
+                            url = "ProductController?perform=Index";
                         }
                         request.setAttribute("success", "true");
                         request.setAttribute("username", user.getName());
@@ -106,6 +107,7 @@ public class UserController extends HttpServlet {
                         error.setLoginError("Invalid username or password");
                         request.setAttribute("LOGIN_ERROR", error);
                     }
+                    System.out.println("url login "+url);
                     break;
                 case "Update Profile":
                     user = (UserDTO) session.getAttribute("USER");

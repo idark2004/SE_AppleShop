@@ -76,7 +76,7 @@
                     <span class="icon-bar"></span>
                 </a>
                 <div class="navbar-inner">
-                    <a class="brand" href="index_Manager.html">SE15 Shop</a>
+                    <a class="brand" href="MainController?action=Product&perform=Index">SE15 Shop</a>
                     <form class="form-inline navbar-search" method="post" action="MainController">
                         <input id="srchFld" class="srchTxt" type="text" name="keyWord"/>
                         <input type="hidden" value="SearchProduct" name="action"/>
@@ -180,7 +180,7 @@
                 <!-- Sidebar end=============================================== -->
                 <div class="span9">
                     <ul class="breadcrumb">
-                        <li><a href="index_Manager.html">Home</a> <span class="divider">/</span></li>
+                        <li><a href="MainController?action=Product&perform=Index">Home</a> <span class="divider">/</span></li>
                         <li><a href="product_summary_Manager.html">Products</a> <span class="divider">/</span></li>
                         <li class="active">Receipt</li>
                     </ul>

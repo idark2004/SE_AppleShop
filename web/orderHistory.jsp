@@ -77,7 +77,7 @@
                     <span class="icon-bar"></span>
                 </a>
                 <div class="navbar-inner">
-                    <a class="brand" href="index.jsp">SE15 Shop</a>
+                    <a class="brand" href="MainController?action=Product&perform=Index">SE15 Shop</a>
                     <form class="form-inline navbar-search" method="post" action="MainController">
                         <input id="srchFld" class="srchTxt" type="text" name="keyWord"/>
                         <input type="hidden" value="SearchProduct" name="action"/>
@@ -173,10 +173,7 @@
                         <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=MB&status=True">Mac</a></li>
                         <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AW&status=True">Apple Watch</a></li>
                         <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AS&status=True">Accessory</a></li>
-                        <c:if test="${sessionScope.USER.roleID.trim() == 'MN' || sessionScope.USER.roleID.trim() == 'AD'}">
-                        
-                        </c:if>
-                        <li class="subMenu" id="manaLi"> aa<a>Shop Manager</a>
+                        <li class="subMenu" id="manaLi"><a>Shop Manager</a>
                             <ul style="display:none">
                                 <li><a href="dashboard_Manager.html"><i class="icon-chevron-right"></i>Dashboard</a></li>
                                 <li><a href="product_details_Manager.html"><i class="icon-chevron-right"></i>Add Product</a></li>
@@ -189,7 +186,7 @@
                 <!-- Sidebar end=============================================== -->
                 <div class="span9">
                     <ul class="breadcrumb">
-                        <li><a href="index.jsp">Home</a> <span class="divider">/</span></li>
+                        <li><a href="MainController?action=Product&perform=Index">Home</a> <span class="divider">/</span></li>
                         <li class="active">Order History</li>
                     </ul>
                     <div class="row">
@@ -375,13 +372,13 @@
     <span id="themesBtn"></span>
 </body>
 <script type="text/javascript">
-//                $( document ).ready( function() {
-//                var role = "${sessionScope.USER.roleID.trim()}" ;
-//                var aa = $('#manaLi');
-//                if(role==="MN"){
-//                aa.hide();             
-//                }               
-//              });    
-//            
+                $( document ).ready( function() {
+                var role = "${sessionScope.USER.roleID.trim()}" ;
+                var aa = $('#manaLi');
+                if(role==="MN"){
+                aa.hide();             
+                }               
+              });    
+            
 </script>
 </html>

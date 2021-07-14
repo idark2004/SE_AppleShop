@@ -68,7 +68,7 @@
                     <span class="icon-bar"></span>
                 </a>
                 <div class="navbar-inner">
-                    <a class="brand" href="index_Manager.html">SE15 Shop</a>
+                    <a class="brand" href="MainController?action=Product&perform=Index">SE15 Shop</a>
                     <form class="form-inline navbar-search" method="post" action="MainController">
                         <input id="srchFld" class="srchTxt" type="text" name="keyWord"/>
                         <input type="hidden" value="SearchProduct" name="action"/>
@@ -153,7 +153,7 @@
                         <li><a href="products_Manager.html">iPad</a></li>
                         <li><a href="products_Manager.html">Mac</a></li>
                         <li><a href="products_Manager.html">Accessory</a></li>
-                        <li class="subMenu"><a>Shop Manager</a>
+                        <li class="subMenu" id="manaLi"><a>Shop Manager</a>
                             <ul style="display:none">
                                 <li><a href="dashboard_Manager.html"><i class="icon-chevron-right"></i>Dashboard</a></li>
                                 <li><a href="product_details_Manager.html"><i class="icon-chevron-right"></i>Add Product</a></li>
@@ -170,7 +170,7 @@
 
                     <div class="container-fluid">
                         <ul class="breadcrumb" style="margin-top: -1rem;">
-                            <li><a href="index_Manager.html">Home</a> <span class="divider">/</span></li>
+                            <li><a href="MainController?action=Product&perform=Index">Home</a> <span class="divider">/</span></li>
                             <li class="active">Dashboard</li>
                         </ul>
                         <!-- Area Chart-->
@@ -486,4 +486,15 @@
     $(document).ready(function() {
         $('#dataTable').DataTable();
     });
+    <script type="text/javascript">
+                $( document ).ready( function() {
+                var role = "${sessionScope.USER.roleID.trim()}" ;
+                var aa = $('#manaLi');
+                if(role === "CU"){
+                aa.hide();             
+                }
+                
+              });    
+            
+</script>
 </script>

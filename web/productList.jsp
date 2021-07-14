@@ -236,7 +236,7 @@
                             </c:forEach>
                             </c:when>
                         <c:otherwise>
-                            <h1>${requestScope.EMPTY_LIST.msg}</h1>
+                            <h1  style="font-size: 20px;text-align: center;">${requestScope.EMPTY_LIST.msg}</h1>
                         </c:otherwise>
                     </c:choose>                                                     
                         </div>
@@ -262,7 +262,7 @@
                                         </c:forEach>
                                     </c:when>
                                     <c:otherwise>
-                                    <h1>${requestScope.EMPTY_LIST.msg}</h1>
+                                        <h1 style="font-size: 20px;text-align: center;">${requestScope.EMPTY_LIST.msg}</h1>
                                     </c:otherwise>
                                 </c:choose>
                                
@@ -402,8 +402,14 @@
     </div>
     <span id="themesBtn"></span>
 </body>
-<script>
-
+<script type="text/javascript">
+            $( document ).ready( function() {
+                var role = "${sessionScope.USER.roleID.trim()}" ;
+                var aa = $('#manaLi');
+                if(role==="MN"){
+                aa.hide();             
+                }               
+              });    
             $('#sortList').on('change', function() {
                 var conceptName = $('#sortList').find(":selected").text();
                 if(conceptName==="Product name A - Z") {

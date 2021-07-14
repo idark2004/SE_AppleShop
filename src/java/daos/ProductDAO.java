@@ -68,11 +68,52 @@ public class ProductDAO {
         }
         return list;
     }
+     public List<ProductDTO> getTopProduct() throws SQLException {
+        List<ProductDTO> list = null;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBConnect.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT  p.productID, p.productName, p.image, Min(s.specPrice) as price ,(p.orderCount+p.viewCount) as hotCount " +
+                " FROM tblProducts p, tblProductSpec s " +
+                " WHERE p.productID = s.productID AND p.categoryID LIKE '%%' AND s.specStatus = 'True' " +
+                " GROUP BY p.productID, p.productName , p.image ,p.viewCount,p.orderCount " +
+                " ORDER BY hotCount DESC";
+                stm = conn.prepareStatement(sql);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    String id = rs.getString("productID");
+                    String name = rs.getString("productName");
+                    double price = rs.getDouble("price");
+                    String image = rs.getString("image");
+                    if (list == null) {
+                        list = new ArrayList<>();
+                    }
+                    list.add(new ProductDTO(id, name, "", price, 0, 0, Boolean.parseBoolean("status"), image, "", "", ""));
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
     public boolean addProduct(String productName,String categoryID,String productDescription,String image) throws SQLException{
          Connection c = null; //doi tuong ket noi
         PreparedStatement ps = null; //doi tuong truy van
         ResultSet rs = null;//doi tuong nhan ket qua
-        String sql = "INSERT INTO tblProducts(ProductID,ProductName,productDesciption,CategoryID,image) "
+        String sql = "INSERT INTO tblProducts(ProductID,ProductName,productDescription,CategoryID,image) "
                         + "VALUES(?,?,?,?,?)";
         try {boolean check =false;
             DBConnect db = new DBConnect();
@@ -116,7 +157,7 @@ public class ProductDAO {
         PreparedStatement ps = null; //doi tuong truy van
         ResultSet rs = null;//doi tuong nhan ket qua
 
-        String sql = "SELECT productID, productName, productDesciption, viewCount, orderCount, categoryID, image "
+        String sql = "SELECT productID, productName, productDescription, viewCount, orderCount, categoryID, image "
                 + "FROM tblProducts "
                 + "WHERE productID=?";
 
@@ -132,7 +173,7 @@ public class ProductDAO {
                 while (rs.next()) {
                     String id = rs.getString("productID");
                     String name = rs.getString("productName");
-                    String description = rs.getString("productDesciption");
+                    String description = rs.getString("productDescription");
                     int viewCount = rs.getInt("viewCount");
                     int orderCount = rs.getInt("orderCount");
                     String image = rs.getString("image");
@@ -685,7 +726,7 @@ public class ProductDAO {
         }
         return false;
     }
-
+    
     public List<ProductDTO> getAllSpec(String productID) throws SQLException {
         List<ProductDTO> specList = null;
         Connection conn = null;
@@ -738,7 +779,7 @@ public class ProductDAO {
         try {
             conn = DBConnect.makeConnection();
             if (conn != null) {
-                String sql = "SELECT productName, image, productDesciption "
+                String sql = "SELECT productName, image, productDescription "
                         + " FROM tblProducts "
                         + " WHERE productID LIKE ?";
                 stm = conn.prepareStatement(sql);
@@ -746,7 +787,7 @@ public class ProductDAO {
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     String name = rs.getString("productName");
-                    String description = rs.getString("productDesciption");
+                    String description = rs.getString("productDescription");
                     String image = rs.getString("image");
                     pro = new ProductDTO(productID, name, description, image);
                 }

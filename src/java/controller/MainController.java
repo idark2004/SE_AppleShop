@@ -48,7 +48,7 @@ public class MainController extends HttpServlet {
         System.out.println("Run through MainController");
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-        String action = "Product";
+        String action = request.getParameter("action");
         System.out.println(action);
         //System.out.println(session.getAttribute("username"));
         if (action == null){
@@ -116,6 +116,7 @@ public class MainController extends HttpServlet {
                 case "Product":
                     url = PRODUCT;
                     break;
+
                 case "Cart":
                     url = CART;
                     break;
