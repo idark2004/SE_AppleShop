@@ -24,7 +24,7 @@
         <!--<link rel="stylesheet/less" type="text/css" href="themes/less/bootshop.less">
             <script src="themes/js/less.js" type="text/javascript"></script> -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" type="text/javascript"></script>
-
+        <script src="js/hideManagerBar.js" type="text/javascript"></script>
         <!-- Bootstrap style -->
         <link id="callCss" rel="stylesheet" href="themes/bootshop/bootstrap.min.css" media="screen" />
         <link href="themes/css/base.css" rel="stylesheet" media="screen" />
@@ -171,13 +171,15 @@
                         <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=MB&status=True">Mac</a></li>
                         <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AW&status=True">Apple Watch</a></li>
                         <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AS&status=True">Accessory</a></li>
-                        <li class="subMenu" id="manaLi"><a>Shop Manager</a>
+                        <c:if test="${sessionScope.USER.roleID.trim() eq "US" }" >
+                        <li class="subMenu" id="CU"><a>Shop Manager</a>
                             <ul style="display:none">
                                 <li><a href="dashboard_Manager.html"><i class="icon-chevron-right"></i>Dashboard</a></li>
                                 <li><a href="product_details_Manager.html"><i class="icon-chevron-right"></i>Add Product</a></li>
                                 <li><a href="customers_Manager.html"><i class="icon-chevron-right"></i>Customer List</a></li>
                             </ul>
                         </li>
+                        </c:if>
                         </ul>
                         <br/>
                     </div>
@@ -194,7 +196,7 @@
                                             <li class="span3">
                                                 <div class="thumbnail">
                                                     <i class="tag"></i>
-                                                    <a href="MainController?action=Product&perform=ViewDetail&productID=${hotP.productID}"><img src="${hotP.image}" alt=""></a>
+                                                    <a href="MainController?action=Product&perform=ViewDetail&productID=${hotP.productID}"><img src="${hotP.image}" alt="${hotP.name}"></a>
                                                     <div class="caption">
                                                         <h5>${hotP.name}</h5>
                                                         <h4 style="font-size: small;"><a class="btn" href="MainController?action=Product&perform=ViewDetail&productID=${hotP.productID}">VIEW</a> <span class="pull-right">
@@ -212,7 +214,7 @@
                                             <li class="span3">
                                                 <div class="thumbnail">
                                                     <i class="tag"></i>
-                                                    <a href="ProductController?perform=ViewDetail&ProductID=${requestScope.productID}"><img src="${hotP.image}" alt=""></a>
+                                                    <a href="ProductController?perform=ViewDetail&ProductID=${requestScope.productID}"><img src="${hotP.image}" alt="${hotP.name}"></a>
                                                     <div class="caption">
                                                         <h5>${hotP.name}</h5>
                                                         <h4 style="font-size: small;"><a class="btn" href="MainController?action=Product&perform=ViewDetail&productID=${product.productID}">VIEW</a> <span class="pull-right">
@@ -334,15 +336,5 @@
     <span id="themesBtn"></span>
     </body>
 
-<script type="text/javascript">
-                $( document ).ready( function() {
-                var role = "${sessionScope.USER.roleID.trim()}" ;
-                var aa = $('#manaLi');
-                if(role === "CU"){
-                aa.hide();             
-                }
-                
-              });    
-            
-</script>
+
 </html>

@@ -48,7 +48,7 @@ public class OrderDetailController extends HttpServlet {
             if(orderDetail != null){
                 request.setAttribute("detail", orderDetail);
             } else{
-                request.setAttribute("EMPTY_LIST", "no product in this order");
+                request.setAttribute("EMPTY_LIST", "no Order is found");
             }
             url=SUCCESS;
         } catch (Exception e) {

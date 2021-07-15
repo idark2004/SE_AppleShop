@@ -186,8 +186,8 @@
                         </ul>
                         <div class="row">
                             <div id="gallery" class="span3">
-                                <a href="${requestScope.product.image}" title="iPhone 12 Pro Max">
-                                    <img src="${requestScope.product.image}" style="width:100%" alt="iPhone 12 Pro Max" />
+                                <a href="${requestScope.product.image}" title="${requestScope.product.name}">
+                                    <img src="${requestScope.product.image}" style="width:100%" alt="${requestScope.product.name}" />
                                 </a>
                                 
                             </div>
