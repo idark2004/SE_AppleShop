@@ -166,12 +166,22 @@
                         <form class="form-horizontal" action="MainController" method="post">
                             <h4>Sale Information</h4>
                             <!--NOTE: Add new code thì chỗ placeholder trống, edit code thì placeholder sẽ hiện data cũ-->
+                            <c:if test="${requestScope.purpose.equals('View')}">
+                            <div class="control-group">
+                                <label class="control-label" for="">Code ID <sup>*</sup></label>
+                                <div class="controls">
+                                    <input type="text" id="" placeholder="Old data here" name="newCodeID" value="${requestScope.CODE_DETAIL.codeID}" readonly="readonly">
+                                </div>
+                            </div>
+                            </c:if>
+                            <c:if test="${requestScope.purpose.equals('addCode')}">
                             <div class="control-group">
                                 <label class="control-label" for="">Code ID <sup>*</sup></label>
                                 <div class="controls">
                                     <input type="text" id="" placeholder="Old data here" name="newCodeID" value="${requestScope.CODE_DETAIL.codeID}">
                                 </div>
                             </div>
+                            </c:if>
 
                             <div class="control-group">
                                 <label class="control-label" for="">Code Name <sup>*</sup></label>
@@ -180,14 +190,13 @@
                                 </div>
                             </div>
                                 
-                            <c:if test="${requestScope.perform.equals('View')}">
+                            
                             <div class="control-group">
                                 <label class="control-label" for="">Created date <sup>*</sup></label>
                                 <div class="controls">
-                                    <input type="text" id="" placeholder="Old data here" name="createDate" value="${requestScope.CODE_DETAIL.createDate}" readonly="readonly">
+                                    <input type="date" id="" placeholder="Old data here" name="createDate" value="${requestScope.CODE_DETAIL.createDate}">
                                 </div>
                             </div>
-                            </c:if>
                                 
                             <div class="control-group">
                                 <label class="control-label" for="">Exp date <sup>*</sup></label>
@@ -203,7 +212,7 @@
                                 </div>
                             </div>
 
-                                    <c:if test="${requestScope.perform.equals('View')}">
+                                    <c:if test="${requestScope.purpose.equals('View')}">
                             <div class="control-group">
                                 <label class="control-label" for="">Status <sup>*</sup></label>
                                 <div class="controls">
@@ -215,11 +224,11 @@
                             <div class="control-group">
                                 <div class="controls">
                                     <input type="hidden" name="action" value="SaleCode"/>
-                                    <c:if test="${requestScope.perform.equals('View')}">
+                                    <c:if test="${requestScope.purpose.equals('View')}">
                                         <input type="hidden" name="codeID" value="${requestScope.CODE_DETAIL.codeID}"/>
                                         <input class="btn btn-primary btn-success" type="submit" name="perform" value="Update">
                                     </c:if>
-                                    <c:if test="${requestScope.perform.equals('addCode')}">
+                                    <c:if test="${requestScope.purpose.equals('addCode')}">
                                         <input class="btn btn-primary btn-success" type="submit" name="perform" value="Add">
                                     </c:if>
                                 </div>

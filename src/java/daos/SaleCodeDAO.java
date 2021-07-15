@@ -151,8 +151,8 @@ public class SaleCodeDAO {
             conn = DBConnect.makeConnection();
             if (conn != null) {
                 System.out.println("HEY");
-                String sql = "INSERT INTO tblSaleCode(codeID, codeName, createDate, expDate, percentage, codeStatus) "
-                        + "VALUES(?, ?, ?, ?, ?, ?) ";
+                String sql = "INSERT INTO tblSaleCode(codeID, codeName, createDate, expDate, percentage, codeStatus)"
+                        + " VALUES(?, ?, ?, ?, ?, ?)";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, code.getCodeID());
                 stm.setString(2, code.getCodeName());
@@ -160,7 +160,9 @@ public class SaleCodeDAO {
                 stm.setString(4, code.getExpDate());
                 stm.setString(5, code.getPercentage());
                 stm.setBoolean(6, code.getCodeStatus());
-                stm.executeUpdate();
+                System.out.println("Finish");
+                stm.execute();
+                System.out.println("done");
             }
         } finally {
             if (stm != null) {

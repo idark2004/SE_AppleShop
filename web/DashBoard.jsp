@@ -486,15 +486,5 @@
     $(document).ready(function() {
         $('#dataTable').DataTable();
     });
-    <script type="text/javascript">
-                $( document ).ready( function() {
-                var role = "${sessionScope.USER.roleID.trim()}" ;
-                var aa = $('#manaLi');
-                if(role === "CU"){
-                aa.hide();             
-                }
-                
-              });    
-            
-</script>
+    
 </script>
