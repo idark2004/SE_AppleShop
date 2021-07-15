@@ -171,7 +171,8 @@
                         <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=MB&status=True">Mac</a></li>
                         <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AW&status=True">Apple Watch</a></li>
                         <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AS&status=True">Accessory</a></li>
-                        <c:if test="${sessionScope.USER.roleID.trim() eq "US" }" >
+                        <c:if test="${sessionScope.USER.trim() != null}" > 
+                        <c:if test="${sessionScope.USER.trim() != 'US'}" >                      
                         <li class="subMenu" id="CU"><a>Shop Manager</a>
                             <ul style="display:none">
                                 <li><a href="dashboard_Manager.html"><i class="icon-chevron-right"></i>Dashboard</a></li>
@@ -179,6 +180,7 @@
                                 <li><a href="customers_Manager.html"><i class="icon-chevron-right"></i>Customer List</a></li>
                             </ul>
                         </li>
+                        </c:if>                       
                         </c:if>
                         </ul>
                         <br/>
