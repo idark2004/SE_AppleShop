@@ -185,7 +185,7 @@
                         <div id="gallery" class="span3">
                            
                                 <img src="themes/images/products/detail/1.jpg" style="width:100%" alt="iPhone 12 Pro Max" />
-                                <input form="addProduct" name="img" class="file-input" type="file" required="">
+                                <input form="addProduct" name="img" class="file-input" type="file" accept="image/*"required="">
                             
                         </div>
                         <div class="span6">
