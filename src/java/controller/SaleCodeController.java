@@ -69,10 +69,21 @@ public class SaleCodeController extends HttpServlet {
             } else {
                 boolean check = false;
                 switch (perform) {
+                    case "List":
+                        List<SaleCodeDTO> list = dao.getSaleCodeList(codeStatus);
+                        if (list != null) {
+                            request.setAttribute("ERROR", "list not null");
+
+                            request.setAttribute("CODE_LIST", list);
+                            url = LIST;
+                        } else {
+                            request.setAttribute("ERROR", "list null");
+                        }
+                        break;
                     case "View":
                         code = dao.getCode(codeID);
                         request.setAttribute("CODE_DETAIL", code);
-                        request.setAttribute("perform", "View");
+                        request.setAttribute("purpose", "View");
                         url = VIEW;
                         break;
                     case "Update":
@@ -89,7 +100,7 @@ public class SaleCodeController extends HttpServlet {
                     case "DeActive":
                         check = dao.deactiveSaleCode(codeID);
                         if (check) {
-                            List<SaleCodeDTO> list = dao.getSaleCodeList(codeStatus);
+                            list = dao.getSaleCodeList(codeStatus);
                             if (list != null) {
                                 request.setAttribute("ERROR", "list not null");
 
@@ -101,7 +112,7 @@ public class SaleCodeController extends HttpServlet {
                         }
                         break;
                     case "addCode":
-                        request.setAttribute("perform", "addCode");
+                        request.setAttribute("purpose", "addCode");
                         url = VIEW;
                         break;
                     case "Add":
@@ -109,15 +120,16 @@ public class SaleCodeController extends HttpServlet {
                         String newCodeName = request.getParameter("codeName");
                         String newPercentage = request.getParameter("percentage");
                         String newExpDate = request.getParameter("expDate");
+                        String newCreateDate = request.getParameter("createDate");
                         
-                        Calendar cal = Calendar.getInstance();
-                        cal.add(Calendar.DATE, 0);
-                        String createDate=(cal.getTime().getMonth()+1)+"/"+cal.getTime().getDate()+"/"+(cal.getTime().getYear()+1900);
+//                        Calendar cal = Calendar.getInstance();
+//                        cal.add(Calendar.DATE, 0);
+//                        String createDate=(cal.getTime().getMonth()+1)+"/"+cal.getTime().getDate()+"/"+(cal.getTime().getYear()+1900);
                         
-                        SaleCodeDTO newCode = new SaleCodeDTO(newCodeId, newCodeName, newPercentage, createDate, newExpDate, true);
+                        code = new SaleCodeDTO(newCodeId, newCodeName, newPercentage, newCreateDate, newExpDate, true);
                         
-                        dao.createSaleCode(newCode);
-                        url="SaleCodeController";
+                        dao.createSaleCode(code);
+                        url="MainController?action=SaleCode&perform=List";
                         break;
                 }
             }

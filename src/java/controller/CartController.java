@@ -9,13 +9,11 @@ import daos.OrderDAO;
 import daos.ProductDAO;
 import daos.SaleCodeDAO;
 import dtos.CartItemDTO;
-import dtos.ErrorDTO;
 import dtos.OrderDTO;
 import dtos.OrderDetailDTO;
 import dtos.ProductDTO;
 import dtos.SaleCodeDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Currency;
@@ -82,6 +80,9 @@ public class CartController extends HttpServlet {
                     String email = request.getParameter("email");
                     String payMethod = request.getParameter("payMethod");
                     String codeSale = request.getParameter("saleCode");
+                    if (codeSale.length() == 0){
+                        codeSale = null;
+                    }
                     double total = Double.parseDouble(request.getParameter("total"));
                     String userID = null;
                     if (cart != null) System.out.println("cart <> null");
