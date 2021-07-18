@@ -80,7 +80,7 @@
     </servlet>
     <servlet>
         <servlet-name>ViewUserListController</servlet-name>
-        <servlet-class>controller.ViewUserListController</servlet-class>
+        <servlet-class>controllers_backup.ViewUserListController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ManageUserDetail</servlet-name>
@@ -125,6 +125,10 @@
     <servlet>
         <servlet-name>ManageProductController</servlet-name>
         <servlet-class>controller.ManageProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManageUserController</servlet-name>
+        <servlet-class>controller.ManageUserController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>OrderListController</servlet-name>
@@ -262,6 +266,10 @@
     <servlet-mapping>
         <servlet-name>ManageProductController</servlet-name>
         <url-pattern>/ManageProductController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageUserController</servlet-name>
+        <url-pattern>/ManageUserController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

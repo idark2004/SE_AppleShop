@@ -334,7 +334,7 @@ public class UserDAO {
         try {
             conn = DBConnect.makeConnection();
             if (conn != null) {
-                String sql = "SELECT userID, name, userEmail, password, userPhoneNumber, userAddress, roleID"
+                String sql = "SELECT userID, name, userEmail, userPhoneNumber, userAddress, userStatus "
                         + " FROM tblUsers "
                         + " WHERE roleID LIKE ?";
                 stm = conn.prepareStatement(sql);
@@ -343,18 +343,18 @@ public class UserDAO {
                 while (rs.next()) {
                     String userID = rs.getString("userID");
                     String name = rs.getString("name");
-                    String emai = rs.getString("userEmail");
-                    String password = rs.getString("password");
+                    String email = rs.getString("userEmail");                    
                     String phone = rs.getString("userPhoneNumber");
                     String address = rs.getString("userAddress");
+                    String status = rs.getString("userStatus");
                     if (list == null) {
                         list = new ArrayList<>();
                     }
-                    list.add(new UserDTO(userID, name, emai, password, phone, address, roleID));
+                    list.add(new UserDTO(userID, name, email, "", phone, address, status ,roleID));
                 }
             }
-        } catch (Exception e) {
-        } finally {
+        } 
+        finally {
             if (rs != null) {
                 rs.close();
             }

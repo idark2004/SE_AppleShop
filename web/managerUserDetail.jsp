@@ -193,17 +193,17 @@
                                                 </strong>
                                             </td>
                                             <td class="text-primary">
-                                                ozawakimochi
+                                                ${requestScope.PROFILE.userID}
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
                                                 <strong>
-                                                    Fullname                                                
+                                                    Full name                                                
                                                 </strong>
                                             </td>
                                             <td class="text-primary">
-                                                Maria Ozawa
+                                                ${requestScope.PROFILE.name}
                                             </td>
                                             <tr>
                                                 <td>
@@ -222,32 +222,13 @@
                                                     </strong>
                                                 </td>
                                                 <td class="text-primary">
-                                                    ozawajav123@email.com
+                                                    ${requestScope.PROFILE.email}
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td>
-                                                    <strong>
-                                                        Created                                                
-                                                    </strong>
-                                                </td>
-                                                <td class="text-primary">
-                                                    1 July 2021
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <strong>
-                                                        Last Modified                                                
-                                                    </strong>
-                                                </td>
-                                                <td class="text-primary">
-                                                    20 July 2021 20:00:00
-                                                </td>
-                                            </tr>
+                                                                                        
                                     </tbody>
                                 </table>
-                                <p><a href="#" class="btn btn-primary">Action</a> <a href="#" class="btn">Action</a></p>
+                                <p><a href="#" class="btn btn-primary">De-active</a> <a href="#" class="btn">Active</a></p>
                             </div>
                         </div>
                     </div>
