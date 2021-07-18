@@ -1,14 +1,16 @@
+<%-- 
+    Document   : ManagerGuaranty
+    Created on : Jul 10, 2021, 10:38:59 PM
+    Author     : anime
+--%>
 
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
     <head>
         <meta charset="utf-8">
-        <title>SE15 Shop | Guarantee List</title>
+        <title>SE15 Shop | Customers</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
@@ -58,7 +60,7 @@
                         <span class="icon-bar"></span>
                     </a>
                     <div class="navbar-inner">
-                        <a class="brand" href="index_Manager.html">SE15 Shop</a>
+                        <a class="brand" href="MainController?action=Product&perform=Index">SE15 Shop</a>
                         <form class="form-inline navbar-search" method="post" action="products.html">
                             <input id="srchFld" class="srchTxt" type="text" />
                             <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
@@ -137,18 +139,16 @@
                             <a id="myCart" href="product_summary_Manager.html"><img src="themes/images/ico-cart.png" alt="cart">3 Items in your cart <span class="badge badge-warning pull-right">445,000VND</span></a>
                         </div>
                         <ul id="sideManu" class="nav nav-tabs nav-stacked">
-                            <li><a href="products_Manager.html" >All</a></li>
+                            <li><a href="products_Manager.html">All</a></li>
                             <li><a href="products_Manager.html">iPhone</a></li>
                             <li><a href="products_Manager.html">iPad</a></li>
                             <li><a href="products_Manager.html">Mac</a></li>
                             <li><a href="products_Manager.html">Accessory</a></li>
-                            <li class="subMenu" ><a>Shop Manager</a>
-                                <ul style="display:none" >
+                            <li class="subMenu"><a>Shop Manager</a>
+                                <ul style="display:none">
                                     <li><a href="dashboard_Manager.html"><i class="icon-chevron-right"></i>Dashboard</a></li>
                                     <li><a href="product_details_Manager.html"><i class="icon-chevron-right"></i>Add Product</a></li>
-                                    <li><a href="customers_Manager.html"><i class="icon-chevron-right"></i>Manager List</a></li>
-                                    <li><a href="customers_Manager.html"><i class="icon-chevron-right"></i>User List</a></li>
-
+                                    <li><a href="customers_Manager.html"><i class="icon-chevron-right"></i>Customer List</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -158,83 +158,79 @@
                     <div class="span9">
                         <ul class="breadcrumb">
                             <li><a href="index_Manager.html">Home</a> <span class="divider">/</span></li>
-                            <li class="active">Guarantee List</li>
+                            <li class="active">Guarantee Form</li>
                         </ul>
-                        <div class="row">
-                            <div class="span9">
-                                <p><a href="#" class="btn btn-primary">Add guarantee</a></p>
-                                <c:choose>
-                                    <c:when test="${requestScope.GUARANTEE_LIST == null}">
-                                        <h1>${requestScope.EMPTY}</h1>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <table class="table table-striped">
-                                            <thead>
-                                                <tr>
+                        <h3>Guarantee Form</h3>
+                        <div class="well">
+                            <form action="MainController" class="form-horizontal">
+                                <h4>Customer personal information</h4>
 
-                                                    <th><span>Full name </span></th>                                        
-                                                    <th><span>Phone</span></th>
+                                <div class="control-group">
+                                    <label class="control-label" for="inputFname">Full name <sup>*</sup></label>
+                                    <div class="controls">
+                                        <input type="text" id="inputFname" name="name" placeholder="Trần Văn A" pattern="[A-Za-z]{4,}" title="Please enter full name" required>
+                                    </div>
+                                </div>                                
 
-                                                    <th><span>Order ID</span></th>
-                                                    <th><span>Receive date</span></th>
-                                                    <th><span>Expected return date</span></th>
-                                                    <th><span>Description</span></th>
-                                                    <th><span>Guarantee Fee</span></th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <c:forEach var="order" items="${requestScope.GUARANTEE_LIST}">
-                                                    <tr>
-                                                        <td>${order.ownerName}</td>                                        
-                                                        <td>${order.contactNumber}</td>
+                                <div class="control-group">
+                                    <label class="control-label" for="phone">Phone <sup>*</sup></label>
+                                    <div class="controls">
+                                        <input type="text" name="contact" id="Phone" placeholder="0914123456"  pattern="[0-9]{9,10}" title="Please enter correct phone number ( 9-10 numbers )" required/>
+                                    </div>
+                                </div>                                
 
-                                                        <td>${order.orderID}</td>
-                                                        <td>
-                                                            ${order.receiveDate}
-                                                        </td>
-                                                        <td>${order.expectedDate}</td>
-                                                        <td>${order.guarantDescription}</td>
-                                                        <td>
-                                                            <fmt:setLocale value="vi_VN" />
-                                                            <fmt:formatNumber value="${order.guarantFee}" type="currency" />
-                                                        </td>
+                                <hr class="soft" />
 
-                                                        <td>
-                                                            
-                                                            <a href="MainController?action=Guarantee&perform=Cancel&guarantID=${order.guarantID}" class="table-link text-info" title="Cancel">
-                                                                <span class="fa-stack">
-                                                                    <i class="fa fa-square fa-stack-2x"></i>
-                                                                    <i class="fa fa-calendar-times-o fa-stack-1x fa-inverse"></i>
-                                                                </span>
-                                                            </a>                                                                                                                            
-                                                            <a href="MainController?action=Guarantee&perform=Complete&guarantID=${order.guarantID}" class="table-link danger" title="Complete Guarantee">
-                                                                <span class="fa-stack">
-                                                                    <i style="color:green;" class="fa fa-square fa-stack-2x"></i>
-                                                                    <i style="color:white;" class="fa fa-check-square-o fa-stack-1x fa-inverse"></i>
-                                                                </span>
-                                                            </a>                                                            
-                                                        </td>
+                                <h4>Guarantee Details</h4>
+                                <div class="control-group">
+                                    <label class="control-label" for="orderID">Order ID <sup>*</sup></label>
+                                    <div class="controls">
+                                        <input type="text" id="orderID" placeholder="ORD-01" name="orderID" pattern="(ORD-)[0-9]{1,}" title="ORD-xx" required>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="currentDateTime">Receive date </label>
+                                    <div class="controls">
+                                        <input type="text" id="currentDateTime" name="receiveDate" readonly>
+                                    </div>
+                                </div>
+                                <script>
+                                    var today = new Date();
+                                    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+                                    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                                    var dateTime = date + ' ' + time;
+                                    document.getElementById("currentDateTime").value = dateTime;
+                                </script>
+                                <div class="control-group">
+                                    <label class="control-label" for="expected">Expected return date <sup>*</sup></label>
+                                    <div class="controls">
+                                        <input type="date" id="expected" placeholder="Date" name="expectedDate" required>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="textarea">Description</label>
+                                    <div class="controls">
+                                        <textarea class="input-xlarge" id="textarea" name="description" rows="3" style="height:10rem; width:97%;" placeholder="Input guarantee information"></textarea>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="fee">Guarantee Fee <sup>*</sup></label>
+                                    <div class="controls">
+                                        <input type="text" id="fee" placeholder="Fee" name="fee" pattern="[0-9]{6,7}" required>
+                                    </div>
 
-                                                    </tr>
-                                                </c:forEach>
-                                            </tbody>
-                                        </table>
-                                    </c:otherwise>
-                                </c:choose>
-                            </div>
-                        </div>
+                                </div>
 
-                        <div class="pagination">
-                            <ul>
-                                <li><a href="#">&lsaquo;</a></li>
-                                <li><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">...</a></li>
-                                <li><a href="#">&rsaquo;</a></li>
-                            </ul>
+
+                                <p><sup>*</sup>Required field </p>
+
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <input type="hidden" name="action" value="Guarantee"/>
+                                        <input class="btn btn-large btn-success" type="submit" name="perform" value="Submit" />
+                                    </div>
+                                </div>
+                            </form>
                         </div>
 
                     </div>

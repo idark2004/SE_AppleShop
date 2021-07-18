@@ -22,13 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 )
 public class MainController extends HttpServlet {
 
-    private static final String ERROR = "error.jsp";        
-    private static final String ADDCART = "AddToCartController";
-    private static final String BUYITEM = "BuyItemController";
-    private static final String REMOVECART = "RemoveCartItemController";
-    private static final String VIEWCART = "ViewCartController";
-    private static final String COMPLETEORDER="CompleteOrderController";
-    private static final String PRODUCTLISTMANAGEMENT="ProductListManagementController";
+    private static final String ERROR = "error.jsp";           
     private static final String PRODUCTMANAGEMENT="ManageProductController";
     private static final String UPDATEPRODUCT="UpdateProductController";
     private static final String CREATESPEC="CreateSpecController";    
@@ -43,6 +37,7 @@ public class MainController extends HttpServlet {
     private static final String ORDERCHANGE= "OrderChangeStatusController";
     private static final String ORDERDETAIL= "OrderDetailController";
     private static final String MANAGE_USER="ManageUserController";
+    private static final String GUARANTEE="GuaranteeController";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {        
         System.out.println("Run through MainController");
@@ -51,35 +46,16 @@ public class MainController extends HttpServlet {
         String action = request.getParameter("action");
         System.out.println(action);
         //System.out.println(session.getAttribute("username"));
+        
         if (action == null){
             url="index.jsp";
         }
+        
         try {           
             switch (action){                                
                 case "SearchProduct":
                     url= SEARCHPRODUCT;
-                    break;    
-                case "AddItem":
-                    url=ADDCART;
-                    break;
-                case "Add to cart":
-                    url=ADDCART;
-                    break;
-                case "Buy Now":
-                    url=BUYITEM;
-                    break;
-                case "RemoveCart":
-                    url=REMOVECART;
-                    break;
-                case "ViewCart":
-                    url=VIEWCART;
-                    break;
-                case "Finish Checkout":
-                    url=COMPLETEORDER;
-                    break;
-                case "ProductListManagement":
-                    url=PRODUCTLISTMANAGEMENT;
-                    break;
+                    break;                                    
                 case "Manage Product":
                     url=PRODUCTMANAGEMENT;
                     break;
@@ -120,6 +96,9 @@ public class MainController extends HttpServlet {
                     
                 case "Manage User":
                     url =MANAGE_USER;
+                    break;
+                case "Guarantee":
+                    url = GUARANTEE;
                     break;
                 default:
                     url="index.jsp";

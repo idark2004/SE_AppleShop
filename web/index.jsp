@@ -181,6 +181,7 @@
                                     </li>
                                 </c:if>                       
                             </c:if>
+                            <li><a href="MainController?action=Guarantee&perform=Get"><i class="icon-chevron-right"></i>Guarantee</a></li>
                         </ul>
                         <br/>
                     </div>

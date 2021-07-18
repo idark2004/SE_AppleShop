@@ -75,41 +75,9 @@
                         <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
                     </form>
                     <ul id="topMenu" class="nav pull-right">
-                        <li class=""><a href="products_Manager.html">All Products</a></li>
-                        <li class=""><a href="contact.jsp">Contact</a></li>
-                        <li class=""><a href="userProfile.jsp">Profile</a></li>
-                        <li class="">
-                            <a href="register.html" role="button" style="padding-right:0"><span class="btn btn-large btn-success">Signup</span></a>
-                        </li>
-                        <li class="">
-                            <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
-                            <div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                    <h3>Login In</h3>
-                                </div>
-                                <div class="modal-body">
-                                    <form class="form-horizontal loginFrm">
-                                        <div class="control-group">
-                                            <input type="text" id="inputEmail" placeholder="Email">
-                                        </div>
-                                        <div class="control-group">
-                                            <input type="password" id="inputPassword" placeholder="Password">
-                                        </div>
-                                        <div class="control-group">
-                                            <label class="checkbox">
-											<input type="checkbox"> Remember me
-											</label>
-                                        </div>
-                                        <div class="control-group">
-                                            <a href="#"><img width="30" height="30" src="themes/images/google.png" title="Login with Google" alt="Google Login" /></a>
-                                        </div>
-                                    </form>
-                                    <button type="submit" class="btn btn-success">Sign in</button>
-                                    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                                </div>
-                            </div>
-                        </li>
+                        <li class=""><a href="products_Manager.html">All Products</a></li>                        
+                        <li class=""><a href="userProfile.jsp">Profile</a></li>                        
+                        
                     </ul>
                 </div>
             </div>
@@ -169,11 +137,11 @@
                             <ul style="display:none">
                                 <li><a href="DashBoardController"><i class="icon-chevron-right"></i>Dashboard</a></li>
                                 <li><a href="ManagerAddProduct.jsp"><i class="icon-chevron-right"></i>Add Product</a></li>
-                                <li><a href="MainController?action=Manage+User&perform=Get+User&roleID=US"><i class="icon-chevron-right"></i>Customer List</a></li>
+                                <li><a href="MainController?action=Manage+User&perform=Get+User&roleID=US"><i class="icon-chevron-right"></i>User List</a></li>
                                 <li><a href="MainController?action=SaleCode&perform=List"><i class="icon-chevron-right"></i>Sale Code List</a></li>
                             <c:if test="${sessionScope.USER.roleID.trim() == 'AD'}">
                                 <li><a href="MainController?action=Manage+User&perform=Get+Manager"><i class="icon-chevron-right"></i>Manager List</a></li>
-                            </c:if>
+                            </c:if>                                
                             </ul>
                         </li>
                     </ul>
