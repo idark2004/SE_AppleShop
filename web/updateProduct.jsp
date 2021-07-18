@@ -74,8 +74,8 @@
                             <li><a href="products_Manager.html">iPad</a></li>
                             <li><a href="products_Manager.html">Mac</a></li>
                             <li><a href="products_Manager.html">Accessory</a></li>
-                                <c:if test="${sessionScope.USER.trim() != null}" > 
-                                <c:if test="${sessionScope.USER.trim() != 'US'}" >                      
+                                <c:if test="${sessionScope.USER.roleID.trim() != null}" > 
+                                <c:if test="${sessionScope.USER.roleID.trim() != 'US'}" >                      
                                 <li class="subMenu" id="CU"><a>Shop Manager</a>
                                     <ul style="display:none">
                                         <li><a href="dashboard_Manager.html"><i class="icon-chevron-right"></i>Dashboard</a></li>

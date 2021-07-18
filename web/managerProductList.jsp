@@ -176,7 +176,7 @@
                     <!-- Sidebar end=============================================== -->
                     <div class="span9">
                         <ul class="breadcrumb">
-                            <li><a href="index_Manager.html">Home</a> <span class="divider">/</span></li>
+                            <li><a href="index.jsp">Home</a> <span class="divider">/</span></li>
                             <li class="active">All Products</li>
                         </ul>
                         <h3> Products Name <small class="pull-right"> 40 products are available </small></h3>

@@ -121,17 +121,17 @@
             <div class="carousel-inner">
                 <div class="item active">
                     <div class="container">
-                        <a href="register.html"><img style="width:100%" src="themes/images/carousel/1.png" alt="" /></a>
+                        <a href="register.jsp"><img style="width:100%" src="themes/images/carousel/1.png" alt="" /></a>
                     </div>
                 </div>
                 <div class="item">
                     <div class="container">
-                        <a href="register.html"><img style="width:100%" src="themes/images/carousel/2.png" alt="" /></a>
+                        <a href="register.jsp"><img style="width:100%" src="themes/images/carousel/2.png" alt="" /></a>
                     </div>
                 </div>
                 <div class="item">
                     <div class="container">
-                        <a href="register.html"><img src="themes/images/carousel/3.png" alt="" /></a>
+                        <a href="register.jsp"><img src="themes/images/carousel/3.png" alt="" /></a>
                     </div>
                 </div>
             </div>
@@ -145,20 +145,32 @@
                 <!-- Sidebar ================================================== -->
                 <div id="sidebar" class="span3">
                     <div class="well well-small">
-                        <a id="myCart" href="product_summary_Manager.html"><img src="themes/images/ico-cart.png" alt="cart">3 Items in your cart <span class="badge badge-warning pull-right">445,000VND</span></a>
+                        <c:forEach var="cartItem" items="${sessionScope.cart}">
+                                <c:set var="total" value="${total + (cartItem.quantity * cartItem.product.price)}"/>
+                            </c:forEach>
+                            <a id="myCart" href="cartDetail.jsp"><img src="themes/images/ico-cart.png" alt="cart">${subtotal} 
+                                <c:if test="${sessionScope.cart == null}">No</c:if> 
+                                    Items in your cart
+                                <c:if test="${sessionScope.cart != null}">
+                                    <span class="badge badge-warning pull-right"> 
+                                        <fmt:setLocale value="vi_VN" />
+                                        <fmt:formatNumber value="${total}" type="currency" />
+                                    </span>
+                                </c:if>
+                            </a>
                     </div>
                     <ul id="sideManu" class="nav nav-tabs nav-stacked">
-                        <li><a href="products_Manager.html">All</a></li>
-                        <li><a href="products_Manager.html">iPhone</a></li>
-                        <li><a href="products_Manager.html">iPad</a></li>
-                        <li><a href="products_Manager.html">Mac</a></li>
-                        <li><a href="products_Manager.html">Accessory</a></li>
+                        <li><a href="MainController?action=Manage+Product&perform=Get">All</a></li>
+                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=IP">iPhone</a></li>
+                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=ID">iPad</a></li>
+                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=MB">Mac</a></li>
+                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=AS">Accessory</a></li>
                         <li class="subMenu" id="manaLi"><a>Shop Manager</a>
                             <ul style="display:none">
-                                <li><a href="dashboard_Manager.html"><i class="icon-chevron-right"></i>Dashboard</a></li>
-                                <li><a href="product_details_Manager.html"><i class="icon-chevron-right"></i>Add Product</a></li>
-                                <li><a href="customers_Manager.html"><i class="icon-chevron-right"></i>Customer List</a></li>
-                                <li><a href="sales_Manager.html"><i class="icon-chevron-right"></i>Sale Code List</a></li>
+                                <li><a href="DashBoardController"><i class="icon-chevron-right"></i>Dashboard</a></li>
+                                <li><a href="ManagerAddProduct.jsp"><i class="icon-chevron-right"></i>Add Product</a></li>
+                                <li><a href="MainController?action=Manage+User&perform=Get+User"><i class="icon-chevron-right"></i>Customer List</a></li>
+                                <li><a href="MainController?action=SaleCode&perform=List"><i class="icon-chevron-right"></i>Sale Code List</a></li>
                             </ul>
                         </li>
                     </ul>

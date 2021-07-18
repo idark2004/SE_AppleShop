@@ -66,6 +66,9 @@ public class ProductController extends HttpServlet {
                     ProductDAO dao = new ProductDAO();
                     String categoryID = request.getParameter("categoryID");
                     String status = request.getParameter("status");
+                    if (request.getParameter("categoryID") == null) {
+                        categoryID = "";
+                    }
                     if (request.getParameter("status") == null) {
                         status = "True";
                     }

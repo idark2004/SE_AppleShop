@@ -35,7 +35,7 @@ public class UserController extends HttpServlet {
     private static final String ERROR = "error.jsp";
     private static final String FAIL_SIGNUP = "signupForm.jsp";
     private static final String INDEX = "index.jsp";
-    private static final String MND = "DashBoard.jsp";
+    private static final String MND = "DashBoardController";
     private static final String UPDATE_SUCCESS = "userProfile.jsp";
     
     private String host;
