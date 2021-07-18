@@ -93,8 +93,9 @@ public class UserDAO {
                     String pn = rs.getString("userPhoneNumber");
                     String a = rs.getString("userAddress");
                     String rid = rs.getString("roleID");
+                    String status = rs.getString("userStatus");
 
-                    UserDTO u = new UserDTO(id, n, un, p, pn, a, rid);
+                    UserDTO u = new UserDTO(id, n, un, p, pn, a, status ,rid);
 
                     return u;
                 }
@@ -367,5 +368,29 @@ public class UserDAO {
         }
         return list;
     }
-
+    public boolean manageStatus(String userID, boolean status) throws SQLException{
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        try {
+            conn = DBConnect.makeConnection();
+            if(conn!=null){
+                String sql = "UPDATE tblUsers SET userStatus = ? "
+                        + " WHERE userID LIKE ?";
+                stm=conn.prepareStatement(sql);
+                stm.setBoolean(1, status);
+                stm.setString(2, "%" + userID + "%");
+                check = stm.executeUpdate()>0;
+            }
+        } 
+        finally{
+            if(stm != null){
+                stm.close();
+            }
+            if(conn != null){
+                conn.close();
+            }
+        }
+        return check;
+    }
 }

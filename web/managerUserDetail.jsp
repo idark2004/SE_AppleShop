@@ -4,47 +4,49 @@
     Author     : anime
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <title>SE15 Shop | Product Editor</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <!--Less styles -->
-    <!-- Other Less css file //different less files has different color scheam
-	<link rel="stylesheet/less" type="text/css" href="themes/less/simplex.less">
-	<link rel="stylesheet/less" type="text/css" href="themes/less/classified.less">
-	<link rel="stylesheet/less" type="text/css" href="themes/less/amelia.less">  MOVE DOWN TO activate
-	-->
-    <!--<link rel="stylesheet/less" type="text/css" href="themes/less/bootshop.less">
-	<script src="themes/js/less.js" type="text/javascript"></script> -->
+    <head>
+        <meta charset="utf-8">
+        <title>SE15 Shop | Product Editor</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <!--Less styles -->
+        <!-- Other Less css file //different less files has different color scheam
+            <link rel="stylesheet/less" type="text/css" href="themes/less/simplex.less">
+            <link rel="stylesheet/less" type="text/css" href="themes/less/classified.less">
+            <link rel="stylesheet/less" type="text/css" href="themes/less/amelia.less">  MOVE DOWN TO activate
+        -->
+        <!--<link rel="stylesheet/less" type="text/css" href="themes/less/bootshop.less">
+            <script src="themes/js/less.js" type="text/javascript"></script> -->
 
-    <!-- Bootstrap style -->
-    <link id="callCss" rel="stylesheet" href="themes/bootshop/bootstrap.min.css" media="screen" />
-    <link href="themes/css/base.css" rel="stylesheet" media="screen" />
-    <!-- Bootstrap style responsive -->
-    <link href="themes/css/bootstrap-responsive.min.css" rel="stylesheet" />
-    <link href="themes/css/font-awesome.css" rel="stylesheet" type="text/css">
-    <!-- Google-code-prettify -->
-    <link href="themes/js/google-code-prettify/prettify.css" rel="stylesheet" />
-    <!-- fav and touch icons -->
-    <link rel="shortcut icon" href="themes/images/ico/apple.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="themes/images/ico/apple.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="themes/images/ico/apple.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="themes/images/ico/apple.png">
-    <link rel="apple-touch-icon-precomposed" href="themes/images/ico/apple.png">
-    <style type="text/css" id="enject"></style>
-    <link rel="stylesheet" href="themes/font-awesome-4.7.0/css/font-awesome.min.css">
-</head>
+        <!-- Bootstrap style -->
+        <link id="callCss" rel="stylesheet" href="themes/bootshop/bootstrap.min.css" media="screen" />
+        <link href="themes/css/base.css" rel="stylesheet" media="screen" />
+        <!-- Bootstrap style responsive -->
+        <link href="themes/css/bootstrap-responsive.min.css" rel="stylesheet" />
+        <link href="themes/css/font-awesome.css" rel="stylesheet" type="text/css">
+        <!-- Google-code-prettify -->
+        <link href="themes/js/google-code-prettify/prettify.css" rel="stylesheet" />
+        <!-- fav and touch icons -->
+        <link rel="shortcut icon" href="themes/images/ico/apple.ico">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="themes/images/ico/apple.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="themes/images/ico/apple.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="themes/images/ico/apple.png">
+        <link rel="apple-touch-icon-precomposed" href="themes/images/ico/apple.png">
+        <style type="text/css" id="enject"></style>
+        <link rel="stylesheet" href="themes/font-awesome-4.7.0/css/font-awesome.min.css">
+    </head>
 
-<body>
-    <div id="header">
-        <div class="container">
-            <div id="welcomeLine" class="row">
+    <body>
+        <div id="header">
+            <div class="container">
+                <div id="welcomeLine" class="row">
                     <div class="span6">Welcome!
                         <c:choose>
                             <c:when test="${sessionScope.USER != null}">
@@ -64,91 +66,91 @@
                         </div>
                     </div>
                 </div>
-            <!-- Navbar ================================================== -->
-            <div id="logoArea" class="navbar">
-                <a id="smallScreen" data-target="#topMenu" data-toggle="collapse" class="btn btn-navbar">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </a>
-                <div class="navbar-inner">
-                    <a class="brand" href="MainController?action=Product&perform=Index">SE15 Shop</a>
-                    <form class="form-inline navbar-search" method="post" action="MainController">
-                        <input id="srchFld" class="srchTxt" type="text" name="keyWord"/>
-                        <input type="hidden" value="SearchProduct" name="action"/>
-                        <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
-                    </form>
-                    <ul id="topMenu" class="nav pull-right">
-                        <li class=""><a href="products_Manager.html">All Products</a></li>
-                        <li class=""><a href="contact.html">Contact</a></li>
-                        <li class=""><a href="user_profile.html">Profile</a></li>
-                        <li class="">
-                            <a href="register.html" role="button" style="padding-right:0"><span class="btn btn-large btn-success">Signup</span></a>
-                        </li>
-                        <li class="">
-                            <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
-                            <div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                    <h3>Login In</h3>
+                <!-- Navbar ================================================== -->
+                <div id="logoArea" class="navbar">
+                    <a id="smallScreen" data-target="#topMenu" data-toggle="collapse" class="btn btn-navbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <div class="navbar-inner">
+                        <a class="brand" href="MainController?action=Product&perform=Index">SE15 Shop</a>
+                        <form class="form-inline navbar-search" method="post" action="MainController">
+                            <input id="srchFld" class="srchTxt" type="text" name="keyWord"/>
+                            <input type="hidden" value="SearchProduct" name="action"/>
+                            <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
+                        </form>
+                        <ul id="topMenu" class="nav pull-right">
+                            <li class=""><a href="products_Manager.html">All Products</a></li>
+                            <li class=""><a href="contact.html">Contact</a></li>
+                            <li class=""><a href="user_profile.html">Profile</a></li>
+                            <li class="">
+                                <a href="register.html" role="button" style="padding-right:0"><span class="btn btn-large btn-success">Signup</span></a>
+                            </li>
+                            <li class="">
+                                <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
+                                <div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        <h3>Login In</h3>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form class="form-horizontal loginFrm">
+                                            <div class="control-group">
+                                                <input type="text" id="inputEmail" placeholder="Email">
+                                            </div>
+                                            <div class="control-group">
+                                                <input type="password" id="inputPassword" placeholder="Password">
+                                            </div>
+                                            <div class="control-group">
+                                                <label class="checkbox">
+                                                    <input type="checkbox"> Remember me
+                                                </label>
+                                            </div>
+                                            <div class="control-group">
+                                                <a href="#"><img width="30" height="30" src="themes/images/google.png" title="Login with Google" alt="Google Login" /></a>
+                                            </div>
+                                        </form>
+                                        <button type="submit" class="btn btn-success">Sign in</button>
+                                        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                                    </div>
                                 </div>
-                                <div class="modal-body">
-                                    <form class="form-horizontal loginFrm">
-                                        <div class="control-group">
-                                            <input type="text" id="inputEmail" placeholder="Email">
-                                        </div>
-                                        <div class="control-group">
-                                            <input type="password" id="inputPassword" placeholder="Password">
-                                        </div>
-                                        <div class="control-group">
-                                            <label class="checkbox">
-											<input type="checkbox"> Remember me
-											</label>
-                                        </div>
-                                        <div class="control-group">
-                                            <a href="#"><img width="30" height="30" src="themes/images/google.png" title="Login with Google" alt="Google Login" /></a>
-                                        </div>
-                                    </form>
-                                    <button type="submit" class="btn btn-success">Sign in</button>
-                                    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Header End====================================================================== -->
-    <div id="carouselBlk">
-        <div id="myCarousel" class="carousel slide">
-            <div class="carousel-inner">
-                <div class="item active">
-                    <div class="container">
-                        <a href="register.html"><img style="width:100%" src="themes/images/carousel/1.png" alt="" /></a>
+        <!-- Header End====================================================================== -->
+        <div id="carouselBlk">
+            <div id="myCarousel" class="carousel slide">
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <div class="container">
+                            <a href="register.html"><img style="width:100%" src="themes/images/carousel/1.png" alt="" /></a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="container">
+                            <a href="register.html"><img style="width:100%" src="themes/images/carousel/2.png" alt="" /></a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="container">
+                            <a href="register.html"><img src="themes/images/carousel/3.png" alt="" /></a>
+                        </div>
                     </div>
                 </div>
-                <div class="item">
-                    <div class="container">
-                        <a href="register.html"><img style="width:100%" src="themes/images/carousel/2.png" alt="" /></a>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="container">
-                        <a href="register.html"><img src="themes/images/carousel/3.png" alt="" /></a>
-                    </div>
-                </div>
+                <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+                <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
             </div>
-            <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-            <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
         </div>
-    </div>
-    <div id="mainBody">
-        <div class="container">
-            <div class="row">
-                <!-- Sidebar ================================================== -->
-                <div id="sidebar" class="span3">
-                    <div class="well well-small">
+        <div id="mainBody">
+            <div class="container">
+                <div class="row">
+                    <!-- Sidebar ================================================== -->
+                    <div id="sidebar" class="span3">
+                        <div class="well well-small">
                             <c:forEach var="cartItem" items="${sessionScope.cart}">
                                 <c:set var="total" value="${total + (cartItem.quantity * cartItem.product.price)}"/>
                             </c:forEach>
@@ -156,55 +158,55 @@
                                     <fmt:setLocale value="vi_VN" />
                                     <fmt:formatNumber value="${total}" type="currency" /></span>
                             </a>
+                        </div>
+                        <ul id="sideManu" class="nav nav-tabs nav-stacked">
+                            <li><a href="products_Manager.html">All</a></li>
+                            <li><a href="products_Manager.html">iPhone</a></li>
+                            <li><a href="products_Manager.html">iPad</a></li>
+                            <li><a href="products_Manager.html">Mac</a></li>
+                            <li><a href="products_Manager.html">Accessory</a></li>
+                            <li class="subMenu"><a>Shop Manager</a>
+                                <ul style="display:none">
+                                    <li><a href="dashboard_Manager.html"><i class="icon-chevron-right"></i>Dashboard</a></li>
+                                    <li><a href="product_details_Manager.html"><i class="icon-chevron-right"></i>Add Product</a></li>
+                                    <li><a href="customers_Manager.html"><i class="icon-chevron-right"></i>Customer List</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <br/>
                     </div>
-                    <ul id="sideManu" class="nav nav-tabs nav-stacked">
-                        <li><a href="products_Manager.html">All</a></li>
-                        <li><a href="products_Manager.html">iPhone</a></li>
-                        <li><a href="products_Manager.html">iPad</a></li>
-                        <li><a href="products_Manager.html">Mac</a></li>
-                        <li><a href="products_Manager.html">Accessory</a></li>
-                        <li class="subMenu"><a>Shop Manager</a>
-                            <ul style="display:none">
-                                <li><a href="dashboard_Manager.html"><i class="icon-chevron-right"></i>Dashboard</a></li>
-                                <li><a href="product_details_Manager.html"><i class="icon-chevron-right"></i>Add Product</a></li>
-                                <li><a href="customers_Manager.html"><i class="icon-chevron-right"></i>Customer List</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <br/>
-                </div>
-                <!-- Sidebar end=============================================== -->
-                <div class="span9">
-                    <ul class="breadcrumb">
-                        <li><a href="MainController?action=Product&perform=Index">Home</a> <span class="divider">/</span></li>
-                        <li><a href="customers_Manager.html">Customers</a> <span class="divider">/</span></li>
-                        <li class="active">User1</li>
-                    </ul>
-                    <div class="row">
-                        <div class="span9">
-                            <strong>Information</strong><br>
-                            <div class="table-responsive">
-                                <table class="table table-user-information">
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <strong>
-                                                    User ID                                                
-                                                </strong>
-                                            </td>
-                                            <td class="text-primary">
-                                                ${requestScope.PROFILE.userID}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <strong>
-                                                    Full name                                                
-                                                </strong>
-                                            </td>
-                                            <td class="text-primary">
-                                                ${requestScope.PROFILE.name}
-                                            </td>
+                    <!-- Sidebar end=============================================== -->
+                    <div class="span9">
+                        <ul class="breadcrumb">
+                            <li><a href="MainController?action=Product&perform=Index">Home</a> <span class="divider">/</span></li>
+                            <li><a href="customers_Manager.html">Customers</a> <span class="divider">/</span></li>
+                            <li class="active">User1</li>
+                        </ul>
+                        <div class="row">
+                            <div class="span9">
+                                <strong>Information</strong><br>
+                                <div class="table-responsive">
+                                    <table class="table table-user-information">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <strong>
+                                                        User ID                                                
+                                                    </strong>
+                                                </td>
+                                                <td class="text-primary">
+                                                    ${requestScope.PROFILE.userID}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <strong>
+                                                        Full name                                                
+                                                    </strong>
+                                                </td>
+                                                <td class="text-primary">
+                                                    ${requestScope.PROFILE.name}
+                                                </td>
                                             <tr>
                                                 <td>
                                                     <strong>
@@ -212,7 +214,14 @@
                                                     </strong>
                                                 </td>
                                                 <td class="text-primary">
-                                                    Customer
+                                                    <c:choose>
+                                                        <c:when test="${fn:trim(requestScope.PROFILE.roleID) == 'US'}">
+                                                            User
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            Manager
+                                                        </c:otherwise>
+                                                    </c:choose>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -225,18 +234,39 @@
                                                     ${requestScope.PROFILE.email}
                                                 </td>
                                             </tr>
-                                                                                        
-                                    </tbody>
-                                </table>
-                                <p><a href="#" class="btn btn-primary">De-active</a> <a href="#" class="btn">Active</a></p>
+                                            <tr>
+                                                <td>
+                                                    <strong>
+                                                        Phone                                                
+                                                    </strong>
+                                                </td>
+                                                <td class="text-primary">
+                                                    ${requestScope.PROFILE.phone}
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                    <p>
+                                        <c:choose>
+
+                                            <c:when test="${requestScope.PROFILE.status == 1}">
+                                                <a href="MainController?action=Manage+User&perform=Status&status=false&userID=${requestScope.PROFILE.userID}&roleID=${requestScope.PROFILE.roleID}" class="btn">De-active</a>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <a href="MainController?action=Manage+User&perform=Status&status=true&userID=${requestScope.PROFILE.userID}&roleID=${requestScope.PROFILE.roleID}" class="btn">Active</a>
+                                            </c:otherwise>
+
+                                        </c:choose>
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
     <!-- MainBody End ============================= -->
     <!-- Footer ================================================================== -->

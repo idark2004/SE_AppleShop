@@ -22,9 +22,12 @@ import javax.servlet.http.HttpSession;
  */
 public class ManageUserController extends HttpServlet {
 
-    private static final String ERROR  = "error.jsp";
-    private static final String USER_LIST  = "managerUserList.jsp";
+    private static final String ERROR = "error.jsp";
+    private static final String USER_LIST = "managerUserList.jsp";
     private static final String PROFILE = "managerUserDetail.jsp";
+    private static final String USER_UPDATE = "MainController?action=Manage+User&perform=Get+User&roleID=";
+    private static final String UPDATE_FAIL = "MainController?action=Manage+User&perform=Profile&userID=";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -37,23 +40,36 @@ public class ManageUserController extends HttpServlet {
         List<UserDTO> list = new ArrayList<>();
         String url = ERROR;
         try {
-            switch(perform){
+            switch (perform) {
                 case "Get User":
-                    roleID = "US";
+                   
                     list = dao.getUserList(roleID);
                     request.setAttribute("USER_LIST", list);
                     url = USER_LIST;
                     break;
+                    
                 case "Profile":
                     user = dao.getUserProfile(userID);
                     request.setAttribute("PROFILE", user);
                     url = PROFILE;
                     break;
+
+                case "Status":
+                    boolean status;
+                    status = Boolean.parseBoolean(request.getParameter("status"));
+                    boolean check = dao.manageStatus(userID, status);
+                    if(check){
+                        url = USER_UPDATE+roleID;
+                        request.setAttribute("SUCCESS", "Update Success");                        
+                    } else {
+                        url = UPDATE_FAIL+userID;
+                        request.setAttribute("FAILED", "Update Failed");
+                    }
+                    
             }
         } catch (Exception e) {
             request.setAttribute("ERROR", e.toString());
-        }
-        finally{
+        } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }

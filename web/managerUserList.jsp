@@ -151,12 +151,14 @@
                                                             <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
                                                         </span>
                                                     </a>
-                                                    <a href="" class="table-link danger" title="Hide This Customer">
+                                                    <c:if test="${user.status eq 1}">
+                                                    <a href="MainController?action=Manage+User&perform=Status&status=false&userID=${user.userID}&roleID=${user.roleID}" class="table-link danger" title="Hide This Customer">
                                                         <span class="fa-stack">
                                                             <i class="fa fa-square fa-stack-2x"></i>
                                                             <i class="fa fa-eye fa-stack-1x fa-inverse"></i>
                                                         </span>
                                                     </a>
+                                                    </c:if>
                                                 </td>
                                             </tr>
                                         </c:forEach>
