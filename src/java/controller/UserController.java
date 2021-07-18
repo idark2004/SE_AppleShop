@@ -37,13 +37,14 @@ public class UserController extends HttpServlet {
     private static final String INDEX = "index.jsp";
     private static final String MND = "DashBoardController";
     private static final String UPDATE_SUCCESS = "userProfile.jsp";
-    
+    private static final String OUT = "MainController?action=Product&perform=Index";
+
     private String host;
     private String port;
     private String email;
     private String name;
     private String pass;
- 
+
     @Override
     public void init() {
         // reads SMTP server setting from web.xml file
@@ -66,7 +67,7 @@ public class UserController extends HttpServlet {
         String password = request.getParameter("password");
         UserDTO user = new UserDTO();
         UserDAO dao = new UserDAO();
-        System.out.println("user controller perform"+perform);
+        System.out.println("user controller perform" + perform);
         try {
             switch (perform) {
                 case "Sign Up":
@@ -107,7 +108,7 @@ public class UserController extends HttpServlet {
                         error.setLoginError("Invalid username or password");
                         request.setAttribute("LOGIN_ERROR", error);
                     }
-                    System.out.println("url login "+url);
+                    System.out.println("url login " + url);
                     break;
                 case "Update Profile":
                     user = (UserDTO) session.getAttribute("USER");
@@ -116,9 +117,15 @@ public class UserController extends HttpServlet {
                     if (dao.updateUserDetail(user)) {
                         url = UPDATE_SUCCESS;
                         request.setAttribute("UPDATE_SUCCESS", "Update successfully");
-                    } else{
-                    request.setAttribute("ERROR", "No user found to update");
+                    } else {
+                        request.setAttribute("ERROR", "No user found to update");
                     }
+                    break;
+
+                case "Log Out":
+                    session.invalidate();
+                    request.getSession(false);
+                    url = OUT;
                     break;
                 case "Contact":
                     String userName = request.getParameter("fullname");
@@ -127,14 +134,14 @@ public class UserController extends HttpServlet {
                     String description = request.getParameter("description");
 
                     String message = "";
-                    
+
                     String content = "From Customer: " + userName
-                        + "\nEmail for Contract: " + userEmail
-                        + "\nDescription: " + description;
-                    
+                            + "\nEmail for Contract: " + userEmail
+                            + "\nDescription: " + description;
+
                     EmailUtility.sendEmail(host, port, email, "Shop Email", pass, email, subject, content);
                     System.out.println(content);
-                    url="contact.jsp";
+                    url = "contact.jsp";
                     break;
             }
         } catch (Exception e) {

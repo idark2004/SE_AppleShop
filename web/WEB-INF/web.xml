@@ -155,9 +155,7 @@
         <url-pattern>/SignupController</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
-        <welcome-file>
-            ViewProductController
-        </welcome-file>
+        <welcome-file>ProductController</welcome-file>
     </welcome-file-list>
     <servlet-mapping>
         <servlet-name>UpdateUserController</servlet-name>

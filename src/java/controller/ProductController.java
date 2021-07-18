@@ -29,7 +29,7 @@ public class ProductController extends HttpServlet {
     private static final String UPLOAD_DIR = "images";
     private static final String ERROR = "error.jsp";
     private static final String VIEW = "productList.jsp";
-    private static final String DETAIL = "product_details.jsp";
+    private static final String DETAIL = "productDetails.jsp";
     private static final String INDEX = "index.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,6 +45,9 @@ public class ProductController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         String perform = request.getParameter("perform");
+        if(perform == null){
+            perform = "Index";
+        }
         System.out.println(perform);
         ProductErrorDTO msg = new ProductErrorDTO();
         try {

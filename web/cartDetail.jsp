@@ -61,7 +61,7 @@
                                 <c:set var="subtotalCount" value="${cartItem.quantity}"/>
                                 <c:set var="subtotal" value="${subtotal+cartItem.quantity}"/>
                             </c:forEach>
-                            <a href="cartDetail.jsp"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> ${subtotal} Itemes in your cart </span> </a>
+                            <a href="cartDetail.jsp"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> ${subtotal} Items in your cart </span> </a>
                         </div>
                     </div>
                 </div>
@@ -75,44 +75,56 @@
                     <div class="navbar-inner">
                         <a class="brand" href="MainController?action=Product&perform=Index">SE15 Shop</a>
                         <form class="form-inline navbar-search" method="post" action="MainController">
-                        <input id="srchFld" class="srchTxt" type="text" name="keyWord"/>
-                        <input type="hidden" value="SearchProduct" name="action"/>
-                        <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
-                    </form>
+                            <input id="srchFld" class="srchTxt" type="text" name="keyWord"/>
+                            <input type="hidden" value="SearchProduct" name="action"/>
+                            <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
+                        </form>
                         <ul id="topMenu" class="nav pull-right">
                             <li class=""><a href="MainController?action=Product&perform=ViewProduct">All Products</a></li>
                             <li class=""><a href="contact.jsp">Contact</a></li>
-                            <li class=""><a href="userProfile.jsp">Profile</a></li>
-                            <li class="">
-                                <a href="register.html" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Signup</span></a>
-                            </li>
-                            <li class="">
-                                <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
-                                <div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                        <h3>Login In</h3>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form class="form-horizontal loginFrm" action="MainController" method="post">
-                                            <div class="control-group">
-                                                <input type="text" id="inputEmail" placeholder="Enter Email" name="uname" required>
+                                <c:if test="${sessionScope.USER != null}">
+                                <li class=""><a href="userProfile.jsp">Profile</a></li>
+                                </c:if>
+                                <c:choose>
+                                <c:when test="${sessionScope.USER == null}">
+                                    <li class="">
+                                        <a href="signupForm.jsp" role="button" style="padding-right:0"><span class="btn btn-large btn-success">Signup</span></a>
+                                    </li>
+                                    <li class="">
+                                        <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
+                                        <div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                <h3>Log In</h3>
                                             </div>
-                                            <div class="control-group">
-                                                <input type="password" id="inputPassword" placeholder="Enter Password" name="psw" required>
+                                            <div class="modal-body">
+                                                <form class="form-horizontal loginFrm" action="MainController" method="post">
+                                                    <div class="control-group">
+                                                        <input type="text" id="inputEmail" placeholder="Enter Email" name="email" required>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <input type="password" id="inputPassword" placeholder="Enter Password" name="password" required>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="checkbox">
+                                                            <input type="checkbox"> Remember me
+                                                        </label>
+                                                        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                                                        <input type="hidden" name="perform" value="Log in">
+                                                        <button type="submit" class="btn btn-success" name="action" value="User">Sign in</button>
+                                                        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                                                    </div>
+                                                </form>
                                             </div>
-                                            <div class="control-group">
-                                                <label class="checkbox">
-                                                    <input type="checkbox"> Remember me
-                                                </label>
-                                                <div class="g-signin2" data-onsuccess="onSignIn"></div>
-                                                <button type="submit" class="btn btn-success" name="action" value="Login">Sign in</button>
-                                                <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </li>
+                                        </div>
+                                    </li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li class="">
+                                        <a href="MainController?action=User&perform=Log+Out" role="button" style="padding-right:0"><span class="btn btn-large btn-success">Log Out</span></a>
+                                    </li>
+                                </c:otherwise>
+                            </c:choose>
                         </ul>
                     </div>
                 </div>
@@ -174,39 +186,43 @@
                         </ul>
                         <h3> SHOPPING CART [ <small>${subtotal} Item(s) </small>]<a href="ViewProductController?categoryID=&status=True" class="btn btn-large pull-right"><i class="icon-arrow-left"></i> Continue Shopping </a></h3>
                         <hr class="soft" />
-                        <table class="table table-bordered">
-                            <tr>
-                                <th> I AM ALREADY REGISTERED </th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <form class="form-horizontal">
-                                        <div class="control-group">
-                                            <label class="control-label" for="inputUsername">Username</label>
-                                            <div class="controls">
-                                                <input type="text" id="inputUsername" placeholder="Username">
+                        <c:if test="${sessionScope.USER == null}">
+                            <table class="table table-bordered">
+
+                                <tr>
+                                    <th> I AM ALREADY REGISTERED </th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <form class="form-horizontal">
+                                            <div class="control-group">
+                                                <label class="control-label" for="inputUsername">Username</label>
+                                                <div class="controls">
+                                                    <input type="text" id="inputUsername" placeholder="Username">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="control-group">
-                                            <label class="control-label" for="inputPassword1">Password</label>
-                                            <div class="controls">
-                                                <input type="password" id="inputPassword1" placeholder="Password">
+                                            <div class="control-group">
+                                                <label class="control-label" for="inputPassword1">Password</label>
+                                                <div class="controls">
+                                                    <input type="password" id="inputPassword1" placeholder="Password">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <button type="submit" class="btn">Sign in</button> OR <a href="register.html" class="btn">Register Now!</a>
+                                            <div class="control-group">
+                                                <div class="controls">
+                                                    <button type="submit" class="btn">Sign in</button> OR <a href="register.html" class="btn">Register Now!</a>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <a href="forgetPass.jsp" style="text-decoration:underline">Forgot password ?</a>
+                                            <div class="control-group">
+                                                <div class="controls">
+                                                    <a href="forgetPass.jsp" style="text-decoration:underline">Forgot password ?</a>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </form>
-                                </td>
-                            </tr>
-                        </table>
+                                        </form>
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </c:if>
 
                         <c:set var="discount" value="${requestScope.sale.percentage}"/>
                         <c:if test="${requestScope.sale ==null}">
@@ -232,7 +248,7 @@
                                         <c:forEach var="cartItem" items="${sessionScope.cart}">
                                             <tr>
                                                 <td> <img width="60" src="${cartItem.product.image}" alt="Item" /></td>
-                                                <td>${cartItem.product.name}<br/>Color : black</td>
+                                                <td>${cartItem.product.name}<br/>Color : ${cartItem.product.color}</td>
                                                 <td>
                                                     <div class="input-append"><input class="span1" style="max-width:34px" id="appendedInputButtons" size="16" type="text" value="${cartItem.quantity}">
                                                         <button class="btn" type="button">
@@ -369,15 +385,19 @@
                 <div class="row">
                     <div class="span3">
                         <h5>ACCOUNT</h5>
-                        <a href="loginForm.jsp">LOGIN</a>
-                        <a href="userProfile.jsp">PROFILE</a>
-                        <a href="product_summary.jsp">CART</a>
-                        <a href="order_history.jsp">ORDER HISTORY</a>
+                        <c:if test="${sessionScope.USER == null}">                   
+                            <a href="loginForm.jsp">LOGIN</a>
+                            <a href="signupForm.jsp">REGISTRATION</a>
+                            <a href="cartDetail.jsp">CART</a>
+                        </c:if>
+                        <c:if test="${sessionScope.USER != null}">
+                            <a href="userProfile.jsp">PROFILE</a>                    
+                            <a href="order_history.jsp">ORDER HISTORY</a>
+                        </c:if>
                     </div>
                     <div class="span3">
                         <h5>INFORMATION</h5>
-                        <a href="contact.jsp">CONTACT</a>
-                        <a href="signupForm.jsp">REGISTRATION</a>
+                        <a href="contact.jsp">CONTACT</a>                    
                         <a href="legal_notice.html">LEGAL NOTICE</a>
                         <a href="tac.html">TERMS AND CONDITIONS</a>
                     </div>
