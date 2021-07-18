@@ -41,9 +41,9 @@ public class GoogleSignInController extends HttpServlet {
             String email = request.getParameter("email");
             HttpSession session = request.getSession();
             UserDAO dao = new UserDAO();
-            UserDTO user = new UserDTO(userID, name, email, "True", "US");
-            dao.manageGoogleUser(user);
-            session.setAttribute("user", user);
+            //UserDTO user = new UserDTO(userID, name, email, "True", "US");
+            //dao.manageGoogleUser(user);
+            //session.setAttribute("user", user);
             url = SUCCESS;
         } catch (Exception e) {
             log("Error at GoogleSignInController: " + e.toString());            
