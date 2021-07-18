@@ -8,7 +8,6 @@ package controllers_backup;
 import daos.UserDAO;
 import dtos.UserDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -34,7 +33,7 @@ public class UpdateUserController extends HttpServlet {
             user.setAddress(request.getParameter("address"));
             user.setPhone(request.getParameter("phone"));
             UserDAO ud=new UserDAO();
-            if(ud.UpdateUserDetail(user)){
+            if(ud.updateUserDetail(user)){
                 url=SUCCESS;
                 request.setAttribute("UpSuccess","Update successfully");
             }

@@ -113,7 +113,7 @@ public class UserController extends HttpServlet {
                     user = (UserDTO) session.getAttribute("USER");
                     user.setAddress(request.getParameter("address"));
                     user.setPhone(request.getParameter("phone"));
-                    if (dao.UpdateUserDetail(user)) {
+                    if (dao.updateUserDetail(user)) {
                         url = UPDATE_SUCCESS;
                         request.setAttribute("UPDATE_SUCCESS", "Update successfully");
                     } else{

@@ -165,7 +165,7 @@ public class UserDAO {
         return null;
     }
     
-    public String GetRoleKey(String roleID) throws NamingException, SQLException {
+    public String getRoleKey(String roleID) throws NamingException, SQLException {
         Connection conn = null; //doi tuong ket noi
         PreparedStatement stm = null; //doi tuong truy van
         ResultSet rs = null;//doi tuong nhan ket qua
@@ -204,7 +204,7 @@ public class UserDAO {
         return null;
     }
 
-    public boolean UpdateUserDetail(UserDTO u) throws NamingException, SQLException {
+    public boolean updateUserDetail(UserDTO u) throws NamingException, SQLException {
         Connection conn = null;
         PreparedStatement stm = null;
         boolean check =false;
@@ -235,7 +235,7 @@ public class UserDAO {
         return check;
     }
 
-    public boolean UpdateUserPassword(UserDTO u) throws NamingException, SQLException {
+    public boolean updateUserPassword(UserDTO u) throws NamingException, SQLException {
         Connection conn = null;
         PreparedStatement stm = null;
         String sql = "UPDATE tblUsers SET password=? WHERE userID=?";

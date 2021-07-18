@@ -160,7 +160,7 @@ public class OrderDAO {
 
         try {
             DBConnect db = new DBConnect();
-            c = db.makeConnection(); // tao doi tuong connection qua DBConnection
+            c = DBConnect.makeConnection(); // tao doi tuong connection qua DBConnection
 
             if (c != null) {
                 ps = c.prepareStatement(sql); // tao truy van
