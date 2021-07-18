@@ -83,7 +83,7 @@ public class ManageProductController extends HttpServlet {
         return null;
     }
     
-    private static final String ALL = "managerProductList.jsp";
+    private static final String ALL = "ManagerProductList.jsp";
     private static final String DETAIL = "managerProductDetail.jsp";
     private static final String UPDATE_FAIL="updateProduct.jsp";
     private static final String ERROR = "error.jsp";

@@ -32,13 +32,17 @@ public class UserDTO {
         this.roleID = roleID;
     }
 
-    public UserDTO(String userID, String name, String email, String status, String roleID) {
+    public UserDTO(String userID, String name, String email, String password, String phone, String address, String status, String roleID) {
         this.userID = userID;
         this.name = name;
         this.email = email;
+        this.password = password;
+        this.phone = phone;
+        this.address = address;
         this.status = status;
         this.roleID = roleID;
     }
+    
     
     public UserDTO(String email, String name, String password, String address, String phone, String roleID) {
         this.name = name;
@@ -48,6 +52,7 @@ public class UserDTO {
         this.address = address;
         this.roleID = roleID;
     }
+    
 
     public String getStatus() {
         return status;

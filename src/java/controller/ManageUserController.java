@@ -1,37 +1,59 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package controller;
 
 import daos.UserDAO;
 import dtos.UserDTO;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author phath
  */
-public class ViewUserListController extends HttpServlet {
-    private static final String ERROR = "error.jsp";
-    private static final String SUCCESS = "userList.jsp";
-    
+public class ManageUserController extends HttpServlet {
+
+    private static final String ERROR  = "error.jsp";
+    private static final String USER_LIST  = "managerUserList.jsp";
+    private static final String PROFILE = "managerUserDetail.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession();
+        String perform = request.getParameter("perform");
+        String roleID = request.getParameter("roleID");
+        UserDAO dao = new UserDAO();
+        String userID = request.getParameter("userID");
+        UserDTO user = new UserDTO();
+        List<UserDTO> list = new ArrayList<>();
         String url = ERROR;
         try {
-            UserDAO dao = new UserDAO();
-            String roleID = "US";
-            List<UserDTO> list = dao.getUserList(roleID);
-            if(list != null){
-                request.setAttribute("USER_LIST", list);
-                url=SUCCESS;
+            switch(perform){
+                case "Get User":
+                    roleID = "US";
+                    list = dao.getUserList(roleID);
+                    request.setAttribute("USER_LIST", list);
+                    url = USER_LIST;
+                    break;
+                case "Profile":
+                    user = dao.getUserProfile(userID);
+                    request.setAttribute("PROFILE", user);
+                    url = PROFILE;
+                    break;
             }
         } catch (Exception e) {
-        } finally{
+            request.setAttribute("ERROR", e.toString());
+        }
+        finally{
             request.getRequestDispatcher(url).forward(request, response);
         }
     }

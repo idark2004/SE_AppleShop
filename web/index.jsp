@@ -64,61 +64,61 @@
                         </div>
                     </div>
                 </div>
-            
-            <!-- Navbar ================================================== -->
-            <div id="logoArea" class="navbar">
-                <a id="smallScreen" data-target="#topMenu" data-toggle="collapse" class="btn btn-navbar">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </a>
-                  <div class="navbar-inner">
-                    <a class="brand" href="MainController?action=Product&perform=Index">SE15 Shop</a>
-                    <form class="form-inline navbar-search" method="post" action="MainController">
-                        <input id="srchFld" class="srchTxt" type="text" name="keyWord"/>
-                        <input type="hidden" value="SearchProduct" name="action"/>
-                        <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
-                    </form>
-                    <ul id="topMenu" class="nav pull-right">
-                        <li class=""><a href="ViewProductController">All Products</a></li>
-                        <li class=""><a href="contact.jsp">Contact</a></li>
-                        <li class=""><a href="userProfile.jsp">Profile</a></li>
-                        <li class="">
-                            <a href="signupForm.jsp" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Signup</span></a>
-                        </li>
-                        <li class="">
-                            <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
-                            <div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                    <h3>Log In</h3>
+
+                <!-- Navbar ================================================== -->
+                <div id="logoArea" class="navbar">
+                    <a id="smallScreen" data-target="#topMenu" data-toggle="collapse" class="btn btn-navbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <div class="navbar-inner">
+                        <a class="brand" href="MainController?action=Product&perform=Index">SE15 Shop</a>
+                        <form class="form-inline navbar-search" method="post" action="MainController">
+                            <input id="srchFld" class="srchTxt" type="text" name="keyWord"/>
+                            <input type="hidden" value="SearchProduct" name="action"/>
+                            <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
+                        </form>
+                        <ul id="topMenu" class="nav pull-right">
+                            <li class=""><a href="ViewProductController">All Products</a></li>
+                            <li class=""><a href="contact.jsp">Contact</a></li>
+                            <li class=""><a href="userProfile.jsp">Profile</a></li>
+                            <li class="">
+                                <a href="signupForm.jsp" role="button" style="padding-right:0"><span class="btn btn-large btn-success">Signup</span></a>
+                            </li>
+                            <li class="">
+                                <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
+                                <div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        <h3>Log In</h3>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form class="form-horizontal loginFrm" action="MainController" method="post">
+                                            <div class="control-group">
+                                                <input type="text" id="inputEmail" placeholder="Enter Email" name="email" required>
+                                            </div>
+                                            <div class="control-group">
+                                                <input type="password" id="inputPassword" placeholder="Enter Password" name="password" required>
+                                            </div>
+                                            <div class="control-group">
+                                                <label class="checkbox">
+                                                    <input type="checkbox"> Remember me
+                                                </label>
+                                                <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                                                <input type="hidden" name="perform" value="Log in">
+                                                <button type="submit" class="btn btn-success" name="action" value="User">Sign in</button>
+                                                <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
-                                <div class="modal-body">
-                                    <form class="form-horizontal loginFrm" action="MainController" method="post">
-                                        <div class="control-group">
-                                            <input type="text" id="inputEmail" placeholder="Enter Email" name="email" required>
-                                        </div>
-                                        <div class="control-group">
-                                            <input type="password" id="inputPassword" placeholder="Enter Password" name="password" required>
-                                        </div>
-                                        <div class="control-group">
-                                            <label class="checkbox">
-											<input type="checkbox"> Remember me
-											</label>
-                                            <div class="g-signin2" data-onsuccess="onSignIn"></div>
-                                            <input type="hidden" name="perform" value="Log in">
-                                            <button type="submit" class="btn btn-success" name="action" value="User">Sign in</button>
-                                            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-   </div>
         <!-- Header End====================================================================== -->
         <div id="carouselBlk">
             <div id="myCarousel" class="carousel slide">
@@ -148,39 +148,39 @@
                 <div class="row">
                     <!-- Sidebar ================================================== -->
                     <div id="sidebar" class="span3">
-                         <div class="well well-small">
+                        <div class="well well-small">
                             <c:forEach var="cartItem" items="${sessionScope.cart}">
                                 <c:set var="total" value="${total + (cartItem.quantity * cartItem.product.price)}"/>
                             </c:forEach>
                             <a id="myCart" href="cartDetail.jsp"><img src="themes/images/ico-cart.png" alt="cart">${subtotal} 
-                            <c:if test="${sessionScope.cart == null}">No</c:if> 
-                            Items in your cart
-                            <c:if test="${sessionScope.cart != null}">
-                            <span class="badge badge-warning pull-right"> 
-                                    <fmt:setLocale value="vi_VN" />
-                                    <fmt:formatNumber value="${total}" type="currency" />
-                            </span>
-                            </c:if>
+                                <c:if test="${sessionScope.cart == null}">No</c:if> 
+                                    Items in your cart
+                                <c:if test="${sessionScope.cart != null}">
+                                    <span class="badge badge-warning pull-right"> 
+                                        <fmt:setLocale value="vi_VN" />
+                                        <fmt:formatNumber value="${total}" type="currency" />
+                                    </span>
+                                </c:if>
                             </a>
                         </div>
                         <ul id="sideManu" class="nav nav-tabs nav-stacked">
-                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=">All</a></li>
-                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=IP&status=True">iPhone</a></li>
-                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=ID&status=True">iPad</a></li>
-                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=MB&status=True">Mac</a></li>
-                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AW&status=True">Apple Watch</a></li>
-                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AS&status=True">Accessory</a></li>
-                        <c:if test="${sessionScope.USER.roleID.trim() != null}" > 
-                        <c:if test="${sessionScope.USER.roleID.trim() != 'US'}" >                      
-                        <li class="subMenu" id="CU"><a>Shop Manager</a>
-                            <ul style="display:none">
-                                <li><a href="dashboard_Manager.html"><i class="icon-chevron-right"></i>Dashboard</a></li>
-                                <li><a href="product_details_Manager.html"><i class="icon-chevron-right"></i>Add Product</a></li>
-                                <li><a href="customers_Manager.html"><i class="icon-chevron-right"></i>Customer List</a></li>
-                            </ul>
-                        </li>
-                        </c:if>                       
-                        </c:if>
+                            <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=">All</a></li>
+                            <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=IP&status=True">iPhone</a></li>
+                            <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=ID&status=True">iPad</a></li>
+                            <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=MB&status=True">Mac</a></li>
+                            <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AW&status=True">Apple Watch</a></li>
+                            <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AS&status=True">Accessory</a></li>
+                                <c:if test="${sessionScope.USER.roleID.trim() != null}" > 
+                                    <c:if test="${sessionScope.USER.roleID.trim() != 'US'}" >                      
+                                    <li class="subMenu" id="CU"><a>Shop Manager</a>
+                                        <ul style="display:none">
+                                            <li><a href="dashboard_Manager.html"><i class="icon-chevron-right"></i>Dashboard</a></li>
+                                            <li><a href="product_details_Manager.html"><i class="icon-chevron-right"></i>Add Product</a></li>
+                                            <li><a href="customers_Manager.html"><i class="icon-chevron-right"></i>Customer List</a></li>
+                                        </ul>
+                                    </li>
+                                </c:if>                       
+                            </c:if>
                         </ul>
                         <br/>
                     </div>
@@ -190,51 +190,51 @@
                             <h4>Featured Products <small class="pull-right">200+ featured products</small></h4>
                             <div class="row-fluid">
                                 <div id="featured" class="carousel slide">
-                                     <div class="carousel-inner">
+                                    <div class="carousel-inner">
                                         <div class="item active">
-                                        <ul class="thumbnails">
-                                        <c:forEach begin="1" end="4" items="${requestScope.hotProducts}" var="hotP">
-                                            <li class="span3">
-                                                <div class="thumbnail">
-                                                    <i class="tag"></i>
-                                                    <a href="MainController?action=Product&perform=ViewDetail&productID=${hotP.productID}"><img src="${hotP.image}" alt="${hotP.name}"></a>
-                                                    <div class="caption">
-                                                        <h5>${hotP.name}</h5>
-                                                        <h4 style="font-size: small;"><a class="btn" href="MainController?action=Product&perform=ViewDetail&productID=${hotP.productID}">VIEW</a> <span class="pull-right">
-                                                        <fmt:formatNumber type="number" maxFractionDigits = "0" value="${hotP.price}" />VND</span></h4>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </c:forEach>
-                                        </ul>
-                                    </div>
+                                            <ul class="thumbnails">
+                                                <c:forEach begin="1" end="4" items="${requestScope.hotProducts}" var="hotP">
+                                                    <li class="span3">
+                                                        <div class="thumbnail">
+                                                            <i class="tag"></i>
+                                                            <a href="MainController?action=Product&perform=ViewDetail&productID=${hotP.productID}"><img src="${hotP.image}" alt="${hotP.name}"></a>
+                                                            <div class="caption">
+                                                                <h5>${hotP.name}</h5>
+                                                                <h4 style="font-size: small;"><a class="btn" href="MainController?action=Product&perform=ViewDetail&productID=${hotP.productID}">VIEW</a> <span class="pull-right">
+                                                                        <fmt:formatNumber type="number" maxFractionDigits = "0" value="${hotP.price}" />VND</span></h4>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </c:forEach>
+                                            </ul>
+                                        </div>
 
-                                    <div class="item">
-                                        <ul class="thumbnails">
-                                            <c:forEach begin="5" end="8" items="${requestScope.hotProducts}" var="hotP">
-                                            <li class="span3">
-                                                <div class="thumbnail">
-                                                    <i class="tag"></i>
-                                                    <a href="ProductController?perform=ViewDetail&ProductID=${requestScope.productID}"><img src="${hotP.image}" alt="${hotP.name}"></a>
-                                                    <div class="caption">
-                                                        <h5>${hotP.name}</h5>
-                                                        <h4 style="font-size: small;"><a class="btn" href="MainController?action=Product&perform=ViewDetail&productID=${product.productID}">VIEW</a> <span class="pull-right">
-                                                        <fmt:formatNumber type="number" maxFractionDigits = "0" value="${hotP.price}" />VND</span></h4>
-    
-                                                            </span></h4>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </c:forEach>
-                                         
-                                        </ul>
+                                        <div class="item">
+                                            <ul class="thumbnails">
+                                                <c:forEach begin="5" end="8" items="${requestScope.hotProducts}" var="hotP">
+                                                    <li class="span3">
+                                                        <div class="thumbnail">
+                                                            <i class="tag"></i>
+                                                            <a href="ProductController?perform=ViewDetail&ProductID=${requestScope.productID}"><img src="${hotP.image}" alt="${hotP.name}"></a>
+                                                            <div class="caption">
+                                                                <h5>${hotP.name}</h5>
+                                                                <h4 style="font-size: small;"><a class="btn" href="MainController?action=Product&perform=ViewDetail&productID=${product.productID}">VIEW</a> <span class="pull-right">
+                                                                        <fmt:formatNumber type="number" maxFractionDigits = "0" value="${hotP.price}" />VND</span></h4>
+
+                                                                </span></h4>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </c:forEach>
+
+                                            </ul>
+                                        </div>
                                     </div>
-                                </div>
-                                <c:if test="${requestScope.hotProducts == null}">
-                                   <h2 style="text-align: center;">This list is under maintaince</h2>
-                                </c:if>  
-                                   <a class="left carousel-control" href="#featured" data-slide="prev">‹</a>
-                                <a class="right carousel-control" href="#featured" data-slide="next">›</a>
+                                    <c:if test="${requestScope.hotProducts == null}">
+                                        <h2 style="text-align: center;">This list is under maintaince</h2>
+                                    </c:if>  
+                                    <a class="left carousel-control" href="#featured" data-slide="prev">‹</a>
+                                    <a class="right carousel-control" href="#featured" data-slide="next">›</a>
                                 </div>
                             </div>
                         </div>
@@ -335,11 +335,7 @@
         </div>
     </div>
     <span id="themesBtn"></span>
-    </body>
-    <script type="text/javascript">
-       function abc() {
-    console.log("${requestScope.ERROR}");
-    });
-    </script>
+</body>
+
 
 </html>

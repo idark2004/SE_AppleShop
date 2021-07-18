@@ -1,6 +1,6 @@
 <%-- 
-    Document   : ManagerProductList
-    Created on : Jul 8, 2021, 8:13:32 PM
+    Document   : CustomerDetail
+    Created on : Jul 8, 2021, 7:36:50 PM
     Author     : anime
 --%>
 
@@ -10,7 +10,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>SE15 Shop | Products</title>
+    <title>SE15 Shop | Product Editor</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -38,6 +38,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="themes/images/ico/apple.png">
     <link rel="apple-touch-icon-precomposed" href="themes/images/ico/apple.png">
     <style type="text/css" id="enject"></style>
+    <link rel="stylesheet" href="themes/font-awesome-4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -71,7 +72,7 @@
                     <span class="icon-bar"></span>
                 </a>
                 <div class="navbar-inner">
-                    <a class="brand" href="index_Manager.html">SE15 Shop</a>
+                    <a class="brand" href="MainController?action=Product&perform=Index">SE15 Shop</a>
                     <form class="form-inline navbar-search" method="post" action="MainController">
                         <input id="srchFld" class="srchTxt" type="text" name="keyWord"/>
                         <input type="hidden" value="SearchProduct" name="action"/>
@@ -175,304 +176,67 @@
                 <!-- Sidebar end=============================================== -->
                 <div class="span9">
                     <ul class="breadcrumb">
-                        <li><a href="index_Manager.html">Home</a> <span class="divider">/</span></li>
-                        <li class="active">All Products</li>
+                        <li><a href="MainController?action=Product&perform=Index">Home</a> <span class="divider">/</span></li>
+                        <li><a href="customers_Manager.html">Customers</a> <span class="divider">/</span></li>
+                        <li class="active">User1</li>
                     </ul>
-                    <h3> Products Name <small class="pull-right"> 40 products are available </small></h3>
-                    <form class="form-horizontal span6">
-                        <div class="control-group">
-                            <label class="control-label alignL">Sort By </label>
-                            <select>
-                            <option>Priduct name A - Z</option>
-                            <option>Priduct name Z - A</option>
-                            <option>Priduct Stoke</option>
-                            <option>Price Lowest first</option>
-                            </select>
-                        </div>
-                    </form>
-
-                    <div id="myTab" class="pull-right">
-                        <a href="#listView" data-toggle="tab"><span class="btn btn-large"><i class="icon-list"></i></span></a>
-                        <a href="#blockView" data-toggle="tab"><span class="btn btn-large btn-primary"><i class="icon-th-large"></i></span></a>
-                    </div>
-                    <br class="clr" />
-                    <div class="tab-content">
-                        <div class="tab-pane" id="listView">
-                            <div class="row">
-                                <div class="span2">
-                                    <img src="themes/images/products/3.jpg" alt="" />
-                                </div>
-                                <div class="span4">
-                                    <h3>Product Name</h3>
-                                    <hr class="soft" />
-                                    <h5>Available </h5>
-                                    <p>
-                                        Input content here, bitches!
-                                    </p>
-                                    <a class="btn btn-small pull-right" href="product_details.html">Edit</a>
-                                    <br class="clr" />
-                                </div>
-                                <div class="span3 alignR">
-                                    <form class="form-horizontal qtyFrm">
-                                        <h3>15,000,000VND</h3>
-
-                                        <a href="product_details_Manager.html" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
-                                        <a href="product_details_Manager.html" class="btn btn-large"><i class="icon-zoom-in"></i></a>
-
-                                    </form>
-                                </div>
+                    <div class="row">
+                        <div class="span9">
+                            <strong>Information</strong><br>
+                            <div class="table-responsive">
+                                <table class="table table-user-information">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <strong>
+                                                    User ID                                                
+                                                </strong>
+                                            </td>
+                                            <td class="text-primary">
+                                                ${requestScope.PROFILE.userID}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>
+                                                    Full name                                                
+                                                </strong>
+                                            </td>
+                                            <td class="text-primary">
+                                                ${requestScope.PROFILE.name}
+                                            </td>
+                                            <tr>
+                                                <td>
+                                                    <strong>
+                                                        Role                                                
+                                                    </strong>
+                                                </td>
+                                                <td class="text-primary">
+                                                    Customer
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <strong>
+                                                        Email                                                
+                                                    </strong>
+                                                </td>
+                                                <td class="text-primary">
+                                                    ${requestScope.PROFILE.email}
+                                                </td>
+                                            </tr>
+                                                                                        
+                                    </tbody>
+                                </table>
+                                <p><a href="#" class="btn btn-primary">De-active</a> <a href="#" class="btn">Active</a></p>
                             </div>
-                            <hr class="soft" />
-                            <div class="row">
-                                <div class="span2">
-                                    <img src="themes/images/products/1.jpg" alt="" />
-                                </div>
-                                <div class="span4">
-                                    <h3>Product Name</h3>
-                                    <hr class="soft" />
-                                    <h5>Available </h5>
-                                    <p>
-                                        Input content here, bitches!
-                                    </p>
-                                    <a class="btn btn-small pull-right" href="products_Manager.html">Edit</a>
-                                    <br class="clr" />
-                                </div>
-                                <div class="span3 alignR">
-                                    <form class="form-horizontal qtyFrm">
-                                        <h3>15,000,000VND</h3>
-
-                                        <a href="product_details_Manager.html" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
-                                        <a href="product_details_Manager.html" class="btn btn-large"><i class="icon-zoom-in"></i></a>
-
-                                    </form>
-                                </div>
-                            </div>
-                            <hr class="soft" />
-                            <div class="row">
-                                <div class="span2">
-                                    <img src="themes/images/products/3.jpg" alt="" />
-                                </div>
-                                <div class="span4">
-                                    <h3>Product Name</h3>
-                                    <hr class="soft" />
-                                    <h5>Available </h5>
-                                    <p>
-                                        Input content here, bitches!
-                                    </p>
-                                    <a class="btn btn-small pull-right" href="product_details_Manager.html">Edit</a>
-                                    <br class="clr" />
-                                </div>
-                                <div class="span3 alignR">
-                                    <form class="form-horizontal qtyFrm">
-                                        <h3>15,000,000VND</h3>
-
-                                        <a href="product_details_Manager.html" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
-                                        <a href="product_details_Manager.html" class="btn btn-large"><i class="icon-zoom-in"></i></a>
-
-                                    </form>
-                                </div>
-                            </div>
-                            <hr class="soft" />
-                            <div class="row">
-                                <div class="span2">
-                                    <img src="themes/images/products/3.jpg" alt="" />
-                                </div>
-                                <div class="span4">
-                                    <h3>Product Name</h3>
-                                    <hr class="soft" />
-                                    <h5>Available </h5>
-                                    <p>
-                                        Input content here, bitches!
-                                    </p>
-                                    <a class="btn btn-small pull-right" href="product_details_Manager.html">Edit</a>
-                                    <br class="clr" />
-                                </div>
-                                <div class="span3 alignR">
-                                    <form class="form-horizontal qtyFrm">
-                                        <h3>15,000,000VND</h3>
-
-                                        <a href="product_details_Manager.html" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
-                                        <a href="product_details_Manager.html" class="btn btn-large"><i class="icon-zoom-in"></i></a>
-
-                                    </form>
-                                </div>
-                            </div>
-
-                            <hr class="soft" />
-                            <div class="row">
-                                <div class="span2">
-                                    <img src="themes/images/products/3.jpg" alt="" />
-                                </div>
-                                <div class="span4">
-                                    <h3>Product Name</h3>
-                                    <hr class="soft" />
-                                    <h5>Available </h5>
-                                    <p>
-                                        Input content here, bitches!
-                                    </p>
-                                    <a class="btn btn-small pull-right" href="product_details_Manager.html">Edit</a>
-                                    <br class="clr" />
-                                </div>
-                                <div class="span3 alignR">
-                                    <form class="form-horizontal qtyFrm">
-                                        <h3>15,000,000VND</h3>
-                                        <a href="product_details_Manager.html" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
-                                        <a href="product_details_Manager.html" class="btn btn-large"><i class="icon-zoom-in"></i></a>
-                                    </form>
-                                </div>
-                            </div>
-                            <hr class="soft" />
-                            <div class="row">
-                                <div class="span2">
-                                    <img src="themes/images/products/3.jpg" alt="" />
-                                </div>
-                                <div class="span4">
-                                    <h3>Product Name</h3>
-                                    <hr class="soft" />
-                                    <h5>Available </h5>
-                                    <p>
-                                        Input content here, bitches!
-                                    </p>
-                                    <a class="btn btn-small pull-right" href="product_details_Manager.html">Edit</a>
-                                    <br class="clr" />
-                                </div>
-                                <div class="span3 alignR">
-                                    <form class="form-horizontal qtyFrm">
-                                        <h3>15,000,000VND</h3>
-                                        <a href="product_details_Manager.html" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a>
-                                        <a href="product_details_Manager.html" class="btn btn-large"><i class="icon-zoom-in"></i></a>
-
-                                    </form>
-                                </div>
-                            </div>
-                            <hr class="soft" />
-                        </div>
-
-                        <div class="tab-pane  active" id="blockView">
-                            <ul class="thumbnails">
-                                <li class="span3">
-                                    <div class="thumbnail">
-                                        <a href="product_details_Manager.html"><img src="themes/images/products/3.jpg" alt="" /></a>
-                                        <div class="caption">
-                                            <h5>123456789 1111111 111111111111111</h5>
-                                            <p>
-                                                15,000,000 VND
-                                            </p>
-                                            <h4 style="text-align:center">
-                                                <a class="btn" href="product_details_Manager.html"> <i class="icon-zoom-in"></i></a>
-                                                <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a>
-                                                <a class="btn btn-primary" href="#">Edit</a></h4>
-                                            </h4>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li class="span3">
-                                    <div class="thumbnail">
-                                        <a href="product_details_Manager.html"><img src="themes/images/products/3.jpg" alt="" /></a>
-                                        <div class="caption">
-                                            <h5>Product Nameda a</h5>
-                                            <p>
-                                                15,000,000 VND
-                                            </p>
-                                            <h4 style="text-align:center">
-                                                <a class="btn" href="product_details_Manager.html"> <i class="icon-zoom-in"></i></a>
-                                                <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a>
-                                                <a class="btn btn-primary" href="#">Edit</a></h4>
-                                            </h4>
-                                        </div>
-                                    </div>
-                                </li>
-
-
-                                <li class="span3">
-                                    <div class="thumbnail">
-                                        <a href="product_details_Manager.html"><img src="themes/images/products/3.jpg" alt="" /></a>
-                                        <div class="caption">
-                                            <h5>Product Name</h5>
-                                            <p>
-                                                15,000,000 VND
-                                            </p>
-                                            <h4 style="text-align:center">
-                                                <a class="btn" href="product_details_Manager.html"> <i class="icon-zoom-in"></i></a>
-                                                <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a>
-                                                <a class="btn btn-primary" href="#">Edit</a></h4>
-                                            </h4>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li class="span3">
-                                    <div class="thumbnail">
-                                        <a href="product_details_Manager.html"><img src="themes/images/products/3.jpg" alt="" /></a>
-                                        <div class="caption">
-                                            <h5>Product Name</h5>
-                                            <p>
-                                                15,000,000 VND
-                                            </p>
-                                            <h4 style="text-align:center">
-                                                <a class="btn" href="product_details_Manager.html"> <i class="icon-zoom-in"></i></a>
-                                                <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a>
-                                                <a class="btn btn-primary" href="#">Edit</a></h4>
-                                            </h4>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li class="span3">
-                                    <div class="thumbnail">
-                                        <a href="product_details_Manager.html"><img src="themes/images/products/3.jpg" alt="" /></a>
-                                        <div class="caption">
-                                            <h5>Product Name</h5>
-                                            <p>
-                                                15,000,000 VND
-                                            </p>
-                                            <h4 style="text-align:center">
-                                                <a class="btn" href="product_details_Manager.html"> <i class="icon-zoom-in"></i></a>
-                                                <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a>
-                                                <a class="btn btn-primary" href="#">Edit</a></h4>
-                                            </h4>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li class="span3">
-                                    <div class="thumbnail">
-                                        <a href="product_details_Manager.html"><img src="themes/images/products/3.jpg" alt="" /></a>
-                                        <div class="caption">
-                                            <h5>Product Name</h5>
-                                            <p>
-                                                15,000,000 VND
-                                            </p>
-                                            <h4 style="text-align:center">
-                                                <a class="btn" href="product_details_Manager.html"> <i class="icon-zoom-in"></i></a>
-                                                <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a>
-                                                <a class="btn btn-primary" href="#">Edit</a></h4>
-
-                                            </h4>
-                                        </div>
-                                    </div>
-                                </li>
-
-                            </ul>
-                            <hr class="soft" />
                         </div>
                     </div>
-                    <div class="pagination">
-                        <ul>
-                            <li><a href="#">&lsaquo;</a></li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">...</a></li>
-                            <li><a href="#">&rsaquo;</a></li>
-                        </ul>
-                    </div>
-                    <br class="clr" />
+
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <!-- MainBody End ============================= -->
     <!-- Footer ================================================================== -->

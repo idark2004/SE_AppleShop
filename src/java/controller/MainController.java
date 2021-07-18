@@ -31,8 +31,7 @@ public class MainController extends HttpServlet {
     private static final String PRODUCTLISTMANAGEMENT="ProductListManagementController";
     private static final String PRODUCTMANAGEMENT="ManageProductController";
     private static final String UPDATEPRODUCT="UpdateProductController";
-    private static final String CREATESPEC="CreateSpecController";
-    private static final String SUBMITCOMMENT="AddCommentController";
+    private static final String CREATESPEC="CreateSpecController";    
     private static final String CHANGEPASS="ChangePasswordController";
     private static final String GOOGLE="GoogleSignInController";
     private static final String SALECODE="SaleCodeController";
@@ -43,6 +42,7 @@ public class MainController extends HttpServlet {
     private static final String CART = "CartController";
     private static final String ORDERCHANGE= "OrderChangeStatusController";
     private static final String ORDERDETAIL= "OrderDetailController";
+    private static final String MANAGE_USER="ManageUserController";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {        
         System.out.println("Run through MainController");
@@ -88,10 +88,7 @@ public class MainController extends HttpServlet {
                     break;
                 case "Create new option":
                     url=CREATESPEC;
-                    break;
-                case "Submit comment":
-                    url = SUBMITCOMMENT;
-                    break;
+                    break;                
                 case "Change Password":
                     url = CHANGEPASS;
                     break;
@@ -119,6 +116,10 @@ public class MainController extends HttpServlet {
 
                 case "Cart":
                     url = CART;
+                    break;
+                    
+                case "Manage User":
+                    url =MANAGE_USER;
                     break;
                 default:
                     url="index.jsp";
