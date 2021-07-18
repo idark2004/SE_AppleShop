@@ -393,4 +393,76 @@ public class UserDAO {
         }
         return check;
     }
+    public List<UserDTO> getAdminUserList() throws SQLException {
+        List<UserDTO> list = null;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBConnect.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT userID, name, userEmail, userPhoneNumber, userAddress, userStatus, roleID "
+                        + " FROM tblUsers "
+                        + " WHERE roleID NOT LIKE '%AD%'";
+                stm = conn.prepareStatement(sql);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    String userID = rs.getString("userID");
+                    String name = rs.getString("name");
+                    String email = rs.getString("userEmail");                    
+                    String phone = rs.getString("userPhoneNumber");
+                    String address = rs.getString("userAddress");
+                    String status = rs.getString("userStatus");
+                    String roleID = rs.getString("roleID");
+                    if (list == null) {
+                        list = new ArrayList<>();
+                    }
+                    list.add(new UserDTO(userID, name, email, "", phone, address, status ,roleID));
+                }
+            }
+        } 
+        finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+    
+    public void insertManager(UserDTO user) throws SQLException {
+        Connection conn = null;
+        PreparedStatement stm = null;
+        try {
+            conn = DBConnect.makeConnection(); // tao doi tuong connection qua DBConnection
+            if (conn != null) {
+                DBSupport db = new DBSupport();
+                String userID="MN-";
+                String sql = "INSERT INTO tblUsers(userID, name, userEmail, password, userPhoneNumber, userAddress, roleID, userStatus)"
+                        + " VALUES(?,?,?,?,?,?,?,?)";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, userID+db.getNumbRows("userID", "tblUsers"));
+                stm.setString(2, user.getName());
+                stm.setString(3, user.getEmail());
+                stm.setString(4, user.getPassword());
+                stm.setString(5, user.getPhone());
+                stm.setString(6, user.getAddress());
+                stm.setString(7, user.getRoleID());
+                stm.setBoolean(8, true);
+                stm.executeUpdate();
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
 }

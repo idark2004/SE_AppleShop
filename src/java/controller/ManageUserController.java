@@ -25,6 +25,7 @@ public class ManageUserController extends HttpServlet {
     private static final String ERROR = "error.jsp";
     private static final String USER_LIST = "managerUserList.jsp";
     private static final String PROFILE = "managerUserDetail.jsp";
+    private static final String ADMIN_LIST  = "AdminUserList.jsp";
     private static final String USER_UPDATE = "MainController?action=Manage+User&perform=Get+User&roleID=";
     private static final String UPDATE_FAIL = "MainController?action=Manage+User&perform=Profile&userID=";
 
@@ -65,6 +66,24 @@ public class ManageUserController extends HttpServlet {
                         url = UPDATE_FAIL+userID;
                         request.setAttribute("FAILED", "Update Failed");
                     }
+                 
+                case "Get Manager":
+                    list = dao.getAdminUserList();
+                    request.setAttribute("USER_LIST", list);
+                    url = ADMIN_LIST;
+                    break;
+                case "Add Manager":
+                    
+                    String email = request.getParameter("email");
+                    String password = request.getParameter("password");
+                    String name= request.getParameter("name");
+                    String phone = request.getParameter("phone");
+                    String address = request.getParameter("address");
+                    
+                    UserDTO manager = new UserDTO("", name, email, password, phone, address, "True", "MN");
+                    dao.insertManager(manager);
+                    url="MainController?action=Manage+User&perform=Get+Manager";
+                    break;
                     
             }
         } catch (Exception e) {

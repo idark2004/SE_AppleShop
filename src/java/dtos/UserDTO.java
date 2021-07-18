@@ -52,6 +52,14 @@ public class UserDTO {
         this.address = address;
         this.roleID = roleID;
     }
+
+    public UserDTO(String userID, String name, String email, String status, String roleID) {
+        this.userID = userID;
+        this.name = name;
+        this.email = email;
+        this.status = status;
+        this.roleID = roleID;
+    }
     
 
     public String getStatus() {

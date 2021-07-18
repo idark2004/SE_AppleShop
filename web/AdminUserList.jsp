@@ -4,6 +4,7 @@
     Author     : anime
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,7 +49,11 @@
                 <div class="span6">Welcome!<strong> User</strong></div>
                 <div class="span6">
                     <div class="pull-right">
-                        <a href="product_summary_Manager.html"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> [ 3 ] Itemes in your cart </span> </a>
+                        <c:forEach var="cartItem" items="${sessionScope.cart}">
+                                    <c:set var="subtotalCount" value="${cartItem.quantity}"/>
+                                    <c:set var="subtotal" value="${subtotal+cartItem.quantity}"/>
+                          </c:forEach>
+                        <a href="cartDetail.jsp"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> ${subtotal} Itemes in your cart </span> </a>
                     </div>
                 </div>
             </div>
@@ -136,20 +141,35 @@
                 <!-- Sidebar ================================================== -->
                 <div id="sidebar" class="span3">
                     <div class="well well-small">
-                        <a id="myCart" href="product_summary_Manager.html"><img src="themes/images/ico-cart.png" alt="cart">3 Items in your cart <span class="badge badge-warning pull-right">445,000VND</span></a>
+                        <c:forEach var="cartItem" items="${sessionScope.cart}">
+                                <c:set var="total" value="${total + (cartItem.quantity * cartItem.product.price)}"/>
+                            </c:forEach>
+                            <a id="myCart" href="cartDetail.jsp"><img src="themes/images/ico-cart.png" alt="cart">${subtotal} 
+                                <c:if test="${sessionScope.cart == null}">No</c:if> 
+                                    Items in your cart
+                                <c:if test="${sessionScope.cart != null}">
+                                    <span class="badge badge-warning pull-right"> 
+                                        <fmt:setLocale value="vi_VN" />
+                                        <fmt:formatNumber value="${total}" type="currency" />
+                                    </span>
+                                </c:if>
+                            </a>
                     </div>
                     <ul id="sideManu" class="nav nav-tabs nav-stacked">
-                        <li><a href="products_Manager.html">All</a></li>
-                        <li><a href="products_Manager.html">iPhone</a></li>
-                        <li><a href="products_Manager.html">iPad</a></li>
-                        <li><a href="products_Manager.html">Mac</a></li>
-                        <li><a href="products_Manager.html">Accessory</a></li>
-                        <li class="subMenu"><a>Shop Manager</a>
+                        <li><a href="MainController?action=Manage+Product&perform=Get">All</a></li>
+                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=IP">iPhone</a></li>
+                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=ID">iPad</a></li>
+                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=MB">Mac</a></li>
+                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=AS">Accessory</a></li>
+                        <li class="subMenu" id="manaLi"><a>Shop Manager</a>
                             <ul style="display:none">
-                                <li><a href="dashboard_Manager.html"><i class="icon-chevron-right"></i>Dashboard</a></li>
-                                <li><a href="product_details_Manager.html"><i class="icon-chevron-right"></i>Add Product</a></li>
-                                <li><a href="customers_Manager.html"><i class="icon-chevron-right"></i>Customer List</a></li>
-                                <li><a href="sales_Manager.html"><i class="icon-chevron-right"></i>Sale Code List</a></li>
+                                <li><a href="DashBoardController"><i class="icon-chevron-right"></i>Dashboard</a></li>
+                                <li><a href="ManagerAddProduct.jsp"><i class="icon-chevron-right"></i>Add Product</a></li>
+                                <li><a href="MainController?action=Manage+User&perform=Get+User"><i class="icon-chevron-right"></i>Customer List</a></li>
+                                <li><a href="MainController?action=SaleCode&perform=List"><i class="icon-chevron-right"></i>Sale Code List</a></li>
+                            <c:if test="${sessionScope.USER.roleID.trim() == 'AD'}">
+                                <li><a href="MainController?action=Manage+User&perform=Get+Manager"><i class="icon-chevron-right"></i>Manager List</a></li>
+                            </c:if>
                             </ul>
                         </li>
                     </ul>
@@ -167,65 +187,55 @@
                                 <thead>
                                     <tr>
 
-                                        <th><span>User</span></th>
                                         <th>Id</th>
-                                        <th><span>Created</span></th>
+                                        <th><span>Name</span></th>                               
                                         <th><span>Address</span></th>
+                                        <th>Phone Number</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
+                                    <tbody>
+                                        <c:forEach var="user" items="${requestScope.USER_LIST}">
+                                            <tr>
 
-                                        <td>
-                                            <a href="customer_details_Manager.html">Tien Tri Vu Tru Tran Dan</a>
-                                        </td>
-                                        <td>trandan123</td>
-                                        <td>2020/08/12</td>
-                                        <td>
-                                            123 Little Saigon, California, USA
-                                        </td>
-                                        <td>
-                                            <a href="customer_details_Manager.html" class="table-link text-info" title="More Detail">
-                                                <span class="fa-stack">
-                                                    <i class="fa fa-square fa-stack-2x"></i>
-                                                    <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
-                                                </span>
-                                            </a>
-                                            <a href="" class="table-link danger" title="Hide This Customer">
-                                                <span class="fa-stack">
-                                                    <i class="fa fa-square fa-stack-2x"></i>
-                                                    <i class="fa fa-eye fa-stack-1x fa-inverse"></i>
-                                                </span>
-                                            </a>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>
-                                            <a href="customer_details_Manager.html">Maria Ozawa</a>
-                                        </td>
-                                        <td>ozawakimochi</td>
-                                        <td>2020/08/12</td>
-                                        <td>
-                                            123 Yamate Kudasai, Tokyo, Japan
-                                        </td>
-                                        <td>
-                                            <a href="customer_details_Manager.html" class="table-link  text-info" title="More Detail">
-                                                <span class="fa-stack">
-                                                    <i class="fa fa-square fa-stack-2x"></i>
-                                                    <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
-                                                </span>
-                                            </a>
-                                            <a href="#" class="table-link danger" title="Hide This Customer">
-                                                <span class="fa-stack">
-                                                    <i class="fa fa-square fa-stack-2x"></i>
-                                                    <i class="fa fa-eye fa-stack-1x fa-inverse"></i>
-                                                </span>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </tbody>
+                                                <td>${user.userID}</td>
+                                                <td>
+                                                    <a href="MainController?action=Manage+User&perform=Profile&userID=${user.userID}">${user.name}</a>
+                                                </td>                                      
+                                                <td>
+                                                    ${user.address}
+                                                </td>
+                                                <td>
+                                                    ${user.phone}
+                                                </td>
+                                                <td>
+                                                    <c:choose>
+                                                        <c:when test="${user.status eq 1}">
+                                                            Active
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            Inactive
+                                                        </c:otherwise>                                            
+                                                    </c:choose>
+                                                </td>
+                                                <td>
+                                                    <a href="MainController?action=Manage+User&perform=Profile&userID=${user.userID}" class="table-link text-info" title="More Detail">
+                                                        <span class="fa-stack">
+                                                            <i class="fa fa-square fa-stack-2x"></i>
+                                                            <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+                                                        </span>
+                                                    </a>
+                                                    <a href="" class="table-link danger" title="Hide This Customer">
+                                                        <span class="fa-stack">
+                                                            <i class="fa fa-square fa-stack-2x"></i>
+                                                            <i class="fa fa-eye fa-stack-1x fa-inverse"></i>
+                                                        </span>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
+                                    </tbody>
                             </table>
                         </div>
                     </div>
@@ -241,7 +251,7 @@
                             <li><a href="#">&rsaquo;</a></li>
                         </ul>
                     </div>
-                    <p><a href="#" class="btn btn-primary">Manager List</a> <a href="add_manager_admin.html" class="btn">Add new manager</a></p>
+                    <p><a href="#" class="btn btn-primary">Manager List</a> <a href="AdminAddUser.jsp" class="btn">Add new manager</a></p>
 
                 </div>
             </div>

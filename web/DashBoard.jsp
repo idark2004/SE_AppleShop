@@ -169,8 +169,11 @@
                             <ul style="display:none">
                                 <li><a href="DashBoardController"><i class="icon-chevron-right"></i>Dashboard</a></li>
                                 <li><a href="ManagerAddProduct.jsp"><i class="icon-chevron-right"></i>Add Product</a></li>
-                                <li><a href="MainController?action=Manage+User&perform=Get+User"><i class="icon-chevron-right"></i>Customer List</a></li>
+                                <li><a href="MainController?action=Manage+User&perform=Get+User&roleID=US"><i class="icon-chevron-right"></i>Customer List</a></li>
                                 <li><a href="MainController?action=SaleCode&perform=List"><i class="icon-chevron-right"></i>Sale Code List</a></li>
+                            <c:if test="${sessionScope.USER.roleID.trim() == 'AD'}">
+                                <li><a href="MainController?action=Manage+User&perform=Get+Manager"><i class="icon-chevron-right"></i>Manager List</a></li>
+                            </c:if>
                             </ul>
                         </li>
                     </ul>
