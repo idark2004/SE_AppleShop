@@ -97,7 +97,7 @@ public class UserController extends HttpServlet {
                         if (user.getRoleID().contains("AD") || user.getRoleID().contains("MN")) {
                             url = MND;
                         } else {
-                            url = "ProductController?perform=Index";
+                            url = "MainController?action=Product&perform=Index";
                         }
                         request.setAttribute("success", "true");
                         request.setAttribute("username", user.getName());

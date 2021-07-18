@@ -24,7 +24,6 @@
         <!--<link rel="stylesheet/less" type="text/css" href="themes/less/bootshop.less">
             <script src="themes/js/less.js" type="text/javascript"></script> -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" type="text/javascript"></script>
-        <script src="js/hideManagerBar.js" type="text/javascript"></script>
         <!-- Bootstrap style -->
         <link id="callCss" rel="stylesheet" href="themes/bootshop/bootstrap.min.css" media="screen" />
         <link href="themes/css/base.css" rel="stylesheet" media="screen" />
@@ -42,7 +41,7 @@
         <style type="text/css" id="enject"></style>
     </head>
 
-    <body>
+    <body >
         <div id="header">
             <div class="container">
                 <div id="welcomeLine" class="row">
@@ -171,8 +170,8 @@
                         <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=MB&status=True">Mac</a></li>
                         <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AW&status=True">Apple Watch</a></li>
                         <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AS&status=True">Accessory</a></li>
-                        <c:if test="${sessionScope.USER.trim() != null}" > 
-                        <c:if test="${sessionScope.USER.trim() != 'US'}" >                      
+                        <c:if test="${sessionScope.USER.roleID.trim() != null}" > 
+                        <c:if test="${sessionScope.USER.roleID.trim() != 'US'}" >                      
                         <li class="subMenu" id="CU"><a>Shop Manager</a>
                             <ul style="display:none">
                                 <li><a href="dashboard_Manager.html"><i class="icon-chevron-right"></i>Dashboard</a></li>
@@ -337,6 +336,10 @@
     </div>
     <span id="themesBtn"></span>
     </body>
-
+    <script type="text/javascript">
+       function abc() {
+    console.log("${requestScope.ERROR}");
+    });
+    </script>
 
 </html>

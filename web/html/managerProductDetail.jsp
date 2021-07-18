@@ -3,7 +3,6 @@
     Created on : Jul 8, 2021, 8:11:55 PM
     Author     : anime
 --%>
-<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>  
@@ -125,165 +124,167 @@
                             </c:when>
                             <c:otherwise>
                                 <div class="row">
-                                    <div class="span9">
-                                        <h3>${fn:trim(sessionScope.BASIC.name)}</h3>
-                                        <hr class="soft" />
-                                        <form action="MainController" method="post" enctype="multipart/form-data">
-                                            <div id="gallery" class="span3">
-                                                <a href="${sessionScope.BASIC.image}" title="${sessionScope.BASIC.name}">
-                                                    <img src="${sessionScope.BASIC.image}" style="width:100%" alt="${sessionScope.BASIC.name}" />                                
-                                                </a>
+                                    <h3>${fn:trim(sessionScope.BASIC.name)}</h3>
+                                    <hr class="soft" />
+                                    <form action="MainController" method="post" enctype="multipart/form-data">
+                                        <div id="gallery" class="span3">
+                                            <a href="${sessionScope.BASIC.image}" title="${sessionScope.BASIC.name}">
+                                                <img src="${sessionScope.BASIC.image}" style="width:100%" alt="${sessionScope.BASIC.name}" />                                
+                                            </a>
 
-                                                <input class="file-input" type="file" id="specImage" name="image" accept="image/*" onchange="getPath();">
-                                                <script language="javascript" type="text/javascript">
-                                                    function getPath() {
-                                                        var inputName = document.getElementById('specImage');
-                                                        var imgPath;
+                                            <input class="file-input" type="file" id="specImage" name="image" accept="image/*" onchange="getPath();">
+                                            <script language="javascript" type="text/javascript">
+                                                function getPath() {
+                                                    var inputName = document.getElementById('specImage');
+                                                    var imgPath;
 
-                                                        imgPath = inputName.files[0].name;
-                                                        console.log(imgPath);
-                                                    }
-                                                </script>
-                                                <div class="control-group">
-                                                    <label class="control-label" for="productName">Product Name</label>
-                                                    <div class="controls">
-                                                        <input class="span3" type="text" id="productName" name="productName" value="${fn:trim(sessionScope.BASIC.name)}" maxlength="30" required>
-                                                    </div>
+                                                    imgPath = inputName.files[0].name;
+                                                    console.log(imgPath);
+                                                }
+                                            </script>
+                                            <div class="control-group">
+                                                <label class="control-label" for="productName">Product Name</label>
+                                                <div class="controls">
+                                                    <input class="span3" type="text" id="productName" name="productName" value="${fn:trim(sessionScope.BASIC.name)}" maxlength="30" required>
                                                 </div>
                                             </div>
-                                    </div>
-                                    <div class="span9">
-                                        <ul id="productDetail" class="nav nav-tabs">
-                                            <li class="active"><a href="#home" data-toggle="tab">Product Details</a></li>
-                                        </ul>
-                                        <div id="myTabContent" class="tab-content">
-                                            <div class="tab-pane fade active in" id="home">
-                                                <h4>Product Information</h4>
-                                                <div class="control-group">
-                                                    <label class="control-label" for="textarea">Description</label>
-                                                    <div class="controls">
-                                                        <textarea class="input-xlarge" id="textarea" name="description" rows="3" style="height:10rem; width:97%;" value="${fn:trim(sessionScope.BASIC.description)}"></textarea>
-                                                    </div>
-                                                </div>
-                                                <div class="controls">
-                                                    <input type="hidden" name="productID" value="${sessionScope.BASIC.productID}">
-                                                    <input type="hidden" name="action" value="Manage Product">
-                                                    <input class="btn btn-primary btn-success" type="submit" name="perform" value="Update Basic"><br>
-                                                </div>
-                                            </div>                                            
                                         </div>
-                                    </div>
-                                    <div class="span9">
-                                        <h5>Product Editor</h5>
-                                        <br>
+                                        <div class="span9">
+                                            <ul id="productDetail" class="nav nav-tabs">
+                                                <li class="active"><a href="#home" data-toggle="tab">Product Details</a></li>
+                                            </ul>
+                                            <div id="myTabContent" class="tab-content">
+                                                <div class="tab-pane fade active in" id="home">
+                                                    <h4>Product Information</h4>
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="textarea">Description</label>
+                                                        <div class="controls">
+                                                            <textarea class="input-xlarge" id="textarea" name="description" rows="3" style="height:10rem; width:97%;" value="${fn:trim(sessionScope.BASIC.description)}"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="controls">
+                                                        <input type="hidden" name="productID" value="${sessionScope.BASIC.productID}">
+                                                        <input type="hidden" name="action" value="Manage Product">
+                                                        <input class="btn btn-primary btn-success" type="submit" name="perform" value="Update Basic"><br>
+                                                    </div>
+                                                </div>                                            
+                                            </div>
+                                        </div>
 
+                                    </form>
+                                    <div class="span6">
 
-                                        <table class="table table-striped table-bordered table-condensed">
-                                            <thead>
-                                                <tr>
-                                                    <th id="specID">Spec ID</th>
-                                                    <th id="specColor">Color</th>
-                                                    <th id="ram">Ram</th>
-                                                    <th id="storage">Storage</th>
-                                                    <th id="quantity">Quantity</th>
-                                                    <th id="price">Price</th>
-                                                    <th id="specStatus">Status</th>
-                                                    <th colspan="2">Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <c:forEach var="spec" items="${sessionScope.SPEC_LIST}">
-                                                    <tr>                                            
-                                                        <td class="specID">${spec.specID}</td>
-                                                        <td class="specColor">${spec.color}</td>
-                                                        <td class="ram">${spec.ram}</td>
-                                                        <td class="storage">${spec.storage}</td>
-                                                        <td class="quantity">${spec.specQuantity}</td>
-                                                        <td class="price"> <fmt:formatNumber type="number" maxFractionDigits = "0" value="${spec.price}"/> VND</td>
-                                                        <td class="specStatus">
-                                                            <c:choose> 
-                                                                <c:when test="${spec.status eq true}">
-                                                                    Active
-                                                                </c:when>
-                                                                <c:otherwise>
-                                                                    Inactive
-                                                                </c:otherwise>
-                                                            </c:choose>
-                                                        </td>
-                                                        <td class="updateBtn">
-                                                            <form action="updateProduct.jsp">
-                                                                <input type="hidden" name="specID" value="${spec.specID}" >
-                                                                <input type="hidden" name="color" value="${spec.color}" >
-                                                                <input type="hidden" name="ram" value="${spec.ram}" >
-                                                                <input type="hidden" name="storage" value="${spec.storage}" >
-                                                                <input type="hidden" name="quantity" value="${spec.specQuantity}" >
-                                                                <input type="hidden" name="price" value="${spec.price}" >
-                                                                <input type="hidden" name="productID" value="${sessionScope.BASIC.productID}">
-                                                                <button class="btn btn-primary btn-success" type="submit">Update</button>
-                                                            </form>
-                                                        </td>
-                                                        <td class="hideBtn">
-                                                            <form action="MainController">
-                                                                <button class="btn btn-primary btn-danger" type="submit" name="perform" value="Hide">Hide</button>
-                                                            </form>
-                                                        </td>
-                                                    </tr>
-                                                </c:forEach>
-                                            </tbody>
-                                        </table>
-
-                                        <hr class="soft" />
-                                        <form class="form-horizontal qtyFrm">
-                                            <h5>Create new spec</h5>
+                                        <div class="">
+                                            <h5>Product Editor</h5>
                                             <br>
 
-                                            <div class="control-group">
-                                                <label class="control-label" for="">Spec ID</label>
-                                                <div class="controls">
-                                                    <input class="span3" type="text" id="" placeholder="Spec ID">
+
+                                            <table border="1">
+                                                <thead>
+                                                    <tr>
+                                                        <th id="specID">Spec ID</th>
+                                                        <th id="specColor">Color</th>
+                                                        <th id="ram">Ram</th>
+                                                        <th id="storage">Storage</th>
+                                                        <th id="quantity">Quantity</th>
+                                                        <th id="price">Price</th>
+                                                        <th id="specStatus">Status</th>
+                                                        <th colspan="2">Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <c:forEach var="spec" items="${sessionScope.SPEC_LIST}">
+                                                        <tr>                                            
+                                                            <td class="specID">${spec.specID}</td>
+                                                            <td class="specColor">${spec.color}</td>
+                                                            <td class="ram">${spec.ram}</td>
+                                                            <td class="storage">${spec.storage}</td>
+                                                            <td class="quantity">${spec.specQuantity}</td>
+                                                            <td class="price">${spec.price}</td>
+                                                            <td class="specStatus">
+                                                                <c:choose> 
+                                                                    <c:when test="${spec.status eq true}">
+                                                                        Active
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        Inactive
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                            </td>
+                                                            <td class="updateBtn">
+                                                                <form action="updateProduct.jsp">
+                                                                    <input type="hidden" name="specID" value="${spec.specID}" >
+                                                                    <input type="hidden" name="color" value="${spec.color}" >
+                                                                    <input type="hidden" name="ram" value="${spec.ram}" >
+                                                                    <input type="hidden" name="storage" value="${spec.storage}" >
+                                                                    <input type="hidden" name="quantity" value="${spec.specQuantity}" >
+                                                                    <input type="hidden" name="price" value="${spec.price}" >
+                                                                    <input type="hidden" name="productID" value="${sessionScope.BASIC.productID}">
+                                                                    <button type="submit">Update</button>
+                                                                </form>
+                                                            </td>
+                                                            <td class="hideBtn">
+                                                                <form action="MainController">
+                                                                    <button type="submit" name="perform" value="Hide">Hide</button>
+                                                                </form>
+                                                            </td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                </tbody>
+                                            </table>
+
+                                            <hr class="soft" />
+                                            <form class="form-horizontal qtyFrm">
+                                                <h5>Create new spec</h5>
+                                                <br>
+
+                                                <div class="control-group">
+                                                    <label class="control-label" for="">Spec ID</label>
+                                                    <div class="controls">
+                                                        <input class="span3" type="text" id="" placeholder="Spec ID">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="control-group">
-                                                <label class="control-label" for="">New Color</label>
-                                                <div class="controls">
-                                                    <input class="span3" type="text" id="" placeholder="New Color">
+                                                <div class="control-group">
+                                                    <label class="control-label" for="">New Color</label>
+                                                    <div class="controls">
+                                                        <input class="span3" type="text" id="" placeholder="New Color">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="control-group">
-                                                <label class="control-label" for="">RAM</label>
-                                                <div class="controls">
-                                                    <input class="span3" type="text" id="" placeholder="Ram">
+                                                <div class="control-group">
+                                                    <label class="control-label" for="">RAM</label>
+                                                    <div class="controls">
+                                                        <input class="span3" type="text" id="" placeholder="Ram">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="control-group">
-                                                <label class="control-label" for="">Storage</label>
-                                                <div class="controls">
-                                                    <input class="span3" type="text" id="" placeholder="Storage">
+                                                <div class="control-group">
+                                                    <label class="control-label" for="">Storage</label>
+                                                    <div class="controls">
+                                                        <input class="span3" type="text" id="" placeholder="Storage">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="control-group">
-                                                <label class="control-label" for="">Price</label>
-                                                <div class="controls">
-                                                    <input class="span3" type="text" id="inputPrice" placeholder="Price" maxlength="11">
+                                                <div class="control-group">
+                                                    <label class="control-label" for="">Price</label>
+                                                    <div class="controls">
+                                                        <input class="span3" type="text" id="inputPrice" placeholder="Price" maxlength="11">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="control-group">
-                                                <label class="control-label" for="">Quantity</label>
-                                                <div class="controls">
-                                                    <input class="span3" type="number" id="inputPrice" placeholder="Quantity">
+                                                <div class="control-group">
+                                                    <label class="control-label" for="">Quantity</label>
+                                                    <div class="controls">
+                                                        <input class="span3" type="number" id="inputPrice" placeholder="Quantity">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="control-group">
-                                                <div class="controls">
-                                                    <input class="btn btn-primary btn-success" type="submit" value="Submit">
+                                                <div class="control-group">
+                                                    <div class="controls">
+                                                        <input class="btn btn-primary btn-success" type="submit" value="Submit">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </form>
-                                        <hr class="soft" />
+                                            </form>
+                                            <hr class="soft" />
+                                        </div>
+
+
                                     </div>
-
-
-                                   
 
 
 
