@@ -81,7 +81,7 @@
                                 <li class=""><a href="userProfile.jsp">Profile</a></li>
                                 </c:if>
                                 <c:choose>
-                                <c:when test="${sessionScope.USER == null}">
+                                    <c:when test="${sessionScope.USER == null}">
                                     <li class="">
                                         <a href="signupForm.jsp" role="button" style="padding-right:0"><span class="btn btn-large btn-success">Signup</span></a>
                                     </li>
@@ -292,9 +292,9 @@
                         <h5>ACCOUNT</h5>
                         <c:if test="${sessionScope.USER == null}">                   
                             <a href="loginForm.jsp">LOGIN</a>
-                            <a href="signupForm.jsp">REGISTRATION</a>
-                            <a href="cartDetail.jsp">CART</a>
+                            <a href="signupForm.jsp">REGISTRATION</a>                            
                         </c:if>
+                        <a href="cartDetail.jsp">CART</a>
                         <c:if test="${sessionScope.USER != null}">
                             <a href="userProfile.jsp">PROFILE</a>                    
                             <a href="order_history.jsp">ORDER HISTORY</a>

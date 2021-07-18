@@ -54,7 +54,7 @@
                                 <c:set var="subtotalCount" value="${cartItem.quantity}"/>
                                 <c:set var="subtotal" value="${subtotal+cartItem.quantity}"/>
                             </c:forEach>
-                            <a href="cartDetail.jsp"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> ${subtotal} Itemes in your cart </span> </a>
+                            <a href="cartDetail.jsp"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> ${subtotal} Items in your cart </span> </a>
                         </div>
                     </div>
                 </div>
@@ -236,9 +236,9 @@
                         <h5>ACCOUNT</h5>
                         <c:if test="${sessionScope.USER == null}">                   
                             <a href="loginForm.jsp">LOGIN</a>
-                            <a href="signupForm.jsp">REGISTRATION</a>
-                            <a href="cartDetail.jsp">CART</a>
+                            <a href="signupForm.jsp">REGISTRATION</a>                            
                         </c:if>
+                            <a href="cartDetail.jsp">CART</a>
                         <c:if test="${sessionScope.USER != null}">
                             <a href="userProfile.jsp">PROFILE</a>                    
                             <a href="order_history.jsp">ORDER HISTORY</a>

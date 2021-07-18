@@ -64,14 +64,18 @@
                         <span class="icon-bar"></span>
                     </a>
                     <div class="navbar-inner">
-                        <a class="brand" href="index_Manager.html">SE15 Shop</a>
+                        <a class="brand" href="MainController?action=Product&perform=Index">SE15 Shop</a>
                         <form class="form-inline navbar-search" method="post" action="MainController">
                             <input id="srchFld" class="srchTxt" type="text" name="keyWord"/>
                             <input type="hidden" value="SearchProduct" name="action"/>
                             <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
                         </form>
                         <ul id="topMenu" class="nav pull-right">
-                            <li class=""><a href="products_Manager.html">All Products</a></li>                                               
+                            <li class=""><a href="MainController?action=Product&perform=ViewProduct">All Products</a></li>                                
+                            <li class=""><a href="userProfile.jsp">Profile</a></li>
+                            <li class="">
+                                <a href="MainController?action=User&perform=Log+Out" role="button" style="padding-right:0"><span class="btn btn-large btn-success">Log Out</span></a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -85,25 +89,33 @@
                     <div id="sidebar" class="span3">
 
                         <ul id="sideManu" class="nav nav-tabs nav-stacked">
-                            <li><a href="products_Manager.html">All</a></li>
-                            <li><a href="products_Manager.html">iPhone</a></li>
-                            <li><a href="products_Manager.html">iPad</a></li>
-                            <li><a href="products_Manager.html">Mac</a></li>
-                            <li><a href="products_Manager.html">Accessory</a></li>
-                            <li class="subMenu"><a>Shop Manager</a>
-                                <ul style="display:none">
-                                    <li><a href="dashboard_Manager.html"><i class="icon-chevron-right"></i>Dashboard</a></li>
-                                    <li><a href="product_details_Manager.html"><i class="icon-chevron-right"></i>Add Product</a></li>
-                                    <li><a href="customers_Manager.html"><i class="icon-chevron-right"></i>Customer List</a></li>
-                                </ul>
-                            </li>
+                            <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=">All</a></li>
+                            <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=IP&status=True">iPhone</a></li>
+                            <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=ID&status=True">iPad</a></li>
+                            <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=MB&status=True">Mac</a></li>
+                            <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AW&status=True">Apple Watch</a></li>
+                            <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AS&status=True">Accessory</a></li>
+                                <c:if test="${sessionScope.USER.roleID.trim() != null}" > 
+                                    <c:if test="${sessionScope.USER.roleID.trim() != 'US'}" >                      
+                                    <li class="subMenu" id="CU"><a>Shop Manager</a>
+                                        <ul style="display:none">
+                                            <c:if test="${sessionScope.USER.roleID.trim() == 'AD'}" >
+                                                <li><a href="DashBoardController"><i class="icon-chevron-right"></i>Dashboard</a></li>
+                                                </c:if>                                            
+                                            <li><a href="managerAddProduct.jsp"><i class="icon-chevron-right"></i>Add Product</a></li>
+                                            <li><a href="MainController?action=Manage+User&perform=Get+User"><i class="icon-chevron-right"></i>User List</a></li>
+                                            <li><a href="MainController?action=Guarantee&perform=Get"><i class="icon-chevron-right"></i>Guarantee</a></li>
+                                        </ul>
+                                    </li>
+                                </c:if>                       
+                            </c:if>
                         </ul>
                         <br/>
                     </div>
                     <!-- Sidebar end=============================================== -->
                     <div class="span9">
                         <ul class="breadcrumb">
-                            <li><a href="managerIndex.jsp">Home</a> <span class="divider">/</span></li>
+                            <li><a href="MainController?action=Product&perform=Index">Home</a> <span class="divider">/</span></li>
                             <li class="active">Customers</li>
                         </ul>
                         <div class="row">
@@ -152,12 +164,12 @@
                                                         </span>
                                                     </a>
                                                     <c:if test="${user.status eq 1}">
-                                                    <a href="MainController?action=Manage+User&perform=Status&status=false&userID=${user.userID}&roleID=${user.roleID}" class="table-link danger" title="Hide This Customer">
-                                                        <span class="fa-stack">
-                                                            <i class="fa fa-square fa-stack-2x"></i>
-                                                            <i class="fa fa-eye fa-stack-1x fa-inverse"></i>
-                                                        </span>
-                                                    </a>
+                                                        <a href="MainController?action=Manage+User&perform=Status&status=false&userID=${user.userID}&roleID=${user.roleID}" class="table-link danger" title="Hide This Customer">
+                                                            <span class="fa-stack">
+                                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                                <i class="fa fa-eye fa-stack-1x fa-inverse"></i>
+                                                            </span>
+                                                        </a>
                                                     </c:if>
                                                 </td>
                                             </tr>
@@ -188,19 +200,23 @@
             <div class="container">
                 <div class="row">
                     <div class="span3">
-                        <h5>ACCOUNT</h5>
-                        <a href="login.html">LOGIN</a>
-                        <a href="login.html">PROFILE</a>
-                        <a href="login.html">CART</a>
-                        <a href="login.html">ORDER HISTORY</a>
-                    </div>
-                    <div class="span3">
-                        <h5>INFORMATION</h5>
-                        <a href="contact.html">CONTACT</a>
-                        <a href="register.html">REGISTRATION</a>
-                        <a href="legal_notice.html">LEGAL NOTICE</a>
-                        <a href="tac.html">TERMS AND CONDITIONS</a>
-                    </div>
+                    <h5>ACCOUNT</h5>
+                <c:if test="${sessionScope.USER == null}">                   
+                    <a href="loginForm.jsp">LOGIN</a>
+                    <a href="signupForm.jsp">REGISTRATION</a>                    
+                </c:if>
+                    <a href="cartDetail.jsp">CART</a>
+                <c:if test="${sessionScope.USER != null}">
+                    <a href="userProfile.jsp">PROFILE</a>                    
+                    <a href="order_history.jsp">ORDER HISTORY</a>
+                </c:if>
+                </div>
+                <div class="span3">
+                    <h5>INFORMATION</h5>
+                    <a href="contact.jsp">CONTACT</a>                    
+                    <a href="legal_notice.html">LEGAL NOTICE</a>
+                    <a href="tac.html">TERMS AND CONDITIONS</a>
+                </div>
                     <div id="socialMedia" class="span3 pull-right">
                         <h5>SOCIAL MEDIA </h5>
                         <a href="#"><img width="60" height="60" src="themes/images/facebook.png" title="facebook" alt="facebook" /></a>

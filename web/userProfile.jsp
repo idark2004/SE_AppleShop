@@ -63,7 +63,7 @@
                                 <c:set var="subtotal" value="${subtotal+cartItem.quantity}"/>
                             </c:forEach>
                             <a href="cartDetail.jsp"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> ${subtotal}
-                                    <c:if test="${sessionScope.cart == null}">No</c:if>  Itemes in your cart </span> </a>
+                                    <c:if test="${sessionScope.cart == null}">No</c:if>  Items in your cart </span> </a>
                             </div>
                         </div>
                     </div>
@@ -198,12 +198,12 @@
 
                                         </div>
                                     </div>                                    
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <a href="newPass.jsp" role="button" style="padding-right:0"><span class="btn btn-primary btn-success">Reset New Password</span></a>
-                                                <a href="OrderHistoryController?userid=${sessionScope.USER.userID}" role="button" style="padding-right:0"><span class="btn btn-primary btn-info">Order History</span></a>
-                                            </div>
-                                        </div>                                    
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <a href="newPass.jsp" role="button" style="padding-right:0"><span class="btn btn-primary btn-success">Reset New Password</span></a>
+                                            <a href="OrderHistoryController?userid=${sessionScope.USER.userID}" role="button" style="padding-right:0"><span class="btn btn-primary btn-info">Order History</span></a>
+                                        </div>
+                                    </div>                                    
                                     <input type="hidden"  name="userID" value="${sessionScope.USER.userID}" >
                                     <input type="hidden"  name="action" value="User Manage" >
                                     <div class="control-group">
@@ -228,15 +228,19 @@
                 <div class="row">
                     <div class="span3">
                         <h5>ACCOUNT</h5>
-                        <a href="loginForm.jsp">LOGIN</a>
-                        <a href="userProfile.jsp">PROFILE</a>
+                        <c:if test="${sessionScope.USER == null}">                   
+                            <a href="loginForm.jsp">LOGIN</a>
+                            <a href="signupForm.jsp">REGISTRATION</a>                    
+                        </c:if>
                         <a href="cartDetail.jsp">CART</a>
-                        <a href="loginForm.jsp">ORDER HISTORY</a>
+                        <c:if test="${sessionScope.USER != null}">
+                            <a href="userProfile.jsp">PROFILE</a>                    
+                            <a href="order_history.jsp">ORDER HISTORY</a>
+                        </c:if>
                     </div>
                     <div class="span3">
                         <h5>INFORMATION</h5>
-                        <a href="contact.jsp">CONTACT</a>
-                        <a href="signupForm.jsp">REGISTRATION</a>
+                        <a href="contact.jsp">CONTACT</a>                    
                         <a href="legal_notice.html">LEGAL NOTICE</a>
                         <a href="tac.html">TERMS AND CONDITIONS</a>
                     </div>

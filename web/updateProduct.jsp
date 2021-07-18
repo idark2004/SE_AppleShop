@@ -69,29 +69,33 @@
                     <!-- Sidebar ================================================== -->
                     <div id="sidebar" class="span3">                    
                         <ul id="sideManu" class="nav nav-tabs nav-stacked">
-                            <li><a href="products_Manager.html">All</a></li>
-                            <li><a href="products_Manager.html">iPhone</a></li>
-                            <li><a href="products_Manager.html">iPad</a></li>
-                            <li><a href="products_Manager.html">Mac</a></li>
-                            <li><a href="products_Manager.html">Accessory</a></li>
+                            <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=">All</a></li>
+                            <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=IP&status=True">iPhone</a></li>
+                            <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=ID&status=True">iPad</a></li>
+                            <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=MB&status=True">Mac</a></li>
+                            <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AW&status=True">Apple Watch</a></li>
+                            <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AS&status=True">Accessory</a></li>
                                 <c:if test="${sessionScope.USER.roleID.trim() != null}" > 
-                                <c:if test="${sessionScope.USER.roleID.trim() != 'US'}" >                      
-                                <li class="subMenu" id="CU"><a>Shop Manager</a>
-                                    <ul style="display:none">
-                                        <li><a href="dashboard_Manager.html"><i class="icon-chevron-right"></i>Dashboard</a></li>
-                                        <li><a href="product_details_Manager.html"><i class="icon-chevron-right"></i>Add Product</a></li>
-                                        <li><a href="customers_Manager.html"><i class="icon-chevron-right"></i>Customer List</a></li>
-                                    </ul>
-                                </li>
+                                    <c:if test="${sessionScope.USER.roleID.trim() != 'US'}" >                      
+                                    <li class="subMenu" id="CU"><a>Shop Manager</a>
+                                        <ul style="display:none">
+                                            <c:if test="${sessionScope.USER.roleID.trim() == 'AD'}" >
+                                                <li><a href="DashBoardController"><i class="icon-chevron-right"></i>Dashboard</a></li>
+                                                </c:if>                                            
+                                            <li><a href="managerAddProduct.jsp"><i class="icon-chevron-right"></i>Add Product</a></li>
+                                            <li><a href="MainController?action=Manage+User&perform=Get+User"><i class="icon-chevron-right"></i>User List</a></li>
+                                            <li><a href="MainController?action=Guarantee&perform=Get"><i class="icon-chevron-right"></i>Guarantee</a></li>
+                                        </ul>
+                                    </li>
                                 </c:if>                       
-                                </c:if>
+                            </c:if>
                         </ul>
                         <br/>
                     </div>
                     <!-- Sidebar end=============================================== -->
                     <div class="span9">
                         <ul class="breadcrumb">
-                            <li><a href="index_Manager.html">Home</a> <span class="divider">/</span></li>
+                            <li><a href="MainController?action=Product&perform=Index">Home</a> <span class="divider">/</span></li>
                             <li class="active">Guarantee Form</li>
                         </ul>
                         <h3>Update Product's Spec Form</h3>
@@ -174,15 +178,19 @@
                 <div class="row">
                     <div class="span3">
                         <h5>ACCOUNT</h5>
-                        <a href="login.html">LOGIN</a>
-                        <a href="login.html">PROFILE</a>
-                        <a href="login.html">CART</a>
-                        <a href="login.html">ORDER HISTORY</a>
+                        <c:if test="${sessionScope.USER == null}">                   
+                            <a href="loginForm.jsp">LOGIN</a>
+                            <a href="signupForm.jsp">REGISTRATION</a>                    
+                        </c:if>
+                        <a href="cartDetail.jsp">CART</a>
+                        <c:if test="${sessionScope.USER != null}">
+                            <a href="userProfile.jsp">PROFILE</a>                    
+                            <a href="order_history.jsp">ORDER HISTORY</a>
+                        </c:if>
                     </div>
                     <div class="span3">
                         <h5>INFORMATION</h5>
-                        <a href="contact.html">CONTACT</a>
-                        <a href="register.html">REGISTRATION</a>
+                        <a href="contact.jsp">CONTACT</a>                    
                         <a href="legal_notice.html">LEGAL NOTICE</a>
                         <a href="tac.html">TERMS AND CONDITIONS</a>
                     </div>

@@ -42,9 +42,8 @@ public class ManageUserController extends HttpServlet {
         String url = ERROR;
         try {
             switch (perform) {
-                case "Get User":
-                   
-                    list = dao.getUserList(roleID);
+                case "Get User":                   
+                    list = dao.getUserList();
                     request.setAttribute("USER_LIST", list);
                     url = USER_LIST;
                     break;

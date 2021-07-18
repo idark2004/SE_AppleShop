@@ -327,7 +327,7 @@ public class UserDAO {
         }
     }
 
-    public List<UserDTO> getUserList(String roleID) throws SQLException {
+    public List<UserDTO> getUserList() throws SQLException {
         List<UserDTO> list = null;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -335,11 +335,10 @@ public class UserDAO {
         try {
             conn = DBConnect.makeConnection();
             if (conn != null) {
-                String sql = "SELECT userID, name, userEmail, userPhoneNumber, userAddress, userStatus "
+                String sql = "SELECT userID, name, userEmail, userPhoneNumber, userAddress, userStatus, roleID "
                         + " FROM tblUsers "
-                        + " WHERE roleID LIKE ?";
-                stm = conn.prepareStatement(sql);
-                stm.setString(1, "%" + roleID + "%");
+                        + " WHERE roleID NOT LIKE '%AD%' AND roleID NOT LIKE '%MN%'";
+                stm = conn.prepareStatement(sql);                
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     String userID = rs.getString("userID");
@@ -348,6 +347,7 @@ public class UserDAO {
                     String phone = rs.getString("userPhoneNumber");
                     String address = rs.getString("userAddress");
                     String status = rs.getString("userStatus");
+                    String roleID = rs.getString("roleID");
                     if (list == null) {
                         list = new ArrayList<>();
                     }

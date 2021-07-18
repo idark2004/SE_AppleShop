@@ -249,9 +249,9 @@
                         <h5>ACCOUNT</h5>
                         <c:if test="${sessionScope.USER == null}">                   
                             <a href="loginForm.jsp">LOGIN</a>
-                            <a href="signupForm.jsp">REGISTRATION</a>
-                            <a href="cartDetail.jsp">CART</a>
+                            <a href="signupForm.jsp">REGISTRATION</a>                            
                         </c:if>
+                        <a href="cartDetail.jsp">CART</a>
                         <c:if test="${sessionScope.USER != null}">
                             <a href="userProfile.jsp">PROFILE</a>                    
                             <a href="order_history.jsp">ORDER HISTORY</a>

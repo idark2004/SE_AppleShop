@@ -35,7 +35,7 @@ public class UserController extends HttpServlet {
     private static final String ERROR = "error.jsp";
     private static final String FAIL_SIGNUP = "signupForm.jsp";
     private static final String INDEX = "index.jsp";
-    private static final String MND = "DashBoardController";
+    private static final String AD = "DashBoardController";
     private static final String UPDATE_SUCCESS = "userProfile.jsp";
     private static final String OUT = "MainController?action=Product&perform=Index";
 
@@ -95,8 +95,8 @@ public class UserController extends HttpServlet {
                     }
                     if (IsAUser) {//neu co trong db
                         session.setAttribute("USER", user);
-                        if (user.getRoleID().contains("AD") || user.getRoleID().contains("MN")) {
-                            url = MND;
+                        if (user.getRoleID().contains("AD")) {
+                            url = AD;
                         } else {
                             url = "MainController?action=Product&perform=Index";
                         }
