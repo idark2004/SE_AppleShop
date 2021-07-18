@@ -205,8 +205,8 @@
                                             </a>
                                             <a href="" class="table-link danger" title="Hide This">
                                                 <span class="fa-stack">
-                                                    <i class="fa fa-square fa-stack-2x"></i>
-                                                    <i class="fa fa-eye fa-stack-1x fa-inverse"></i>
+                                                    <i style="color:green;" class="fa fa-square fa-stack-2x"></i>
+                                                    <i style="color:white;" class="fa fa-check-square-o fa-stack-1x fa-inverse"></i>
                                                 </span>
                                             </a>
                                         </td>
