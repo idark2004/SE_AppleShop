@@ -194,10 +194,11 @@
                             </c:when>
                             <c:otherwise>
                                 <div class="row">
+                                    <form action="MainController" method="post" enctype="multipart/form-data">
                                     <div class="span9">
                                         <h3>${fn:trim(sessionScope.BASIC.name)}</h3>
                                         <hr class="soft" />
-                                        <form action="MainController" method="post" enctype="multipart/form-data">
+                                        
                                             <div id="gallery" class="span3">
                                                 <a href="${sessionScope.BASIC.image}" title="${sessionScope.BASIC.name}">
                                                     <img src="${sessionScope.BASIC.image}" style="width:100%" alt="${sessionScope.BASIC.name}" />                                
@@ -242,6 +243,7 @@
                                             </div>                                            
                                         </div>
                                     </div>
+                            </form>
                                     <div class="span9">
                                         <h5>Product Editor</h5>
                                         <br>
@@ -302,48 +304,45 @@
                                         </table>
 
                                         <hr class="soft" />
-                                        <form class="form-horizontal qtyFrm">
+                                        <form class="form-horizontal qtyFrm" action="MainController">
                                             <h5>Create new spec</h5>
                                             <br>
 
                                             <div class="control-group">
-                                                <label class="control-label" for="">Spec ID</label>
-                                                <div class="controls">
-                                                    <input class="span3" type="text" id="" placeholder="Spec ID">
-                                                </div>
-                                            </div>
-                                            <div class="control-group">
                                                 <label class="control-label" for="">New Color</label>
                                                 <div class="controls">
-                                                    <input class="span3" type="text" id="" placeholder="New Color">
+                                                    <input class="span3" type="text" id="" name="color" placeholder="New Color">
                                                 </div>
                                             </div>
                                             <div class="control-group">
                                                 <label class="control-label" for="">RAM</label>
                                                 <div class="controls">
-                                                    <input class="span3" type="text" id="" placeholder="Ram">
+                                                    <input class="span3" type="text" id="" name="ram" placeholder="Ram">
                                                 </div>
                                             </div>
                                             <div class="control-group">
                                                 <label class="control-label" for="">Storage</label>
                                                 <div class="controls">
-                                                    <input class="span3" type="text" id="" placeholder="Storage">
+                                                    <input class="span3" type="text" id="" name="storage" placeholder="Storage">
                                                 </div>
                                             </div>
                                             <div class="control-group">
                                                 <label class="control-label" for="">Price</label>
                                                 <div class="controls">
-                                                    <input class="span3" type="text" id="inputPrice" placeholder="Price" maxlength="11">
+                                                    <input class="span3" type="text" id="inputPrice" name="price" placeholder="Price" maxlength="11">
                                                 </div>
                                             </div>
                                             <div class="control-group">
                                                 <label class="control-label" for="">Quantity</label>
                                                 <div class="controls">
-                                                    <input class="span3" type="number" id="inputPrice" placeholder="Quantity">
+                                                    <input class="span3" type="number" id="inputPrice" name="quantity" placeholder="Quantity">
                                                 </div>
                                             </div>
                                             <div class="control-group">
                                                 <div class="controls">
+                                                    <input type="hidden" name="productID" value="${sessionScope.BASIC.productID}">
+                                                    <input type="hidden" name="action" value="Manage Product">
+                                                    <input type="hidden" name="perform" value="Add Spec">
                                                     <input class="btn btn-primary btn-success" type="submit" value="Submit">
                                                 </div>
                                             </div>

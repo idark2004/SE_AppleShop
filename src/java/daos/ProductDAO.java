@@ -594,7 +594,7 @@ public class ProductDAO {
         boolean check = false;
         Connection c = null;
         PreparedStatement ps = null;
-        String sql = "UPDATE tblProducts SET productName=?, description = ? WHERE productID=?";
+        String sql = "UPDATE tblProducts SET productName=?, productDescription = ? WHERE productID=?";
         try {
             c = DBConnect.makeConnection();
 
@@ -624,7 +624,7 @@ public class ProductDAO {
     public boolean UpdateProductWithImage(String productID, String name, String image, String description) throws NamingException, SQLException {
         Connection c = null;
         PreparedStatement ps = null;
-        String sql = "UPDATE tblProducts SET productName=?, image=?, description = ? WHERE productID=?";
+        String sql = "UPDATE tblProducts SET productName=?, image=?, productDescription = ? WHERE productID=?";
         try {
             c = DBConnect.makeConnection();
 
@@ -817,7 +817,7 @@ public class ProductDAO {
             if (conn != null) {
                 String sql = "UPDATE tblProductSpec "
                         + " SET color=?, ram = ?, storage = ?, specPrice=?, specQuantity = ?, specStatus = ? "
-                        + " WHERE specID LIKE ?";
+                        + " WHERE specID = ?";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, pro.getColor());
                 stm.setString(2, pro.getRam());

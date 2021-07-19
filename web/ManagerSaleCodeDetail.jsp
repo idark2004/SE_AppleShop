@@ -49,7 +49,11 @@
                 <div class="span6">Welcome!<strong> User</strong></div>
                 <div class="span6">
                     <div class="pull-right">
-                        <a href="product_summary_Manager.html"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> [ 3 ] Itemes in your cart </span> </a>
+                        <c:forEach var="cartItem" items="${sessionScope.cart}">
+                            <c:set var="subtotalCount" value="${cartItem.quantity}"/>
+                            <c:set var="subtotal" value="${subtotal+cartItem.quantity}"/>
+                        </c:forEach>
+                        <a href="cartDetail.jsp"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> ${subtotal} Itemes in your cart </span> </a>
                     </div>
                 </div>
             </div>
@@ -147,7 +151,19 @@
                 <!-- Sidebar ================================================== -->
                 <div id="sidebar" class="span3">
                     <div class="well well-small">
-                        <a id="myCart" href="product_summary_Manager.html"><img src="themes/images/ico-cart.png" alt="cart">3 Items in your cart <span class="badge badge-warning pull-right">445,000VND</span></a>
+                        <c:forEach var="cartItem" items="${sessionScope.cart}">
+                            <c:set var="total" value="${total + (cartItem.quantity * cartItem.product.price)}"/>
+                        </c:forEach>
+                        <a id="myCart" href="cartDetail.jsp"><img src="themes/images/ico-cart.png" alt="cart">${subtotal} 
+                        <c:if test="${sessionScope.cart == null}">No</c:if> 
+                        Items in your cart
+                        <c:if test="${sessionScope.cart != null}">
+                        <span class="badge badge-warning pull-right"> 
+                                <fmt:setLocale value="vi_VN" />
+                                <fmt:formatNumber value="${total}" type="currency" />
+                        </span>
+                        </c:if>
+                        </a>
                     </div>
                         <ul id="sideManu" class="nav nav-tabs nav-stacked">
                         <li class="subMenu"><a>Product</a>  

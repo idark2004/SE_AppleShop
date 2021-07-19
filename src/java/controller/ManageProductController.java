@@ -171,6 +171,7 @@ public class ManageProductController extends HttpServlet {
                     int specQuantity = Integer.parseInt(request.getParameter("specQuantity"));
                     double price = Double.parseDouble(request.getParameter("specPrice"));
                     boolean status = Boolean.parseBoolean(request.getParameter("specStatus"));
+                    System.out.println(price+" "+status);
                     pro = new ProductDTO(price, status, ram, storage, color, specID, specQuantity);
                     if(dao.updateSpec(pro)){
                         request.setAttribute("UPDATED", specID);
@@ -196,6 +197,27 @@ public class ManageProductController extends HttpServlet {
                     }
                     url = "ManageProductController?perform=Manage+Detail&productID="+productID;
                     
+                    break;
+                    
+                case "Add Spec":
+                    String newSpecColor=request.getParameter("color");
+                    String newSpecRam=request.getParameter("ram");
+                    String newSpecStorage=request.getParameter("storage");
+                    double newSpecPrice=Double.parseDouble(request.getParameter("price"));
+                    int newSpecQuantity=Integer.parseInt(request.getParameter("quantity"));
+                    String ProductID=request.getParameter("productID");
+                    
+                    ProductDTO newSpec= new ProductDTO();
+                    newSpec.setProductID(ProductID);
+                    newSpec.setColor(newSpecColor);
+                    newSpec.setRam(newSpecRam);
+                    newSpec.setStorage(newSpecStorage);
+                    newSpec.setPrice(newSpecPrice);
+                    newSpec.setSpecQuantity(newSpecQuantity);
+                    
+                    if(dao.CreateSpec(newSpec)){
+                        url = "ManageProductController?perform=Manage+Detail&productID="+productID;
+                    }
                     break;
             }
         } catch (Exception e) {
