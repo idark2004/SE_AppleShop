@@ -229,7 +229,7 @@
                                     </c:otherwise>
                                 </c:choose>
                                     <tr>
-                                        <td colspan="5" style="text-align:right"><strong>TOTAL ( <fmt:formatNumber type="number" maxFractionDigits = "0" value="${total}"/> - 200,000 VND) =</strong></td>
+                                        <td colspan="5" style="text-align:right"><strong>TOTAL ( <fmt:formatNumber type="number" maxFractionDigits = "0" value="${total}"/> ) =</strong></td>
                                         <td class="label label-important" style="display:block"> <strong> <fmt:formatNumber type="number" maxFractionDigits = "0" value="${total}"/></strong></td>
                                     </tr>
                                 </tbody>

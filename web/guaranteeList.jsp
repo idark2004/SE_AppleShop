@@ -203,7 +203,7 @@
                                                     <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
                                                 </span>
                                             </a>
-                                            <a href="" class="table-link danger" title="Hide This">
+                                            <a href="" class="table-link danger" title="Complete">
                                                 <span class="fa-stack">
                                                     <i style="color:green;" class="fa fa-square fa-stack-2x"></i>
                                                     <i style="color:white;" class="fa fa-check-square-o fa-stack-1x fa-inverse"></i>
