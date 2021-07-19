@@ -86,39 +86,49 @@
                     <ul id="topMenu" class="nav pull-right">
                         <li class=""><a href="products.html">All Products</a></li>
                         <li class=""><a href="contact.html">Contact</a></li>
-                        <li class=""><a href="user_profile.html">Profile</a></li>
-                        <li class="">
-                            <a href="register.html" role="button" style="padding-right:0"><span class="btn btn-large btn-success">Signup</span></a>
-                        </li>
-                        <li class="">
-                            <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
-                            <div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                    <h3>Login In</h3>
-                                </div>
-                                <div class="modal-body">
-                                    <form class="form-horizontal loginFrm">
-                                        <div class="control-group">
-                                            <input type="text" id="inputEmail" placeholder="Email">
+                        <c:if test="${sessionScope.USER != null}">
+                            <li class=""><a href="userProfile.jsp">Profile</a></li>
+                            </c:if>
+                            <c:choose>
+                            <c:when test="${sessionScope.USER == null}">
+                                <li class="">
+                                    <a href="signupForm.jsp" role="button" style="padding-right:0"><span class="btn btn-large btn-success">Signup</span></a>
+                                </li>
+                                <li class="">
+                                    <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
+                                    <div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                            <h3>Log In</h3>
                                         </div>
-                                        <div class="control-group">
-                                            <input type="password" id="inputPassword" placeholder="Password">
+                                        <div class="modal-body">
+                                            <form class="form-horizontal loginFrm" action="MainController" method="post">
+                                                <div class="control-group">
+                                                    <input type="text" id="inputEmail" placeholder="Enter Email" name="email" required>
+                                                </div>
+                                                <div class="control-group">
+                                                    <input type="password" id="inputPassword" placeholder="Enter Password" name="password" required>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label class="checkbox">
+                                                        <input type="checkbox"> Remember me
+                                                    </label>
+                                                    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                                                    <input type="hidden" name="perform" value="Log in">
+                                                    <button type="submit" class="btn btn-success" name="action" value="User">Sign in</button>
+                                                    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                                                </div>
+                                            </form>
                                         </div>
-                                        <div class="control-group">
-                                            <label class="checkbox">
-											<input type="checkbox"> Remember me
-											</label>
-                                        </div>
-                                        <div class="control-group">
-                                            <a href="#"><img width="30" height="30" src="themes/images/google.png" title="Login with Google" alt="Google Login" /></a>
-                                        </div>
-                                    </form>
-                                    <button type="submit" class="btn btn-success">Sign in</button>
-                                    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                                </div>
-                            </div>
-                        </li>
+                                    </div>
+                                </li>
+                            </c:when>
+                            <c:otherwise>
+                                <li class="">
+                                    <a href="MainController?action=User&perform=Log+Out" role="button" style="padding-right:0"><span class="btn btn-large btn-success">Log Out</span></a>
+                                </li>
+                            </c:otherwise>
+                        </c:choose>
                     </ul>
                 </div>
             </div>
