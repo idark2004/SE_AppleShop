@@ -22,6 +22,7 @@
             <script src="themes/js/less.js" type="text/javascript"></script> -->
 
         <!-- Bootstrap style -->
+       
         <link id="callCss" rel="stylesheet" href="themes/bootshop/bootstrap.min.css" media="screen" />
         <link href="themes/css/base.css" rel="stylesheet" media="screen" />
         <!-- Bootstrap style responsive -->
@@ -42,7 +43,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
 
-    <body onload="a();">
+    <body >
         <div id="header">
             <div class="container">
                 <div id="welcomeLine" class="row">
@@ -246,7 +247,7 @@
                                                 </div>
                                                 <div class="span3 alignR">
                                                     <form class="form-horizontal qtyFrm">
-                                                        <h3><fmt:setLocale value="vi_VN" />
+                                                        <h3 class="product-price"><fmt:setLocale value="vi_VN" />
                                                             <fmt:formatNumber value="${product.price}" type="currency" /></h3>
 
                                         <!-- a href="MainController?action=Product&perform=ViewDetail&productID=${product.productID}" class="btn btn-large btn-primary"> Add to <i class=" icon-shopping-cart"></i></a> -->
@@ -432,22 +433,20 @@
         <span id="themesBtn"></span>
     </body>
     <script type="text/javascript">
-                                    $(document).ready(function () {
-                                        var role = "${sessionScope.USER.roleID.trim()}";
-                                        var aa = $('#manaLi');
-                                        if (role === "MN") {
-                                            aa.hide();
-                                        }
-                                    });
+          
                                     $('#sortList').on('change', function () {
                                         var conceptName = $('#sortList').find(":selected").text();
                                         if (conceptName === "Product name A - Z") {
                                             sortNameAcs();
+                                            sortNameAcsVertical();
                                         } else if (conceptName === "Product name Z - A") {
                                             sortNameDes();
+                                            sortNameDesVertical();
                                         } else if (conceptName === "Price Lowest first") {
+                                            sortPriceAcsVertical() ;
                                             sortPriceAcs();
                                         } else {
+                                            sortPriceDesVertical();
                                             sortPriceDes();
                                         }
                                     });
@@ -458,6 +457,34 @@
                                         while (switching) {
                                             switching = false;
                                             b = list.getElementsByClassName("product-item");
+                                            var num1, num2, price1, price2;
+                                            for (i = 0; i < (b.length - 1); i++) {
+                                                shouldSwitch = false;
+                                                num1 = b[i].getElementsByClassName("product-price")[0].innerHTML;
+                                                num2 = b[i + 1].getElementsByClassName("product-price")[0].innerHTML;
+                                                price1 = num1.replaceAll(",", "");
+                                                price2 = num2.replaceAll(",", "");
+                                                main1 = parseInt(price1);
+                                                main2 = parseInt(price2);
+                                                if (main1 < main2) {
+
+                                                    shouldSwitch = true;
+                                                    break;
+                                                }
+                                            }
+                                            if (shouldSwitch) {
+                                                b[i].parentNode.insertBefore(b[i + 1], b[i]);
+                                                switching = true;
+                                            }
+                                        }
+                                    }
+                                    function sortPriceDesVertical() {
+                                        var list, i, switching, name, b, shouldSwitch, main1, main2;
+                                        list = document.getElementById("listView");
+                                        switching = true;
+                                        while (switching) {
+                                            switching = false;
+                                            b = list.getElementsByClassName("row");
                                             var num1, num2, price1, price2;
                                             for (i = 0; i < (b.length - 1); i++) {
                                                 shouldSwitch = false;
@@ -507,6 +534,34 @@
                                             }
                                         }
                                     }
+                                    function sortPriceAcsVertical() {
+                                        var list, i, switching, name, b, shouldSwitch, main1, main2;
+                                        list = document.getElementById("listView");
+                                        switching = true;
+                                        while (switching) {
+                                            switching = false;
+                                            b = list.getElementsByClassName("row");
+                                            var num1, num2, price1, price2;
+                                            for (i = 0; i < (b.length - 1); i++) {
+                                                shouldSwitch = false;
+                                                num1 = b[i].getElementsByClassName("product-price")[0].innerHTML;
+                                                num2 = b[i + 1].getElementsByClassName("product-price")[0].innerHTML;
+                                                price1 = num1.replaceAll(",", "");
+                                                price2 = num2.replaceAll(",", "");
+                                                main1 = parseInt(price1);
+                                                main2 = parseInt(price2);
+                                                if (main1 > main2) {
+
+                                                    shouldSwitch = true;
+                                                    break;
+                                                }
+                                            }
+                                            if (shouldSwitch) {
+                                                b[i].parentNode.insertBefore(b[i + 1], b[i]);
+                                                switching = true;
+                                            }
+                                        }
+                                    }
                                     function sortNameAcs() {
                                         var list, i, switching, name, b, shouldSwitch;
                                         list = document.getElementById("product-list");
@@ -514,6 +569,27 @@
                                         while (switching) {
                                             switching = false;
                                             b = list.getElementsByClassName("product-item");
+                                            for (i = 0; i < (b.length - 1); i++) {
+                                                shouldSwitch = false;
+                                                if (b[i].getElementsByClassName("product-name")[0].innerHTML.toLowerCase() > b[i + 1].getElementsByClassName("product-name")[0].innerHTML.toLowerCase())
+                                                {
+                                                    shouldSwitch = true;
+                                                    break;
+                                                }
+                                            }
+                                            if (shouldSwitch) {
+                                                b[i].parentNode.insertBefore(b[i + 1], b[i]);
+                                                switching = true;
+                                            }
+                                        }
+                                    }
+                                    function sortNameAcsVertical() {
+                                        var list, i, switching, name, b, shouldSwitch;
+                                        list = document.getElementById("listView");
+                                        switching = true;
+                                        while (switching) {
+                                            switching = false;
+                                            b = list.getElementsByClassName("row");
                                             for (i = 0; i < (b.length - 1); i++) {
                                                 shouldSwitch = false;
                                                 if (b[i].getElementsByClassName("product-name")[0].innerHTML.toLowerCase() > b[i + 1].getElementsByClassName("product-name")[0].innerHTML.toLowerCase())
@@ -536,6 +612,26 @@
                                         while (switching) {
                                             switching = false;
                                             b = list.getElementsByClassName("product-item");
+                                            for (i = 0; i < (b.length - 1); i++) {
+                                                shouldSwitch = false;
+                                                if (b[i].getElementsByClassName("product-name")[0].innerHTML.toLowerCase() < b[i + 1].getElementsByClassName("product-name")[0].innerHTML.toLowerCase()) {
+                                                    shouldSwitch = true;
+                                                    break;
+                                                }
+                                            }
+                                            if (shouldSwitch) {
+                                                b[i].parentNode.insertBefore(b[i + 1], b[i]);
+                                                switching = true;
+                                            }
+                                        }
+                                    }
+                                    function sortNameDesVertical() {
+                                        var list, i, switching, name, b, shouldSwitch;
+                                        list = document.getElementById("listView");
+                                        switching = true;
+                                        while (switching) {
+                                            switching = false;
+                                            b = list.getElementsByClassName("row");
                                             for (i = 0; i < (b.length - 1); i++) {
                                                 shouldSwitch = false;
                                                 if (b[i].getElementsByClassName("product-name")[0].innerHTML.toLowerCase() < b[i + 1].getElementsByClassName("product-name")[0].innerHTML.toLowerCase()) {
