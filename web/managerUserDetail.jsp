@@ -82,7 +82,7 @@
                         </form>
                         <ul id="topMenu" class="nav pull-right">
                             <li class=""><a href="products_Manager.html">All Products</a></li>
-                            <li class=""><a href="contact.html">Contact</a></li>
+                            <li class=""><a href="contact.jsp">Contact</a></li>
                             <li class=""><a href="userProfile.jsp">Profile</a></li>
                             <li class="">
                                 <a href="MainController?action=User&perform=Log+Out" role="button" style="padding-right:0"><span class="btn btn-large btn-success">Log Out</span></a>
@@ -98,17 +98,17 @@
                 <div class="carousel-inner">
                     <div class="item active">
                         <div class="container">
-                            <a href="register.html"><img style="width:100%" src="themes/images/carousel/1.png" alt="" /></a>
+                            <a href="register.jsp"><img style="width:100%" src="themes/images/carousel/1.png" alt="" /></a>
                         </div>
                     </div>
                     <div class="item">
                         <div class="container">
-                            <a href="register.html"><img style="width:100%" src="themes/images/carousel/2.png" alt="" /></a>
+                            <a href="register.jsp"><img style="width:100%" src="themes/images/carousel/2.png" alt="" /></a>
                         </div>
                     </div>
                     <div class="item">
                         <div class="container">
-                            <a href="register.html"><img src="themes/images/carousel/3.png" alt="" /></a>
+                            <a href="register.jsp"><img src="themes/images/carousel/3.png" alt="" /></a>
                         </div>
                     </div>
                 </div>
@@ -131,28 +131,45 @@
                             </a>
                         </div>
                         <ul id="sideManu" class="nav nav-tabs nav-stacked">
-                            <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=">All</a></li>
-                            <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=IP&status=True">iPhone</a></li>
-                            <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=ID&status=True">iPad</a></li>
-                            <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=MB&status=True">Mac</a></li>
-                            <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AW&status=True">Apple Watch</a></li>
-                            <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AS&status=True">Accessory</a></li>
-                                <c:if test="${sessionScope.USER.roleID.trim() != null}" > 
-                                    <c:if test="${sessionScope.USER.roleID.trim() != 'US'}" >                      
-                                    <li class="subMenu" id="CU"><a>Shop Manager</a>
-                                        <ul style="display:none">
-                                            <c:if test="${sessionScope.USER.roleID.trim() == 'AD'}" >
-                                                <li><a href="DashBoardController"><i class="icon-chevron-right"></i>Dashboard</a></li>
-                                                </c:if>                                            
-                                            <li><a href="managerAddProduct.jsp"><i class="icon-chevron-right"></i>Add Product</a></li>
-                                            <li><a href="MainController?action=Manage+User&perform=Get+User"><i class="icon-chevron-right"></i>User List</a></li>
-                                            <li><a href="MainController?action=Guarantee&perform=Get"><i class="icon-chevron-right"></i>Guarantee</a></li>
-                                            <li><a href="MainController?action=OrderList"><i class="icon-chevron-right"></i>Order List</a></li>
-                                        </ul>
-                                    </li>
-                                </c:if>                       
-                            </c:if>
-                        </ul>
+                        <li class="subMenu"><a>Product</a>  
+                         <ul style="display: none">
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=">All</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=IP&status=True">iPhone</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=ID&status=True">iPad</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=MB&status=True">Mac</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AW&status=True">Apple Watch</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AS&status=True">Accessory</a></li>                          
+                         </ul>
+                         </li>  
+                            <c:if test="${sessionScope.USER.roleID.trim() != null}" > 
+                                <c:if test="${sessionScope.USER.roleID.trim() != 'US'}" >
+                                <li class="subMenu"><a>Manager Product</a>
+                                    <ul style="display: none">
+                                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=">All</a></li>
+                                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=IP">iPhone</a></li>
+                                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=ID">iPad</a></li>
+                                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=MB">Mac</a></li>
+                                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=AW">Apple Watch</a></li>
+                                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=AS">Accessory</a></li>
+                                    </ul>
+                                </li>
+                                <li class="subMenu" id="CU"><a>Shop Manager</a>
+                                    <ul style="display:none">
+                                        <li><a href="DashBoardController"><i class="icon-chevron-right"></i>Dashboard</a></li>
+                                        <li><a href="managerAddProduct.jsp"><i class="icon-chevron-right"></i>Add Product</a></li>
+                                        <li><a href="MainController?action=Manage+User&perform=Get+User"><i class="icon-chevron-right"></i>User List</a></li>
+                                        <c:if test="${sessionScope.USER.roleID.trim() == 'AD'}">
+                                            <li><a href="MainController?action=Manage+User&perform=Get+Manager"><i class="icon-chevron-right"></i>Manager List</a></li>
+                                        </c:if>
+                                        <li><a href="MainController?action=Guarantee&perform=Get"><i class="icon-chevron-right"></i>Guarantee</a></li>
+                                        <li><a href="MainController?action=SaleCode&perform=List"><i class="icon-chevron-right"></i>Sale Code List</a></li>
+                                        <li><a href="MainController?action=OrderList"><i class="icon-chevron-right"></i>Order List</a></li>
+
+                                    </ul>
+                                </li>
+                            </c:if>                       
+                        </c:if>
+                    </ul>
                         <br/>
                     </div>
                     <!-- Sidebar end=============================================== -->

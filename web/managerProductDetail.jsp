@@ -69,14 +69,57 @@
                         <span class="icon-bar"></span>
                     </a>
                     <div class="navbar-inner">
-                        <a class="brand" href="index_Manager.html">SE15 Shop</a>
+                        <a class="brand" href="DashBoardController">SE15 Shop</a>
                         <form class="form-inline navbar-search" method="post" action="MainController">
                             <input id="srchFld" class="srchTxt" type="text" name="keyWord"/>
                             <input type="hidden" value="SearchProduct" name="action"/>
                             <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
                         </form>
                         <ul id="topMenu" class="nav pull-right">
-                            <li class=""><a href="products_Manager.html">All Products</a></li>                                                                        
+                            <li class=""><a href="products_Manager.html">All Products</a></li>
+                            <c:if test="${sessionScope.USER != null}">
+                            <li class=""><a href="userProfile.jsp">Profile</a></li>
+                            </c:if>
+                            <c:choose>
+                            <c:when test="${sessionScope.USER == null}">
+                                <li class="">
+                                    <a href="signupForm.jsp" role="button" style="padding-right:0"><span class="btn btn-large btn-success">Signup</span></a>
+                                </li>
+                                <li class="">
+                                    <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
+                                    <div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                            <h3>Log In</h3>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form class="form-horizontal loginFrm" action="MainController" method="post">
+                                                <div class="control-group">
+                                                    <input type="text" id="inputEmail" placeholder="Enter Email" name="email" required>
+                                                </div>
+                                                <div class="control-group">
+                                                    <input type="password" id="inputPassword" placeholder="Enter Password" name="password" required>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label class="checkbox">
+                                                        <input type="checkbox"> Remember me
+                                                    </label>
+                                                    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                                                    <input type="hidden" name="perform" value="Log in">
+                                                    <button type="submit" class="btn btn-success" name="action" value="User">Sign in</button>
+                                                    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </li>
+                            </c:when>
+                            <c:otherwise>
+                                <li class="">
+                                    <a href="MainController?action=User&perform=Log+Out" role="button" style="padding-right:0"><span class="btn btn-large btn-success">Log Out</span></a>
+                                </li>
+                            </c:otherwise>
+                        </c:choose>  
                         </ul>
                     </div>
                 </div>
@@ -89,28 +132,45 @@
                     <!-- Sidebar ================================================== -->
                     <div id="sidebar" class="span3">                        
                         <ul id="sideManu" class="nav nav-tabs nav-stacked">
-                            <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=">All</a></li>
-                            <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=IP&status=True">iPhone</a></li>
-                            <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=ID&status=True">iPad</a></li>
-                            <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=MB&status=True">Mac</a></li>
-                            <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AW&status=True">Apple Watch</a></li>
-                            <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AS&status=True">Accessory</a></li>
-                                <c:if test="${sessionScope.USER.roleID.trim() != null}" > 
-                                    <c:if test="${sessionScope.USER.roleID.trim() != 'US'}" >                      
-                                    <li class="subMenu" id="CU"><a>Shop Manager</a>
-                                        <ul style="display:none">
-                                            <c:if test="${sessionScope.USER.roleID.trim() == 'AD'}" >
-                                                <li><a href="DashBoardController"><i class="icon-chevron-right"></i>Dashboard</a></li>
-                                                </c:if>                                            
-                                            <li><a href="managerAddProduct.jsp"><i class="icon-chevron-right"></i>Add Product</a></li>
-                                            <li><a href="MainController?action=Manage+User&perform=Get+User"><i class="icon-chevron-right"></i>User List</a></li>
-                                            <li><a href="MainController?action=Guarantee&perform=Get"><i class="icon-chevron-right"></i>Guarantee</a></li>
-                                            <li><a href="MainController?action=OrderList"><i class="icon-chevron-right"></i>Order List</a></li>
-                                        </ul>
-                                    </li>
-                                </c:if>                       
-                            </c:if>
-                        </ul>
+                        <li class="subMenu"><a>Product</a>  
+                         <ul style="display: none">
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=">All</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=IP&status=True">iPhone</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=ID&status=True">iPad</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=MB&status=True">Mac</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AW&status=True">Apple Watch</a></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AS&status=True">Accessory</a></li>                          
+                         </ul>
+                         </li>  
+                            <c:if test="${sessionScope.USER.roleID.trim() != null}" > 
+                                <c:if test="${sessionScope.USER.roleID.trim() != 'US'}" >
+                                <li class="subMenu"><a>Manager Product</a>
+                                    <ul style="display: none">
+                                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=">All</a></li>
+                                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=IP">iPhone</a></li>
+                                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=ID">iPad</a></li>
+                                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=MB">Mac</a></li>
+                                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=AW">Apple Watch</a></li>
+                                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=AS">Accessory</a></li>
+                                    </ul>
+                                </li>
+                                <li class="subMenu" id="CU"><a>Shop Manager</a>
+                                    <ul style="display:none">
+                                        <li><a href="DashBoardController"><i class="icon-chevron-right"></i>Dashboard</a></li>
+                                        <li><a href="managerAddProduct.jsp"><i class="icon-chevron-right"></i>Add Product</a></li>
+                                        <li><a href="MainController?action=Manage+User&perform=Get+User"><i class="icon-chevron-right"></i>User List</a></li>
+                                        <c:if test="${sessionScope.USER.roleID.trim() == 'AD'}">
+                                            <li><a href="MainController?action=Manage+User&perform=Get+Manager"><i class="icon-chevron-right"></i>Manager List</a></li>
+                                        </c:if>
+                                        <li><a href="MainController?action=Guarantee&perform=Get"><i class="icon-chevron-right"></i>Guarantee</a></li>
+                                        <li><a href="MainController?action=SaleCode&perform=List"><i class="icon-chevron-right"></i>Sale Code List</a></li>
+                                        <li><a href="MainController?action=OrderList"><i class="icon-chevron-right"></i>Order List</a></li>
+
+                                    </ul>
+                                </li>
+                            </c:if>                       
+                        </c:if>
+                    </ul>
                         <br/>
                     </div>
                     <!-- Sidebar end=============================================== -->
