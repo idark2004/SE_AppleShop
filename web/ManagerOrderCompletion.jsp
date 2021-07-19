@@ -4,10 +4,11 @@
     Author     : anime
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
-
+    
 <head>
     <meta charset="utf-8">
     <title>SE15 Shop | Order Summary</title>
@@ -84,40 +85,50 @@
                     </form>
                     <ul id="topMenu" class="nav pull-right">
                         <li class=""><a href="products_Manager.html">All Products</a></li>
-                        <li class=""><a href="contact.html">Contact</a></li>
-                        <li class=""><a href="user_profile.html">Profile</a></li>
-                        <li class="">
-                            <a href="register.html" role="button" style="padding-right:0"><span class="btn btn-large btn-success">Signup</span></a>
-                        </li>
-                        <li class="">
-                            <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
-                            <div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                    <h3>Login In</h3>
-                                </div>
-                                <div class="modal-body">
-                                    <form class="form-horizontal loginFrm">
-                                        <div class="control-group">
-                                            <input type="text" id="inputEmail" placeholder="Email">
+                        <li class=""><a href="contact.jsp">Contact</a></li>
+                        <c:if test="${sessionScope.USER != null}">
+                            <li class=""><a href="userProfile.jsp">Profile</a></li>
+                            </c:if>
+                            <c:choose>
+                            <c:when test="${sessionScope.USER == null}">
+                                <li class="">
+                                    <a href="signupForm.jsp" role="button" style="padding-right:0"><span class="btn btn-large btn-success">Signup</span></a>
+                                </li>
+                                <li class="">
+                                    <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
+                                    <div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                            <h3>Log In</h3>
                                         </div>
-                                        <div class="control-group">
-                                            <input type="password" id="inputPassword" placeholder="Password">
+                                        <div class="modal-body">
+                                            <form class="form-horizontal loginFrm" action="MainController" method="post">
+                                                <div class="control-group">
+                                                    <input type="text" id="inputEmail" placeholder="Enter Email" name="email" required>
+                                                </div>
+                                                <div class="control-group">
+                                                    <input type="password" id="inputPassword" placeholder="Enter Password" name="password" required>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label class="checkbox">
+                                                        <input type="checkbox"> Remember me
+                                                    </label>
+                                                    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                                                    <input type="hidden" name="perform" value="Log in">
+                                                    <button type="submit" class="btn btn-success" name="action" value="User">Sign in</button>
+                                                    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                                                </div>
+                                            </form>
                                         </div>
-                                        <div class="control-group">
-                                            <label class="checkbox">
-											<input type="checkbox"> Remember me
-											</label>
-                                        </div>
-                                        <div class="control-group">
-                                            <a href="#"><img width="30" height="30" src="themes/images/google.png" title="Login with Google" alt="Google Login" /></a>
-                                        </div>
-                                    </form>
-                                    <button type="submit" class="btn btn-success">Sign in</button>
-                                    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                                </div>
-                            </div>
-                        </li>
+                                    </div>
+                                </li>
+                            </c:when>
+                            <c:otherwise>
+                                <li class="">
+                                    <a href="MainController?action=User&perform=Log+Out" role="button" style="padding-right:0"><span class="btn btn-large btn-success">Log Out</span></a>
+                                </li>
+                            </c:otherwise>
+                        </c:choose>  
                     </ul>
                 </div>
             </div>
@@ -129,17 +140,17 @@
             <div class="carousel-inner">
                 <div class="item active">
                     <div class="container">
-                        <a href="register.html"><img style="width:100%" src="themes/images/carousel/1.png" alt="" /></a>
+                        <a href="register.jsp"><img style="width:100%" src="themes/images/carousel/1.png" alt="" /></a>
                     </div>
                 </div>
                 <div class="item">
                     <div class="container">
-                        <a href="register.html"><img style="width:100%" src="themes/images/carousel/2.png" alt="" /></a>
+                        <a href="register.jsp"><img style="width:100%" src="themes/images/carousel/2.png" alt="" /></a>
                     </div>
                 </div>
                 <div class="item">
                     <div class="container">
-                        <a href="register.html"><img src="themes/images/carousel/3.png" alt="" /></a>
+                        <a href="register.jsp"><img src="themes/images/carousel/3.png" alt="" /></a>
                     </div>
                 </div>
             </div>
@@ -162,16 +173,20 @@
                             </a>
                     </div>
                     <ul id="sideManu" class="nav nav-tabs nav-stacked">
-                        <li><a href="products_Manager.html">All</a></li>
-                        <li><a href="products_Manager.html">iPhone</a></li>
-                        <li><a href="products_Manager.html">iPad</a></li>
-                        <li><a href="products_Manager.html">Mac</a></li>
-                        <li><a href="products_Manager.html">Accessory</a></li>
-                        <li class="subMenu"><a>Shop Manager</a>
+                        <li><a href="MainController?action=Manage+Product&perform=Get">All</a></li>
+                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=IP">iPhone</a></li>
+                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=ID">iPad</a></li>
+                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=MB">Mac</a></li>
+                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=AS">Accessory</a></li>
+                        <li class="subMenu" id="manaLi"><a>Shop Manager</a>
                             <ul style="display:none">
-                                <li><a href="dashboard_Manager.html"><i class="icon-chevron-right"></i>Dashboard</a></li>
-                                <li><a href="product_details_Manager.html"><i class="icon-chevron-right"></i>Add Product</a></li>
-                                <li><a href="customers_Manager.html"><i class="icon-chevron-right"></i>Customer List</a></li>
+                                <li><a href="DashBoardController"><i class="icon-chevron-right"></i>Dashboard</a></li>
+                                <li><a href="ManagerAddProduct.jsp"><i class="icon-chevron-right"></i>Add Product</a></li>
+                                <li><a href="MainController?action=Manage+User&perform=Get+User&roleID=US"><i class="icon-chevron-right"></i>User List</a></li>
+                                <li><a href="MainController?action=SaleCode&perform=List"><i class="icon-chevron-right"></i>Sale Code List</a></li>
+                            <c:if test="${sessionScope.USER.roleID.trim() == 'AD'}">
+                                <li><a href="MainController?action=Manage+User&perform=Get+Manager"><i class="icon-chevron-right"></i>Manager List</a></li>
+                            </c:if>                                
                             </ul>
                         </li>
                     </ul>

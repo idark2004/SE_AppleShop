@@ -82,7 +82,7 @@
                         </form>
                         <ul id="topMenu" class="nav pull-right">
                             <li class=""><a href="products_Manager.html">All Products</a></li>
-                            <li class=""><a href="contact.html">Contact</a></li>
+                            <li class=""><a href="contact.jsp">Contact</a></li>
                             <li class=""><a href="userProfile.jsp">Profile</a></li>
                             <li class="">
                                 <a href="MainController?action=User&perform=Log+Out" role="button" style="padding-right:0"><span class="btn btn-large btn-success">Log Out</span></a>
@@ -98,17 +98,17 @@
                 <div class="carousel-inner">
                     <div class="item active">
                         <div class="container">
-                            <a href="register.html"><img style="width:100%" src="themes/images/carousel/1.png" alt="" /></a>
+                            <a href="register.jsp"><img style="width:100%" src="themes/images/carousel/1.png" alt="" /></a>
                         </div>
                     </div>
                     <div class="item">
                         <div class="container">
-                            <a href="register.html"><img style="width:100%" src="themes/images/carousel/2.png" alt="" /></a>
+                            <a href="register.jsp"><img style="width:100%" src="themes/images/carousel/2.png" alt="" /></a>
                         </div>
                     </div>
                     <div class="item">
                         <div class="container">
-                            <a href="register.html"><img src="themes/images/carousel/3.png" alt="" /></a>
+                            <a href="register.jsp"><img src="themes/images/carousel/3.png" alt="" /></a>
                         </div>
                     </div>
                 </div>

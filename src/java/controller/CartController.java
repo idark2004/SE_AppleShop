@@ -195,7 +195,6 @@ public class CartController extends HttpServlet {
                 case "addSaleCode":
                     String saleCode = request.getParameter("saleCode");
                     SaleCodeDTO sale=sDAO.ApplyCode(saleCode);
-                    System.out.println(sale.getCodeID()+" "+sale.getPercentage());
                     if (sale!=null){
                         request.setAttribute("sale", sale);
                         url="cartDetail.jsp";

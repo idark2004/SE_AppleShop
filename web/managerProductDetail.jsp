@@ -69,14 +69,57 @@
                         <span class="icon-bar"></span>
                     </a>
                     <div class="navbar-inner">
-                        <a class="brand" href="index_Manager.html">SE15 Shop</a>
+                        <a class="brand" href="DashBoardController">SE15 Shop</a>
                         <form class="form-inline navbar-search" method="post" action="MainController">
                             <input id="srchFld" class="srchTxt" type="text" name="keyWord"/>
                             <input type="hidden" value="SearchProduct" name="action"/>
                             <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
                         </form>
                         <ul id="topMenu" class="nav pull-right">
-                            <li class=""><a href="products_Manager.html">All Products</a></li>                                                                        
+                            <li class=""><a href="products_Manager.html">All Products</a></li>
+                            <c:if test="${sessionScope.USER != null}">
+                            <li class=""><a href="userProfile.jsp">Profile</a></li>
+                            </c:if>
+                            <c:choose>
+                            <c:when test="${sessionScope.USER == null}">
+                                <li class="">
+                                    <a href="signupForm.jsp" role="button" style="padding-right:0"><span class="btn btn-large btn-success">Signup</span></a>
+                                </li>
+                                <li class="">
+                                    <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
+                                    <div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                            <h3>Log In</h3>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form class="form-horizontal loginFrm" action="MainController" method="post">
+                                                <div class="control-group">
+                                                    <input type="text" id="inputEmail" placeholder="Enter Email" name="email" required>
+                                                </div>
+                                                <div class="control-group">
+                                                    <input type="password" id="inputPassword" placeholder="Enter Password" name="password" required>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label class="checkbox">
+                                                        <input type="checkbox"> Remember me
+                                                    </label>
+                                                    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                                                    <input type="hidden" name="perform" value="Log in">
+                                                    <button type="submit" class="btn btn-success" name="action" value="User">Sign in</button>
+                                                    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </li>
+                            </c:when>
+                            <c:otherwise>
+                                <li class="">
+                                    <a href="MainController?action=User&perform=Log+Out" role="button" style="padding-right:0"><span class="btn btn-large btn-success">Log Out</span></a>
+                                </li>
+                            </c:otherwise>
+                        </c:choose>  
                         </ul>
                     </div>
                 </div>
@@ -89,16 +132,21 @@
                     <!-- Sidebar ================================================== -->
                     <div id="sidebar" class="span3">                        
                         <ul id="sideManu" class="nav nav-tabs nav-stacked">
-                            <li><a href="products_Manager.html">All</a></li>
-                            <li><a href="products_Manager.html">iPhone</a></li>
-                            <li><a href="products_Manager.html">iPad</a></li>
-                            <li><a href="products_Manager.html">Mac</a></li>
-                            <li><a href="products_Manager.html">Accessory</a></li>
-                            <li class="subMenu"><a>Shop Manager</a>
+                            <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=">All</a></li>
+                            <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=IP">iPhone</a></li>
+                            <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=ID">iPad</a></li>
+                            <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=MB">Mac</a></li>
+                            <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=AW">Apple Watch</a></li>
+                            <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=AS">Accessory</a></li>
+                            <li class="subMenu" id="manaLi"><a>Shop Manager</a>
                                 <ul style="display:none">
-                                    <li><a href="dashboard_Manager.html"><i class="icon-chevron-right"></i>Dashboard</a></li>
-                                    <li><a href="product_details_Manager.html"><i class="icon-chevron-right"></i>Add Product</a></li>
-                                    <li><a href="customers_Manager.html"><i class="icon-chevron-right"></i>Customer List</a></li>
+                                    <li><a href="DashBoardController"><i class="icon-chevron-right"></i>Dashboard</a></li>
+                                    <li><a href="ManagerAddProduct.jsp"><i class="icon-chevron-right"></i>Add Product</a></li>
+                                    <li><a href="MainController?action=Manage+User&perform=Get+User&roleID=US"><i class="icon-chevron-right"></i>User List</a></li>
+                                    <li><a href="MainController?action=SaleCode&perform=List"><i class="icon-chevron-right"></i>Sale Code List</a></li>
+                                <c:if test="${sessionScope.USER.roleID.trim() == 'AD'}">
+                                    <li><a href="MainController?action=Manage+User&perform=Get+Manager"><i class="icon-chevron-right"></i>Manager List</a></li>
+                                </c:if>                                
                                 </ul>
                             </li>
                         </ul>
