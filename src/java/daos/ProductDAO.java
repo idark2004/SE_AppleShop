@@ -68,7 +68,8 @@ public class ProductDAO {
         }
         return list;
     }
-     public List<ProductDTO> getTopProduct() throws SQLException {
+
+    public List<ProductDTO> getTopProduct() throws SQLException {
         List<ProductDTO> list = null;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -76,11 +77,11 @@ public class ProductDAO {
         try {
             conn = DBConnect.makeConnection();
             if (conn != null) {
-                String sql = "SELECT  p.productID, p.productName, p.image, Min(s.specPrice) as price ,(p.orderCount+p.viewCount) as hotCount " +
-                " FROM tblProducts p, tblProductSpec s " +
-                " WHERE p.productID = s.productID AND p.categoryID LIKE '%%' AND s.specStatus = 'True' " +
-                " GROUP BY p.productID, p.productName , p.image ,p.viewCount,p.orderCount " +
-                " ORDER BY hotCount DESC";
+                String sql = "SELECT  p.productID, p.productName, p.image, Min(s.specPrice) as price ,(p.orderCount+p.viewCount) as hotCount "
+                        + " FROM tblProducts p, tblProductSpec s "
+                        + " WHERE p.productID = s.productID AND p.categoryID LIKE '%%' AND s.specStatus = 'True' "
+                        + " GROUP BY p.productID, p.productName , p.image ,p.viewCount,p.orderCount "
+                        + " ORDER BY hotCount DESC";
                 stm = conn.prepareStatement(sql);
                 rs = stm.executeQuery();
                 while (rs.next()) {
@@ -109,30 +110,32 @@ public class ProductDAO {
         }
         return list;
     }
-    public boolean addProduct(String productName,String categoryID,String productDescription,String image) throws SQLException{
-         Connection c = null; //doi tuong ket noi
+
+    public boolean addProduct(String productName, String categoryID, String productDescription, String image) throws SQLException {
+        Connection c = null; //doi tuong ket noi
         PreparedStatement ps = null; //doi tuong truy van
         ResultSet rs = null;//doi tuong nhan ket qua
         String sql = "INSERT INTO tblProducts(ProductID,ProductName,productDescription,CategoryID,image) "
-                        + "VALUES(?,?,?,?,?)";
-        try {boolean check =false;
+                + "VALUES(?,?,?,?,?)";
+        try {
+            boolean check = false;
             DBConnect db = new DBConnect();
             c = db.makeConnection(); // tao doi tuong connection qua DBConnection
             DBSupport dbs = new DBSupport();
             if (c != null) {
                 ps = c.prepareStatement(sql); // tao truy van
-                
-               String pID = categoryID+"-"+dbs.getNumbRows("productID", "tblProducts");
-                ps.setString(1,pID );
+
+                String pID = categoryID + "-" + dbs.getNumbRows("productID", "tblProducts");
+                ps.setString(1, pID);
                 ps.setString(2, productName);
                 ps.setString(3, productDescription);
-                ps.setString(4,categoryID );
-                ps.setString(5,image );
-                
+                ps.setString(4, categoryID);
+                ps.setString(5, image);
+
                 //gan tham so 1 la bien truyen vao
-                check = ps.executeUpdate()>0;
+                check = ps.executeUpdate() > 0;
                 return true;
-           
+
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -330,7 +333,7 @@ public class ProductDAO {
         return null;
     }
 
-    public ProductDTO GetSpec(String specID) throws NamingException, SQLException {
+    public ProductDTO getSpec(String specID) throws NamingException, SQLException {
         Connection c = null; //doi tuong ket noi
         PreparedStatement ps = null; //doi tuong truy van
         ResultSet rs = null;//doi tuong nhan ket qua
@@ -396,8 +399,8 @@ public class ProductDAO {
         try {
             conn = DBConnect.makeConnection();
             if (conn != null) {
-                String sql = "INSERT INTO tblOrders(orderID,cusName,orderAddress,orderCreateDate,orderExpectDate,codeID,userID,orderPrice,payMethod,orderStatus,ggUserID) "
-                        + "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+                String sql = "INSERT INTO tblOrders(orderID,cusName,orderAddress,orderCreateDate,orderExpectDate,codeID,userID,orderPrice,payMethod,orderStatus) "
+                        + "VALUES(?,?,?,?,?,?,?,?,?,?)";
                 stm = conn.prepareStatement(sql);
                 String orderID = "ORD-" + db.getNumbRows("orderID", "tblOrders");
                 stm.setString(1, orderID);
@@ -409,8 +412,7 @@ public class ProductDAO {
                 stm.setString(7, userID);
                 stm.setDouble(8, price);
                 stm.setString(9, method);
-                stm.setString(10, "Accepted");
-                stm.setString(11, null);
+                stm.setString(10, "Accepted");                
                 stm.executeUpdate();
                 newOrder = new OrderDTO(orderID, name, address, phone, email, orderCreateDate, orderExpectedDay, codeID, userID, price, method, "True");
 
@@ -590,7 +592,7 @@ public class ProductDAO {
         return null;
     }
 
-    public boolean UpdateProduct(String productID, String name, String description) throws NamingException, SQLException {
+    public boolean updateProduct(String productID, String name, String description) throws NamingException, SQLException {
         boolean check = false;
         Connection c = null;
         PreparedStatement ps = null;
@@ -605,11 +607,11 @@ public class ProductDAO {
                 ps.setString(2, description);
                 ps.setString(3, productID);
 
-                check= ps.executeUpdate()>0;
-                
+                check = ps.executeUpdate() > 0;
+
             }
         } catch (Exception e) {
-            e.printStackTrace();            
+            e.printStackTrace();
         } finally {
             if (ps != null) {
                 ps.close();
@@ -621,7 +623,7 @@ public class ProductDAO {
         return check;
     }
 
-    public boolean UpdateProductWithImage(String productID, String name, String image, String description) throws NamingException, SQLException {
+    public boolean updateProductWithImage(String productID, String name, String image, String description) throws NamingException, SQLException {
         Connection c = null;
         PreparedStatement ps = null;
         String sql = "UPDATE tblProducts SET productName=?, image=?, productDescription = ? WHERE productID=?";
@@ -652,7 +654,8 @@ public class ProductDAO {
         }
         return false;
     }
-    public boolean CreateSpec(ProductDTO product) throws NamingException, SQLException {
+
+    public boolean createSpec(ProductDTO product) throws NamingException, SQLException {
         Connection c = null;
         PreparedStatement ps = null;
         DBSupport dbs = new DBSupport();
@@ -663,7 +666,7 @@ public class ProductDAO {
 
             if (c != null) {
                 ps = c.prepareStatement(sql);
-                String specID = "Spec-"+dbs.getNumbRows("specID", "tblProductSpec");
+                String specID = "Spec-" + dbs.getNumbRows("specID", "tblProductSpec");
                 ps.setString(1, specID);
                 ps.setString(2, product.getRam());
                 ps.setString(3, product.getStorage());
@@ -689,6 +692,7 @@ public class ProductDAO {
         }
         return false;
     }
+/*
     public boolean CreateSpec1(ProductDTO product) throws NamingException, SQLException {
         Connection c = null;
         PreparedStatement ps = null;
@@ -700,7 +704,7 @@ public class ProductDAO {
 
             if (c != null) {
                 ps = c.prepareStatement(sql);
-                String specID = "Spec-"+dbs.getNumbRows("specID", "tblProductSpec");
+                String specID = "Spec-" + dbs.getNumbRows("specID", "tblProductSpec");
                 ps.setString(1, specID);
                 ps.setString(2, product.getRam());
                 ps.setString(3, product.getStorage());
@@ -726,7 +730,8 @@ public class ProductDAO {
         }
         return false;
     }
-    
+*/
+
     public List<ProductDTO> getAllSpec(String productID) throws SQLException {
         List<ProductDTO> specList = null;
         Connection conn = null;
@@ -821,12 +826,12 @@ public class ProductDAO {
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, pro.getColor());
                 stm.setString(2, pro.getRam());
-                stm.setString(3, pro.getStorage());                
+                stm.setString(3, pro.getStorage());
                 stm.setDouble(4, pro.getPrice());
                 stm.setInt(5, pro.getSpecQuantity());
                 stm.setBoolean(6, pro.isStatus());
                 stm.setString(7, pro.getSpecID());
-                check = stm.executeUpdate()>0;
+                check = stm.executeUpdate() > 0;
             }
         } finally {
             if (stm != null) {

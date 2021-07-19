@@ -190,10 +190,10 @@ public class ManageProductController extends HttpServlet {
                     System.out.println(imgUrl.length());
                     System.out.println(imgUrl);
                     if (imgUrl.length()<=7){
-                        dao.UpdateProduct(productID, productName,description);
+                        dao.updateProduct(productID, productName,description);
                     }
                     else {
-                        dao.UpdateProductWithImage(productID, productName, imgUrl, description);
+                        dao.updateProductWithImage(productID, productName, imgUrl, description);
                     }
                     url = "ManageProductController?perform=Manage+Detail&productID="+productID;
                     
@@ -215,7 +215,7 @@ public class ManageProductController extends HttpServlet {
                     newSpec.setPrice(newSpecPrice);
                     newSpec.setSpecQuantity(newSpecQuantity);
                     
-                    if(dao.CreateSpec(newSpec)){
+                    if(dao.createSpec(newSpec)){
                         url = "ManageProductController?perform=Manage+Detail&productID="+productID;
                     }
                     break;

@@ -111,14 +111,14 @@ public class CartController extends HttpServlet {
                     String specID= request.getParameter("hardware").trim();
                     int qty = Integer.parseInt(request.getParameter("Quantity"));
                     
-                    ProductDTO product=prDAO.GetSpec(specID);
-                    if(prDAO.GetSpec(specID)==null) System.err.println("null spec");
+                    ProductDTO product=prDAO.getSpec(specID);
+                    if(prDAO.getSpec(specID)==null) System.err.println("null spec");
                     else System.err.println("not null");
                     if (product!=null){
                         for(int i=0; i<qty; i++){
                             if(session.getAttribute("cart")==null){
                                 cart = new ArrayList<CartItemDTO>();
-                                cart.add(new CartItemDTO(prDAO.GetSpec( 
+                                cart.add(new CartItemDTO(prDAO.getSpec( 
                                         specID), 1));
                                 session.setAttribute("cart", cart);
                                 url="MainController?action=Product&perform=ViewDetail&productID="+productID+"&color="+color+"&specID="+specID;
@@ -127,7 +127,7 @@ public class CartController extends HttpServlet {
                                 int index = isExisting( 
                                         specID, cart);
                                 if (index == -1){
-                                    cart.add(new CartItemDTO(prDAO.GetSpec(
+                                    cart.add(new CartItemDTO(prDAO.getSpec(
                                         specID), 1));
                                 }
                                 else {

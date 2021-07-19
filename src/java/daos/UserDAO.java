@@ -8,15 +8,14 @@ package daos;
 import utils.DBConnect;
 import dtos.UserDTO;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.naming.NamingException;
 import utils.DBSupport;
+import utils.Encrypt;
 
 /**
  *
@@ -28,6 +27,7 @@ public class UserDAO {
         Connection conn = null; //doi tuong ket noi
         PreparedStatement stm = null; //doi tuong truy van
         ResultSet rs = null;//doi tuong nhan ket qua
+        Encrypt encrypt = new Encrypt();
 
         String sql = "SELECT * FROM tblUsers WHERE userEmail=? AND password=? ";
 
@@ -35,9 +35,10 @@ public class UserDAO {
             conn = DBConnect.makeConnection(); // tao doi tuong connection qua DBConnection
 
             if (conn != null) {
+                String crypted = encrypt.encryptPass(password);
                 stm = conn.prepareStatement(sql); // tao truy van
                 stm.setString(1, email); //gan tham so 1 la bien truyen vao
-                stm.setString(2, password);
+                stm.setString(2, crypted);
                 rs = stm.executeQuery();
 
                 while (rs.next()) {
@@ -238,14 +239,17 @@ public class UserDAO {
     public boolean updateUserPassword(UserDTO u) throws NamingException, SQLException {
         Connection conn = null;
         PreparedStatement stm = null;
+        Encrypt encrypt = new Encrypt();
         String sql = "UPDATE tblUsers SET password=? WHERE userID=?";
         try {
             conn = DBConnect.makeConnection();
 
             if (conn != null) {
+                String crypted = encrypt.encryptPass(u.getPassword());
+                
                 stm = conn.prepareStatement(sql);
 
-                stm.setString(1, u.getPassword());
+                stm.setString(1, crypted);
                 stm.setString(2, u.getUserID());
 
                 stm.executeUpdate();
@@ -268,6 +272,7 @@ public class UserDAO {
     public void insert(UserDTO user) throws SQLException {
         Connection conn = null;
         PreparedStatement stm = null;
+        Encrypt encrypt = new Encrypt();
         try {
             conn = DBConnect.makeConnection(); // tao doi tuong connection qua DBConnection
             if (conn != null) {
@@ -279,7 +284,7 @@ public class UserDAO {
                 stm.setString(1, userID+db.getNumbRows("userID", "tblUsers"));
                 stm.setString(2, user.getName());
                 stm.setString(3, user.getEmail());
-                stm.setString(4, user.getPassword());
+                stm.setString(4, encrypt.encryptPass(user.getPassword()));
                 stm.setString(5, user.getPhone());
                 stm.setString(6, user.getAddress());
                 stm.setString(7, user.getRoleID());
@@ -294,38 +299,7 @@ public class UserDAO {
                 conn.close();
             }
         }
-    }
-
-    public void manageGoogleUser(UserDTO user) throws SQLException {
-        Connection conn = null;
-        PreparedStatement stm = null;
-        try {
-            conn = DBConnect.makeConnection();
-            if (conn != null) {
-                long d = System.currentTimeMillis();
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-                Date currentDate = new Date(d);
-                String sql = "INSERT INTO tblGoogleUsers(idToken, fullName, email, createDate,status, roleID) "
-                        + " VALUES(?,?,?,?,?,?)";
-                stm = conn.prepareStatement(sql);
-                stm.setString(1, user.getUserID());
-                stm.setString(2, user.getName());
-                stm.setString(3, user.getEmail());
-                stm.setString(4, formatter.format(currentDate));
-                stm.setBoolean(5, Boolean.parseBoolean(user.getStatus()));
-                stm.setString(6, user.getRoleID());
-                stm.execute();
-            }
-        } catch (Exception e) {
-        } finally {
-            if (stm != null) {
-                stm.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
-        }
-    }
+    }    
 
     public List<UserDTO> getUserList() throws SQLException {
         List<UserDTO> list = null;

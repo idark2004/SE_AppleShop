@@ -39,10 +39,6 @@
         <servlet-class>controllers_backup.ViewProductController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>AddToCartController</servlet-name>
-        <servlet-class>controllers_backup.AddToCartController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>RemoveCartItemController</servlet-name>
         <servlet-class>controllers_backup.RemoveCartItemController</servlet-class>
     </servlet>
@@ -89,10 +85,6 @@
     <servlet>
         <servlet-name>ResetPasswordController</servlet-name>
         <servlet-class>controller.ResetPasswordController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>GoogleSignInController</servlet-name>
-        <servlet-class>controller.GoogleSignInController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SaleCodeController</servlet-name>
@@ -166,10 +158,6 @@
         <url-pattern>/ViewProductController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>AddToCartController</servlet-name>
-        <url-pattern>/AddToCartController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>RemoveCartItemController</servlet-name>
         <url-pattern>/RemoveCartItemController</url-pattern>
     </servlet-mapping>
@@ -228,10 +216,6 @@
     <servlet-mapping>
         <servlet-name>ResetPasswordController</servlet-name>
         <url-pattern>/ResetPasswordController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>GoogleSignInController</servlet-name>
-        <url-pattern>/GoogleSignInController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SaleCodeController</servlet-name>

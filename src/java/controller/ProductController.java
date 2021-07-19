@@ -171,7 +171,7 @@ public class ProductController extends HttpServlet {
                     newProductSpec.setSpecQuantity(newQuantity); 
                     pDAO = new ProductDAO();
                     System.out.println("productID="+cateID+"-"+a);    
-                    if (pDAO.CreateSpec1(newProductSpec) || pDAO.addProduct(pname, cateID, des, imgUrl)){
+                    if (pDAO.createSpec(newProductSpec) || pDAO.addProduct(pname, cateID, des, imgUrl)){
                         url="MainController?action=Product&perform=ViewDetail&productID="+cateID+"-"+a;
                         System.out.println("Add thanh cong va productID="+cateID+"-"+a); 
                         System.out.println("success");

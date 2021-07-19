@@ -47,7 +47,7 @@ public class CreateSpecController extends HttpServlet {
             newProductSpec.setSpecQuantity(newQuantity);
             
             ProductDAO pDAO = new ProductDAO();
-            if (pDAO.CreateSpec(newProductSpec)){
+            if (pDAO.createSpec(newProductSpec)){
                 url="MainController?action=UpdateProductManagement&productID="+id;
                 System.out.println("success");
             }
