@@ -65,7 +65,7 @@
                                 <c:set var="subtotalCount" value="${cartItem.quantity}"/>
                                 <c:set var="subtotal" value="${subtotal+cartItem.quantity}"/>
                             </c:forEach>
-                            <a href="cartDetail.jsp"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> ${subtotal} Itemes in your cart </span> </a>
+                            <a href="cartDetail.jsp"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> ${subtotal} Items in your cart </span> </a>
                         </div>
                     </div>
                 </div>
@@ -79,45 +79,56 @@
                     <div class="navbar-inner">
                         <a class="brand" href="MainController?action=Product&perform=Index">SE15 Shop</a>
                         <form class="form-inline navbar-search" method="post" action="MainController">
-                        <input id="srchFld" class="srchTxt" type="text" name="keyWord"/>
-                        <input type="hidden" value="SearchProduct" name="action"/>
-                        <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
-                         </form>
+                            <input id="srchFld" class="srchTxt" type="text" name="keyWord"/>
+                            <input type="hidden" value="SearchProduct" name="action"/>
+                            <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
+                        </form>
                         <ul id="topMenu" class="nav pull-right">
                             <li class=""><a href="MainController?action=Product&perform=ViewProduct">All Products</a></li>
-                            <li class=""><a href="contact.jsp">Contact</a></li>
-                            <li class=""><a href="userProfile.jsp">Profile</a></li>
-                            <li class="">
-                                <a href="signupForm.jsp" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Signup</span></a>
-                            </li>
-                            <li class="">
-                                <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
-                                <div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                        <h3>Log In</h3>
-                                    </div>
-                                    <div class="modal-body">
-                                    <form class="form-horizontal loginFrm" action="MainController" method="post">
-                                        <div class="control-group">
-                                            <input type="text" id="inputEmail" placeholder="Enter Email" name="email" required>
+                            <li class=""><a href="contact.jsp">Contact</a></li>                            
+                                <c:if test="${sessionScope.USER != null}">
+                                <li class=""><a href="userProfile.jsp">Profile</a></li>
+                                </c:if>
+                                <c:choose>
+                                <c:when test="${sessionScope.USER == null}">
+                                    <li class="">
+                                        <a href="signupForm.jsp" role="button" style="padding-right:0"><span class="btn btn-large btn-success">Signup</span></a>
+                                    </li>
+                                    <li class="">
+                                        <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
+                                        <div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                <h3>Log In</h3>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form class="form-horizontal loginFrm" action="MainController" method="post">
+                                                    <div class="control-group">
+                                                        <input type="text" id="inputEmail" placeholder="Enter Email" name="email" required>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <input type="password" id="inputPassword" placeholder="Enter Password" name="password" required>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="checkbox">
+                                                            <input type="checkbox"> Remember me
+                                                        </label>
+                                                        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                                                        <input type="hidden" name="perform" value="Log in">
+                                                        <button type="submit" class="btn btn-success" name="action" value="User">Sign in</button>
+                                                        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                                                    </div>
+                                                </form>
+                                            </div>
                                         </div>
-                                        <div class="control-group">
-                                            <input type="password" id="inputPassword" placeholder="Enter Password" name="password" required>
-                                        </div>
-                                        <div class="control-group">
-                                            <label class="checkbox">
-											<input type="checkbox"> Remember me
-											</label>
-                                            
-                                            <input type="hidden" name="perform" value="Log in">
-                                            <button type="submit" class="btn btn-success" name="action" value="User">Sign in</button>
-                                            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                                        </div>
-                                    </form>
-                                </div>
-                                </div>
-                            </li>
+                                    </li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li class="">
+                                        <a href="MainController?action=User&perform=Log+Out" role="button" style="padding-right:0"><span class="btn btn-large btn-success">Log Out</span></a>
+                                    </li>
+                                </c:otherwise>
+                            </c:choose>
                         </ul>
                     </div>
                 </div>
@@ -157,31 +168,47 @@
                                 <c:set var="total" value="${total + (cartItem.quantity * cartItem.product.price)}"/>
                             </c:forEach>
                             <a id="myCart" href="cartDetail.jsp"><img src="themes/images/ico-cart.png" alt="cart">${subtotal} 
-                            <c:if test="${sessionScope.cart == null}">No</c:if> 
-                            Items 
-                            <c:if test="${sessionScope.cart != null}">
-                            <span class="badge badge-warning pull-right"> 
-                                    <fmt:setLocale value="vi_VN" />
-                                    <fmt:formatNumber value="${total}" type="currency" />
-                            </span>
-                            </c:if>
+                                <c:if test="${sessionScope.cart == null}">No</c:if> 
+                                    Items 
+                                <c:if test="${sessionScope.cart != null}">
+                                    <span class="badge badge-warning pull-right"> 
+                                        <fmt:setLocale value="vi_VN" />
+                                        <fmt:formatNumber value="${total}" type="currency" />
+                                    </span>
+                                </c:if>
                             </a>
                         </div>
                         <ul id="sideManu" class="nav nav-tabs nav-stacked">
-                        <li><a href="MainController?action=Product&perform=ViewProduct">All</a></li>
-                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=IP&status=True">iPhone</a></li>
-                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=ID&status=True">iPad</a></li>
-                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=MB&status=True">Mac</a></li>
-                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AW&status=True">Apple Watch</a></li>
-                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AS&status=True">Accessory</a></li>
-                    </ul>
+                            <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=">All</a></li>
+                            <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=IP&status=True">iPhone</a></li>
+                            <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=ID&status=True">iPad</a></li>
+                            <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=MB&status=True">Mac</a></li>
+                            <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AW&status=True">Apple Watch</a></li>
+                            <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AS&status=True">Accessory</a></li>
+                                <c:if test="${sessionScope.USER.roleID.trim() != null}" > 
+                                    <c:if test="${sessionScope.USER.roleID.trim() != 'US'}" >                      
+                                    <li class="subMenu" id="CU"><a>Shop Manager</a>
+                                        <ul style="display:none">
+                                            <c:if test="${sessionScope.USER.roleID.trim() == 'AD'}" >
+                                                <li><a href="DashBoardController"><i class="icon-chevron-right"></i>Dashboard</a></li>
+                                                </c:if>                                            
+                                            <li><a href="managerAddProduct.jsp"><i class="icon-chevron-right"></i>Add Product</a></li>
+                                            <li><a href="MainController?action=Manage+User&perform=Get+User"><i class="icon-chevron-right"></i>User List</a></li>
+                                            <li><a href="MainController?action=Guarantee&perform=Get"><i class="icon-chevron-right"></i>Guarantee</a></li>
+                                            <li><a href="MainController?action=OrderList"><i class="icon-chevron-right"></i>Order List</a></li>
+                                        </ul>
+                                    </li>
+                                </c:if>                       
+                            </c:if>
+
+                        </ul>
                         <br/>
                     </div>
                     <!-- Sidebar end=============================================== -->
                     <div class="span9">
                         <ul class="breadcrumb">
                             <li><a href="MainController?action=Product&perform=Index">Home</a> <span class="divider">/</span></li>
-                            <li><a href="productList.jsp">Products</a> <span class="divider">/</span></li>
+                            <li><a href="MainController?action=Product&perform=ViewProduct">Products</a> <span class="divider">/</span></li>
                             <li class="active">${requestScope.product.name}</li>
                         </ul>
                         <div class="row">
@@ -189,25 +216,25 @@
                                 <a href="${requestScope.product.image}" title="${requestScope.product.name}">
                                     <img src="${requestScope.product.image}" style="width:100%" alt="${requestScope.product.name}" />
                                 </a>
-                                
+
                             </div>
                             <form  action="MainController" method="POST">  
                                 <div class="span6">
                                     <input type="hidden" name="productID" value="${requestScope.product.productID.trim()}"/>
                                     <h3>${requestScope.product.name}</h3>
-                                   
+
                                     <hr class="soft" />
                                     <div class="form-horizontal qtyFrm">
                                         <div class="control-group">
                                             <label class="control-label">
-                                                
-                                                
+
+
                                                 <c:if test="${requestScope.spec!=null}">
                                                     <span><fmt:setLocale value="vi_VN" />
                                                         <fmt:formatNumber value="${requestScope.spec.price}" type="currency" /></span>
                                                     </c:if>
                                             </label>
-                                            
+
                                             <div class="controls">
                                                 <h4>Select quantity</h4>
                                                 <input type="number" name="Quantity" max="6" class="span1" placeholder="Qty."  required="Need to add quantity"/>
@@ -218,16 +245,16 @@
                                     </div>
 
                                     <hr class="soft" />
-                                    
-                                    
+
+
                                     <div class="form-horizontal qtyFrm pull-right">
                                         <div class="control-group">
                                             <c:if test="${requestScope.colorChosen==null}">
-                                                    <h4>1. Select a Color</h4>
+                                                <h4>1. Select a Color</h4>
                                             </c:if>
                                             <label class="control-label"><span>Color</span></label>
                                             <div class="controls">
-                                                
+
                                                 <select name="color" class="span2" onchange="window.location = 'MainController?action=Product&perform=ViewDetail&productID=${product.productID.trim()}&color=' + this.value">
                                                     <c:if test="${requestScope.colorChosen == null}">
                                                         <option value="" selected="selected"></option>
@@ -242,9 +269,9 @@
                                                     </c:forEach>
                                                 </select>
                                             </div>
-                                                <c:if test="${requestScope.spec == null && requestScope.colorChosen != null}">
-                                                    <h4>2. Select a spec</h4>
-                                                 </c:if>  
+                                            <c:if test="${requestScope.spec == null && requestScope.colorChosen != null}">
+                                                <h4>2. Select a spec</h4>
+                                            </c:if>  
                                             <c:if test="${requestScope.colorChosen!=null}">
                                                 <h4 class="addToCreateSpece" style="margin-top: 20px;"> </h4>
                                                 <label class="control-label"><span>Spec</span></label>
@@ -267,127 +294,63 @@
                                         </div>
                                     </div>
                                 </div>
-                                                    <!--<input type="hidden" name="action" value="Product"/>-->
+                                <!--<input type="hidden" name="action" value="Product"/>-->
                             </form>                
                         </div>                    
-                           
 
-                            <div class="span9">
-                                <ul id="productDetail" class="nav nav-tabs">
-                                    <li class="active"><a href="#home" data-toggle="tab">Product Details</a></li>
-                                    <li><a href="#profile" data-toggle="tab">Comment</a></li>
-                                </ul>
-                                <div id="myTabContent" class="tab-content">
-                                    <div class="tab-pane fade active in" id="home">
-                                        <h4>Product Information</h4>
-                                        <p>
-                                            ${product.description}
-                                        </p>
+
+                        <div class="span9">
+                            <ul id="productDetail" class="nav nav-tabs">
+                                <li class="active"><a href="#home" data-toggle="tab">Product Details</a></li>
+                                <li><a href="#profile" data-toggle="tab">Comment</a></li>
+                            </ul>
+                            <div id="myTabContent" class="tab-content">
+                                <div class="tab-pane fade active in" id="home">
+                                    <h4>Product Information</h4>
+                                    <p>
+                                        ${product.description}
+                                    </p>
+                                </div>
+                                <div class="tab-pane fade" id="profile">
+
+                                    <div class="container__review">
+                                        <div class="fb-comments" data-href="http://localhost:8080/SE_AppleShop/MainController?action=ProductDetail&amp;productID=IP00&amp;color=Blue&amp;specID=01" data-width="600" data-numposts="5"></div>
+                                        <script>
+                                            $(document).ready(function () {
+                                                $(".fb-comments").attr("data-href", window.location.href);
+                                            });
+                                        </script>                                        
                                     </div>
-                                    <div class="tab-pane fade" id="profile">
 
-                                        <div class="container__review">
-                                            <div class="fb-comments" data-href="http://localhost:8080/SE_AppleShop/MainController?action=ProductDetail&amp;productID=IP00&amp;color=Blue&amp;specID=01" data-width="600" data-numposts="5"></div>
-                                            <script>
-                                                $(document).ready(function () {
-                                                    $(".fb-comments").attr("data-href", window.location.href);
-                                                });
-                                            </script>
-                                            <!--
-                                            <h3 class="review__tittle">Comment</h3>
-    
-                                            <div class="form-comment__container">
-                                                <form action="MainController" class="form-review">
-                                                    <lable for="reviewer-name" class="name-lable">Full Name</lable>
-                                                    <input placeholder="Input your Name" type="text" id="reviewer-name" class="cName" name="reviewer-name">
-                                                    <lable for="pComment" class="comment-lable">Comment</lable>
-                                                    <textarea type="text" class="pComment" id="pComment" name="pComment" placeholder="Input detail your comment"></textarea>
-                                                    <input type="hidden" name="productID" value="${requestScope.product.productID}" />
-                                                    <input type="submit" name="action" class="btn btn-small" value="Submit comment">
-                                                </form>
-                                            </div>
-                                            <div class="review-list">
-                                                <div review-item__container>
-                                                    <div class="reivew-row">
-                                                        <span class="review__reviewer-name">
-                                                        Khach hang
-                                                        </span>
-                                                        <p class="review__reviewer-comment">
-                                                            Cho mình hòi Galaxy A51 đã sử dụng hơn 1 năm, shop có xem xét áp dụng chương trình trợ giá đổi qua IP 12 bản 256GB không ạ? và có áp dụng thêm chương trình trả góp qua thẻ tín dụng của HSBC không ạ? và kì hạn hỗ trợ tối đa là bao nhiêu? mình cảm ơn shope.
-                                                        </p>
-                                                    </div>
-                                                    <ul class="review-option">
-                                                        <form method="POST" class="reply-form d-none" id="comment-1-reply-form">
-                                                            <textarea class="input-reply" placeholder="Reply to comment" rows="4"></textarea>
-                                                            <button class="reply-submit" type="submit">Submit</button>
-                                                            <button type="button" onclick="closeForm(this)">Cancel</button>
-                                                        </form>
-                                                    </ul>
-    
-    
-                                                    <div id="reply-1" class="reply-item__container">
-    
-                                                        <div class="reivew-row">
-                                                            <span class="fas fa-share review__reviewer-name">
-                                                            Customer
-                                                            </span>
-    
-                                                            <p class="review__reviewer-comment">
-                                                                Shop xin chào anh Galaxy A51 hiện chưa được áp dụng cái kiểu chương trình này ạ.
-                                                            </p>
-                                                        </div>
-    
-                                                    </div>
-                                                </div>
-                                                <hr class="soft" />
-                                                <div review-item__container>
-                                                    <li class="reivew-row">
-                                                        <span class="review__reviewer-name">
-                                                        Thang anh 69
-                                                        </span>
-                                                        <p class="review__reviewer-comment">
-                                                            Ngành IT Việt Nam hiện nay ở đầu của sự phát triển. Có thể nói IT là vua của các nghề. Vừa có tiền, có quyền. Vừa kiếm được nhiều $ lại được xã hội trọng vọng. Thằng em mình học bách khoa cơ khí, sinh năm 96. Tự mày mò học code rồi đi làm remote cho công
-                                                            ty Mỹ 2 năm nay. Mỗi tối online 3-4 giờ là xong việc. Lương tháng 3k6. Nhưng thu nhập chính vẫn là từ nhận các project bên ngoài làm thêm. Tuần làm 2,3 cái nhẹ nhàng 9,10k tiền tươi thóc thật không
-                                                            phải đóng thuế. Làm gần được 3 năm mà nhà xe nó đã mua đủ cả. Nghĩ mà thèm.
-                                                        </p>
-                                                    </li>
-                                                    <ul class="review-option">
-                                                        <form method="POST" class="reply-form d-none" id="comment-1-reply-form">
-                                                            <textarea class="input-reply" placeholder="Reply to comment" rows="4"></textarea>
-                                                            <button class="reply-submit" type="submit">Submit</button>
-                                                            <button type="button" onclick="closeForm(this)">Cancel</button>
-                                                        </form>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            -->
-                                        </div>
-
-                                    </div>
                                 </div>
                             </div>
-
                         </div>
+
                     </div>
                 </div>
             </div>
         </div>
-        <!-- MainBody End ============================= -->
-        <!-- Footer ================================================================== -->
-        <div id="footerSection">
+    </div>
+    <!-- MainBody End ============================= -->
+    <!-- Footer ================================================================== -->
+    <div id="footerSection">
         <div class="container">
             <div class="row">
                 <div class="span3">
                     <h5>ACCOUNT</h5>
+                <c:if test="${sessionScope.USER == null}">                   
                     <a href="loginForm.jsp">LOGIN</a>
-                    <a href="userProfile.jsp">PROFILE</a>
+                    <a href="signupForm.jsp">REGISTRATION</a>                    
+                </c:if>
                     <a href="cartDetail.jsp">CART</a>
+                <c:if test="${sessionScope.USER != null}">
+                    <a href="userProfile.jsp">PROFILE</a>                    
                     <a href="order_history.jsp">ORDER HISTORY</a>
+                </c:if>
                 </div>
                 <div class="span3">
                     <h5>INFORMATION</h5>
-                    <a href="contact.jsp">CONTACT</a>
-                    <a href="signupForm.jsp">REGISTRATION</a>
+                    <a href="contact.jsp">CONTACT</a>                    
                     <a href="legal_notice.html">LEGAL NOTICE</a>
                     <a href="tac.html">TERMS AND CONDITIONS</a>
                 </div>
@@ -464,7 +427,7 @@
         </div>
     </div>
     <span id="themesBtn"></span>
-    
-    </body>
+
+</body>
 
 </html>

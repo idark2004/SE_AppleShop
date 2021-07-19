@@ -37,7 +37,7 @@ public class ChangePasswordController extends HttpServlet {
             if (password.equals(psw)){
                 user.setPassword(password);
                 UserDAO ud=new UserDAO();
-                if(ud.UpdateUserPassword(user)){
+                if(ud.updateUserPassword(user)){
                     url=SUCCESS;
                     request.setAttribute("UpSuccess","Change password successfully");
                 }

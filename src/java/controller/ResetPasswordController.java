@@ -8,12 +8,6 @@ package controller;
 import daos.UserDAO;
 import dtos.UserDTO;
 import java.io.IOException;
-import java.util.Map;
-import java.util.Properties;
-import javax.mail.Authenticator;
-import javax.mail.Message;
-import javax.mail.Session;
-import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -90,7 +84,7 @@ public class ResetPasswordController extends HttpServlet {
                     String newPassword = AlphaNumericString(10);
 
                     user.setPassword(newPassword);
-                    uDAO.UpdateUserPassword(user);
+                    uDAO.updateUserPassword(user);
 
                     String content = "Hi, this is your new password: " + newPassword;
                     content += "\nNote: for security reason, "
@@ -105,13 +99,13 @@ public class ResetPasswordController extends HttpServlet {
                     request.setAttribute("message", "Enter the key");
                 }
                 else {
-                    String key = uDAO.GetRoleKey(user.getRoleID().trim());
+                    String key = uDAO.getRoleKey(user.getRoleID().trim());
                     String enteredKey=request.getParameter("key");
                     if (key.trim().equals(enteredKey)){
                         String newPassword = AlphaNumericString(10);
 
                         user.setPassword(newPassword);
-                        uDAO.UpdateUserPassword(user);
+                        uDAO.updateUserPassword(user);
 
                         String content = "Hi, this is your new password: " + newPassword;
                         content += "\nNote: for security reason, "

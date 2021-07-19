@@ -25,7 +25,7 @@ public class ViewUserListController extends HttpServlet {
         try {
             UserDAO dao = new UserDAO();
             String roleID = "US";
-            List<UserDTO> list = dao.getUserList(roleID);
+            List<UserDTO> list = dao.getUserList();
             if(list != null){
                 request.setAttribute("USER_LIST", list);
                 url=SUCCESS;
