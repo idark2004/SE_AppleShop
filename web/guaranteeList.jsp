@@ -46,198 +46,15 @@
                 <div class="span6">Welcome!<strong> User</strong></div>
                 <div class="span6">
                     <div class="pull-right">
-                        <a href="product_summary_Manager.html"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> [ 3 ] Itemes in your cart </span> </a>
+                        <c:forEach var="cartItem" items="${sessionScope.cart}">
+                            <c:set var="subtotalCount" value="${cartItem.quantity}"/>
+                            <c:set var="subtotal" value="${subtotal+cartItem.quantity}"/>
+                        </c:forEach>
+                        <a href="cartDetail.jsp"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> ${subtotal} Items in your cart </span> </a>
                     </div>
                 </div>
             </div>
-            <!-- Navbar ================================================== -->
-            <div id="logoArea" class="navbar">
-                <a id="smallScreen" data-target="#topMenu" data-toggle="collapse" class="btn btn-navbar">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </a>
-                <div class="navbar-inner">
-                    <a class="brand" href="index_Manager.html">SE15 Shop</a>
-                    <form class="form-inline navbar-search" method="post" action="products.html">
-                        <input id="srchFld" class="srchTxt" type="text" />
-                        <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
-                    </form>
-                    <ul id="topMenu" class="nav pull-right">
-                        <li class=""><a href="products_Manager.html">All Products</a></li>
-                        <li class=""><a href="contact.html">Contact</a></li>
-                        <li class=""><a href="user_profile.html">Profile</a></li>
-                        <li class="">
-                            <a href="register.html" role="button" style="padding-right:0"><span class="btn btn-large btn-success">Signup</span></a>
-                        </li>
-                        <li class="">
-                            <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
-                            <div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                    <h3>Login In</h3>
-                                </div>
-                                <div class="modal-body">
-                                    <form class="form-horizontal loginFrm">
-                                        <div class="control-group">
-                                            <input type="text" id="inputEmail" placeholder="Email">
-                                        </div>
-                                        <div class="control-group">
-                                            <input type="password" id="inputPassword" placeholder="Password">
-                                        </div>
-                                        <div class="control-group">
-                                            <label class="checkbox">
-											<input type="checkbox"> Remember me
-											</label>
-                                        </div>
-                                        <div class="control-group">
-                                            <a href="#"><img width="30" height="30" src="themes/images/google.png" title="Login with Google" alt="Google Login" /></a>
-                                        </div>
-                                    </form>
-                                    <button type="submit" class="btn btn-success">Sign in</button>
-                                    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Header End====================================================================== -->
-    <div id="carouselBlk">
-        <div id="myCarousel" class="carousel slide">
-            <div class="carousel-inner">
-                <div class="item active">
-                    <div class="container">
-                        <a href="register.html"><img style="width:100%" src="themes/images/carousel/1.png" alt="" /></a>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="container">
-                        <a href="register.html"><img style="width:100%" src="themes/images/carousel/2.png" alt="" /></a>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="container">
-                        <a href="register.html"><img src="themes/images/carousel/3.png" alt="" /></a>
-                    </div>
-                </div>
-            </div>
-            <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-            <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
-        </div>
-    </div>
-    <div id="mainBody">
-        <div class="container">
-            <div class="row">
-                <!-- Sidebar ================================================== -->
-                <div id="sidebar" class="span3">
-                    <div class="well well-small">
-                        <a id="myCart" href="product_summary_Manager.html"><img src="themes/images/ico-cart.png" alt="cart">3 Items in your cart <span class="badge badge-warning pull-right">445,000VND</span></a>
-                    </div>
-                    <ul id="sideManu" class="nav nav-tabs nav-stacked">
-                        <li class="subMenu"><a>Product</a>  
-                         <ul style="display: none">
-                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=">All</a></li>
-                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=IP&status=True">iPhone</a></li>
-                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=ID&status=True">iPad</a></li>
-                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=MB&status=True">Mac</a></li>
-                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AW&status=True">Apple Watch</a></li>
-                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AS&status=True">Accessory</a></li>                          
-                         </ul>
-                         </li>  
-                            <c:if test="${sessionScope.USER.roleID.trim() != null}" > 
-                                <c:if test="${sessionScope.USER.roleID.trim() != 'US'}" >
-                                <li class="subMenu"><a>Manager Product</a>
-                                    <ul style="display: none">
-                                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=">All</a></li>
-                                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=IP">iPhone</a></li>
-                                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=ID">iPad</a></li>
-                                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=MB">Mac</a></li>
-                                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=AW">Apple Watch</a></li>
-                                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=AS">Accessory</a></li>
-                                    </ul>
-                                </li>
-                                <li class="subMenu" id="CU"><a>Shop Manager</a>
-                                    <ul style="display:none">
-                                        <li><a href="DashBoardController"><i class="icon-chevron-right"></i>Dashboard</a></li>
-                                        <li><a href="managerAddProduct.jsp"><i class="icon-chevron-right"></i>Add Product</a></li>
-                                        <li><a href="MainController?action=Manage+User&perform=Get+User"><i class="icon-chevron-right"></i>User List</a></li>
-                                        <c:if test="${sessionScope.USER.roleID.trim() == 'AD'}">
-                                            <li><a href="MainController?action=Manage+User&perform=Get+Manager"><i class="icon-chevron-right"></i>Manager List</a></li>
-                                        </c:if>
-                                        <li><a href="MainController?action=Guarantee&perform=Get"><i class="icon-chevron-right"></i>Guarantee</a></li>
-                                        <li><a href="MainController?action=SaleCode&perform=List"><i class="icon-chevron-right"></i>Sale Code List</a></li>
-                                        <li><a href="MainController?action=OrderList"><i class="icon-chevron-right"></i>Order List</a></li>
-
-                                    </ul>
-                                </li>
-                            </c:if>                       
-                        </c:if>
-                    </ul>
-                    <br/>
-                </div>
-                <!-- Sidebar end=============================================== -->
-                <div class="span9">
-                    <ul class="breadcrumb">
-                        <li><a href="index_Manager.html">Home</a> <span class="divider">/</span></li>
-                        <li class="active">Guarantee List</li>
-                    </ul>
-                    <div class="row">
-                        <div class="span9">
-                            <p><a href="#" class="btn btn-primary">Add guarantee</a></p>
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-
-                                        <th><span>Full name </span></th>
-                                        <th>Address</th>
-                                        <th><span>Phone</span></th>
-
-                                        <th><span>Order ID</span></th>
-                                        <th><span>Sending date</span></th>
-                                        <th><span>Expected return date</span></th>
-                                        <th><span>Description</span></th>
-                                        <th><span>Guarantee Fee</span></th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Kha Banh</td>
-                                        <td>69 Disneyland</td>
-                                        <td>0914123123</td>
-
-                                        <td>123</td>
-                                        <td>
-                                            2021/07/12
-                                        </td>
-                                        <td>2021/08/12</td>
-                                        <td>Thay pin may</td>
-                                        <td>
-                                            100.000 VND
-                                        </td>
-                                        <td>
-                                            <a href="customer_details_Manager.html" class="table-link text-info" title="More Detail">
-                                                <span class="fa-stack">
-                                                    <i class="fa fa-square fa-stack-2x"></i>
-                                                    <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
-                                                </span>
-                                            </a>
-                                            <a href="" class="table-link danger" title="Complete">
-                                                <span class="fa-stack">
-                                                    <i style="color:green;" class="fa fa-square fa-stack-2x"></i>
-                                                    <i style="color:white;" class="fa fa-check-square-o fa-stack-1x fa-inverse"></i>
-                                                </span>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+            
                 <!-- Navbar ================================================== -->
                 <div id="logoArea" class="navbar">
                     <a id="smallScreen" data-target="#topMenu" data-toggle="collapse" class="btn btn-navbar">
@@ -246,13 +63,13 @@
                         <span class="icon-bar"></span>
                     </a>
                     <div class="navbar-inner">
-                        <a class="brand" href="index_Manager.html">SE15 Shop</a>
+                        <a class="brand" href="MainController?action=Product&perform=Index">SE15 Shop</a>
                         <form class="form-inline navbar-search" method="post" action="products.html">
                             <input id="srchFld" class="srchTxt" type="text" />
                             <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
                         </form>
                         <ul id="topMenu" class="nav pull-right">
-                            <li class=""><a href="products_Manager.html">All Products</a></li>
+                            <li class=""><a href="MainController?action=Product&perform=ViewProduct&categoryID=">All Products</a></li>
                             <li class=""><a href="contact.jsp">Contact</a></li>
                             <c:if test="${sessionScope.USER != null}">
                                 <li class=""><a href="userProfile.jsp">Profile</a></li>
@@ -332,7 +149,19 @@
                     <!-- Sidebar ================================================== -->
                     <div id="sidebar" class="span3">
                         <div class="well well-small">
-                            <a id="myCart" href="product_summary_Manager.html"><img src="themes/images/ico-cart.png" alt="cart">3 Items in your cart <span class="badge badge-warning pull-right">445,000VND</span></a>
+                            <c:forEach var="cartItem" items="${sessionScope.cart}">
+                                <c:set var="total" value="${total + (cartItem.quantity * cartItem.product.price)}"/>
+                            </c:forEach>
+                            <a id="myCart" href="cartDetail.jsp"><img src="themes/images/ico-cart.png" alt="cart">${subtotal} 
+                                <c:if test="${sessionScope.cart == null}">No</c:if> 
+                                    Items in your cart
+                                <c:if test="${sessionScope.cart != null}">
+                                    <span class="badge badge-warning pull-right"> 
+                                        <fmt:setLocale value="vi_VN" />
+                                        <fmt:formatNumber value="${total}" type="currency" />
+                                    </span>
+                                </c:if>
+                            </a>
                         </div>
                         <ul id="sideManu" class="nav nav-tabs nav-stacked">
                             <li class="subMenu"><a>Product</a>
@@ -377,12 +206,12 @@
                     <!-- Sidebar end=============================================== -->
                     <div class="span9">
                         <ul class="breadcrumb">
-                            <li><a href="index_Manager.html">Home</a> <span class="divider">/</span></li>
+                            <li><a href="MainController?action=Product&perform=Index">Home</a> <span class="divider">/</span></li>
                             <li class="active">Guarantee List</li>
                         </ul>
                         <div class="row">
                             <div class="span9">
-                                <p><a href="#" class="btn btn-primary">Add guarantee</a></p>
+                                <p><a href="managerGuarantee.jsp" class="btn btn-primary">Add guarantee</a></p>
                                 <c:choose>
                                     <c:when test="${requestScope.GUARANTEE_LIST == null}">
                                         <h1>${requestScope.EMPTY}</h1>

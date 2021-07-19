@@ -133,10 +133,14 @@ public class DashBoardController extends HttpServlet {
                 if(highestMonthlyRevenue<data.getRevenue()) highestMonthlyRevenue=data.getRevenue();
                 list.add(data);
             }
+            int lowestMonthlyRevenue=highestDailyRevenue;
             if(list != null && areaList != null){
                 System.out.println("Monthly revenue");
                 for (int i=0; i<12;i++){
                     System.out.println("Revenue: " + list.get(i).getRevenue() + " Month: " + (i+1));
+                    if (lowestMonthlyRevenue >= list.get(i).getRevenue()){
+                        lowestMonthlyRevenue = list.get(i).getRevenue();
+                    }
                 }
                 System.out.println("Daily revenue");
                 for (int i=0; i<14;i++){
@@ -145,6 +149,7 @@ public class DashBoardController extends HttpServlet {
                 
                 request.setAttribute("highestDaily", highestDailyRevenue);
                 request.setAttribute("highestMonthly", highestMonthlyRevenue);
+                request.setAttribute("lowestMonthly", lowestMonthlyRevenue);
                 request.setAttribute("AreaChart", areaList);
                 request.setAttribute("BarChart", list);
                 url=SUCCESS;

@@ -240,13 +240,13 @@
                                     </div>
                                     <div class="col-sm-2 text-center my-auto">
                                         <div class="h4 mb-0 text-primary">${total} VND</div>
-                                        <div class="small text-muted">YTD Revenue</div>
+                                        <div class="small text-muted">Revenue</div>
                                         <hr>
-                                        <div class="h4 mb-0 text-warning">$18,474</div>
-                                        <div class="small text-muted">YTD Expenses</div>
+                                        <div class="h4 mb-0 text-warning">${requestScope.highestMonthly} VND</div>
+                                        <div class="small text-muted">highest Month</div>
                                         <hr>
-                                        <div class="h4 mb-0 text-success">$16,219</div>
-                                        <div class="small text-muted">YTD Margin</div>
+                                        <div class="h4 mb-0 text-success">${requestScope.lowestMonthly} VND</div>
+                                        <div class="small text-muted">Lowest Month</div>
                                     </div>
                                 </div>
                             </div>
