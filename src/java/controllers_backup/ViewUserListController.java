@@ -23,13 +23,13 @@ public class ViewUserListController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            UserDAO dao = new UserDAO();
-            String roleID = "US";
-            List<UserDTO> list = dao.getUserList();
-            if(list != null){
-                request.setAttribute("USER_LIST", list);
-                url=SUCCESS;
-            }
+//            UserDAO dao = new UserDAO();
+//            String roleID = "US";
+//            List<UserDTO> list = dao.getUserList(roleID);
+//            if(list != null){
+//                request.setAttribute("USER_LIST", list);
+//                url=SUCCESS;
+//            }
         } catch (Exception e) {
         } finally{
             request.getRequestDispatcher(url).forward(request, response);

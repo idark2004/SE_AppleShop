@@ -84,7 +84,10 @@
                             <ul id="topMenu" class="nav pull-right">
                                 <li class=""><a href="MainController?action=Product&perform=ViewProduct">All Products</a></li>
                                 <li class=""><a href="contact.jsp">Contact</a></li>
-                                <li class=""><a href="userProfile.jsp">Profile</a></li>                        
+                                <li class=""><a href="userProfile.jsp">Profile</a></li>        
+                                <li class="">
+                                    <a href="MainController?action=User&perform=Log+Out" role="button" style="padding-right:0"><span class="btn btn-large btn-success">Log Out</span></a>
+                                </li>
                             </ul>
                         </div>
                     </div>

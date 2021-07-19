@@ -299,7 +299,7 @@
                         </div>
                         <c:choose>    
                             <c:when test="${requestScope.keyWord!=null}">
-                                <!--                    pagination  search-->
+                                <!--pagination  search-->
                                 <div class="pagination">
                                     <ul>
                                         <li><a <c:if test="${requestScope.curPage == 1 }">style="cursor:default;pointer-events: none; "</c:if>
