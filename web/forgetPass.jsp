@@ -168,12 +168,42 @@
                             </a>
                     </div>
                     <ul id="sideManu" class="nav nav-tabs nav-stacked">
-                        <li><a href="MainController?action=Product&perform=ViewProduct">All</a></li>
+                        <li class="subMenu"><a>Product</a>
+                            <ul>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=">All</a></li>
                         <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=IP&status=True">iPhone</a></li>
                         <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=ID&status=True">iPad</a></li>
                         <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=MB&status=True">Mac</a></li>
                         <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AW&status=True">Apple Watch</a></li>
                         <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AS&status=True">Accessory</a></li>
+                            </ul>
+                        </li>
+                            <c:if test="${sessionScope.USER.roleID.trim() != null}" > 
+                                <c:if test="${sessionScope.USER.roleID.trim() != 'US'}" >
+                                <li class="subMenu"><a>Manager Product</a>
+                                    <ul style="display: none">
+                                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=">All</a></li>
+                                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=IP">iPhone</a></li>
+                                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=ID">iPad</a></li>
+                                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=MB">Mac</a></li>
+                                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=AW">Apple Watch</a></li>
+                                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=AS">Accessory</a></li>
+                                    </ul>
+                                </li>
+                                <li class="subMenu" id="CU"><a>Shop Manager</a>
+                                    <ul style="display:none">
+                                        <li><a href="DashBoardController"><i class="icon-chevron-right"></i>Dashboard</a></li>
+                                        <li><a href="managerAddProduct.jsp"><i class="icon-chevron-right"></i>Add Product</a></li>
+                                        <li><a href="MainController?action=Manage+User&perform=Get+User"><i class="icon-chevron-right"></i>User List</a></li>
+                                        <c:if test="${sessionScope.USER.roleID.trim() == 'AD'}">
+                                            <li><a href="MainController?action=Manage+User&perform=Get+Manager"><i class="icon-chevron-right"></i>Manager List</a></li>
+                                        </c:if>
+                                        <li><a href="MainController?action=Guarantee&perform=Get"><i class="icon-chevron-right"></i>Guarantee</a></li>
+                                        <li><a href="MainController?action=SaleCode&perform=List"><i class="icon-chevron-right"></i>Sale Code List</a></li>
+                                    </ul>
+                                </li>
+                            </c:if>                       
+                        </c:if>
                     </ul>
                     <br/>
                 </div>
