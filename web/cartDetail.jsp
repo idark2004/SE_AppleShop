@@ -262,6 +262,7 @@
                         <c:if test="${requestScope.sale ==null}">
                             <c:set var="discount" value="0"/>
                         </c:if>
+                        ${requestScope.notenough}
                         <table class="table table-bordered">
                             <thead>
                                 <tr>

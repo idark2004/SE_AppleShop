@@ -338,7 +338,7 @@ public class ProductDAO {
         PreparedStatement ps = null; //doi tuong truy van
         ResultSet rs = null;//doi tuong nhan ket qua
 
-        String sql = "SELECT p.productID, p.productName, p.image, s.color, s.ram, s.storage, s.specPrice, s.specID "
+        String sql = "SELECT p.productID, p.productName, p.image, s.color, s.ram, s.storage, s.specPrice, s.specID, s.specQuantity "
                 + "FROM tblProductSpec s, tblProducts p "
                 + "WHERE s.specID=? AND p.productID=s.productID";
 
@@ -359,8 +359,10 @@ public class ProductDAO {
                     String ram = rs.getString("ram");
                     String storage = rs.getString("storage");
                     String color = rs.getString("color");
+                    int quantity=rs.getInt("specQuantity");
                     //ProductDTO prs=new ProductDTO(productID, name, "", 0, price, 0, 0, true, image, ram, storage, color);
                     ProductDTO prs = new ProductDTO(productID, name, price, true, image, ram, storage, color, specID);
+                    prs.setSpecQuantity(quantity);
                     return prs;
                 }
             }

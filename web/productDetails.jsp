@@ -253,6 +253,7 @@
                                             </label>
 
                                             <div class="controls">
+                                                ${requestScope.notenough}
                                                 <h4>Select quantity</h4>
                                                 <input type="number" name="Quantity" max="6" class="span1" placeholder="Qty."  required="Need to add quantity"/>
                                                 <input type="hidden" name="action" value="Cart"/>

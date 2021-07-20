@@ -115,6 +115,11 @@ public class CartController extends HttpServlet {
                     if(prDAO.getSpec(specID)==null) System.err.println("null spec");
                     else System.err.println("not null");
                     if (product!=null){
+                        if (product.getSpecQuantity()==0){
+                            request.setAttribute("notenough", "No more item");
+                            url="MainController?action=Product&perform=ViewDetail&productID="+productID+"&color="+color+"&specID="+specID;
+                            break;
+                        }
                         for(int i=0; i<qty; i++){
                             if(session.getAttribute("cart")==null){
                                 cart = new ArrayList<CartItemDTO>();
@@ -133,6 +138,13 @@ public class CartController extends HttpServlet {
                                 else {
                                     int quantity = cart.get(index).getQuantity() + 1;
                                     cart.get(index).setQuantity(quantity);
+                                }
+                                if (product.getSpecQuantity()<cart.get(index).getQuantity()){
+                                    request.setAttribute("notenough", "The quantity is not enough");
+                                    int notenough=cart.get(index).getQuantity() -1;
+                                    cart.get(index).setQuantity(notenough);
+                                    url="cartDetail.jsp";
+                                    break;
                                 }
                                 session.setAttribute("cart", cart);
                                 url="MainController?action=Product&perform=ViewDetail&productID="+productID+"&color="+color+"&specID="+specID;
@@ -167,7 +179,15 @@ public class CartController extends HttpServlet {
                     if (cart.isEmpty())
                         cart=null;
 
-                    System.out.println("REMOVE SUCCESS!!!");
+                    ProductDTO spec = cart.get(AddIndex).getProduct();
+                    if (spec.getSpecQuantity()<cart.get(AddIndex).getQuantity()){
+                        request.setAttribute("notenough", "The quantity is not enough");
+                        int notenough=cart.get(AddIndex).getQuantity() -1;
+                        cart.get(AddIndex).setQuantity(notenough);
+                        url="cartDetail.jsp";
+                        break;
+                    }
+                    System.out.println("ADD SUCCESS!!!");
 
                     session.setAttribute("cart", cart);
                     url="cartDetail.jsp";
