@@ -78,6 +78,7 @@ public class SaleCodeController extends HttpServlet {
                             url = LIST;
                         } else {
                             request.setAttribute("ERROR", "list null");
+                            url = LIST;
                         }
                         break;
                     case "View":

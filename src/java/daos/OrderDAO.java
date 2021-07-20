@@ -102,6 +102,40 @@ public class OrderDAO {
         }
          return check;
     }
+    public boolean CompleteStatus(String oid,String status, String completeDate)throws NamingException, SQLException{
+        boolean check=false; 
+        Connection c = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        String sql="UPDATE tblOrders " +
+        " SET orderStatus = ?, completedDate = ?" +
+        " WHERE orderID = ?";
+         try {
+            c = DBConnect.makeConnection();
+                if (c != null) {
+                    ps = c.prepareStatement(sql);
+                    ps.setString(1, status);
+                    ps.setString(2, completeDate);
+                    ps.setString(3, oid);
+                    check = ps.executeUpdate()>0;
+                }
+            } catch (Exception e) {
+            e.printStackTrace();
+             } 
+            finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (c != null) {
+                c.close();
+            }
+        }
+         return check;
+    }
     public ArrayList<OrderDTO> getAllUserOrder(String userID) throws NamingException, SQLException {
         Connection c = null;
         PreparedStatement ps = null;

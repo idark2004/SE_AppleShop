@@ -412,6 +412,7 @@ public class UserDAO {
     public void insertManager(UserDTO user) throws SQLException {
         Connection conn = null;
         PreparedStatement stm = null;
+        Encrypt encrypt = new Encrypt();
         try {
             conn = DBConnect.makeConnection(); // tao doi tuong connection qua DBConnection
             if (conn != null) {
@@ -423,7 +424,7 @@ public class UserDAO {
                 stm.setString(1, userID+db.getNumbRows("userID", "tblUsers"));
                 stm.setString(2, user.getName());
                 stm.setString(3, user.getEmail());
-                stm.setString(4, user.getPassword());
+                stm.setString(4, encrypt.encryptPass(user.getPassword()));
                 stm.setString(5, user.getPhone());
                 stm.setString(6, user.getAddress());
                 stm.setString(7, user.getRoleID());

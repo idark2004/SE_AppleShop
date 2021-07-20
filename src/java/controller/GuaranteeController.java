@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 public class GuaranteeController extends HttpServlet {
 
     private static final String ERROR = "error.jsp";
-    private static final String ADDED = "guaranteeList.jsp";
+    private static final String ADDED = "MainController?action=Guarantee&perform=Get";
     private static final String LIST = "guaranteeList.jsp";
     private static final String ACTION = "MainController?action=Guarantee&perform=Get";    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -56,7 +56,7 @@ public class GuaranteeController extends HttpServlet {
                     
                 case "Get":
                     List<GuaranteeDTO> list = dao.getAll();
-                    if(list.size() >0){
+                    if(list!=null){
                         request.setAttribute("GUARANTEE_LIST", list);
                         url=LIST;
                     }

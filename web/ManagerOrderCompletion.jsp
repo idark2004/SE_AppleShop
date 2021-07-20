@@ -84,7 +84,7 @@
                         <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
                     </form>
                     <ul id="topMenu" class="nav pull-right">
-                        <li class=""><a href="products_Manager.html">All Products</a></li>
+                        <li class=""><a href="MainController?action=Product&perform=ViewProduct&categoryID=">All Products</a></li>
                         <li class=""><a href="contact.jsp">Contact</a></li>
                         <c:if test="${sessionScope.USER != null}">
                             <li class=""><a href="userProfile.jsp">Profile</a></li>
@@ -218,7 +218,7 @@
                 <div class="span9">
                     <ul class="breadcrumb">
                         <li><a href="MainController?action=Product&perform=Index">Home</a> <span class="divider">/</span></li>
-                        <li><a href="product_summary_Manager.html">Products</a> <span class="divider">/</span></li>
+                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=">Products</a> <span class="divider">/</span></li>
                         <li class="active">Receipt</li>
                     </ul>
                     <div class="row">

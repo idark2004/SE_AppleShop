@@ -205,7 +205,7 @@
                                 <div class="control-group">
                                     <label class="control-label" for="inputFname">Full name <sup>*</sup></label>
                                     <div class="controls">
-                                        <input type="text" id="inputFname" name="name" placeholder="Trần Văn A" pattern="[A-Za-z]{4,}" title="Please enter full name" required>
+                                        <input type="text" id="inputFname" name="name" placeholder="Trần Văn A" title="Please enter full name" required>
                                     </div>
                                 </div>                                
 

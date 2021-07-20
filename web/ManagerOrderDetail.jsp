@@ -211,41 +211,13 @@
                             </c:if>                       
                         </c:if>
                     </ul>
-                            <c:if test="${sessionScope.USER.roleID.trim() != null}" > 
-                                <c:if test="${sessionScope.USER.roleID.trim() != 'US'}" >
-                                <li class="subMenu"><a>Manager Product</a>
-                                    <ul style="display: none">
-                                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=">All</a></li>
-                                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=IP">iPhone</a></li>
-                                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=ID">iPad</a></li>
-                                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=MB">Mac</a></li>
-                                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=AW">Apple Watch</a></li>
-                                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=AS">Accessory</a></li>
-                                    </ul>
-                                </li>
-                                <li class="subMenu" id="CU"><a>Shop Manager</a>
-                                    <ul style="display:none">
-                                        <li><a href="DashBoardController"><i class="icon-chevron-right"></i>Dashboard</a></li>
-                                        <li><a href="managerAddProduct.jsp"><i class="icon-chevron-right"></i>Add Product</a></li>
-                                        <li><a href="MainController?action=Manage+User&perform=Get+User"><i class="icon-chevron-right"></i>User List</a></li>
-                                        <c:if test="${sessionScope.USER.roleID.trim() == 'AD'}">
-                                            <li><a href="MainController?action=Manage+User&perform=Get+Manager"><i class="icon-chevron-right"></i>Manager List</a></li>
-                                        </c:if>
-                                        <li><a href="MainController?action=Guarantee&perform=Get"><i class="icon-chevron-right"></i>Guarantee</a></li>
-                                        <li><a href="MainController?action=SaleCode&perform=List"><i class="icon-chevron-right"></i>Sale Code List</a></li>
-                                    </ul>
-                                </li>
-                            </c:if>                       
-                        </c:if>
-                    </ul>
->>>>>>> origin/main
                     <br/>
                 </div>
                 <!-- Sidebar end=============================================== -->
                 <div class="span9">
                     <ul class="breadcrumb">
                         <li><a href="MainController?action=Product&perform=Index">Home</a> <span class="divider">/</span></li>
-                        <li><a href="product_summary_Manager.html">Products</a> <span class="divider">/</span></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=">Products</a> <span class="divider">/</span></li>
                         <li class="active">Receipt</li>
                     </ul>
                     <div class="row">

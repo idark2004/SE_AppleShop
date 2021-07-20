@@ -75,14 +75,14 @@
                     <span class="icon-bar"></span>
                 </a>
                 <div class="navbar-inner">
-                    <a class="brand" href="index.html">SE15 Shop</a>
+                    <a class="brand" href="MainController?action=Product&perform=Index">SE15 Shop</a>
                     <form class="form-inline navbar-search" method="post" action="MainController">
                         <input id="srchFld" class="srchTxt" type="text" name="keyWord"/>
                         <input type="hidden" value="SearchProduct" name="action"/>
                         <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
                     </form>
                     <ul id="topMenu" class="nav pull-right">
-                        <li class=""><a href="products.html">All Products</a></li>
+                        <li class=""><a href="MainController?action=Product&perform=ViewProduct&categoryID=">All Products</a></li>
                         <li class=""><a href="contact.jsp">Contact</a></li>
                         <c:if test="${sessionScope.USER != null}">
                             <li class=""><a href="userProfile.jsp">Profile</a></li>

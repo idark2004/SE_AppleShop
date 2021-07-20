@@ -8,6 +8,7 @@ package controller;
 import daos.OrderDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Calendar;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -36,11 +37,18 @@ public class OrderChangeStatusController extends HttpServlet {
         String status = request.getParameter("orderStatus");
         OrderDAO oDAO=new OrderDAO();
         String url=ERROR;
+        boolean check=false;
         try {            
-           boolean check = oDAO.ChangeStatus(id, status);
-             if (check) {
-            url="MainController?action=OrderDetail&orderID="+id;
-             }
+            if (status.equals("Completed")){
+                Calendar cal = Calendar.getInstance();
+                cal.add(Calendar.DATE, 0);
+                String createDate=(cal.getTime().getMonth()+1)+"/"+cal.getTime().getDate()+"/"+(cal.getTime().getYear()+1900);
+                check = oDAO.CompleteStatus(id, status, createDate);
+            }
+            else check = oDAO.ChangeStatus(id, status);
+            if (check) {
+                url="MainController?action=OrderDetail&orderID="+id;
+            }
         }catch(Exception ex){
             request.setAttribute("message", ex.toString());
             request.setAttribute("ERROR", ex.toString());
