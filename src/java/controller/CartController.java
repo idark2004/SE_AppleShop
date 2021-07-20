@@ -164,14 +164,15 @@ public class CartController extends HttpServlet {
                                 else {
                                     int quantity = cart.get(index).getQuantity() + 1;
                                     cart.get(index).setQuantity(quantity);
+                                    if (product.getSpecQuantity()<cart.get(index).getQuantity()){
+                                        request.setAttribute("notenough", "The quantity is not enough");
+                                        int notenough=cart.get(index).getQuantity() -1;
+                                        cart.get(index).setQuantity(notenough);
+                                        url="cartDetail.jsp";
+                                        break;
+                                    }
                                 }
-                                if (product.getSpecQuantity()<cart.get(index).getQuantity()){
-                                    request.setAttribute("notenough", "The quantity is not enough");
-                                    int notenough=cart.get(index).getQuantity() -1;
-                                    cart.get(index).setQuantity(notenough);
-                                    url="cartDetail.jsp";
-                                    break;
-                                }
+                                
                                 session.setAttribute("cart", cart);
                                 url="MainController?action=Product&perform=ViewDetail&productID="+productID+"&color="+color+"&specID="+specID;
                             }

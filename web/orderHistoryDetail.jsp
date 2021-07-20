@@ -311,7 +311,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                     <c:choose>
+                                    <c:set var="total" value="0"></c:set>
+                                    <c:set var="totalDiscount" value="0"></c:set>
+                                <c:choose>
                                 <c:when test="${requestScope.detail != null}">
                                     <c:forEach var="detail" items="${requestScope.detail}">
                                     <tr>
@@ -321,11 +323,12 @@
                                         <td>
                                             ${detail.quantity}
                                         </td>
-                                        <td><fmt:formatNumber type="number" maxFractionDigits = "0" value="${detail.product.price}"/></td>
-                                        <td>100,000 VND</td>
+                                        <td><fmt:formatNumber type="number" maxFractionDigits = "0" value="${detail.product.price}"/> VND</td>
+                                        <td><fmt:formatNumber type="number" maxFractionDigits = "0" value="${detail.product.price * detail.quantity * requestScope.sale.percentage/100}"/> VND</td>
                                         <td><fmt:formatNumber type="number" maxFractionDigits = "0" value="${detail.product.price * detail.quantity}"/></td>
                                     </tr>
                                     <c:set var="total" value="${total + (detail.product.price * detail.quantity)}" ></c:set>
+                                    <c:set var="totalDiscount" value="${totalDiscount + (detail.product.price * detail.quantity * requestScope.sale.percentage/100)}" ></c:set>
                                </c:forEach>
                                 </c:when>
                                     <c:otherwise>
@@ -333,8 +336,8 @@
                                     </c:otherwise>
                                 </c:choose>
                                     <tr>
-                                        <td colspan="5" style="text-align:right"><strong>TOTAL ( <fmt:formatNumber type="number" maxFractionDigits = "0" value="${total}"/> - 200,000 VND) =</strong></td>
-                                        <td class="label label-important" style="display:block"> <strong> <fmt:formatNumber type="number" maxFractionDigits = "0" value="${total}"/></strong></td>
+                                        <td colspan="5" style="text-align:right"><strong>TOTAL ( <fmt:formatNumber type="number" maxFractionDigits = "0" value="${total}"/> - <fmt:formatNumber type="number" maxFractionDigits = "0" value="${totalDiscount}"/> VND) =</strong></td>
+                                        <td class="label label-important" style="display:block"> <strong> <fmt:formatNumber type="number" maxFractionDigits = "0" value="${total - totalDiscount}"/></strong></td>
                                     </tr>
                                 </tbody>
                             </table>

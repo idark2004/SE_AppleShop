@@ -188,7 +188,7 @@ public class OrderDAO {
         PreparedStatement ps = null; //doi tuong truy van
         ResultSet rs = null;//doi tuong nhan ket qua
 
-        String sql = "SELECT orderID, userID,cusName, orderCreateDate,orderExpectDate,completedDate, orderPrice , orderAddress, payMethod, orderStatus "
+        String sql = "SELECT orderID, userID,cusName, orderCreateDate,orderExpectDate,completedDate, orderPrice , orderAddress, payMethod, orderStatus, codeID "
                 + " FROM tblOrders "
                 + " WHERE orderID=?";
 
@@ -214,6 +214,7 @@ public class OrderDAO {
                     o.setAddress(rs.getString("orderAddress"));
                     o.setPayMethod(rs.getString("payMethod"));
                     o.setStatus(rs.getString("orderStatus"));
+                    o.setCodeID(rs.getString("codeID"));
 
                     return o;
                 }

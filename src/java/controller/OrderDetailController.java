@@ -6,9 +6,11 @@
 package controller;
 
 import daos.OrderDAO;
+import daos.SaleCodeDAO;
 import daos.UserDAO;
 import dtos.OrderDTO;
 import dtos.OrderDetailDTO;
+import dtos.SaleCodeDTO;
 import dtos.UserDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -35,16 +37,23 @@ public class OrderDetailController extends HttpServlet {
         try {
             OrderDAO oDAO= new OrderDAO();
             UserDAO uDAO = new UserDAO();
+            SaleCodeDAO scDAO=new SaleCodeDAO();
             UserDTO  u = new UserDTO();
+            SaleCodeDTO sc=new SaleCodeDTO();
             OrderDTO order= oDAO.getOrder(id);
             ArrayList<OrderDetailDTO> orderDetail = oDAO.getAllOrderDetail(id);
             
             u = uDAO.getUserProfile(order.getUserID());
+            sc=scDAO.getCode(order.getCodeID());
             if (u==null){
                 u = new UserDTO();
             }
-            System.out.println(u.getEmail()+"dd");
+            if(sc==null){
+                sc=new SaleCodeDTO();
+            }
+            
             request.setAttribute("order", order);
+            request.setAttribute("sale", sc);
             if(u!=null){request.setAttribute("userDetail",u);}
             else System.out.println("user null");
             //request.setAttribute("detail", orderDetail);
