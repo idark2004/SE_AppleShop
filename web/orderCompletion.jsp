@@ -229,7 +229,7 @@
                                                 Thank you for choosing SE15 Shop. In 15 minutes, we will SMS or Call to confirm the order.
                                             </p>
                                             <p class="small">
-                                                * For the orders from <span><strong>21:30 pm to 8 am</strong></span> the next day, we will contact you before 10 pm on the same day.
+                                                For the orders from <span><strong>21:30 pm to 8 am</strong></span> the next day, we will contact you before 10 pm on the same day.
                                             </p>
                                             <p class="small">
                                                 If you need any assistance, please contact <span><strong>0914123456</strong></span>. Thank you very much!
@@ -268,6 +268,7 @@
                                         </form>
                                     </div>
                                 </form>
+                                <c:set var="percent" value="${requestScope.percent}" ></c:set>
 
                                 <table class="table table-bordered">
                                     <thead>
@@ -292,10 +293,14 @@
                                                             ${detail.quantity}
                                                         </td>
                                                         <td><fmt:formatNumber type="number" maxFractionDigits = "0" value="${detail.product.price}"/></td>
-                                                        <td>100,000 VND</td>
-                                                        <td><fmt:formatNumber type="number" maxFractionDigits = "0" value="${detail.product.price * detail.quantity}"/></td>
+                                                        <td><fmt:formatNumber type="number" maxFractionDigits = "0" value="${percent*(detail.product.price * detail.quantity)}"/></td>
+                                                        <td><fmt:formatNumber type="number" maxFractionDigits = "0" value="${(detail.product.price * detail.quantity)-percent*(detail.product.price * detail.quantity)}"/></td>
                                                     </tr>
-                                                    <c:set var="total" value="${total + (detail.product.price * detail.quantity)}" ></c:set>
+                                                    <c:set var="totalNotSaleCode" value="${totalNotSaleCode + ((detail.product.price * detail.quantity)) }" ></c:set>
+
+                                                   <c:set var="totalSale" value="${totalSale + (percent * (detail.product.price * detail.quantity))}" ></c:set>
+                                                    <c:set var="total" value="${total + ((detail.product.price * detail.quantity) - percent*(detail.product.price * detail.quantity))}" ></c:set>
+
                                                 </c:forEach>
                                             </c:when>
                                             <c:otherwise>
@@ -303,7 +308,7 @@
                                         </c:otherwise>
                                     </c:choose>
                                     <tr>
-                                        <td colspan="5" style="text-align:right"><strong>TOTAL ( <fmt:formatNumber type="number" maxFractionDigits = "0" value="${total}"/> ) =</strong></td>
+                                        <td colspan="5" style="text-align:right"><strong>TOTAL ( <fmt:formatNumber type="number" maxFractionDigits = "0" value="${totalNotSaleCode}"/> - <fmt:formatNumber type="number" maxFractionDigits = "0" value="${totalSale}"/> ) =</strong></td>
                                         <td class="label label-important" style="display:block"> <strong> <fmt:formatNumber type="number" maxFractionDigits = "0" value="${total}"/></strong></td>
                                     </tr>
                                     </tbody>

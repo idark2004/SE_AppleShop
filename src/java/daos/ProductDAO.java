@@ -572,7 +572,7 @@ public class ProductDAO {
                     ProductDTO product = new ProductDTO();
                     product.setPrice(rs.getDouble("specPrice"));
                     product.setSpecID(rs.getString("specID"));
-
+                    product.setSpecQuantity(rs.getInt("specQuantity"));
                     return product;
                 }
             }

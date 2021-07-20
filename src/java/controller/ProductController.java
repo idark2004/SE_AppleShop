@@ -121,7 +121,7 @@ public class ProductController extends HttpServlet {
                     break;
                 case "ViewDetail":
                     
-                    System.out.println( request.getParameter("productID").trim());
+                 System.out.println( request.getParameter("productID").trim());
                     String id = request.getParameter("productID").trim();
                     String colorChoosen = request.getParameter("color");
                     String specChosen = request.getParameter("specID");

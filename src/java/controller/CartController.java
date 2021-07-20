@@ -72,6 +72,7 @@ public class CartController extends HttpServlet {
         OrderDAO oDAO= new OrderDAO();
         List<CartItemDTO> cart = (List<CartItemDTO>) session.getAttribute("cart");
         String perform = request.getParameter("perform");
+        System.out.println(perform);
         try {
             switch (perform) {
                 case "Order Complete":
@@ -84,9 +85,24 @@ public class CartController extends HttpServlet {
                     if (codeSale.length() == 0){
                         codeSale = null;
                     }
+                    double salePercent =0;
+                    System.out.println("get code fail");
+                    if(request.getParameter("saleCode") != null){
+                    SaleCodeDTO sDTO =  sDAO.getCode(codeSale);
+                        if(sDAO.getCode(codeSale).getCodeID() !=null){
+                         salePercent = (Double.parseDouble(sDTO.getPercentage())*0.01) ;
+                        }  
+                    }
+                    System.out.println("get code sucess");
                     double total = Double.parseDouble(request.getParameter("total"));
+                    System.out.println("session user null");
                     UserDTO user=(UserDTO) session.getAttribute("USER");
-                    String userID = user.getUserID();
+                    System.out.println("session not null");
+                    String userID =null;
+                    if(session.getAttribute("USER") != null ){
+                         userID = user.getUserID();
+                    }
+                
                     if (cart != null) System.out.println("cart <> null");
                     else System.out.println("cart null");
                     if (cart != null) {
@@ -97,12 +113,20 @@ public class CartController extends HttpServlet {
                        
                         System.out.println("Thru");
                         request.setAttribute("newOrder",newOrder);
+                        System.out.println("get all null");
                         ArrayList<OrderDetailDTO> orderDetail = oDAO.getAllOrderDetail(orderID);
+                        System.out.println("get all khong null");
+                        System.out.println("send mail ");
                         sendEmail(orderDetail,newOrder, email);
+                         System.out.println("send fail ");
                         request.setAttribute("detail", orderDetail);
+                        request.setAttribute("percent", salePercent);
                         if (check) {
                             session.removeAttribute("cart");
                             url = ORDERED;
+                        }
+                        else {
+                            System.out.println("check fail");
                         }
                     }
                     break;
@@ -230,6 +254,7 @@ public class CartController extends HttpServlet {
         } catch (Exception e) {
             request.setAttribute("ERROR", e.toString());
         } finally {
+            System.out.println("url cua cart controller "+url);
             request.getRequestDispatcher(url).forward(request, response);
         }
     }
@@ -250,6 +275,17 @@ public class CartController extends HttpServlet {
     private static  void sendEmail(ArrayList<OrderDetailDTO> orderDetail,OrderDTO newOrder,String email) throws MessagingException, IOException{
                 //send Mail
                 double total=0;
+                double rowTotal=0;
+                double finalTotal =0;
+                String percent ="";
+                SaleCodeDAO saleDao = new SaleCodeDAO();
+                if(newOrder.getCodeID()!= null){
+                  percent = saleDao.getCode(newOrder.getCodeID()).getPercentage();
+                }
+                else{
+                    percent = "0";
+                }
+               
                 String MailMessage = "Your billing was sent to Email."+email;
                  String subject = "Your billing at SE15AppleShop";
                   String content = "<h2>Bill Infor</h2>"
@@ -288,7 +324,8 @@ public class CartController extends HttpServlet {
                 + "<td><b>Row Total<b></td>"
                 + "</tr>" ;      
                 for (OrderDetailDTO orderDetailDTO : orderDetail) {
-                   
+                total = (orderDetailDTO.getProduct().getPrice()*orderDetailDTO.getQuantity());
+                rowTotal = total - (total*(Double.parseDouble(percent)*0.01));
                 content+= "<tr align='center'>"
                 + "<td><b>"+orderDetailDTO.getProduct().getName()+"<b></td>"
                 + "<td><b>"+"Color: "+orderDetailDTO.getProduct().getColor()
@@ -296,13 +333,13 @@ public class CartController extends HttpServlet {
                     +"<br/>Storage: "+orderDetailDTO.getProduct().getStorage()+"<b></td>"
                 + "<td><b>"+orderDetailDTO.getQuantity()+"<b></td>"
                 + "<td><b>"+formatPrice(orderDetailDTO.getProduct().getPrice())+"<b></td>"
-                + "<td><b>"+""+"<b></td>"
-                + "<td><b>"+formatPrice(orderDetailDTO.getProduct().getPrice()*orderDetailDTO.getQuantity())+"<b></td>"
+                + "<td><b>"+formatPrice(total*(Double.parseDouble(percent)*0.01))+"<b></td>"
+                + "<td><b>"+formatPrice(rowTotal)+"<b></td>"
                 + "</tr>"; 
-                
-                total += orderDetailDTO.getProduct().getPrice()*orderDetailDTO.getQuantity(); 
+               
+                finalTotal +=rowTotal;
                 }
-               content+="<td colspan=\"6\" style=\"text-align:right\"><strong>TOTAL "+formatPrice(total)+" </strong></td>\n" 
+               content+="<td colspan=\"6\" style=\"text-align:right\"><strong>TOTAL "+formatPrice(finalTotal)+" </strong></td>\n" 
                +"</table>";
             EmailUtility.sendEmail_1(host, port, emailSender, nameSender, pass, email, subject, content);
                 //end send Mail

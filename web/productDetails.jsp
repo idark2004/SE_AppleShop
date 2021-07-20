@@ -113,6 +113,7 @@
                                                         <label class="checkbox">
                                                             <input type="checkbox"> Remember me
                                                         </label>
+                                                        <a href="forgetPass.jsp" >ForgetPass?</a>
                                                         <div class="g-signin2" data-onsuccess="onSignIn"></div>
                                                         <input type="hidden" name="perform" value="Log in">
                                                         <button type="submit" class="btn btn-success" name="action" value="User">Sign in</button>
@@ -235,11 +236,11 @@
                                 </a>
 
                             </div>
-                            <form  action="MainController" method="POST">  
+                            <form id="addToCartForm" action="MainController" method="POST">  
                                 <div class="span6">
                                     <input type="hidden" name="productID" value="${requestScope.product.productID.trim()}"/>
                                     <h3>${requestScope.product.name}</h3>
-
+                                    <p style="color:red;font-size:20px; ">${requestScope.notenough}</p>
                                     <hr class="soft" />
                                     <div class="form-horizontal qtyFrm">
                                         <div class="control-group">
@@ -249,15 +250,16 @@
                                                 <c:if test="${requestScope.spec!=null}">
                                                     <span><fmt:setLocale value="vi_VN" />
                                                         <fmt:formatNumber value="${requestScope.spec.price}" type="currency" /></span>
+                                                        <p id="specQuan">Quantity:${requestScope.spec.specQuantity}</p>
                                                     </c:if>
                                             </label>
 
                                             <div class="controls">
                                                 ${requestScope.notenough}
                                                 <h4>Select quantity</h4>
-                                                <input type="number" name="Quantity" max="6" class="span1" placeholder="Qty."  required="Need to add quantity"/>
+                                                <input id="iQuan" type="number" name="Quantity" max="6" class="span1" placeholder="Qty."  required="Need to add quantity"/>
                                                 <input type="hidden" name="action" value="Cart"/>
-                                                <button type="submit" name="perform" value="AddItem" class="btn btn-large btn-primary pull-right"> Add to cart <i class=" icon-shopping-cart"></i></button>
+                                                <button id="addToCart"type="submit" name="perform" value="AddItem" class="btn btn-large btn-primary pull-right"> Add to cart <i class=" icon-shopping-cart"></i></button>
                                             </div>
                                         </div>
                                     </div>
@@ -447,5 +449,19 @@
     <span id="themesBtn"></span>
 
 </body>
+<script type="text/javascript">
+$('#addToCartForm').on('submit',function(e){
+    var input = $('#iQuan').val();
+    var specQ = $('#specQuan').val();
+    if(input <= 0 ){
+    e.preventDefault();
+    alert("Quantity must larget than 0");
+    return false;
+    }
+    
+    
+    
+});
+</script>
 
 </html>
