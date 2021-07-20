@@ -40,6 +40,9 @@ public class OrderDetailController extends HttpServlet {
             ArrayList<OrderDetailDTO> orderDetail = oDAO.getAllOrderDetail(id);
             
             u = uDAO.getUserProfile(order.getUserID());
+            if (u==null){
+                u = new UserDTO();
+            }
             System.out.println(u.getEmail()+"dd");
             request.setAttribute("order", order);
             if(u!=null){request.setAttribute("userDetail",u);}

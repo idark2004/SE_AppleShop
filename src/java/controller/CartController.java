@@ -13,6 +13,7 @@ import dtos.OrderDTO;
 import dtos.OrderDetailDTO;
 import dtos.ProductDTO;
 import dtos.SaleCodeDTO;
+import dtos.UserDTO;
 import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -84,7 +85,8 @@ public class CartController extends HttpServlet {
                         codeSale = null;
                     }
                     double total = Double.parseDouble(request.getParameter("total"));
-                    String userID = null;
+                    UserDTO user=(UserDTO) session.getAttribute("USER");
+                    String userID = user.getUserID();
                     if (cart != null) System.out.println("cart <> null");
                     else System.out.println("cart null");
                     if (cart != null) {
