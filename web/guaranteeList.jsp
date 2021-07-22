@@ -125,17 +125,17 @@
                 <div class="carousel-inner">
                     <div class="item active">
                         <div class="container">
-                            <a href="register.html"><img style="width:100%" src="themes/images/carousel/1.png" alt="" /></a>
+                            <a href="signupForm.html"><img style="width:100%" src="themes/images/carousel/1.png" alt="" /></a>
                         </div>
                     </div>
                     <div class="item">
                         <div class="container">
-                            <a href="register.html"><img style="width:100%" src="themes/images/carousel/2.png" alt="" /></a>
+                            <a href="signupForm.html"><img style="width:100%" src="themes/images/carousel/2.png" alt="" /></a>
                         </div>
                     </div>
                     <div class="item">
                         <div class="container">
-                            <a href="register.html"><img src="themes/images/carousel/3.png" alt="" /></a>
+                            <a href="signupForm.html"><img src="themes/images/carousel/3.png" alt="" /></a>
                         </div>
                     </div>
                 </div>
@@ -211,7 +211,8 @@
                         </ul>
                         <div class="row">
                             <div class="span9">
-                                <p><a href="managerGuarantee.jsp" class="btn btn-primary">Add guarantee</a></p>
+                                <!--<p><a href="managerGuarantee.jsp" class="btn btn-primary">Add guarantee</a></p>-->
+                                <p><a href="MainController?action=Guarantee&perform=Form" class="btn btn-primary">Add guarantee</a></p>
                                 <c:choose>
                                     <c:when test="${requestScope.GUARANTEE_LIST == null}">
                                         <h1>${requestScope.EMPTY}</h1>

@@ -139,17 +139,17 @@
             <div class="carousel-inner">
                 <div class="item active">
                     <div class="container">
-                        <a href="register.jsp"><img style="width:100%" src="themes/images/carousel/1.png" alt="" /></a>
+                        <a href="signupForm.jsp"><img style="width:100%" src="themes/images/carousel/1.png" alt="" /></a>
                     </div>
                 </div>
                 <div class="item">
                     <div class="container">
-                        <a href="register.jsp"><img style="width:100%" src="themes/images/carousel/2.png" alt="" /></a>
+                        <a href="signupForm.jsp"><img style="width:100%" src="themes/images/carousel/2.png" alt="" /></a>
                     </div>
                 </div>
                 <div class="item">
                     <div class="container">
-                        <a href="register.jsp"><img src="themes/images/carousel/3.png" alt="" /></a>
+                        <a href="signupForm.jsp"><img src="themes/images/carousel/3.png" alt="" /></a>
                     </div>
                 </div>
             </div>

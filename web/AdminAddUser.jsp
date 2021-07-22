@@ -127,17 +127,17 @@
             <div class="carousel-inner">
                 <div class="item active">
                     <div class="container">
-                        <a href="register.jsp"><img style="width:100%" src="themes/images/carousel/1.png" alt="" /></a>
+                        <a href="signupForm.jsp"><img style="width:100%" src="themes/images/carousel/1.png" alt="" /></a>
                     </div>
                 </div>
                 <div class="item">
                     <div class="container">
-                        <a href="register.jsp"><img style="width:100%" src="themes/images/carousel/2.png" alt="" /></a>
+                        <a href="signupForm.jsp"><img style="width:100%" src="themes/images/carousel/2.png" alt="" /></a>
                     </div>
                 </div>
                 <div class="item">
                     <div class="container">
-                        <a href="register.jsp"><img src="themes/images/carousel/3.png" alt="" /></a>
+                        <a href="signupForm.jsp"><img src="themes/images/carousel/3.png" alt="" /></a>
                     </div>
                 </div>
             </div>
@@ -212,7 +212,7 @@
                 <div class="span9">
                     <ul class="breadcrumb">
                         <li><a href="MainController?action=Product&perform=Index">Home</a> <span class="divider">/</span></li>
-                        <li><a href="customers_Manager.html">Users</a> <span class="divider">/</span></li>
+                        <li><a href="MainController?action=Manage+User&perform=Get+Manager">Users</a> <span class="divider">/</span></li>
                         <li class="active">New Manager</li>
                     </ul>
                     <div class="well">

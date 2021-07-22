@@ -360,4 +360,43 @@ public class OrderDAO {
         }
         return null;
     }
+    
+    public ArrayList<OrderDTO> getAllOrderID() throws NamingException, SQLException {
+        Connection c = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        String sql = "SELECT orderID FROM tblOrders WHERE orderStatus='Completed' ";
+
+        ArrayList<OrderDTO> lst = new ArrayList<>();
+
+        try {
+            c = DBConnect.makeConnection();
+            if (c != null) {
+                ps = c.prepareStatement(sql);
+                rs = ps.executeQuery();
+                
+                if(rs != null) System.out.println("rs <> null");
+                else System.out.println("rs null");
+                
+                while (rs.next()) {
+                    OrderDTO o = new OrderDTO();
+                    o.setOrderID(rs.getString("orderID"));
+                    
+                    lst.add(o);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (c != null) {
+                c.close();
+            }
+        }
+        return lst;
+    }
 }
