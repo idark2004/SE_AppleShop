@@ -233,8 +233,9 @@
                                                 <h4>Product Information</h4>
                                                 <div class="control-group">
                                                     <label class="control-label" for="textarea">Description</label>
+                                                    
                                                     <div class="controls">
-                                                        <textarea class="input-xlarge" id="textarea" name="description" rows="3" style="height:10rem; width:97%;" value="${fn:trim(sessionScope.BASIC.description)}"></textarea>
+                                                        <p><span id="textarea" name="description" class="textarea_input" role="textbox" value="${fn:trim(sessionScope.BASIC.description)}" contenteditable></span></p>
                                                     </div>
                                                 </div>
                                                 <div class="controls">
@@ -463,3 +464,25 @@
     </body>
 
 </html>
+
+<script>
+    // Dealing with Input width
+    let el = document.querySelector(".input-wrap .input");
+    let widthMachine = document.querySelector(".input-wrap .width-machine");
+    el.addEventListener("keyup", () => {
+        widthMachine.innerHTML = el.value;
+    });
+
+    // Dealing with Textarea Height
+    function calcHeight(value) {
+        let numberOfLineBreaks = (value.match(/\n/g) || []).length;
+        // min-height + lines x line-height + padding + border
+        let newHeight = 20 + numberOfLineBreaks * 20 + 12 + 2;
+        return newHeight;
+    }
+
+    let textarea = document.querySelector(".resize-ta");
+    textarea.addEventListener("keyup", () => {
+        textarea.style.height = calcHeight(textarea.value) + "px";
+    });
+</script>

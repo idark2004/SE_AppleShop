@@ -153,6 +153,7 @@ public class ManageProductController extends HttpServlet {
                 case "Manage Detail":
                     List<ProductDTO> specList = dao.getAllSpec(productID);
                     ProductDTO pro = dao.getBasicDetail(productID);
+                    System.out.println(pro.getDescription());
                     if (specList == null) {
                         error.setMsg("NO SPEC FOUND");
                         request.setAttribute("ERROR", error);
@@ -185,6 +186,7 @@ public class ManageProductController extends HttpServlet {
                 case "Update Basic":
                     String productName = request.getParameter("productName");
                     String description = request.getParameter("description");
+                    System.out.println(description);
                     String imgUrl=uploadFile(request);
                     imgUrl="images/"+imgUrl;
                     System.out.println(imgUrl.length());
