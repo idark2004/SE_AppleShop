@@ -6,7 +6,9 @@
 package controller;
 
 import daos.GuaranteeDAO;
+import daos.OrderDAO;
 import dtos.GuaranteeDTO;
+import dtos.OrderDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -27,6 +29,7 @@ public class GuaranteeController extends HttpServlet {
     private static final String ADDED = "MainController?action=Guarantee&perform=Get";
     private static final String LIST = "guaranteeList.jsp";
     private static final String ACTION = "MainController?action=Guarantee&perform=Get";    
+    private static final String FORM = "managerGuarantee.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -51,6 +54,19 @@ public class GuaranteeController extends HttpServlet {
                     check = dao.submit(guarant);
                     if(check){
                         url = ADDED;
+                    }
+                    break;
+                    
+                case "Form":
+                    OrderDAO oDAO= new OrderDAO();
+                    List<OrderDTO> orders = oDAO.getAllOrderID();
+                    if(orders!=null){
+                        request.setAttribute("Orders", orders);
+                        url=FORM;
+                    }
+                    else{
+                        request.setAttribute("EMPTY", "There's no order");
+                        url = LIST;
                     }
                     break;
                     

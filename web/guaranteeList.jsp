@@ -211,7 +211,8 @@
                         </ul>
                         <div class="row">
                             <div class="span9">
-                                <p><a href="managerGuarantee.jsp" class="btn btn-primary">Add guarantee</a></p>
+                                <!--<p><a href="managerGuarantee.jsp" class="btn btn-primary">Add guarantee</a></p>-->
+                                <p><a href="MainController?action=Guarantee&perform=Form" class="btn btn-primary">Add guarantee</a></p>
                                 <c:choose>
                                     <c:when test="${requestScope.GUARANTEE_LIST == null}">
                                         <h1>${requestScope.EMPTY}</h1>
