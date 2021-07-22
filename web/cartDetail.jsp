@@ -303,11 +303,11 @@
                                                         </button>
                                                     </div>
                                                 </td>
-                                                <td><fmt:formatNumber type="number" maxFractionDigits = "0" value="${cartItem.quantity * cartItem.product.price}"/> VND</td>
-                                                <td>
+                                                <td style="text-align:right"><fmt:formatNumber type="number" maxFractionDigits = "0" value="${cartItem.quantity * cartItem.product.price}"/> VND</td>
+                                                <td style="text-align:right">
                                                     <fmt:formatNumber type="number" maxFractionDigits = "0" value="${cartItem.quantity * cartItem.product.price * discount / 100}"/> VND
                                                 </td>
-                                                <td><fmt:formatNumber type="number" maxFractionDigits = "0" value="${cartItem.quantity * cartItem.product.price - cartItem.quantity * cartItem.product.price * discount / 100}"/> VND</td>
+                                                <td style="text-align:right"><fmt:formatNumber type="number" maxFractionDigits = "0" value="${cartItem.quantity * cartItem.product.price - cartItem.quantity * cartItem.product.price * discount / 100}"/> VND</td>
                                                 <c:set var="total" value="${total + (cartItem.quantity * cartItem.product.price - cartItem.quantity * cartItem.product.price * discount / 100)}"/>
                                                 <c:set var="totalDiscount" value="${totalDiscount + (cartItem.quantity * cartItem.product.price * discount / 100)}"/>
                                                 <c:set var="Price" value="${Price + (cartItem.quantity * cartItem.product.price)}"/>
@@ -320,15 +320,15 @@
                             </c:choose>
                             <tr>
                                 <td colspan="5" style="text-align:right">Total Price: </td>
-                                <td> <fmt:formatNumber type="number" maxFractionDigits = "0" value="${Price}"/> VND</td>
+                                <td style="text-align:right"> <fmt:formatNumber type="number" maxFractionDigits = "0" value="${Price}"/> VND</td>
                             </tr>
                             <tr>
                                 <td colspan="5" style="text-align:right">Total Discount: </td>
-                                <td> <fmt:formatNumber type="number" maxFractionDigits = "0" value="${totalDiscount}"/></td>
+                                <td style="text-align:right"> <fmt:formatNumber type="number" maxFractionDigits = "0" value="${totalDiscount}"/></td>
                             </tr>
                             <tr>
                                 <td colspan="5" style="text-align:right"><strong>TOTAL (<fmt:formatNumber type="number" maxFractionDigits = "0" value="${Price}"/> VND - ${totalDiscount} VND) =</strong></td>
-                                <td class="label label-important" style="display:block"> <strong><fmt:formatNumber type="number" maxFractionDigits = "0" value="${total}"/> VND</strong></td>
+                                <td class="label label-important" style="display:block" style="text-align:right"> <strong><fmt:formatNumber type="number" maxFractionDigits = "0" value="${total}"/> VND</strong></td>
                             </tr>
                             </tbody>
                         </table>

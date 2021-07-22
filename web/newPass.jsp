@@ -224,9 +224,9 @@
                 <div class="span9">
                     <ul class="breadcrumb">
                         <li><a href="MainController?action=Product&perform=Index">Home</a> <span class="divider">/</span></li>
-                        <li class="active">Forget password?</li>
+                        <li class="active">Reset password?</li>
                     </ul>
-                    <h3> FORGET YOUR PASSWORD?</h3>
+                    <h3> RESET YOUR PASSWORD?</h3>
                     <hr class="soft" />
 
                     <div class="row">
