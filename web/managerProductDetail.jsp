@@ -235,7 +235,7 @@
                                                     <label class="control-label" for="textarea">Description</label>
                                                     
                                                     <div class="controls">
-                                                        <p><span id="textarea" name="description" class="textarea_input" role="textbox" value="${fn:trim(sessionScope.BASIC.description)}" contenteditable></span></p>
+                                                        <textarea id="textarea" name="description" class="textarea_input" role="textbox" contenteditable value="${fn:trim(sessionScope.BASIC.description)}">${fn:trim(sessionScope.BASIC.description)}</textarea>
                                                     </div>
                                                 </div>
                                                 <div class="controls">
@@ -466,23 +466,36 @@
 </html>
 
 <script>
+    var textarea = document.querySelector('textarea');
+
+    textarea.addEventListener('keydown', autosize);
+
+    function autosize(){
+      var el = this;
+      setTimeout(function(){
+        el.style.cssText = 'height:auto; padding:0';
+        // for box-sizing other than "content-box" use:
+        // el.style.cssText = '-moz-box-sizing:content-box';
+        el.style.cssText = 'height:' + el.scrollHeight + 'px';
+      },0);
+    }
     // Dealing with Input width
-    let el = document.querySelector(".input-wrap .input");
-    let widthMachine = document.querySelector(".input-wrap .width-machine");
-    el.addEventListener("keyup", () => {
-        widthMachine.innerHTML = el.value;
-    });
+    //let el = document.querySelector(".input-wrap .input");
+    //let widthMachine = document.querySelector(".input-wrap .width-machine");
+    //el.addEventListener("keyup", () => {
+    //    widthMachine.innerHTML = el.value;
+    //});
 
     // Dealing with Textarea Height
-    function calcHeight(value) {
-        let numberOfLineBreaks = (value.match(/\n/g) || []).length;
+    //function calcHeight(value) {
+    //    let numberOfLineBreaks = (value.match(/\n/g) || []).length;
         // min-height + lines x line-height + padding + border
-        let newHeight = 20 + numberOfLineBreaks * 20 + 12 + 2;
-        return newHeight;
-    }
+    //    let newHeight = 20 + numberOfLineBreaks * 20 + 12 + 2;
+    //    return newHeight;
+    //}
 
-    let textarea = document.querySelector(".resize-ta");
-    textarea.addEventListener("keyup", () => {
-        textarea.style.height = calcHeight(textarea.value) + "px";
-    });
+    //let textarea = document.querySelector(".resize-ta");
+    //textarea.addEventListener("keyup", () => {
+    //    textarea.style.height = calcHeight(textarea.value) + "px";
+    //});
 </script>

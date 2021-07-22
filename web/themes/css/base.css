@@ -588,10 +588,11 @@
 
 .textarea_input {
     display: block;
-    width: 99%;
+    width: 98%;
     overflow: hidden;
     resize: both;
-    min-height: 1.75rem;
+    
+    height: 20px;
     line-height: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
