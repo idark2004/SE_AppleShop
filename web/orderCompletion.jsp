@@ -289,12 +289,12 @@
                                                         <td> <img width="60" src="${detail.product.image}" alt="" /></td>
                                                         <td>${detail.product.name}<br/>Color : ${detail.product.color}<br/>
                                                             Ram:${detail.product.ram}<br/>Storage:${detail.product.storage}</td>
-                                                        <td style="text-align:right">
+                                                        <td>
                                                             ${detail.quantity}
                                                         </td>
-                                                        <td style="text-align:right"><fmt:formatNumber type="number" maxFractionDigits = "0" value="${detail.product.price}"/></td>
-                                                        <td style="text-align:right"><fmt:formatNumber type="number" maxFractionDigits = "0" value="${percent*(detail.product.price * detail.quantity)}"/></td>
-                                                        <td style="text-align:right"> <fmt:formatNumber type="number" maxFractionDigits = "0" value="${(detail.product.price * detail.quantity)-percent*(detail.product.price * detail.quantity)}"/></td>
+                                                        <td><fmt:formatNumber type="number" maxFractionDigits = "0" value="${detail.product.price}"/></td>
+                                                        <td><fmt:formatNumber type="number" maxFractionDigits = "0" value="${percent*(detail.product.price * detail.quantity)}"/></td>
+                                                        <td><fmt:formatNumber type="number" maxFractionDigits = "0" value="${(detail.product.price * detail.quantity)-percent*(detail.product.price * detail.quantity)}"/></td>
                                                     </tr>
                                                     <c:set var="totalNotSaleCode" value="${totalNotSaleCode + ((detail.product.price * detail.quantity)) }" ></c:set>
 
@@ -308,8 +308,8 @@
                                         </c:otherwise>
                                     </c:choose>
                                     <tr>
-                                        <td colspan="5" style="text-align:right" ><strong>TOTAL ( <fmt:formatNumber type="number" maxFractionDigits = "0" value="${totalNotSaleCode}"/> - <fmt:formatNumber type="number" maxFractionDigits = "0" value="${totalSale}"/> ) =</strong></td>
-                                        <td class="label label-important" style="display:block; text-align:right"> <strong> <fmt:formatNumber type="number" maxFractionDigits = "0" value="${total}"/></strong></td>
+                                        <td colspan="5" style="text-align:right"><strong>TOTAL ( <fmt:formatNumber type="number" maxFractionDigits = "0" value="${totalNotSaleCode}"/> - <fmt:formatNumber type="number" maxFractionDigits = "0" value="${totalSale}"/> ) =</strong></td>
+                                        <td class="label label-important" style="display:block"> <strong> <fmt:formatNumber type="number" maxFractionDigits = "0" value="${total}"/></strong></td>
                                     </tr>
                                     </tbody>
                                 </table>

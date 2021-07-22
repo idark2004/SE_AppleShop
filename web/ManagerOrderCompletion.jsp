@@ -1,21 +1,20 @@
 <%-- 
-    Document   : newPass
-    Created on : Jul 4, 2021, 10:15:51 PM
+    Document   : ManagerOrderCompletion
+    Created on : Jul 8, 2021, 8:11:04 PM
     Author     : anime
 --%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html lang="en">
-
+    
 <head>
     <meta charset="utf-8">
-    <title>SE15 Shop | Change Pass</title>
+    <title>SE15 Shop | Order Summary</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-
     <!--Less styles -->
     <!-- Other Less css file //different less files has different color scheam
 	<link rel="stylesheet/less" type="text/css" href="themes/less/simplex.less">
@@ -31,8 +30,13 @@
     <!-- Bootstrap style responsive -->
     <link href="themes/css/bootstrap-responsive.min.css" rel="stylesheet" />
     <link href="themes/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="themes/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <!-- Google-code-prettify -->
     <link href="themes/js/google-code-prettify/prettify.css" rel="stylesheet" />
+    <script type="text/javascript" src="chart.js/Chart.js"></script>
+
     <!-- fav and touch icons -->
     <link rel="shortcut icon" href="themes/images/ico/apple.ico">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="themes/images/ico/apple.png">
@@ -40,10 +44,6 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="themes/images/ico/apple.png">
     <link rel="apple-touch-icon-precomposed" href="themes/images/ico/apple.png">
     <style type="text/css" id="enject"></style>
-     <script src="https://apis.google.com/js/platform.js" async defer></script>
-     <meta name="google-signin-scope" content="profile email">
-     <meta name="google-signin-client_id" content="779792849031-s9k66dv106kav3h90o9lak0vnm2943ci.apps.googleusercontent.com">
-
 </head>
 
 <body>
@@ -84,51 +84,51 @@
                         <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
                     </form>
                     <ul id="topMenu" class="nav pull-right">
-                        <li class=""><a href="MainController?action=Product&perform=ViewProduct">All Products</a></li>
+                        <li class=""><a href="MainController?action=Product&perform=ViewProduct&categoryID=">All Products</a></li>
                         <li class=""><a href="contact.jsp">Contact</a></li>
                         <c:if test="${sessionScope.USER != null}">
                             <li class=""><a href="userProfile.jsp">Profile</a></li>
-                        </c:if>
-                        <c:choose>
-                        <c:when test="${sessionScope.USER == null}">
-                            <li class="">
-                                <a href="signupForm.jsp" role="button" style="padding-right:0"><span class="btn btn-large btn-success">Signup</span></a>
-                            </li>
-                            <li class="">
-                                <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
-                                <div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                        <h3>Log In</h3>
+                            </c:if>
+                            <c:choose>
+                            <c:when test="${sessionScope.USER == null}">
+                                <li class="">
+                                    <a href="signupForm.jsp" role="button" style="padding-right:0"><span class="btn btn-large btn-success">Signup</span></a>
+                                </li>
+                                <li class="">
+                                    <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
+                                    <div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                            <h3>Log In</h3>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form class="form-horizontal loginFrm" action="MainController" method="post">
+                                                <div class="control-group">
+                                                    <input type="text" id="inputEmail" placeholder="Enter Email" name="email" required>
+                                                </div>
+                                                <div class="control-group">
+                                                    <input type="password" id="inputPassword" placeholder="Enter Password" name="password" required>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label class="checkbox">
+                                                        <input type="checkbox"> Remember me
+                                                    </label>
+                                                    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                                                    <input type="hidden" name="perform" value="Log in">
+                                                    <button type="submit" class="btn btn-success" name="action" value="User">Sign in</button>
+                                                    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
-                                    <div class="modal-body">
-                                        <form class="form-horizontal loginFrm" action="MainController" method="post">
-                                            <div class="control-group">
-                                                <input type="text" id="inputEmail" placeholder="Enter Email" name="email" required>
-                                            </div>
-                                            <div class="control-group">
-                                                <input type="password" id="inputPassword" placeholder="Enter Password" name="password" required>
-                                            </div>
-                                            <div class="control-group">
-                                                <label class="checkbox">
-                                                    <input type="checkbox"> Remember me
-                                                </label>
-                                                <div class="g-signin2" data-onsuccess="onSignIn"></div>
-                                                <input type="hidden" name="perform" value="Log in">
-                                                <button type="submit" class="btn btn-success" name="action" value="User">Sign in</button>
-                                                <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </li>
-                        </c:when>
-                        <c:otherwise>
-                            <li class="">
-                                <a href="MainController?action=User&perform=Log+Out" role="button" style="padding-right:0"><span class="btn btn-large btn-success">Log Out</span></a>
-                            </li>
-                        </c:otherwise>
-                    </c:choose>
+                                </li>
+                            </c:when>
+                            <c:otherwise>
+                                <li class="">
+                                    <a href="MainController?action=User&perform=Log+Out" role="button" style="padding-right:0"><span class="btn btn-large btn-success">Log Out</span></a>
+                                </li>
+                            </c:otherwise>
+                        </c:choose>  
                     </ul>
                 </div>
             </div>
@@ -163,22 +163,16 @@
             <div class="row">
                 <!-- Sidebar ================================================== -->
                 <div id="sidebar" class="span3">
-                      <div class="well well-small">
+                    <div class="well well-small">
                             <c:forEach var="cartItem" items="${sessionScope.cart}">
                                 <c:set var="total" value="${total + (cartItem.quantity * cartItem.product.price)}"/>
                             </c:forEach>
-                            <a id="myCart" href="cartDetail.jsp"><img src="themes/images/ico-cart.png" alt="cart">${subtotal} 
-                            <c:if test="${sessionScope.cart == null}">No</c:if> 
-                            Items in your cart
-                            <c:if test="${sessionScope.cart != null}">
-                            <span class="badge badge-warning pull-right"> 
+                            <a id="myCart" href="cartDetail.jsp"><img src="themes/images/ico-cart.png" alt="cart">${subtotal} Items in your cart <span class="badge badge-warning pull-right"> 
                                     <fmt:setLocale value="vi_VN" />
-                                    <fmt:formatNumber value="${total}" type="currency" />
-                            </span>
-                            </c:if>
+                                    <fmt:formatNumber value="${total}" type="currency" /></span>
                             </a>
-                        </div>
-                    <ul id="sideManu" class="nav nav-tabs nav-stacked">
+                    </div>
+                  <ul id="sideManu" class="nav nav-tabs nav-stacked">
                         <li class="subMenu"><a>Product</a>  
                          <ul style="display: none">
                         <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=">All</a></li>
@@ -224,34 +218,116 @@
                 <div class="span9">
                     <ul class="breadcrumb">
                         <li><a href="MainController?action=Product&perform=Index">Home</a> <span class="divider">/</span></li>
-                        <li class="active">Forget password?</li>
+                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=">Products</a> <span class="divider">/</span></li>
+                        <li class="active">Receipt</li>
                     </ul>
-                    <h3> FORGET YOUR PASSWORD?</h3>
-                    <hr class="soft" />
-
                     <div class="row">
-                        <div class="span9" style="min-height:900px">
-                            <div class="well">
-                                <h5>Reset your password</h5><br/> Please enter a new password<br/><br/><br/><br/>
-                                <form action="MainController" method="post">
-                                    <div class="control-group">
-                                        <label class="control-label" for="inputPassword">New password</label>
-                                        <div class="controls">
-                                            <input class="span3" type="password" placeholder="Enter New Password" name="password" required>
-                                        </div>
-                                    </div>
+                        <div class="span9">
+                            <h3>Thank you for your order!</h3>
+                            <hr class="soft" />
+                            <form class="form-horizontal qtyFrm">
+                                <div class="">
+                                    <p class="small">
+                                        Thank you for choosing SE15 Shop. In 15 minutes, we will SMS or Call to confirm the order.
+                                    </p>
+                                    <p class="small">
+                                        * For the orders from <span><strong>21:30 pm to 8 am</strong></span> the next day, we will contact you before 10 pm on the same day.
+                                    </p>
+                                    <p class="small">
+                                        If you need any assistance, please contact <span><strong>0914123456</strong></span>. Thank you very much!
+                                    </p>
+                                </div>
+                                <hr class="soft" />
+                                <h5> Order Details</h5>
+                                <div class="well span8">
+                                    <form>
+                                        <p class="small">
+                                            Order ID: <span><strong>abc123</strong></span>
+                                        </p>
+                                        <p class="small">
+                                            Fullname: <span><strong>Trần Văn A</strong></span>
+                                        </p>
+                                        <p class="small">
+                                            Address: <span><strong>69 Phú Mỹ Hưng P.Tân Hưng Q.7 </strong></span>
+                                        </p>
+                                        <p class="small">
+                                            Phone: <span><strong>0914123456</strong></span>
+                                        </p>
+                                        <br>
+                                        <p class="small">
+                                            Manager creating this order: <span><strong>Hồ Quang Phúc</strong></span>
+                                        </p>
+                                        <p class="small">
+                                            Created: <span><strong>2020/08/12, 20:00</strong></span>
+                                        </p>
+                                        <p class="small">
+                                            Payment method: <span><strong>Pay on delivery</strong></span>
+                                        </p>
+                                        <p class="small">
+                                            Payment status: <span><strong>Charging</strong></span>
+                                        </p>
+                                    </form>
+                                </div>
+                            </form>
 
-                                    <div class="control-group">
-                                        <label class="control-label" for="inputPasswordConfirm">Confirm</label>
-                                        <div class="controls">
-                                            <input class="span3" type="password" placeholder="Re-enter Password" name="psw" required>
-                                        </div>
-                                    </div>
-                                    <div class="controls">
-                                        <button type="submit" class="btn block" name="action" value="Change Password">Submit</button>
-                                    </div>
-                                </form>
-                            </div>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Description</th>
+                                        <th>Quantity/Update</th>
+                                        <th>Price</th>
+                                        <th>Discount</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td> <img width="60" src="themes/images/products/4.jpg" alt="" /></td>
+                                        <td>iPad Pro<br/>Color : black</td>
+                                        <td>
+                                            1
+                                        </td>
+                                        <td>10,000,000 VND</td>
+                                        <td>100,000 VND</td>
+                                        <td>9,900,000 VND</td>
+                                    </tr>
+                                    <tr>
+                                        <td> <img width="60" src="themes/images/products/8.jpg" alt="" /></td>
+                                        <td>Wired Ear Phone<br/>Color : white</td>
+                                        <td>
+                                            2
+                                        </td>
+                                        <td>100,000 VND</td>
+                                        <td>--</td>
+                                        <td>200,000 VND</td>
+                                    </tr>
+                                    <tr>
+                                        <td> <img width="60" src="themes/images/products/3.jpg" alt="" /></td>
+                                        <td>iPad Air 2<br/>Color : white</td>
+                                        <td>
+                                            1
+                                        </td>
+                                        <td>10,000,000 VND</td>
+                                        <td>100,000 VND</td>
+                                        <td>9,900,000 VND</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td colspan="5" style="text-align:right">Total Price: </td>
+                                        <td> 20,100,000 VND</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="5" style="text-align:right">Total Discount: </td>
+                                        <td> 200,000 VND</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="5" style="text-align:right"><strong>TOTAL (20,200,000 VND - 200,000 VND) =</strong></td>
+                                        <td class="label label-important" style="display:block"> <strong> 20,000,000 VND </strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <a href="index.html" class="btn btn-large pull-right">Finish <i class="icon-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -263,17 +339,17 @@
     <div id="footerSection">
         <div class="container">
             <div class="row">
-                        <div class="span3">
+                <div class="span3">
                     <h5>ACCOUNT</h5>
-                    <a href="loginForm.jsp">LOGIN</a>
-                    <a href="user_profile.jsp">PROFILE</a>
-                    <a href="product_summary.jsp">CART</a>
-                    <a href="order_history.jsp">ORDER HISTORY</a>
+                    <a href="login.html">LOGIN</a>
+                    <a href="login.html">PROFILE</a>
+                    <a href="login.html">CART</a>
+                    <a href="login.html">ORDER HISTORY</a>
                 </div>
                 <div class="span3">
                     <h5>INFORMATION</h5>
-                    <a href="contact.jsp">CONTACT</a>
-                    <a href="signupForm.jsp">REGISTRATION</a>
+                    <a href="contact.html">CONTACT</a>
+                    <a href="register.html">REGISTRATION</a>
                     <a href="legal_notice.html">LEGAL NOTICE</a>
                     <a href="tac.html">TERMS AND CONDITIONS</a>
                 </div>
@@ -351,18 +427,5 @@
     </div>
     <span id="themesBtn"></span>
 </body>
-<script>
-        window.onbeforeunload = function () {
-            gapi.auth2.getAuthInstance().signOut();
-        };
-        function onSignIn(googleUser) {
-            var profile = googleUser.getBasicProfile();
-            var id = googleUser.getId();
-            var name = profile.getName();
-            var email = profile.getEmail();
-            googleUser.disconnect();
-            window.location.href = 'MainController?action=Google&name=' + name + '&email=' + email + '&userID='
-                    + id;
-        }
-        </script>
+
 </html>
