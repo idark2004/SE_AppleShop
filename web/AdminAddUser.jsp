@@ -289,8 +289,8 @@
                     <div class="span3">
                         <h5>INFORMATION</h5>
                         <a href="contact.jsp">CONTACT</a>                    
-                        <a href="legal_notice.html">LEGAL NOTICE</a>
-                        <a href="tac.html">TERMS AND CONDITIONS</a>
+                        <a href="legalNotice.jsp">LEGAL NOTICE</a>
+                        <a href="termsAndConditions.jsp">TERMS AND CONDITIONS</a>
                     </div>
                     <div id="socialMedia" class="span3 pull-right">
                         <h5>SOCIAL MEDIA </h5>
