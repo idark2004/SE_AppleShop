@@ -1,17 +1,18 @@
 <%-- 
-    Document   : product_details
-    Created on : Jul 4, 2021, 10:12:23 PM
-    Author     : ADMIN
+    Document   : termsAndConditions
+    Created on : Jul 22, 2021, 1:40:01 PM
+    Author     : anime
 --%>
 
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
+
     <head>
         <meta charset="utf-8">
-        <title>SE15 Shop | Product Detail</title>
+        <title>SE15 Shop | Homepage</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
@@ -23,11 +24,10 @@
         -->
         <!--<link rel="stylesheet/less" type="text/css" href="themes/less/bootshop.less">
             <script src="themes/js/less.js" type="text/javascript"></script> -->
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" type="text/javascript"></script>
         <!-- Bootstrap style -->
         <link id="callCss" rel="stylesheet" href="themes/bootshop/bootstrap.min.css" media="screen" />
         <link href="themes/css/base.css" rel="stylesheet" media="screen" />
-        <link href="themes/css/comment.css" rel="stylesheet" media="screen" />
         <!-- Bootstrap style responsive -->
         <link href="themes/css/bootstrap-responsive.min.css" rel="stylesheet" />
         <link href="themes/css/font-awesome.css" rel="stylesheet" type="text/css">
@@ -40,13 +40,9 @@
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="themes/images/ico/apple.png">
         <link rel="apple-touch-icon-precomposed" href="themes/images/ico/apple.png">
         <style type="text/css" id="enject"></style>
-        <link rel="stylesheet" href="themes/font-awesome-4.7.0/css/font-awesome.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
 
-    <body>
-        <div id="fb-root"></div>
-        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v11.0&appId=1837579903108404&autoLogAppEvents=1" nonce="TMXKQcXh"></script>
+    <body >
         <div id="header">
             <div class="container">
                 <div id="welcomeLine" class="row">
@@ -69,6 +65,7 @@
                         </div>
                     </div>
                 </div>
+
                 <!-- Navbar ================================================== -->
                 <div id="logoArea" class="navbar">
                     <a id="smallScreen" data-target="#topMenu" data-toggle="collapse" class="btn btn-navbar">
@@ -84,8 +81,8 @@
                             <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
                         </form>
                         <ul id="topMenu" class="nav pull-right">
-                            <li class=""><a href="MainController?action=Product&perform=ViewProduct">All Products</a></li>
-                            <li class=""><a href="contact.jsp">Contact</a></li>                            
+                            <li class=""><a href="MainController?action=Product&perform=ViewProduct&categoryID=">All Products</a></li>
+                            <li class=""><a href="contact.jsp">Contact</a></li>
                                 <c:if test="${sessionScope.USER != null}">
                                 <li class=""><a href="userProfile.jsp">Profile</a></li>
                                 </c:if>
@@ -113,7 +110,6 @@
                                                         <label class="checkbox">
                                                             <input type="checkbox"> Remember me
                                                         </label>
-                                                        <a href="forgetPass.jsp" >ForgetPass?</a>
                                                         <div class="g-signin2" data-onsuccess="onSignIn"></div>
                                                         <input type="hidden" name="perform" value="Log in">
                                                         <button type="submit" class="btn btn-success" name="action" value="User">Sign in</button>
@@ -160,196 +156,80 @@
             </div>
         </div>
         <div id="mainBody">
-            <div class="container">
-                <div class="row">
-                    <!-- Sidebar ================================================== -->
-                    <div id="sidebar" class="span3">
-                        <div class="well well-small">
-                            <c:forEach var="cartItem" items="${sessionScope.cart}">
-                                <c:set var="total" value="${total + (cartItem.quantity * cartItem.product.price)}"/>
-                            </c:forEach>
-                            <a id="myCart" href="cartDetail.jsp"><img src="themes/images/ico-cart.png" alt="cart">${subtotal} 
-                                <c:if test="${sessionScope.cart == null}">No</c:if> 
-                                    Items 
-                                <c:if test="${sessionScope.cart != null}">
-                                    <span class="badge badge-warning pull-right"> 
-                                        <fmt:setLocale value="vi_VN" />
-                                        <fmt:formatNumber value="${total}" type="currency" />
-                                    </span>
-                                </c:if>
-                            </a>
-                        </div>
-                        <ul id="sideManu" class="nav nav-tabs nav-stacked">
-<ul id="sideManu" class="nav nav-tabs nav-stacked">
-                        <li class="subMenu"><a>Product</a>  
-                         <ul style="display: none">
-                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=">All</a></li>
-                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=IP&status=True">iPhone</a></li>
-                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=ID&status=True">iPad</a></li>
-                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=MB&status=True">Mac</a></li>
-                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AW&status=True">Apple Watch</a></li>
-                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AS&status=True">Accessory</a></li>                          
-                         </ul>
-                         </li>  
-                            <c:if test="${sessionScope.USER.roleID.trim() != null}" > 
-                                <c:if test="${sessionScope.USER.roleID.trim() != 'US'}" >
-                                <li class="subMenu"><a>Manager Product</a>
-                                    <ul style="display: none">
-                                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=">All</a></li>
-                                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=IP">iPhone</a></li>
-                                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=ID">iPad</a></li>
-                                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=MB">Mac</a></li>
-                                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=AW">Apple Watch</a></li>
-                                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=AS">Accessory</a></li>
-                                    </ul>
-                                </li>
-                                <li class="subMenu" id="CU"><a>Shop Manager</a>
-                                    <ul style="display:none">
-                                        <li><a href="DashBoardController"><i class="icon-chevron-right"></i>Dashboard</a></li>
-                                        <li><a href="managerAddProduct.jsp"><i class="icon-chevron-right"></i>Add Product</a></li>
-                                        <li><a href="MainController?action=Manage+User&perform=Get+User"><i class="icon-chevron-right"></i>User List</a></li>
-                                        <c:if test="${sessionScope.USER.roleID.trim() == 'AD'}">
-                                            <li><a href="MainController?action=Manage+User&perform=Get+Manager"><i class="icon-chevron-right"></i>Manager List</a></li>
-                                        </c:if>
-                                        <li><a href="MainController?action=Guarantee&perform=Get"><i class="icon-chevron-right"></i>Guarantee</a></li>
-                                        <li><a href="MainController?action=SaleCode&perform=List"><i class="icon-chevron-right"></i>Sale Code List</a></li>
-                                        <li><a href="MainController?action=OrderList"><i class="icon-chevron-right"></i>Order List</a></li>
-
-                                    </ul>
-                                </li>
-                            </c:if>                       
-                        </c:if>
+        <div class="container">
+            <div class="row">
+                <!-- Sidebar ================================================== -->
+                <div id="sidebar" class="span3">
+                    <div class="well well-small">
+                        <a id="myCart" href="product_summary.html"><img src="themes/images/ico-cart.png" alt="cart">3 Items in your cart <span class="badge badge-warning pull-right">445,000VND</span></a>
+                    </div>
+                    <ul id="sideManu" class="nav nav-tabs nav-stacked">
+                        <li><a href="products.html">All</a></li>
+                        <li><a href="products.html">iPhone</a></li>
+                        <li><a href="products.html">iPad</a></li>
+                        <li><a href="products.html">Mac</a></li>
+                        <li><a href="products.html">Accessory</a></li>
                     </ul>
-                        <br/>
-                    </div>
-                    <!-- Sidebar end=============================================== -->
-                    <div class="span9">
-                        <ul class="breadcrumb">
-                            <li><a href="MainController?action=Product&perform=Index">Home</a> <span class="divider">/</span></li>
-                            <li><a href="MainController?action=Product&perform=ViewProduct">Products</a> <span class="divider">/</span></li>
-                            <li class="active">${requestScope.product.name}</li>
-                        </ul>
-                        <div class="row">
-                            <div id="gallery" class="span3">
-                                <a href="${requestScope.product.image}" title="${requestScope.product.name}">
-                                    <img src="${requestScope.product.image}" style="width:100%" alt="${requestScope.product.name}" />
-                                </a>
+                    <br/>
+                </div>
+                <!-- Sidebar end=============================================== -->
+                <div class="span9">
+                    <ul class="breadcrumb">
+                        <li><a href="index.html">Home</a> <span class="divider">/</span></li>
+                        <li class="active">Terms and Conditions</li>
+                    </ul>
+                    <h3> Terms and Conditions</h3>
+                    <hr class="soft" />
+                    <h5>In-Store Consumer Returns Policy</h5><br/>
+                    <p>
+                        Any item may be returned for refund or exchange within 30 days of purchase providing that the product has not been opened or used.
+                    </p>
+                    <p>
+                        Apple products purchased from SE15 Shop that are faulty within 30 days of purchase may be returned to store for replacement or refund.
+                    </p>
+                    <p>
+                        All Apple products are covered under a one year warranty unless AppleCare Protection Plan is applied to certain items. SE15 can support all warranty issues on your Apple products.
+                    </p>
+                    <p>
+                        Faulty non Apple hardware and accessories may be returned up to 12 months after the purchase date. These items will be repaired or replaced.
+                    </p>
+                    <p>
+                        Manufacturers warranties are not covered in store once the item is over 12 months old.
+                    </p>
+                    <p>
+                        A valid proof of purchase is required for all returns.
+                    </p>
+                    <p>
+                        Software cannot be returned once opened or downloaded.
+                    </p>
+                    <p>
+                        This does not affect your statutory rights.
+                    </p>
 
-                            </div>
-                            <form id="addToCartForm" action="MainController" method="POST">  
-                                <div class="span6">
-                                    <input type="hidden" name="productID" value="${requestScope.product.productID.trim()}"/>
-                                    <h3>${requestScope.product.name}</h3>
-                                    <p style="color:red;font-size:20px; ">${requestScope.notenough}</p>
-                                    <hr class="soft" />
-                                    <div class="form-horizontal qtyFrm">
-                                        <div class="control-group">
-                                            <label class="control-label">
-
-
-                                                <c:if test="${requestScope.spec!=null}">
-                                                    <span><fmt:setLocale value="vi_VN" />
-                                                        <fmt:formatNumber value="${requestScope.spec.price}" type="currency" /></span>
-                                                        <p id="specQuan">Quantity:${requestScope.spec.specQuantity}</p>
-                                                    </c:if>
-                                            </label>
-
-                                            <div class="controls">
-                                                ${requestScope.notenough}
-                                                <h4>Select quantity</h4>
-                                                <input id="iQuan" type="number" name="Quantity" max="6" class="span1" placeholder="Qty."  required="Need to add quantity"/>
-                                                <input type="hidden" name="action" value="Cart"/>
-                                                <button id="addToCart"type="submit" name="perform" value="AddItem" class="btn btn-large btn-primary pull-right"> Add to cart <i class=" icon-shopping-cart"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <hr class="soft" />
-
-
-                                    <div class="form-horizontal qtyFrm pull-right">
-                                        <div class="control-group">
-                                            <c:if test="${requestScope.colorChosen==null}">
-                                                <h4>1. Select a Color</h4>
-                                            </c:if>
-                                            <label class="control-label"><span>Color</span></label>
-                                            <div class="controls">
-
-                                                <select name="color" class="span2" onchange="window.location = 'MainController?action=Product&perform=ViewDetail&productID=${product.productID.trim()}&color=' + this.value">
-                                                    <c:if test="${requestScope.colorChosen == null}">
-                                                        <option value="" selected="selected"></option>
-                                                    </c:if>
-                                                    <c:forEach var="color" items="${requestScope.color}">
-                                                        <c:if test = "${color.color == requestScope.colorChosen}">
-                                                            <option value="${color.color.trim()}" selected="selected">${color.color}</option>
-                                                        </c:if>
-                                                        <c:if test = "${color.color != requestScope.colorChosen}">
-                                                            <option value="${color.color.trim()}">${color.color}</option>
-                                                        </c:if>
-                                                    </c:forEach>
-                                                </select>
-                                            </div>
-                                            <c:if test="${requestScope.spec == null && requestScope.colorChosen != null}">
-                                                <h4>2. Select a spec</h4>
-                                            </c:if>  
-                                            <c:if test="${requestScope.colorChosen!=null}">
-                                                <h4 class="addToCreateSpece" style="margin-top: 20px;"> </h4>
-                                                <label class="control-label"><span>Spec</span></label>
-                                                <div class="controls">
-                                                    <select name="hardware" class="span2" onchange="window.location = 'MainController?action=Product&perform=ViewDetail&productID=${product.productID.trim()}&color=${requestScope.colorChosen}&specID=' + this.value">
-                                                        <c:if test="${requestScope.spec==null}">
-                                                            <option value="" selected="selected"></option>
-                                                        </c:if>
-                                                        <c:forEach var="hardware" items="${requestScope.hardware}">
-                                                            <c:if test = "${hardware.specID == requestScope.spec.specID}">
-                                                                <option value="${hardware.specID}" selected="selected">Ram:${hardware.ram}-Storage:${hardware.storage}</option>
-                                                            </c:if>
-                                                            <c:if test = "${hardware.specID != requestScope.spec.specID}">
-                                                                <option value="${hardware.specID}">Ram:${hardware.ram}-Storage:${hardware.storage}</option>
-                                                            </c:if>
-                                                        </c:forEach>
-                                                    </select>
-                                                </div>
-                                            </c:if>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--<input type="hidden" name="action" value="Product"/>-->
-                            </form>                
-                        </div>                    
+                    <br><br>
+                    <h5>Online Store Terms and Conditions</h5><br/>
+                    <p>
+                        To place an order for products at the online store, simply add the products you wish to your shopping basket and check out by selecting either Click & Collect or Delivery. You can choose option for us to deliver the products, or for you to collect them
+                        from store. After we have received and processed your order, we’ll send you an order detail email, and we will call you through your phone number to ensure authenticity.
+                    </p>
+                    <p>
+                        All Mac, iPad, iPhone, iPod, Apple TV come with 2 year guarantee. Please see more here. Any purchase made with a sale code on the online store is provided with the standard Apple 1-year warranty.
+                    </p>
+                    <p>
+                        Products should be returned in the original packaging. Once your return has been approved, we will issue a refund directly to you for your original purchase within 14 days.
+                    </p>
+                    <p>
+                        We offer free delivery on all orders. Please note that we do not deliver outside of Ho Chi Minh City. Please allow 2-24 hours for delivery. Please note all orders placed over bank holidays will be processed the next available working day. If you have
+                        opted for home delivery, you will receive an Order Detail email from <span><strong>qbuigiatest123@gmail.com</strong></span> as soon as your products have been dispatched from our warehouse. This email will
+                        contain a courier Tracking ID which you can use to find the status of your delivery. Please note that your order may arrive on separate deliveries. The estimated delivery times above will still apply. Occasionally something will
+                        happen out of our control, such as floods, snow or other adverse weather conditions or things like, sporting events, which result in closed roads. We can’t be held liable if we can’t fulfil delivery due to reasons beyond our control.
+                    </p>
 
 
-                        <div class="span9">
-                            <ul id="productDetail" class="nav nav-tabs">
-                                <li class="active"><a href="#home" data-toggle="tab">Product Details</a></li>
-                                <li><a href="#profile" data-toggle="tab">Comment</a></li>
-                            </ul>
-                            <div id="myTabContent" class="tab-content">
-                                <div class="tab-pane fade active in" id="home">
-                                    <h4>Product Information</h4>
-                                    <p>
-                                        ${product.description}
-                                    </p>
-                                </div>
-                                <div class="tab-pane fade" id="profile">
-
-                                    <div class="container__review">
-                                        <div class="fb-comments" data-href="http://localhost:8080/SE_AppleShop/MainController?action=ProductDetail&amp;productID=IP00&amp;color=Blue&amp;specID=01" data-width="600" data-numposts="5"></div>
-                                        <script>
-                                            $(document).ready(function () {
-                                                $(".fb-comments").attr("data-href", window.location.href);
-                                            });
-                                        </script>                                        
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <!-- MainBody End ============================= -->
     <!-- Footer ================================================================== -->
@@ -358,20 +238,21 @@
             <div class="row">
                 <div class="span3">
                     <h5>ACCOUNT</h5>
-                <c:if test="${sessionScope.USER == null}">                   
-                    <a href="loginForm.jsp">LOGIN</a>
-                    <a href="signupForm.jsp">REGISTRATION</a>                    
-                </c:if>
-                    <a href="cartDetail.jsp">CART</a>
-                <c:if test="${sessionScope.USER != null}">
-                    <a href="userProfile.jsp">PROFILE</a>                    
-                    <a href="order_history.jsp">ORDER HISTORY</a>
-                </c:if>
+                    <c:if test="${sessionScope.USER == null}">                   
+                        <a href="loginForm.jsp">LOGIN</a>
+                        <a href="signupForm.jsp">REGISTRATION</a>
+                        
+                    </c:if>
+                        <a href="cartDetail.jsp">CART</a>
+                    <c:if test="${sessionScope.USER != null}">
+                        <a href="userProfile.jsp">PROFILE</a>                    
+                        <a href="order_history.jsp">ORDER HISTORY</a>
+                    </c:if>
                 </div>
                 <div class="span3">
                     <h5>INFORMATION</h5>
                     <a href="contact.jsp">CONTACT</a>                    
-                    <a href="legalNotice.jsp">LEGAL NOTICE</a>
+                 <a href="legalNotice.jsp">LEGAL NOTICE</a>
                         <a href="termsAndConditions.jsp">TERMS AND CONDITIONS</a>
                 </div>
                 <div id="socialMedia" class="span3 pull-right">
@@ -447,21 +328,8 @@
         </div>
     </div>
     <span id="themesBtn"></span>
-
 </body>
-<script type="text/javascript">
-$('#addToCartForm').on('submit',function(e){
-    var input = $('#iQuan').val();
-    var specQ = $('#specQuan').val();
-    if(input <= 0 ){
-    e.preventDefault();
-    alert("Quantity must larget than 0");
-    return false;
-    }
-    
-    
-    
-});
-</script>
+
 
 </html>
+

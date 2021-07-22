@@ -369,17 +369,21 @@
                 <div class="row">
                     <div class="span3">
                         <h5>ACCOUNT</h5>
-                        <a href="login.html">LOGIN</a>
-                        <a href="login.html">PROFILE</a>
-                        <a href="login.html">CART</a>
-                        <a href="login.html">ORDER HISTORY</a>
+                        <c:if test="${sessionScope.USER == null}">                   
+                            <a href="loginForm.jsp">LOGIN</a>
+                            <a href="signupForm.jsp">REGISTRATION</a>
+                            <a href="cartDetail.jsp">CART</a>
+                        </c:if>
+                        <c:if test="${sessionScope.USER != null}">
+                            <a href="userProfile.jsp">PROFILE</a>                    
+                            <a href="order_history.jsp">ORDER HISTORY</a>
+                        </c:if>
                     </div>
                     <div class="span3">
                         <h5>INFORMATION</h5>
-                        <a href="contact.html">CONTACT</a>
-                        <a href="register.html">REGISTRATION</a>
-                        <a href="legal_notice.html">LEGAL NOTICE</a>
-                        <a href="tac.html">TERMS AND CONDITIONS</a>
+                        <a href="contact.jsp">CONTACT</a>                    
+                       <a href="legalNotice.jsp">LEGAL NOTICE</a>
+                        <a href="termsAndConditions.jsp">TERMS AND CONDITIONS</a>
                     </div>
                     <div id="socialMedia" class="span3 pull-right">
                         <h5>SOCIAL MEDIA </h5>

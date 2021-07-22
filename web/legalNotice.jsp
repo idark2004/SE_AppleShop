@@ -1,17 +1,18 @@
 <%-- 
-    Document   : product_details
-    Created on : Jul 4, 2021, 10:12:23 PM
-    Author     : ADMIN
+    Document   : legalNotice
+    Created on : Jul 22, 2021, 1:39:13 PM
+    Author     : anime
 --%>
 
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
+
     <head>
         <meta charset="utf-8">
-        <title>SE15 Shop | Product Detail</title>
+        <title>SE15 Shop | Homepage</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
@@ -23,11 +24,10 @@
         -->
         <!--<link rel="stylesheet/less" type="text/css" href="themes/less/bootshop.less">
             <script src="themes/js/less.js" type="text/javascript"></script> -->
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" type="text/javascript"></script>
         <!-- Bootstrap style -->
         <link id="callCss" rel="stylesheet" href="themes/bootshop/bootstrap.min.css" media="screen" />
         <link href="themes/css/base.css" rel="stylesheet" media="screen" />
-        <link href="themes/css/comment.css" rel="stylesheet" media="screen" />
         <!-- Bootstrap style responsive -->
         <link href="themes/css/bootstrap-responsive.min.css" rel="stylesheet" />
         <link href="themes/css/font-awesome.css" rel="stylesheet" type="text/css">
@@ -40,13 +40,9 @@
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="themes/images/ico/apple.png">
         <link rel="apple-touch-icon-precomposed" href="themes/images/ico/apple.png">
         <style type="text/css" id="enject"></style>
-        <link rel="stylesheet" href="themes/font-awesome-4.7.0/css/font-awesome.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
 
-    <body>
-        <div id="fb-root"></div>
-        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v11.0&appId=1837579903108404&autoLogAppEvents=1" nonce="TMXKQcXh"></script>
+    <body >
         <div id="header">
             <div class="container">
                 <div id="welcomeLine" class="row">
@@ -69,6 +65,7 @@
                         </div>
                     </div>
                 </div>
+
                 <!-- Navbar ================================================== -->
                 <div id="logoArea" class="navbar">
                     <a id="smallScreen" data-target="#topMenu" data-toggle="collapse" class="btn btn-navbar">
@@ -84,8 +81,8 @@
                             <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
                         </form>
                         <ul id="topMenu" class="nav pull-right">
-                            <li class=""><a href="MainController?action=Product&perform=ViewProduct">All Products</a></li>
-                            <li class=""><a href="contact.jsp">Contact</a></li>                            
+                            <li class=""><a href="MainController?action=Product&perform=ViewProduct&categoryID=">All Products</a></li>
+                            <li class=""><a href="contact.jsp">Contact</a></li>
                                 <c:if test="${sessionScope.USER != null}">
                                 <li class=""><a href="userProfile.jsp">Profile</a></li>
                                 </c:if>
@@ -113,7 +110,6 @@
                                                         <label class="checkbox">
                                                             <input type="checkbox"> Remember me
                                                         </label>
-                                                        <a href="forgetPass.jsp" >ForgetPass?</a>
                                                         <div class="g-signin2" data-onsuccess="onSignIn"></div>
                                                         <input type="hidden" name="perform" value="Log in">
                                                         <button type="submit" class="btn btn-success" name="action" value="User">Sign in</button>
@@ -160,196 +156,114 @@
             </div>
         </div>
         <div id="mainBody">
-            <div class="container">
-                <div class="row">
-                    <!-- Sidebar ================================================== -->
-                    <div id="sidebar" class="span3">
-                        <div class="well well-small">
-                            <c:forEach var="cartItem" items="${sessionScope.cart}">
-                                <c:set var="total" value="${total + (cartItem.quantity * cartItem.product.price)}"/>
-                            </c:forEach>
-                            <a id="myCart" href="cartDetail.jsp"><img src="themes/images/ico-cart.png" alt="cart">${subtotal} 
-                                <c:if test="${sessionScope.cart == null}">No</c:if> 
-                                    Items 
-                                <c:if test="${sessionScope.cart != null}">
-                                    <span class="badge badge-warning pull-right"> 
-                                        <fmt:setLocale value="vi_VN" />
-                                        <fmt:formatNumber value="${total}" type="currency" />
-                                    </span>
-                                </c:if>
-                            </a>
-                        </div>
-                        <ul id="sideManu" class="nav nav-tabs nav-stacked">
-<ul id="sideManu" class="nav nav-tabs nav-stacked">
-                        <li class="subMenu"><a>Product</a>  
-                         <ul style="display: none">
-                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=">All</a></li>
-                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=IP&status=True">iPhone</a></li>
-                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=ID&status=True">iPad</a></li>
-                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=MB&status=True">Mac</a></li>
-                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AW&status=True">Apple Watch</a></li>
-                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=AS&status=True">Accessory</a></li>                          
-                         </ul>
-                         </li>  
-                            <c:if test="${sessionScope.USER.roleID.trim() != null}" > 
-                                <c:if test="${sessionScope.USER.roleID.trim() != 'US'}" >
-                                <li class="subMenu"><a>Manager Product</a>
-                                    <ul style="display: none">
-                                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=">All</a></li>
-                                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=IP">iPhone</a></li>
-                                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=ID">iPad</a></li>
-                                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=MB">Mac</a></li>
-                                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=AW">Apple Watch</a></li>
-                                        <li><a href="MainController?action=Manage+Product&perform=Get&categoryID=AS">Accessory</a></li>
-                                    </ul>
-                                </li>
-                                <li class="subMenu" id="CU"><a>Shop Manager</a>
-                                    <ul style="display:none">
-                                        <li><a href="DashBoardController"><i class="icon-chevron-right"></i>Dashboard</a></li>
-                                        <li><a href="managerAddProduct.jsp"><i class="icon-chevron-right"></i>Add Product</a></li>
-                                        <li><a href="MainController?action=Manage+User&perform=Get+User"><i class="icon-chevron-right"></i>User List</a></li>
-                                        <c:if test="${sessionScope.USER.roleID.trim() == 'AD'}">
-                                            <li><a href="MainController?action=Manage+User&perform=Get+Manager"><i class="icon-chevron-right"></i>Manager List</a></li>
-                                        </c:if>
-                                        <li><a href="MainController?action=Guarantee&perform=Get"><i class="icon-chevron-right"></i>Guarantee</a></li>
-                                        <li><a href="MainController?action=SaleCode&perform=List"><i class="icon-chevron-right"></i>Sale Code List</a></li>
-                                        <li><a href="MainController?action=OrderList"><i class="icon-chevron-right"></i>Order List</a></li>
-
-                                    </ul>
-                                </li>
-                            </c:if>                       
-                        </c:if>
+        <div class="container">
+            <div class="row">
+                <!-- Sidebar ================================================== -->
+                <div id="sidebar" class="span3">
+                    <div class="well well-small">
+                        <a id="myCart" href="product_summary.html"><img src="themes/images/ico-cart.png" alt="cart">3 Items in your cart <span class="badge badge-warning pull-right">445,000VND</span></a>
+                    </div>
+                    <ul id="sideManu" class="nav nav-tabs nav-stacked">
+                        <li><a href="products.html">All</a></li>
+                        <li><a href="products.html">iPhone</a></li>
+                        <li><a href="products.html">iPad</a></li>
+                        <li><a href="products.html">Mac</a></li>
+                        <li><a href="products.html">Accessory</a></li>
                     </ul>
-                        <br/>
-                    </div>
-                    <!-- Sidebar end=============================================== -->
-                    <div class="span9">
-                        <ul class="breadcrumb">
-                            <li><a href="MainController?action=Product&perform=Index">Home</a> <span class="divider">/</span></li>
-                            <li><a href="MainController?action=Product&perform=ViewProduct">Products</a> <span class="divider">/</span></li>
-                            <li class="active">${requestScope.product.name}</li>
-                        </ul>
-                        <div class="row">
-                            <div id="gallery" class="span3">
-                                <a href="${requestScope.product.image}" title="${requestScope.product.name}">
-                                    <img src="${requestScope.product.image}" style="width:100%" alt="${requestScope.product.name}" />
-                                </a>
+                    <br/>
+                </div>
+                <!-- Sidebar end=============================================== -->
+                <div class="span9">
+                    <ul class="breadcrumb">
+                        <li><a href="index.html">Home</a> <span class="divider">/</span></li>
+                        <li class="active">Legal Notice</li>
+                    </ul>
+                    <h3>LEGAL NOTICE</h3>
+                    <hr class="soft" />
+                    <h5>Your rights</h5><br/>
+                    <p>
+                        You have the right to ask us not to process your personal data for marketing purposes. We will ask you for your permission before collecting any personal data. As a data subject, you are entitled to the following rights: </p>
+                    <p>
+                        -Right of access – you have the right to request a copy of the information that we hold about you;
+                    </p>
+                    <p>
+                        -Right of rectification – you have a right to correct data that we hold about you that is inaccurate or incomplete;
+                    </p>
+                    <p>
+                        -Right to be forgotten – in certain circumstances you can ask for the data we hold about you to be erased from our records;
+                    </p>
+                    <p>
+                        -Right to restriction of processing – where certain conditions apply, you have a right to restrict the processing;
+                    </p>
+                    <p>
+                        -Right of portability – you have the right to have the data we hold about you transferred to another organisation;
+                    </p>
+                    <p>
+                        -Right to object – you have the right to object to certain types of processing such as direct marketing;
+                    </p>
+                    <p>
+                        -Right to object to automated processing, including profiling – you also have the right to be subject to the legal effects of automated processing or profiling;
+                    </p>
+                    <p>
+                        -Right to judicial review: you are authorised to bring a proceeding before a national court if you consider that your rights have been infringed as a result of unlawful processing of your personal data us.
+                    </p>
 
-                            </div>
-                            <form id="addToCartForm" action="MainController" method="POST">  
-                                <div class="span6">
-                                    <input type="hidden" name="productID" value="${requestScope.product.productID.trim()}"/>
-                                    <h3>${requestScope.product.name}</h3>
-                                    <p style="color:red;font-size:20px; ">${requestScope.notenough}</p>
-                                    <hr class="soft" />
-                                    <div class="form-horizontal qtyFrm">
-                                        <div class="control-group">
-                                            <label class="control-label">
+                    <br><br>
+                    <h5>Privacy statement</h5><br/>
+                    <p>
+                        In this section, we will further inform you about how and why we use your personal data.
+                    </p>
 
+                    <br><br>
+                    <h5>Personal data </h5><br/>
+                    <p>
+                        We will store and use the personal data you provide in a manner compliant. We will strive to keep your information accurate and up to date, and not keep it for longer than is necessary.
+                    </p>
+                    <p>
+                        We are required to retain information in accordance with the law, such as information needed for income tax and audit purposes.
+                    </p>
+                    <p>
+                        How long certain kinds of personal data should be kept may also be governed by specific business-sector requirements and agreed practices. Personal data may be held in addition to these periods depending on individual business needs.
+                    </p>
 
-                                                <c:if test="${requestScope.spec!=null}">
-                                                    <span><fmt:setLocale value="vi_VN" />
-                                                        <fmt:formatNumber value="${requestScope.spec.price}" type="currency" /></span>
-                                                        <p id="specQuan">Quantity:${requestScope.spec.specQuantity}</p>
-                                                    </c:if>
-                                            </label>
+                    <br><br>
+                    <h5>Why do we need to collect and store your data?</h5><br/>
+                    <p>
+                        In order to provide you with our products and services we need to collect personal data for correspondence, audit and accounting purposes. We are always committed to ensuring that the information we collect is appropriate for this purpose, and does not
+                        constitute an invasion of your privacy.
+                    </p>
+                    <p>
+                        We will reach out to you for additional consent, should we plan to contact you for marketing purposes.
+                    </p>
 
-                                            <div class="controls">
-                                                ${requestScope.notenough}
-                                                <h4>Select quantity</h4>
-                                                <input id="iQuan" type="number" name="Quantity" max="6" class="span1" placeholder="Qty."  required="Need to add quantity"/>
-                                                <input type="hidden" name="action" value="Cart"/>
-                                                <button id="addToCart"type="submit" name="perform" value="AddItem" class="btn btn-large btn-primary pull-right"> Add to cart <i class=" icon-shopping-cart"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
+                    <h5>Are we sharing your personal data with third-parties?</h5>
+                    <p>
+                        Any third-party that we may share your data with is obliged to keep your personal data securely, and to use it only to fulfil the service they provide on our behalf (such as online store transactions, finance applications and service repairs). When they
+                        no longer need your data to fulfil this service, they will dispose of the details in line with our retention procedures.
+                    </p>
 
-                                    <hr class="soft" />
-
-
-                                    <div class="form-horizontal qtyFrm pull-right">
-                                        <div class="control-group">
-                                            <c:if test="${requestScope.colorChosen==null}">
-                                                <h4>1. Select a Color</h4>
-                                            </c:if>
-                                            <label class="control-label"><span>Color</span></label>
-                                            <div class="controls">
-
-                                                <select name="color" class="span2" onchange="window.location = 'MainController?action=Product&perform=ViewDetail&productID=${product.productID.trim()}&color=' + this.value">
-                                                    <c:if test="${requestScope.colorChosen == null}">
-                                                        <option value="" selected="selected"></option>
-                                                    </c:if>
-                                                    <c:forEach var="color" items="${requestScope.color}">
-                                                        <c:if test = "${color.color == requestScope.colorChosen}">
-                                                            <option value="${color.color.trim()}" selected="selected">${color.color}</option>
-                                                        </c:if>
-                                                        <c:if test = "${color.color != requestScope.colorChosen}">
-                                                            <option value="${color.color.trim()}">${color.color}</option>
-                                                        </c:if>
-                                                    </c:forEach>
-                                                </select>
-                                            </div>
-                                            <c:if test="${requestScope.spec == null && requestScope.colorChosen != null}">
-                                                <h4>2. Select a spec</h4>
-                                            </c:if>  
-                                            <c:if test="${requestScope.colorChosen!=null}">
-                                                <h4 class="addToCreateSpece" style="margin-top: 20px;"> </h4>
-                                                <label class="control-label"><span>Spec</span></label>
-                                                <div class="controls">
-                                                    <select name="hardware" class="span2" onchange="window.location = 'MainController?action=Product&perform=ViewDetail&productID=${product.productID.trim()}&color=${requestScope.colorChosen}&specID=' + this.value">
-                                                        <c:if test="${requestScope.spec==null}">
-                                                            <option value="" selected="selected"></option>
-                                                        </c:if>
-                                                        <c:forEach var="hardware" items="${requestScope.hardware}">
-                                                            <c:if test = "${hardware.specID == requestScope.spec.specID}">
-                                                                <option value="${hardware.specID}" selected="selected">Ram:${hardware.ram}-Storage:${hardware.storage}</option>
-                                                            </c:if>
-                                                            <c:if test = "${hardware.specID != requestScope.spec.specID}">
-                                                                <option value="${hardware.specID}">Ram:${hardware.ram}-Storage:${hardware.storage}</option>
-                                                            </c:if>
-                                                        </c:forEach>
-                                                    </select>
-                                                </div>
-                                            </c:if>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--<input type="hidden" name="action" value="Product"/>-->
-                            </form>                
-                        </div>                    
+                    <p>
+                        SE15 will not share your data with any not-related third-parties. Unless we are legally obliged to do otherwise, we will always contact you for your consent, regarding sharing your personal data to third-parties.
+                    </p>
+                    <br><br>
+                    <h5>
+                        Can you find out what personal data we hold about you?
+                    </h5>
+                    <p>
+                        You are entitled to know what information we hold about you, therefore, we will at your request confirm what personal data we hold and how it is processed.
+                    </p>
+                    <p>
+                        Any details and information of automated decision making, such as profiling, and any meaningful information about the logic involved, as well as the significance and expected consequences of such processing.
+                    </p>
+                    <br><br>
+                    <h5>Children</h5>
+                    <p>In using our services online and in store, you confirm that you have read and consented to this Policy and verify that you are over the age of 13.</p>
 
 
-                        <div class="span9">
-                            <ul id="productDetail" class="nav nav-tabs">
-                                <li class="active"><a href="#home" data-toggle="tab">Product Details</a></li>
-                                <li><a href="#profile" data-toggle="tab">Comment</a></li>
-                            </ul>
-                            <div id="myTabContent" class="tab-content">
-                                <div class="tab-pane fade active in" id="home">
-                                    <h4>Product Information</h4>
-                                    <p>
-                                        ${product.description}
-                                    </p>
-                                </div>
-                                <div class="tab-pane fade" id="profile">
-
-                                    <div class="container__review">
-                                        <div class="fb-comments" data-href="http://localhost:8080/SE_AppleShop/MainController?action=ProductDetail&amp;productID=IP00&amp;color=Blue&amp;specID=01" data-width="600" data-numposts="5"></div>
-                                        <script>
-                                            $(document).ready(function () {
-                                                $(".fb-comments").attr("data-href", window.location.href);
-                                            });
-                                        </script>                                        
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <!-- MainBody End ============================= -->
     <!-- Footer ================================================================== -->
@@ -358,20 +272,21 @@
             <div class="row">
                 <div class="span3">
                     <h5>ACCOUNT</h5>
-                <c:if test="${sessionScope.USER == null}">                   
-                    <a href="loginForm.jsp">LOGIN</a>
-                    <a href="signupForm.jsp">REGISTRATION</a>                    
-                </c:if>
-                    <a href="cartDetail.jsp">CART</a>
-                <c:if test="${sessionScope.USER != null}">
-                    <a href="userProfile.jsp">PROFILE</a>                    
-                    <a href="order_history.jsp">ORDER HISTORY</a>
-                </c:if>
+                    <c:if test="${sessionScope.USER == null}">                   
+                        <a href="loginForm.jsp">LOGIN</a>
+                        <a href="signupForm.jsp">REGISTRATION</a>
+                        
+                    </c:if>
+                        <a href="cartDetail.jsp">CART</a>
+                    <c:if test="${sessionScope.USER != null}">
+                        <a href="userProfile.jsp">PROFILE</a>                    
+                        <a href="order_history.jsp">ORDER HISTORY</a>
+                    </c:if>
                 </div>
                 <div class="span3">
                     <h5>INFORMATION</h5>
                     <a href="contact.jsp">CONTACT</a>                    
-                    <a href="legalNotice.jsp">LEGAL NOTICE</a>
+                   <a href="legalNotice.jsp">LEGAL NOTICE</a>
                         <a href="termsAndConditions.jsp">TERMS AND CONDITIONS</a>
                 </div>
                 <div id="socialMedia" class="span3 pull-right">
@@ -447,21 +362,8 @@
         </div>
     </div>
     <span id="themesBtn"></span>
-
 </body>
-<script type="text/javascript">
-$('#addToCartForm').on('submit',function(e){
-    var input = $('#iQuan').val();
-    var specQ = $('#specQuan').val();
-    if(input <= 0 ){
-    e.preventDefault();
-    alert("Quantity must larget than 0");
-    return false;
-    }
-    
-    
-    
-});
-</script>
+
 
 </html>
+

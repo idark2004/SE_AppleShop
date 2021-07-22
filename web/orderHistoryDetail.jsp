@@ -355,32 +355,36 @@
     <!-- MainBody End ============================= -->
     <!-- Footer ================================================================== -->
     <div id="footerSection">
-        <div class="container">
-            <div class="row">
-                <div class="span3">
-                    <h5>ACCOUNT</h5>
-                    <a href="login.html">LOGIN</a>
-                    <a href="login.html">PROFILE</a>
-                    <a href="login.html">CART</a>
-                    <a href="login.html">ORDER HISTORY</a>
-                </div>
-                <div class="span3">
-                    <h5>INFORMATION</h5>
-                    <a href="contact.html">CONTACT</a>
-                    <a href="register.html">REGISTRATION</a>
-                    <a href="legal_notice.html">LEGAL NOTICE</a>
-                    <a href="tac.html">TERMS AND CONDITIONS</a>
-                </div>
-                <div id="socialMedia" class="span3 pull-right">
-                    <h5>SOCIAL MEDIA </h5>
-                    <a href="#"><img width="60" height="60" src="themes/images/facebook.png" title="facebook" alt="facebook" /></a>
-                    <a href="#"><img width="60" height="60" src="themes/images/gmail.png" title="gmail" alt="gmail" /></a>
-                    <a href="#"><img width="60" height="60" src="themes/images/youtube.png" title="youtube" alt="youtube" /></a>
+            <div class="container">
+                <div class="row">
+                    <div class="span3">
+                        <h5>ACCOUNT</h5>
+                        <c:if test="${sessionScope.USER == null}">                   
+                            <a href="loginForm.jsp">LOGIN</a>
+                            <a href="signupForm.jsp">REGISTRATION</a>
+                            <a href="cartDetail.jsp">CART</a>
+                        </c:if>
+                        <c:if test="${sessionScope.USER != null}">
+                            <a href="userProfile.jsp">PROFILE</a>                    
+                            <a href="order_history.jsp">ORDER HISTORY</a>
+                        </c:if>
+                    </div>
+                    <div class="span3">
+                        <h5>INFORMATION</h5>
+                        <a href="contact.jsp">CONTACT</a>                    
+                        <<a href="legalNotice.jsp">LEGAL NOTICE</a>
+                        <a href="termsAndConditions.jsp">TERMS AND CONDITIONS</a>
+                    </div>
+                    <div id="socialMedia" class="span3 pull-right">
+                        <h5>SOCIAL MEDIA </h5>
+                        <a href="#"><img width="60" height="60" src="themes/images/facebook.png" title="facebook" alt="facebook" /></a>
+                        <a href="#"><img width="60" height="60" src="themes/images/gmail.png" title="gmail" alt="gmail" /></a>
+                        <a href="#"><img width="60" height="60" src="themes/images/youtube.png" title="youtube" alt="youtube" /></a>
+                    </div>
                 </div>
             </div>
+            <!-- Container End -->
         </div>
-        <!-- Container End -->
-    </div>
     <!-- Placed at the end of the document so the pages load faster ============================================= -->
     <script src="themes/js/jquery.js" type="text/javascript"></script>
     <script src="themes/js/bootstrap.min.js" type="text/javascript"></script>
