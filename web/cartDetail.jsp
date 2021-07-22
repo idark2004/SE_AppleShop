@@ -202,7 +202,9 @@
                                         <c:if test="${sessionScope.USER.roleID.trim() == 'AD'}">
                                             <li><a href="MainController?action=Manage+User&perform=Get+Manager"><i class="icon-chevron-right"></i>Manager List</a></li>
                                         </c:if>
-                                        <li><a href="MainController?action=Guarantee&perform=Get"><i class="icon-chevron-right"></i>Guarantee</a></li>
+                                        <c:if test="${sessionScope.USER.roleID.trim() == 'MN'}">
+                                            <li><a href="MainController?action=Guarantee&perform=Get"><i class="icon-chevron-right"></i>Guarantee</a></li>
+                                        </c:if>
                                         <li><a href="MainController?action=SaleCode&perform=List"><i class="icon-chevron-right"></i>Sale Code List</a></li>
                                         <li><a href="MainController?action=OrderList"><i class="icon-chevron-right"></i>Order List</a></li>
 
@@ -228,22 +230,23 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <form class="form-horizontal">
+                                        <form class="form-horizontal" action="MainController" method="post">
                                             <div class="control-group">
                                                 <label class="control-label" for="inputUsername">Username</label>
                                                 <div class="controls">
-                                                    <input type="text" id="inputUsername" placeholder="Username">
+                                                    <input type="text" id="inputUsername" placeholder="Username" name="email">
                                                 </div>
                                             </div>
                                             <div class="control-group">
                                                 <label class="control-label" for="inputPassword1">Password</label>
                                                 <div class="controls">
-                                                    <input type="password" id="inputPassword1" placeholder="Password">
+                                                    <input type="password" id="inputPassword1" placeholder="Password" name="password">
                                                 </div>
                                             </div>
                                             <div class="control-group">
                                                 <div class="controls">
-                                                    <button type="submit" class="btn">Sign in</button> OR <a href="register.html" class="btn">Register Now!</a>
+                                                    <input type="hidden" name="perform" value="Log in">
+                                                    <button type="submit" class="btn" name="action" value="User">Sign in</button> OR <a href="signupForm.jsp" class="btn">Register Now!</a>
                                                 </div>
                                             </div>
                                             <div class="control-group">
@@ -303,11 +306,11 @@
                                                         </button>
                                                     </div>
                                                 </td>
-                                                <td><fmt:formatNumber type="number" maxFractionDigits = "0" value="${cartItem.quantity * cartItem.product.price}"/> VND</td>
-                                                <td>
+                                                <td style="text-align:right"><fmt:formatNumber type="number" maxFractionDigits = "0" value="${cartItem.quantity * cartItem.product.price}"/> VND</td>
+                                                <td style="text-align:right">
                                                     <fmt:formatNumber type="number" maxFractionDigits = "0" value="${cartItem.quantity * cartItem.product.price * discount / 100}"/> VND
                                                 </td>
-                                                <td><fmt:formatNumber type="number" maxFractionDigits = "0" value="${cartItem.quantity * cartItem.product.price - cartItem.quantity * cartItem.product.price * discount / 100}"/> VND</td>
+                                                <td style="text-align:right"><fmt:formatNumber type="number" maxFractionDigits = "0" value="${cartItem.quantity * cartItem.product.price - cartItem.quantity * cartItem.product.price * discount / 100}"/> VND</td>
                                                 <c:set var="total" value="${total + (cartItem.quantity * cartItem.product.price - cartItem.quantity * cartItem.product.price * discount / 100)}"/>
                                                 <c:set var="totalDiscount" value="${totalDiscount + (cartItem.quantity * cartItem.product.price * discount / 100)}"/>
                                                 <c:set var="Price" value="${Price + (cartItem.quantity * cartItem.product.price)}"/>
@@ -320,15 +323,15 @@
                             </c:choose>
                             <tr>
                                 <td colspan="5" style="text-align:right">Total Price: </td>
-                                <td> <fmt:formatNumber type="number" maxFractionDigits = "0" value="${Price}"/> VND</td>
+                                <td style="text-align:right"> <fmt:formatNumber type="number" maxFractionDigits = "0" value="${Price}"/> VND</td>
                             </tr>
                             <tr>
                                 <td colspan="5" style="text-align:right">Total Discount: </td>
-                                <td> <fmt:formatNumber type="number" maxFractionDigits = "0" value="${totalDiscount}"/></td>
+                                <td style="text-align:right"> <fmt:formatNumber type="number" maxFractionDigits = "0" value="${totalDiscount}"/></td>
                             </tr>
                             <tr>
                                 <td colspan="5" style="text-align:right"><strong>TOTAL (<fmt:formatNumber type="number" maxFractionDigits = "0" value="${Price}"/> VND - ${totalDiscount} VND) =</strong></td>
-                                <td class="label label-important" style="display:block"> <strong><fmt:formatNumber type="number" maxFractionDigits = "0" value="${total}"/> VND</strong></td>
+                                <td class="label label-important" style="display:block; text-align: right"> <strong><fmt:formatNumber type="number" maxFractionDigits = "0" value="${total}"/> VND</strong></td>
                             </tr>
                             </tbody>
                         </table>

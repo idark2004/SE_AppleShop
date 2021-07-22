@@ -125,17 +125,17 @@
                 <div class="carousel-inner">
                     <div class="item active">
                         <div class="container">
-                            <a href="signupForm.html"><img style="width:100%" src="themes/images/carousel/1.png" alt="" /></a>
+                            <a href="signupForm.jsp"><img style="width:100%" src="themes/images/carousel/1.png" alt="" /></a>
                         </div>
                     </div>
                     <div class="item">
                         <div class="container">
-                            <a href="signupForm.html"><img style="width:100%" src="themes/images/carousel/2.png" alt="" /></a>
+                            <a href="signupForm.jsp"><img style="width:100%" src="themes/images/carousel/2.png" alt="" /></a>
                         </div>
                     </div>
                     <div class="item">
                         <div class="container">
-                            <a href="signupForm.html"><img src="themes/images/carousel/3.png" alt="" /></a>
+                            <a href="signupForm.jsp"><img src="themes/images/carousel/3.png" alt="" /></a>
                         </div>
                     </div>
                 </div>
@@ -194,8 +194,11 @@
                                             <c:if test="${sessionScope.USER.roleID.trim() == 'AD'}">
                                                 <li><a href="MainController?action=Manage+User&perform=Get+Manager"><i class="icon-chevron-right"></i>Manager List</a></li>
                                             </c:if>
-                                            <li><a href="MainController?action=Guarantee&perform=Get"><i class="icon-chevron-right"></i>Guarantee</a></li>
+                                            <c:if test="${sessionScope.USER.roleID.trim() == 'MN'}">
+                                                <li><a href="MainController?action=Guarantee&perform=Get"><i class="icon-chevron-right"></i>Guarantee</a></li>
+                                            </c:if>
                                             <li><a href="MainController?action=SaleCode&perform=List"><i class="icon-chevron-right"></i>Sale Code List</a></li>
+                                            <li><a href="MainController?action=OrderList"><i class="icon-chevron-right"></i>Order List</a></li>
                                         </ul>
                                     </li>
                                 </c:if>                       

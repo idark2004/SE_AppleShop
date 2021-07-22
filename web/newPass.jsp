@@ -209,7 +209,9 @@
                                         <c:if test="${sessionScope.USER.roleID.trim() == 'AD'}">
                                             <li><a href="MainController?action=Manage+User&perform=Get+Manager"><i class="icon-chevron-right"></i>Manager List</a></li>
                                         </c:if>
-                                        <li><a href="MainController?action=Guarantee&perform=Get"><i class="icon-chevron-right"></i>Guarantee</a></li>
+                                        <c:if test="${sessionScope.USER.roleID.trim() == 'MN'}">
+                                            <li><a href="MainController?action=Guarantee&perform=Get"><i class="icon-chevron-right"></i>Guarantee</a></li>
+                                        </c:if>
                                         <li><a href="MainController?action=SaleCode&perform=List"><i class="icon-chevron-right"></i>Sale Code List</a></li>
                                         <li><a href="MainController?action=OrderList"><i class="icon-chevron-right"></i>Order List</a></li>
 
@@ -224,9 +226,9 @@
                 <div class="span9">
                     <ul class="breadcrumb">
                         <li><a href="MainController?action=Product&perform=Index">Home</a> <span class="divider">/</span></li>
-                        <li class="active">Forget password?</li>
+                        <li class="active">Reset password?</li>
                     </ul>
-                    <h3> FORGET YOUR PASSWORD?</h3>
+                    <h3> RESET YOUR PASSWORD?</h3>
                     <hr class="soft" />
 
                     <div class="row">

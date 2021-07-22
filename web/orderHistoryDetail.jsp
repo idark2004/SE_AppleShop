@@ -209,7 +209,9 @@
                                         <c:if test="${sessionScope.USER.roleID.trim() == 'AD'}">
                                             <li><a href="MainController?action=Manage+User&perform=Get+Manager"><i class="icon-chevron-right"></i>Manager List</a></li>
                                         </c:if>
-                                        <li><a href="MainController?action=Guarantee&perform=Get"><i class="icon-chevron-right"></i>Guarantee</a></li>
+                                        <c:if test="${sessionScope.USER.roleID.trim() == 'MN'}">
+                                            <li><a href="MainController?action=Guarantee&perform=Get"><i class="icon-chevron-right"></i>Guarantee</a></li>
+                                        </c:if>
                                         <li><a href="MainController?action=SaleCode&perform=List"><i class="icon-chevron-right"></i>Sale Code List</a></li>
                                         <li><a href="MainController?action=OrderList"><i class="icon-chevron-right"></i>Order List</a></li>
 
@@ -320,12 +322,12 @@
                                         <td> <img width="60" src="themes/images/products/4.jpg" alt="" /></td>
                                         <td>${detail.product.name}<br/>Color : ${detail.product.color}<br/>
                                             Ram:${detail.product.ram}<br/>Storage:${detail.product.storage}</td>
-                                        <td>
+                                        <td style="text-align:right">
                                             ${detail.quantity}
                                         </td>
-                                        <td><fmt:formatNumber type="number" maxFractionDigits = "0" value="${detail.product.price}"/> VND</td>
-                                        <td><fmt:formatNumber type="number" maxFractionDigits = "0" value="${detail.product.price * detail.quantity * requestScope.sale.percentage/100}"/> VND</td>
-                                        <td><fmt:formatNumber type="number" maxFractionDigits = "0" value="${detail.product.price * detail.quantity}"/></td>
+                                        <td style="text-align:right"><fmt:formatNumber type="number" maxFractionDigits = "0" value="${detail.product.price}"/> VND</td>
+                                        <td style="text-align:right"><fmt:formatNumber type="number" maxFractionDigits = "0" value="${detail.product.price * detail.quantity * requestScope.sale.percentage/100}"/> VND</td>
+                                        <td style="text-align:right"><fmt:formatNumber type="number" maxFractionDigits = "0" value="${detail.product.price * detail.quantity}"/></td>
                                     </tr>
                                     <c:set var="total" value="${total + (detail.product.price * detail.quantity)}" ></c:set>
                                     <c:set var="totalDiscount" value="${totalDiscount + (detail.product.price * detail.quantity * requestScope.sale.percentage/100)}" ></c:set>
@@ -337,7 +339,7 @@
                                 </c:choose>
                                     <tr>
                                         <td colspan="5" style="text-align:right"><strong>TOTAL ( <fmt:formatNumber type="number" maxFractionDigits = "0" value="${total}"/> - <fmt:formatNumber type="number" maxFractionDigits = "0" value="${totalDiscount}"/> VND) =</strong></td>
-                                        <td class="label label-important" style="display:block"> <strong> <fmt:formatNumber type="number" maxFractionDigits = "0" value="${total - totalDiscount}"/></strong></td>
+                                        <td class="label label-important" style="display:block; text-align: right"> <strong> <fmt:formatNumber type="number" maxFractionDigits = "0" value="${total - totalDiscount}"/></strong></td>
                                     </tr>
                                 </tbody>
                             </table>

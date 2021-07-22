@@ -142,7 +142,7 @@
                         </div>
                         <ul id="sideManu" class="nav nav-tabs nav-stacked">
                         <li class="subMenu"><a>Product</a>  
-                         <ul style="display: none">
+                        <ul style="display: none">
                         <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=">All</a></li>
                         <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=IP&status=True">iPhone</a></li>
                         <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=ID&status=True">iPad</a></li>
@@ -171,7 +171,9 @@
                                         <c:if test="${sessionScope.USER.roleID.trim() == 'AD'}">
                                             <li><a href="MainController?action=Manage+User&perform=Get+Manager"><i class="icon-chevron-right"></i>Manager List</a></li>
                                         </c:if>
-                                        <li><a href="MainController?action=Guarantee&perform=Get"><i class="icon-chevron-right"></i>Guarantee</a></li>
+                                        <c:if test="${sessionScope.USER.roleID.trim() == 'MN'}">
+                                            <li><a href="MainController?action=Guarantee&perform=Get"><i class="icon-chevron-right"></i>Guarantee</a></li>
+                                        </c:if>
                                         <li><a href="MainController?action=SaleCode&perform=List"><i class="icon-chevron-right"></i>Sale Code List</a></li>
                                         <li><a href="MainController?action=OrderList"><i class="icon-chevron-right"></i>Order List</a></li>
 
