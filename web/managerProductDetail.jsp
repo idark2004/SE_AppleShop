@@ -69,14 +69,14 @@
                         <span class="icon-bar"></span>
                     </a>
                     <div class="navbar-inner">
-                        <a class="brand" href="DashBoardController">SE15 Shop</a>
+                        <a class="brand" href="MainController?action=Product&perform=Index">SE15 Shop</a>
                         <form class="form-inline navbar-search" method="post" action="MainController">
                             <input id="srchFld" class="srchTxt" type="text" name="keyWord"/>
                             <input type="hidden" value="SearchProduct" name="action"/>
                             <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
                         </form>
                         <ul id="topMenu" class="nav pull-right">
-                            <li class=""><a href="products_Manager.html">All Products</a></li>
+                            <li class=""><a href="MainController?action=Product&perform=ViewProduct">All Products</a></li>
                             <c:if test="${sessionScope.USER != null}">
                             <li class=""><a href="userProfile.jsp">Profile</a></li>
                             </c:if>
@@ -176,8 +176,8 @@
                     <!-- Sidebar end=============================================== -->
                     <div class="span9">
                         <ul class="breadcrumb">
-                            <li><a href="index_Manager.html">Home</a> <span class="divider">/</span></li>
-                            <li><a href="products_Manager.html">Products</a> <span class="divider">/</span></li>
+                            <li><a href="MainController?action=Product&perform=Index">Home</a> <span class="divider">/</span></li>
+                            <li><a href="MainController?action=Product&perform=ViewProduct">Products</a> <span class="divider">/</span></li>
                                 <c:if test="${sessionScope.BASIC != null}">
                                 <li class="active">${sessionScope.BASIC.name}</li>
                                 </c:if>

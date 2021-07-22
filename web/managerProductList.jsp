@@ -72,15 +72,15 @@
                         <span class="icon-bar"></span>
                     </a>
                     <div class="navbar-inner">
-                        <a class="brand" href="index_Manager.html">SE15 Shop</a>
+                        <a class="brand" href="MainController?action=Product&perform=Index">SE15 Shop</a>
                         <form class="form-inline navbar-search" method="post" action="MainController">
                             <input id="srchFld" class="srchTxt" type="text" name="keyWord"/>
                             <input type="hidden" value="SearchProduct" name="action"/>
                             <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
                         </form>
                         <ul id="topMenu" class="nav pull-right">
-                            <li class=""><a href="products_Manager.html">All Products</a></li>
-                            <li class=""><a href="contact.html">Contact</a></li>
+                            <li class=""><a href="MainController?action=Product&perform=ViewProduct">All Products</a></li>
+                            <li class=""><a href="contact.jsp">Contact</a></li>
                             <c:if test="${sessionScope.USER != null}">
                             <li class=""><a href="userProfile.jsp">Profile</a></li>
                             </c:if>
@@ -135,17 +135,17 @@
                 <div class="carousel-inner">
                     <div class="item active">
                         <div class="container">
-                            <a href="register.jsp"><img style="width:100%" src="themes/images/carousel/1.png" alt="" /></a>
+                            <a href="signupForm.jsp"><img style="width:100%" src="themes/images/carousel/1.png" alt="" /></a>
                         </div>
                     </div>
                     <div class="item">
                         <div class="container">
-                            <a href="register.jsp"><img style="width:100%" src="themes/images/carousel/2.png" alt="" /></a>
+                            <a href="signupForm.jsp"><img style="width:100%" src="themes/images/carousel/2.png" alt="" /></a>
                         </div>
                     </div>
                     <div class="item">
                         <div class="container">
-                            <a href="register.jsp"><img src="themes/images/carousel/3.png" alt="" /></a>
+                            <a href="signupForm.jsp"><img src="themes/images/carousel/3.png" alt="" /></a>
                         </div>
                     </div>
                 </div>
@@ -212,7 +212,7 @@
                     <!-- Sidebar end=============================================== -->
                     <div class="span9">
                         <ul class="breadcrumb">
-                            <li><a href="index.jsp">Home</a> <span class="divider">/</span></li>
+                            <li><a href="MainController?action=Product&perform=Index">Home</a> <span class="divider">/</span></li>
                             <li class="active">All Products</li>
                         </ul>
                         <h3> Products Name <small class="pull-right"> 40 products are available </small></h3>

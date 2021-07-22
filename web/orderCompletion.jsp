@@ -214,7 +214,7 @@
                     <!-- Sidebar end=============================================== -->
                     <div class="span9">
                         <ul class="breadcrumb">
-                            <li><a href="index.jsp">Home</a> <span class="divider">/</span></li>
+                            <li><a href="MainController?action=Product&perform=Index">Home</a> <span class="divider">/</span></li>
                             <li><a href="MainController?action=Product&perform=ViewProduct">Products</a> <span class="divider">/</span></li>
                             <li class="active">Receipt</li>
                         </ul>
