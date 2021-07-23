@@ -148,7 +148,6 @@ public class ProductController extends HttpServlet {
                     System.out.println("start Addproduct");
                     String pname = request.getParameter("pname");
                     String cateID = request.getParameter("cateID");
-                    String quantity = request.getParameter("quantity");
                     String des = request.getParameter("des");
 //                    String img = request.getParameter("img");
                     //String newSpecID = request.getParameter("newSpecID");

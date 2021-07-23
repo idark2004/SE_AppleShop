@@ -81,7 +81,7 @@
                         <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
                     </form>
                     <ul id="topMenu" class="nav pull-right">
-                        <li class=""><a href="products_Manager.html">All Products</a></li>
+                        <li class=""><a href="MainController?action=Product&perform=ViewProduct&categoryID=">All Products</a></li>
                         <li class=""><a href="contact.jsp">Contact</a></li>
                         <c:if test="${sessionScope.USER != null}">
                             <li class=""><a href="userProfile.jsp">Profile</a></li>
@@ -242,12 +242,6 @@
                                             <label class="control-label" for="">CategoryID</label>
                                             <div class="controls">
                                                 <input class="span3" type="text" name="cateID" id="inputPrice" placeholder="CategoryID" maxlength="11">
-                                            </div>
-                                        </div>
-                                        <div class="control-group">
-                                            <label class="control-label" for="">Quantity</label>
-                                            <div class="controls">
-                                                <input class="span3" type="number" name="quantity" id="inputPrice" placeholder="Quantity">
                                             </div>
                                         </div>
                                         <div class="controls">

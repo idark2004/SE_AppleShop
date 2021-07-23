@@ -81,7 +81,7 @@
                             <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
                         </form>
                         <ul id="topMenu" class="nav pull-right">
-                            <li class=""><a href="products_Manager.html">All Products</a></li>
+                            <li class=""><a href="MainController?action=Product&perform=ViewProduct">All Products</a></li>
                             <li class=""><a href="contact.jsp">Contact</a></li>
                             <li class=""><a href="userProfile.jsp">Profile</a></li>
                             <li class="">
