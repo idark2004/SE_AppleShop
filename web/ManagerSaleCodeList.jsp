@@ -268,7 +268,7 @@
                                                     <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
                                                 </span>
                                             </a>
-                                            <a href="" class="table-link danger" title="Hide This Code">
+                                            <a href="MainController?action=SaleCode&perform=DeActive&codeID=${sale.codeID}" class="table-link danger" title="Hide This Code">
                                                 <span class="fa-stack">
                                                     <i class="fa fa-square fa-stack-2x"></i>
                                                     <i class="fa fa-eye fa-stack-1x fa-inverse"></i>
