@@ -222,7 +222,7 @@
                 <!-- Sidebar end=============================================== -->
                 <div class="span9">
                     <ul class="breadcrumb">
-                        <li><a href="index.html">Home</a> <span class="divider">/</span></li>
+                        <li><a href="MainController?action=Product&perform=Index">Home</a> <span class="divider">/</span></li>
                         <li class="active">Legal Notice</li>
                     </ul>
                     <h3>LEGAL NOTICE</h3>

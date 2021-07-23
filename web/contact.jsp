@@ -179,7 +179,7 @@
 
                                 </div>
 
-                                <input type="hidden" name="action" value="User Manage"/>
+                                <input type="hidden" name="action" value="User"/>
                                 <button class="btn btn-large" type="submit" name="perform" value="Contact">Send Messages</button>
 
                             </fieldset>
