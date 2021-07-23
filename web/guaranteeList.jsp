@@ -241,6 +241,7 @@
                                                     <th><span>Expected return date</span></th>
                                                     <th><span>Description</span></th>
                                                     <th><span>Guarantee Fee</span></th>
+                                                    <th><span>Status</span></th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -260,6 +261,7 @@
                                                             <fmt:setLocale value="vi_VN" />
                                                             <fmt:formatNumber value="${order.guarantFee}" type="currency" />
                                                         </td>
+                                                        <td>${order.gurantStatus}</td>
 
                                                         <td>
                                                             
