@@ -45,7 +45,7 @@ public class SaleCodeController extends HttpServlet {
         String perform = request.getParameter("perform");
         String codeStatus = request.getParameter("codeStatus");
         if (codeStatus==null){
-            codeStatus="true";
+            codeStatus="";
         }
         String codeID = request.getParameter("codeID");
 
@@ -106,7 +106,7 @@ public class SaleCodeController extends HttpServlet {
                                 request.setAttribute("ERROR", "list not null");
 
                                 session.setAttribute("CODE_LIST", list);
-                                url = LIST;
+                                url = "MainController?action=SaleCode&perform=List";
                             } else {
                                 request.setAttribute("ERROR", "list null");
                             }

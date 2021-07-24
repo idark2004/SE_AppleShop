@@ -30,10 +30,14 @@ public class SaleCodeDAO {
 
             if (conn != null) {
                 String sql = "SELECT codeID, percentage, codeName, createDate, expDate, codeStatus"
-                        + " FROM tblSaleCode WHERE codeStatus = ?";
+                        + " FROM tblSaleCode WHERE codeStatus LIKE ? ";
 
                 stm = conn.prepareStatement(sql);
+                if (codeStatus.equals("")){
+                    stm.setString(1, "%%");
+                } else {
                 stm.setBoolean(1, Boolean.parseBoolean(codeStatus));
+                }
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     String codeID = rs.getString("codeID");
@@ -41,10 +45,11 @@ public class SaleCodeDAO {
                     String codeName = rs.getString("codeName");
                     String createDate = rs.getString("createDate");
                     String expDate = rs.getString("expDate");
+                    boolean saleStatus = rs.getBoolean("codeStatus");
                     if (list == null) {
                         list = new ArrayList<>();
                     }
-                    list.add(new SaleCodeDTO(codeID, codeName, percentage, createDate, expDate, Boolean.parseBoolean(codeStatus)));
+                    list.add(new SaleCodeDTO(codeID, codeName, percentage, createDate, expDate, saleStatus));
                 }
             }
         } finally {
@@ -98,7 +103,7 @@ public class SaleCodeDAO {
             conn = DBConnect.makeConnection();
             if (conn != null) {
                 String sql = "SELECT codeName, percentage, createDate, expDate, codeStatus "
-                        + " FROM tblSaleCode WHERE codeID=? AND expDate>GETDATE() codeStatus = True";
+                        + " FROM tblSaleCode WHERE codeID=? AND expDate>GETDATE() AND codeStatus = 'True'";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, codeID);
                 rs = stm.executeQuery();
