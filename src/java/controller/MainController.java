@@ -48,7 +48,7 @@ public class MainController extends HttpServlet {
         //System.out.println(session.getAttribute("username"));
         
         if (action == null){
-            url="index.jsp";
+            url="MainController?action=Product&perform=Index";
         }
         
         try {           
@@ -101,7 +101,7 @@ public class MainController extends HttpServlet {
                     url = GUARANTEE;
                     break;
                 default:
-                    url="index.jsp";
+                    url="MainController?action=Product&perform=Index";
                     break;
             }
         } catch (Exception e) {

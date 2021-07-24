@@ -29,7 +29,7 @@ public class UserDAO {
         ResultSet rs = null;//doi tuong nhan ket qua
         Encrypt encrypt = new Encrypt();
 
-        String sql = "SELECT * FROM tblUsers WHERE userEmail=? AND password=? ";
+        String sql = "SELECT * FROM tblUsers WHERE userEmail=? AND password=? AND userStatus='True' ";
 
         try {
             conn = DBConnect.makeConnection(); // tao doi tuong connection qua DBConnection

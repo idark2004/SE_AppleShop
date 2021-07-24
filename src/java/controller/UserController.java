@@ -107,6 +107,7 @@ public class UserController extends HttpServlet {
                         System.out.println("WRONG");
                         error.setLoginError("Invalid username or password");
                         request.setAttribute("LOGIN_ERROR", error);
+                        url = "loginForm.jsp";
                     }
                     System.out.println("url login " + url);
                     break;
