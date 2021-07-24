@@ -13,8 +13,7 @@
     <head>
         <script async type="module" >
         <c:set var="a" value="#{fn:length(requestScope.hotProducts)}"></c:set>
-        var a =  ${a};
-         if( a===0)
+         if( ${a} ===0)
          {  
             location.replace("MainController?action=Product&perform=Index");
          }  
