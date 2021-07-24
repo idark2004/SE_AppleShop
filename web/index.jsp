@@ -3,6 +3,7 @@
     Created on : Jul 5, 2021, 10:52:09 AM
     Author     : anime
 --%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>  
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -10,6 +11,15 @@
 <html lang="en">
 
     <head>
+        <script async type="module" >
+        <c:set var="a" value="#{fn:length(requestScope.hotProducts)}"></c:set>
+        var a =  ${a};
+         if( a===0)
+         {  
+            location.replace("MainController?action=Product&perform=Index");
+         }  
+        </script>
+
         <meta charset="utf-8">
         <title>SE15 Shop | Homepage</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,8 +50,9 @@
         <link rel="apple-touch-icon-precomposed" href="themes/images/ico/apple.png">
         <style type="text/css" id="enject"></style>
     </head>
-
-    <body >
+   
+    <body>
+        
         <div id="header">
             <div class="container">
                 <div id="welcomeLine" class="row">
@@ -242,7 +253,7 @@
                                                 </c:forEach>
                                             </ul>
                                         </div>
-
+                                     
                                         <div class="item">
                                             <ul class="thumbnails">
                                                 <c:forEach begin="5" end="8" items="${requestScope.hotProducts}" var="hotP">
@@ -374,6 +385,7 @@
         </div>
     </div>
     <span id="themesBtn"></span>
+    
 </body>
 
 

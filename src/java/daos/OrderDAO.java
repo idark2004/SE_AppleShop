@@ -242,7 +242,7 @@ public class OrderDAO {
         PreparedStatement ps = null;
         ResultSet rs = null;
 
-        String sql = "SELECT p.productName, s.color, s.ram, s.storage, o.orderQuantity, s.specPrice "
+        String sql = "SELECT p.productName,p.image, s.color, s.ram, s.storage, o.orderQuantity, s.specPrice "
                 + " FROM tblProducts p, tblProductSpec s, tblOrderDetail o "
                 + " WHERE o.orderID = ? AND o.specID = s.specID AND p.productID = s.productID ";
 
@@ -262,7 +262,7 @@ public class OrderDAO {
                     p.setRam(rs.getString("ram"));
                     p.setStorage(rs.getString("storage"));
                     p.setPrice(rs.getDouble("specPrice"));
-                    
+                    p.setImage(rs.getString("image"));
                     OrderDetailDTO od = new OrderDetailDTO();
                     od.setOrderID(oid);
                     od.setQuantity(rs.getInt("orderQuantity"));

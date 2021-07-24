@@ -49,7 +49,7 @@ public class OrderListController extends HttpServlet {
             } else {
                 page = 1;
             } 
-            int product_per_page = 2;// set product per page here
+            int product_per_page = 10;// set product per page here
             int pNum = list.size();
             System.out.println(pNum);
             int pages = 0;

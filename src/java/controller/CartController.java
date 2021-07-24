@@ -286,7 +286,7 @@ public class CartController extends HttpServlet {
                 else{
                     percent = "0";
                 }
-               
+
                 String MailMessage = "Your billing was sent to Email."+email;
                  String subject = "Your billing at SE15AppleShop";
                   String content = "<h2>Bill Infor</h2>"
