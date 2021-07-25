@@ -318,7 +318,7 @@
                                         </c:forEach>
                                     </c:when>
                                     <c:otherwise>
-                                    <h1>no item in the cart</h1>
+                                    <h3>No item in the cart</h3>
                                 </c:otherwise>
                             </c:choose>
                             <tr>
@@ -330,7 +330,7 @@
                                 <td style="text-align:right"> <fmt:formatNumber type="number" maxFractionDigits = "0" value="${totalDiscount}"/></td>
                             </tr>
                             <tr>
-                                <td colspan="5" style="text-align:right"><strong>TOTAL (<fmt:formatNumber type="number" maxFractionDigits = "0" value="${Price}"/> VND - <fmt:formatNumber type="number" maxFractionDigits = "0" value="${totalDiscount}"/>)=</td> VND) =</strong></td>
+                                <td colspan="5" style="text-align:right"><strong>TOTAL (<fmt:formatNumber type="number" maxFractionDigits = "0" value="${Price}"/> VND - <fmt:formatNumber type="number" maxFractionDigits = "0" value="${totalDiscount}" /> VND) =</strong></td>
                                 <td class="label label-important" style="display:block; text-align: right"> <strong><fmt:formatNumber type="number" maxFractionDigits = "0" value="${total}"/> VND</strong></td>
                             </tr>
                             </tbody>
@@ -359,6 +359,7 @@
                             </tbody>
                         </table>
 
+                                                <c:if test="${sessionScope.cart != null}">
                         <table class="table table-bordered">
                             <tr>
                                 <th>SHIPPING ADDRESS</th>
@@ -369,25 +370,25 @@
                                         <div class="control-group">
                                             <label class="control-label" for="cusName">Your Name </label>
                                             <div class="controls">
-                                                <input type="text" id="cusName" name="cusName" placeholder="Nguyễn Văn A">                                            
+                                                <input type="text" id="cusName" name="cusName" placeholder="Nguyễn Văn A" value="${sessionScope.USER.name}">                                            
                                             </div>
                                         </div>
                                         <div class="control-group">
                                             <label class="control-label" for="inputAddress">Your shipping address </label>
                                             <div class="controls">
-                                                <input type="text" id="inputAddress" name="address" placeholder="123, A Street, District 2" required>                                            
+                                                <input type="text" id="inputAddress" name="address" placeholder="123, A Street, District 2" value="${sessionScope.USER.address}" required>                                            
                                             </div>
                                         </div>
                                         <div class="control-group">
                                             <label class="control-label" for="phoneNumber">Phone Number </label>
                                             <div class="controls">
-                                                <input type="text" id="phoneNumber" name="phone" placeholder="0123456789" required>                                            
+                                                <input type="text" id="phoneNumber" name="phone" placeholder="0123456789" value="${sessionScope.USER.phone}" required>                                            
                                             </div>
                                         </div>
                                         <div class="control-group">
                                             <label class="control-label" for="email">Email </label>
                                             <div class="controls">
-                                                <input type="email" id="email" name="email" placeholder="abc@abc.com">                                            
+                                                <input type="email" id="email" name="email" placeholder="abc@abc.com" value="${sessionScope.USER.email}">                                            
                                             </div>
                                         </div>
 
@@ -411,6 +412,7 @@
                                 </td>
                             </tr>
                         </table>
+                                        </c:if>
 
 
                     </div>
