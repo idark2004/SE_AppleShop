@@ -27,6 +27,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import utils.DBSupport;
 import utils.EmailUtility;
 /**
  *
@@ -76,6 +77,10 @@ public class CartController extends HttpServlet {
         try {
             switch (perform) {
                 case "Order Complete":
+                    DBSupport dbSupport = new DBSupport();
+                    for (int i=0; i<cart.size(); i++){
+                        dbSupport.increaseCount("orderCount", cart.get(i).getProduct().getProductID());
+                    }
                     String cusName = request.getParameter("cusName");
                     String address = request.getParameter("address");
                     String phone = request.getParameter("phone");
@@ -342,7 +347,7 @@ public class CartController extends HttpServlet {
                 }
                content+="<td colspan=\"6\" style=\"text-align:right\"><strong>TOTAL "+formatPrice(finalTotal)+" </strong></td>\n" 
                +"</table>";
-            EmailUtility.sendEmail_1(host, port, emailSender, nameSender, pass, email, subject, content);
+            EmailUtility.sendEmail_1(host, port, emailSender, "SE_AppleStore", pass, email, subject, content);
                 //end send Mail
                 
     }

@@ -268,7 +268,8 @@
                                         </p>
                                         
                                         <c:if test="${requestScope.order.status.trim() != 'Completed'}">
-                                        <c:if test="${requestScope.order.status.trim() != 'Cancel'}">    
+                                        <c:if test="${requestScope.order.status.trim() != 'Cancel'}">
+                                        <c:if test="${sessionScope.USER.roleID.trim() != 'AD'}">
                                         <form method="post" action="MainController">
                                             <lable for="status" >Change Status</lable>
                                             <input value="${requestScope.order.orderID}" name="orderID" type="hidden">
@@ -279,9 +280,6 @@
                                                     >
                                                 <option selected disabled value>-Choose a Status-</option>
                                                 <option value="Cancel" 
-                                                        <c:if test="${sessionScope.USER.roleID.trim() == 'AD'}">
-                                                           hidden 
-                                                        </c:if>
                                                         <c:if test="${requestScope.order.status.trim() == 'Shipping'}">
                                                            hidden 
                                                         </c:if>
@@ -299,6 +297,7 @@
                                             </select>
                                             <button type="submit">Change</button>
                                         </form>  
+                                        </c:if>
                                         </c:if>   
                                         </c:if>
                                 </div>

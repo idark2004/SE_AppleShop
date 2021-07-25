@@ -90,7 +90,7 @@ public class ResetPasswordController extends HttpServlet {
                     content += "\nNote: for security reason, "
                             + "you must change your password after logging in.";            
 
-                    EmailUtility.sendEmail(host, port, email, name, pass, recipient, subject, content);
+                    EmailUtility.sendEmail(host, port, email, "SE_AppleStore", pass, recipient, subject, content);
                     message = "Your password has been reset. Please check your e-mail.";
                 }
                 else if (request.getParameter("key")==null){

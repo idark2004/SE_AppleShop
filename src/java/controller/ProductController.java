@@ -8,6 +8,7 @@ package controller;
 import daos.ProductDAO;
 import dtos.ProductDTO;
 import dtos.ProductErrorDTO;
+import dtos.UserDTO;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -18,6 +19,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import utils.DBSupport;
 
@@ -120,14 +122,17 @@ public class ProductController extends HttpServlet {
 
                     break;
                 case "ViewDetail":
-                    
+                    HttpSession session = request.getSession();
+                            
                  System.out.println( request.getParameter("productID").trim());
-                    String id = request.getParameter("productID").trim();
+                    String id = request.getParameter("productID");
                     String colorChoosen = request.getParameter("color");
                     String specChosen = request.getParameter("specID");
 
                     ProductDAO pDAO = new ProductDAO();
 
+                    DBSupport dbSupport = new DBSupport();
+                        dbSupport.increaseCount("viewCount", id);
                     ProductDTO product = pDAO.getProduct(id);
                     List<ProductDTO> color = pDAO.getAllColor(id);
                     if (colorChoosen != null) {

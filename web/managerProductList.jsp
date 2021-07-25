@@ -222,9 +222,9 @@
                             <div class="control-group">
                                 <label class="control-label alignL">Sort By </label>
                                 <select>
-                                    <option>Priduct name A - Z</option>
-                                    <option>Priduct name Z - A</option>
-                                    <option>Priduct Stoke</option>
+                                    <option>Product name A - Z</option>
+                                    <option>Product name Z - A</option>
+                                    <option>Product Stoke</option>
                                     <option>Price Lowest first</option>
                                 </select>
                             </div>

@@ -3,7 +3,7 @@
     Created on : Jul 10, 2021, 10:38:59 PM
     Author     : anime
 --%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -202,7 +202,7 @@
                                 <div class="control-group">
                                     <label class="control-label" for="price">price </label>
                                     <div class="controls">
-                                        <input type="number" name="specPrice" id="price" min="0" value="${param.price}" required/>
+                                        <input type="number" name="specPrice" id="price" min="0" value="<fmt:formatNumber value="${param.price}" type="number" groupingUsed = "false"/>" required/>
                                     </div>
                                 </div>
 

@@ -115,8 +115,8 @@ public class ProductDAO {
         Connection c = null; //doi tuong ket noi
         PreparedStatement ps = null; //doi tuong truy van
         ResultSet rs = null;//doi tuong nhan ket qua
-        String sql = "INSERT INTO tblProducts(ProductID,ProductName,productDescription,CategoryID,image) "
-                + "VALUES(?,?,?,?,?)";
+        String sql = "INSERT INTO tblProducts(ProductID,ProductName,productDescription,CategoryID,image,viewCount,orderCount) "
+                + "VALUES(?,?,?,?,?,0,0)";
         boolean check = false;
         try {
             

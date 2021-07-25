@@ -140,8 +140,8 @@
                     <div class="span4">
                         <h4>Contact Details</h4>
                         <p> 58 Hoa Sứ Street,<br/> District Phú Nhuận, Ho Chi Minh City
-                            <br/><br/> SE15@gmail.com
-                            <br/> ﻿Tel 0914123456<br/> <br/> web: SE15AppleShop.com
+                            <br/><br/> qbuigiatest123@gmail.com
+                            <br/> ﻿Tel 0914123456<br/>
                         </p>
                     </div>
 

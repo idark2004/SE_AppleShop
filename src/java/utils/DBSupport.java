@@ -53,6 +53,7 @@ public class DBSupport {
                 stm = conn.prepareCall(procedure);
                 stm.setString(1, column);
                 stm.setString(2, productID);
+                stm.execute();
             }
         } finally {
             if (stm != null) {
