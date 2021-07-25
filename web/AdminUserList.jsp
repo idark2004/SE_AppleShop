@@ -284,16 +284,17 @@
                     </div>
 
                     <div class="pagination">
-                        <ul>
-                            <li><a href="#">&lsaquo;</a></li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">...</a></li>
-                            <li><a href="#">&rsaquo;</a></li>
-                        </ul>
-                    </div>
+                            <ul>
+                                <li><a <c:if test="${requestScope.curPage == 1 }">style="cursor:default;pointer-events: none; "</c:if>
+                                                                                  href="MainController?action=Manage+User&perform=Get+Manager&pageNum=${requestScope.curPage - 1}">&lsaquo;</a></li>
+                                    <c:forEach var="pageNum" begin="1" end="${requestScope.pages}">                           
+                                    <li 
+                                        ><a <c:if test="${requestScope.curPage == pageNum}">style="color:red;"</c:if> href="MainController?action=Manage+User&perform=Get+Manager&pageNum=${pageNum}">${pageNum}</a></li>
+                                    </c:forEach>
+                                <li><a <c:if test="${requestScope.curPage == requestScope.pages }">style="cursor:default;pointer-events: none; "</c:if>
+                                                                                                   href="MainController?action=Manage+User&perform=Get+Manager&pageNum=${requestScope.curPage + 1}">&rsaquo;</a></li>
+                            </ul>
+                     </div>
                     <p><a href="#" class="btn btn-primary">Manager List</a> <a href="AdminAddUser.jsp" class="btn">Add new manager</a></p>
 
                 </div>

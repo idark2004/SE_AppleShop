@@ -79,7 +79,7 @@ public class SaleCodeController extends HttpServlet {
                     if(request.getParameter("pageNum") !=null){
                         currentPage = Integer.parseInt(requestPage);
                     }
-                    int pageSize = 1;
+                    int pageSize = 20;
                     List<SaleCodeDTO> subList = pagi.PaginatedList(currentPage, list, pageSize);
                         if (list != null) {
                             request.setAttribute("ERROR", "list not null");

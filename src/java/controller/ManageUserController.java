@@ -52,7 +52,7 @@ public class ManageUserController extends HttpServlet {
                     if(request.getParameter("pageNum") !=null){
                         currentPage = Integer.parseInt(requestPage);
                     }
-                    int pageSize = 1;
+                    int pageSize = 20;
                     List<UserDTO> subList = pagi.PaginatedList(currentPage, list, pageSize);
                     if(list!=null){
                         request.setAttribute("USER_LIST", subList);
@@ -86,8 +86,24 @@ public class ManageUserController extends HttpServlet {
                  
                 case "Get Manager":
                     list = dao.getAdminUserList();
-                    request.setAttribute("USER_LIST", list);
-                    url = ADMIN_LIST;
+                    pagi = new Pagination();
+                    requestPage = request.getParameter("pageNum");
+                    currentPage= 1;//first load current page is 1
+                    if(request.getParameter("pageNum") !=null){
+                        currentPage = Integer.parseInt(requestPage);
+                    }
+                    pageSize = 20;
+                    subList = pagi.PaginatedList(currentPage, list, pageSize);
+                    if(list!=null){
+                        request.setAttribute("USER_LIST", subList);
+                        request.setAttribute("pages", pagi.getNumOfPage());
+                        request.setAttribute("curPage", pagi.getCurrentPage());
+                        url=ADMIN_LIST;
+                    }
+                    else{
+                        request.setAttribute("EMPTY", "There's no user in system");
+                        url = ADMIN_LIST;
+                    }
                     break;
                 case "Add Manager":
                     
