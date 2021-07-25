@@ -73,24 +73,26 @@ public class SaleCodeController extends HttpServlet {
                 switch (perform) {
                     case "List":
                     List<SaleCodeDTO> list = dao.getSaleCodeList(codeStatus);
-                    Pagination pagi = new Pagination();
-                    String requestPage = request.getParameter("pageNum");
-                    int currentPage= 1;//first load current page is 1
-                    if(request.getParameter("pageNum") !=null){
-                        currentPage = Integer.parseInt(requestPage);
-                    }
-                    int pageSize = 20;
-                    List<SaleCodeDTO> subList = pagi.PaginatedList(currentPage, list, pageSize);
-                        if (list != null) {
-                            request.setAttribute("ERROR", "list not null");
-                            request.setAttribute("pages", pagi.getNumOfPage());
-                            request.setAttribute("curPage", pagi.getCurrentPage());
-                            request.setAttribute("CODE_LIST", subList);
-                            url = LIST;
-                        } else {
-                            request.setAttribute("ERROR", "list null");
-                            url = LIST;
-                        }
+//                    Pagination pagi = new Pagination();
+//                    String requestPage = request.getParameter("pageNum");
+//                    int currentPage= 1;//first load current page is 1
+//                    if(request.getParameter("pageNum") !=null){
+//                        currentPage = Integer.parseInt(requestPage);
+//                    }
+//                    int pageSize = 20;
+//                    List<SaleCodeDTO> subList = pagi.PaginatedList(currentPage, list, pageSize);
+//                        if (list != null) {
+//                            request.setAttribute("ERROR", "list not null");
+//                            request.setAttribute("pages", pagi.getNumOfPage());
+//                            request.setAttribute("curPage", pagi.getCurrentPage());
+//                            request.setAttribute("CODE_LIST", subList);
+//                            url = LIST;
+//                        } else {
+//                            request.setAttribute("ERROR", "list null");
+//                            url = LIST;
+//                        }
+                    request.setAttribute("CODE_LIST", list);
+                    url = LIST;
                         break;
                     case "View":
                         code = dao.getCode(codeID);

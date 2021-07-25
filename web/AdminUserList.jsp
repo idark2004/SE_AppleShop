@@ -226,7 +226,24 @@
                     </ul>
                     <div class="row">
                         <div class="span9">
-                            <table class="table table-striped">
+                            <div class="num_rows">		
+                                <div class="form-group"> 
+                                    <select class  ="form-control" name="state" id="maxRows">
+                                            <option value="5">5</option>
+                                            <option value="10">10</option>
+                                            <option value="15">15</option>
+                                            <option value="20">20</option>
+                                            <option value="50">50</option>
+                                            <option value="70">70</option>
+                                            <option value="100">100</option>
+                                            <option value="5000">Show ALL Rows</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="tb_search">
+                                <input type="text" id="search_input_all" onkeyup="FilterkeyWord_all_table()" placeholder="Search.." class="form-control">
+                            </div>
+                            <table class="table table-striped" id="table-id">
                                 <thead>
                                     <tr>
 
@@ -284,17 +301,10 @@
                     </div>
 
                     <div class="pagination">
-                            <ul>
-                                <li><a <c:if test="${requestScope.curPage == 1 }">style="cursor:default;pointer-events: none; "</c:if>
-                                                                                  href="MainController?action=Manage+User&perform=Get+Manager&pageNum=${requestScope.curPage - 1}">&lsaquo;</a></li>
-                                    <c:forEach var="pageNum" begin="1" end="${requestScope.pages}">                           
-                                    <li 
-                                        ><a <c:if test="${requestScope.curPage == pageNum}">style="color:red;"</c:if> href="MainController?action=Manage+User&perform=Get+Manager&pageNum=${pageNum}">${pageNum}</a></li>
-                                    </c:forEach>
-                                <li><a <c:if test="${requestScope.curPage == requestScope.pages }">style="cursor:default;pointer-events: none; "</c:if>
-                                                                                                   href="MainController?action=Manage+User&perform=Get+Manager&pageNum=${requestScope.curPage + 1}">&rsaquo;</a></li>
-                            </ul>
-                     </div>
+                              <ul class="pagination-container">
+
+                              </ul>                        
+                    </div>
                     <p><a href="#" class="btn btn-primary">Manager List</a> <a href="AdminAddUser.jsp" class="btn">Add new manager</a></p>
 
                 </div>
@@ -341,6 +351,8 @@
 
     <script src="themes/js/bootshop.js"></script>
     <script src="themes/js/jquery.lightbox-0.5.js"></script>
+    
+    <script src="themes/js/searchTbl.js"></script>
 
     <!-- Themes switcher section ============================================================================================= -->
     <div id="secectionBox">
