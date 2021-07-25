@@ -36,9 +36,7 @@
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="themes/images/ico/apple.png">
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="themes/images/ico/apple.png">
         <link rel="apple-touch-icon-precomposed" href="themes/images/ico/apple.png">
-        <script src="https://apis.google.com/js/platform.js" async defer></script>
-        <meta name="google-signin-scope" content="profile email">
-        <meta name="google-signin-client_id" content="779792849031-s9k66dv106kav3h90o9lak0vnm2943ci.apps.googleusercontent.com">
+       
         <style type="text/css" id="enject"></style>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
@@ -110,7 +108,7 @@
                                                         <label class="checkbox">
                                                             <input type="checkbox"> Remember me
                                                         </label>
-                                                        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                                                       
                                                         <input type="hidden" name="perform" value="Log in">
                                                         <button type="submit" class="btn btn-success" name="action" value="User">Sign in</button>
                                                         <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>

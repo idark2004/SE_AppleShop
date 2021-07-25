@@ -85,7 +85,7 @@ public class ProductController extends HttpServlet {
                     } else {
                         page = 1;
                     }
-                    int product_per_page = 10;// set product per page here
+                    int product_per_page = 3;// set product per page here
                     int pNum = list.size();
                     int pages = 0;
                     if (pNum % product_per_page == 0) {

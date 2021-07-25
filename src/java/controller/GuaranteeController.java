@@ -17,6 +17,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import utils.Pagination;
 
 /**
  *
@@ -72,8 +73,18 @@ public class GuaranteeController extends HttpServlet {
                     
                 case "Get":
                     List<GuaranteeDTO> list = dao.getAll();
+                    Pagination pagi = new Pagination();
+                    String requestPage = request.getParameter("pageNum");
+                    int currentPage=1;
+                    if(request.getParameter("pageNum") !=null){
+                        currentPage = Integer.parseInt(requestPage);
+                    }
+                    int pageSize = 1;
+                    List<GuaranteeDTO> subList= pagi.PaginatedList(currentPage, list, pageSize);
                     if(list!=null){
-                        request.setAttribute("GUARANTEE_LIST", list);
+                        request.setAttribute("GUARANTEE_LIST", subList);
+                        request.setAttribute("pages", pagi.getNumOfPage());
+                        request.setAttribute("curPage", pagi.getCurrentPage());
                         url=LIST;
                     }
                     else{

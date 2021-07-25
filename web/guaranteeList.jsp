@@ -264,7 +264,7 @@
                                                         <td>${order.gurantStatus}</td>
 
                                                         <td>
-                                                            
+                                                            <c:if test="${order.gurantStatus == 'Pending'}">
                                                             <a href="MainController?action=Guarantee&perform=Cancel&guarantID=${order.guarantID}" class="table-link text-info" title="Cancel">
                                                                 <span class="fa-stack">
                                                                     <i class="fa fa-square fa-stack-2x"></i>
@@ -276,7 +276,8 @@
                                                                     <i style="color:green;" class="fa fa-square fa-stack-2x"></i>
                                                                     <i style="color:white;" class="fa fa-check-square-o fa-stack-1x fa-inverse"></i>
                                                                 </span>
-                                                            </a>                                                            
+                                                            </a>   
+                                                            </c:if>
                                                         </td>
 
                                                     </tr>
@@ -289,16 +290,17 @@
                         </div>
 
                         <div class="pagination">
-                            <ul>
-                                <li><a href="#">&lsaquo;</a></li>
-                                <li><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">...</a></li>
-                                <li><a href="#">&rsaquo;</a></li>
-                            </ul>
-                        </div>
+                                    <ul>
+                                        <li><a <c:if test="${requestScope.curPage == 1 }">style="cursor:default;pointer-events: none; "</c:if>
+                                                                                          href="MainController?action=Guarantee&perform=Get&pageNum=${requestScope.curPage - 1}">&lsaquo;</a></li>
+                                            <c:forEach var="pageNum" begin="1" end="${requestScope.pages}">                           
+                                            <li 
+                                                ><a <c:if test="${requestScope.curPage == pageNum}">style="color:red;"</c:if> href="MainController?action=Guarantee&perform=Get&pageNum=${pageNum}">${pageNum}</a></li>
+                                            </c:forEach>
+                                        <li><a <c:if test="${requestScope.curPage == requestScope.pages }">style="cursor:default;pointer-events: none; "</c:if>
+                                                                                                           href="MainController?action=Guarantee&perform=Get&pageNum=${requestScope.curPage + 1}">&rsaquo;</a></li>
+                                    </ul>
+                     </div>
 
                     </div>
                 </div>

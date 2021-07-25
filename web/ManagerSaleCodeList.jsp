@@ -282,17 +282,18 @@
                         </div>
                     </div>
 
-                    <div class="pagination">
-                        <ul>
-                            <li><a href="#">&lsaquo;</a></li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">...</a></li>
-                            <li><a href="#">&rsaquo;</a></li>
-                        </ul>
-                    </div>
+                   <div class="pagination">
+                            <ul>
+                                <li><a <c:if test="${requestScope.curPage == 1 }">style="cursor:default;pointer-events: none; "</c:if>
+                                                                                  href="MainController?action=SaleCode&perform=List&pageNum=${requestScope.curPage - 1}">&lsaquo;</a></li>
+                                    <c:forEach var="pageNum" begin="1" end="${requestScope.pages}">                           
+                                    <li 
+                                        ><a <c:if test="${requestScope.curPage == pageNum}">style="color:red;"</c:if> href="MainController?action=SaleCode&perform=List&pageNum=${pageNum}">${pageNum}</a></li>
+                                    </c:forEach>
+                                <li><a <c:if test="${requestScope.curPage == requestScope.pages }">style="cursor:default;pointer-events: none; "</c:if>
+                                                                                                   href="MainController?action=SaleCode&perform=List&pageNum=${requestScope.curPage + 1}">&rsaquo;</a></li>
+                            </ul>
+                     </div>
 
                     <a href="MainController?action=SaleCode&perform=addCode" role="button" style="padding-right:0"><span class="btn btn-primary btn-success">Add new code</span></a>
 

@@ -100,6 +100,8 @@ public class UserController extends HttpServlet {
                         } else {
                             url = "MainController?action=Product&perform=Index";
                         }
+                        String lMgs = "Login Success.";
+                        request.setAttribute("lMgs", lMgs);
                         request.setAttribute("success", "true");
                         request.setAttribute("username", user.getName());
                         request.setAttribute("userid", user.getUserID());
@@ -142,6 +144,8 @@ public class UserController extends HttpServlet {
 
                     EmailUtility.sendEmail(host, port, email, "Shop Email", pass, email, subject, content);
                     System.out.println(content);
+                    String contactMgs="A mail was sent to our shop .Please wait for our reply";
+                    request.setAttribute("cMgs",contactMgs);
                     url = "contact.jsp";
                     break;
             }

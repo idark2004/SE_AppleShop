@@ -330,7 +330,7 @@
                                 <td style="text-align:right"> <fmt:formatNumber type="number" maxFractionDigits = "0" value="${totalDiscount}"/></td>
                             </tr>
                             <tr>
-                                <td colspan="5" style="text-align:right"><strong>TOTAL (<fmt:formatNumber type="number" maxFractionDigits = "0" value="${Price}"/> VND - ${totalDiscount} VND) =</strong></td>
+                                <td colspan="5" style="text-align:right"><strong>TOTAL (<fmt:formatNumber type="number" maxFractionDigits = "0" value="${Price}"/> VND - <fmt:formatNumber type="number" maxFractionDigits = "0" value="${totalDiscount}"/>)=</td> VND) =</strong></td>
                                 <td class="label label-important" style="display:block; text-align: right"> <strong><fmt:formatNumber type="number" maxFractionDigits = "0" value="${total}"/> VND</strong></td>
                             </tr>
                             </tbody>
@@ -343,7 +343,8 @@
                                     <td>
                                         <form class="form-horizontal" action="MainController" method="post">
                                             <div class="control-group">
-                                                ${requestScope.message}
+                                                
+                                                <p style="color:red;transform: translateX(74px);">${requestScope.message}</p>
                                                 <label class="control-label"><strong> SALE CODE: </strong> </label>
                                                 <div class="controls">
                                                     <input type="text" class="input-medium" placeholder="CODE" name="saleCode">

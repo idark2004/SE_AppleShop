@@ -14,6 +14,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" type="text/javascript"></script>
+
         <!--Less styles -->
         <!-- Other Less css file //different less files has different color scheam
             <link rel="stylesheet/less" type="text/css" href="themes/less/simplex.less">
@@ -290,5 +292,14 @@
         </div>
         <span id="themesBtn"></span>
     </body>
-
+    <script type="text/javascript">
+      
+        $(window).load(function() {
+           var nofity = "${requestScope.cMgs}";
+           if(nofity !== ""){
+               alert(nofity);
+            }
+             
+        });
+    </script>
 </html>

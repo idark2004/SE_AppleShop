@@ -6,6 +6,7 @@
 package controller;
 
 import daos.UserDAO;
+import dtos.GuaranteeDTO;
 import dtos.UserDTO;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import utils.Pagination;
 
 /**
  *
@@ -44,8 +46,24 @@ public class ManageUserController extends HttpServlet {
             switch (perform) {
                 case "Get User":                   
                     list = dao.getUserList();
-                    request.setAttribute("USER_LIST", list);
-                    url = USER_LIST;
+                         Pagination pagi = new Pagination();
+                    String requestPage = request.getParameter("pageNum");
+                    int currentPage= 1;//first load current page is 1
+                    if(request.getParameter("pageNum") !=null){
+                        currentPage = Integer.parseInt(requestPage);
+                    }
+                    int pageSize = 1;
+                    List<UserDTO> subList = pagi.PaginatedList(currentPage, list, pageSize);
+                    if(list!=null){
+                        request.setAttribute("USER_LIST", subList);
+                        request.setAttribute("pages", pagi.getNumOfPage());
+                        request.setAttribute("curPage", pagi.getCurrentPage());
+                        url=USER_LIST;
+                    }
+                    else{
+                        request.setAttribute("EMPTY", "There's no user in system");
+                        url = USER_LIST;
+                    }
                     break;
                     
                 case "Profile":

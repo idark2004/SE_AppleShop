@@ -386,6 +386,13 @@
     <span id="themesBtn"></span>
     
 </body>
-
-
+    <script type="text/javascript">
+            $(window).load(function() {
+           var nofity = "${requestScope.lMgs}";
+           if(nofity !== ""){
+               alert(nofity);
+            }
+             
+        });
+    </script>
 </html>

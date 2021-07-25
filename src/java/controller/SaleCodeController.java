@@ -7,6 +7,7 @@ package controller;
 
 import daos.SaleCodeDAO;
 import dtos.SaleCodeDTO;
+import dtos.UserDTO;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import utils.Pagination;
 
 /**
  *
@@ -70,11 +72,20 @@ public class SaleCodeController extends HttpServlet {
                 boolean check = false;
                 switch (perform) {
                     case "List":
-                        List<SaleCodeDTO> list = dao.getSaleCodeList(codeStatus);
+                    List<SaleCodeDTO> list = dao.getSaleCodeList(codeStatus);
+                    Pagination pagi = new Pagination();
+                    String requestPage = request.getParameter("pageNum");
+                    int currentPage= 1;//first load current page is 1
+                    if(request.getParameter("pageNum") !=null){
+                        currentPage = Integer.parseInt(requestPage);
+                    }
+                    int pageSize = 1;
+                    List<SaleCodeDTO> subList = pagi.PaginatedList(currentPage, list, pageSize);
                         if (list != null) {
                             request.setAttribute("ERROR", "list not null");
-
-                            request.setAttribute("CODE_LIST", list);
+                            request.setAttribute("pages", pagi.getNumOfPage());
+                            request.setAttribute("curPage", pagi.getCurrentPage());
+                            request.setAttribute("CODE_LIST", subList);
                             url = LIST;
                         } else {
                             request.setAttribute("ERROR", "list null");
