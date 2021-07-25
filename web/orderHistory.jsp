@@ -232,7 +232,7 @@
                     </ul>
                     <div class="row">
                         <div class="span9">
-                            <table class="table table-striped">
+                            <table class="table table-striped" id="example">
                                 <thead>
                                     <tr>
                                         <th><span>Created</span></th>
@@ -359,6 +359,8 @@
 
     <script src="themes/js/bootshop.js"></script>
     <script src="themes/js/jquery.lightbox-0.5.js"></script>
+    
+   <script src="themes/js/searchTbl.js"></script>
 
     <!-- Themes switcher section ============================================================================================= -->
     <div id="secectionBox">

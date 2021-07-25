@@ -597,3 +597,17 @@
     border: 1px solid #ccc;
     border-radius: 5px;
 }
+
+.pagination li:hover {
+            cursor: pointer;
+        }
+        
+.num_rows {
+    width: 20%;
+    float: left;
+}
+
+.tb_search {
+    float: right;
+    margin-left: 1rem;
+}

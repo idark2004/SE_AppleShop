@@ -225,8 +225,8 @@
                 <!-- Sidebar end=============================================== -->
                 <div class="span9">
                     <ul class="breadcrumb">
-                        <li><a href="index.html">Home</a> <span class="divider">/</span></li>
-                        <li><a href="product_summary.html">Products</a> <span class="divider">/</span></li>
+                        <li><a href="MainController?action=Product&perform=Index">Home</a> <span class="divider">/</span></li>
+                        <li><a href="MainController?action=Product&perform=ViewProduct&categoryID=">Products</a> <span class="divider">/</span></li>
                         <li class="active">Order Details</li>
                     </ul>
                     <div class="row">
@@ -322,7 +322,7 @@
                                 <c:when test="${requestScope.detail != null}">
                                     <c:forEach var="detail" items="${requestScope.detail}">
                                     <tr>
-                                        <td> <img width="60" src="themes/images/products/4.jpg" alt="" /></td>
+                                        <td> <img width="60" src="${detail.product.image}" alt="" /></td>
                                         <td>${detail.product.name}<br/>Color : ${detail.product.color}<br/>
                                             Ram:${detail.product.ram}<br/>Storage:${detail.product.storage}</td>
                                         <td style="text-align:right">

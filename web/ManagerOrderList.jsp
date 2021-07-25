@@ -227,8 +227,26 @@
                         <li class="active">Order History</li>
                     </ul>
                     <div class="row">
-                        <div class="span9">
-                            <table class="table table-striped">
+                        <div class="span9">               
+                                <div class="num_rows">		
+                                    <div class="form-group"> 
+                                        <select class  ="form-control" name="state" id="maxRows">
+                                                <option value="5">5</option>
+                                                <option value="10">10</option>
+                                                <option value="15">15</option>
+                                                <option value="20">20</option>
+                                                <option value="50">50</option>
+                                                <option value="70">70</option>
+                                                <option value="100">100</option>
+                                                <option value="5000">Show ALL Rows</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            
+                            <div class="tb_search">
+                                <input type="text" id="search_input_all" onkeyup="FilterkeyWord_all_table()" placeholder="Search.." class="form-control">
+                            </div>
+                            <table class="table table-striped" id= "table-id">
                                 <thead>
                                     <tr>
                                         <th><span>Created</span></th>
@@ -244,7 +262,7 @@
                                     <c:when test="${requestScope.ORDER_LIST != null}">
                                         <c:forEach var="order" items="${requestScope.ORDER_LIST}">
                                     <tr>
-                                        <td>${order.orderDate}</td>
+                                        <td>${order.orderCreateDate}</td>
 
                                         <td>${order.orderID}</td>
                                         <td>
@@ -282,18 +300,13 @@
                             </table>
                         </div>
                     </div>
+                    <!--Start Pagination -->
                     <div class="pagination">
-                        <ul>
-                            <li><a <c:if test="${requestScope.curPage == 1 }">style="cursor:default;pointer-events: none; "</c:if>
-                                                                              href="OrderHistoryController?pageNum=${requestScope.curPage - 1}&userid=${requestScope.user.userID}">&lsaquo;</a></li>
-                                <c:forEach var="pageNum" begin="1" end="${requestScope.pages}">                           
-                                <li 
-                                    ><a <c:if test="${requestScope.curPage == pageNum}">style="color:red;"</c:if> href="OrderHistoryController?pageNum=${pageNum}&userid=${requestScope.user.userID}">${pageNum}</a></li>
-                            </c:forEach>
-                            <li><a <c:if test="${requestScope.curPage == requestScope.pages }">style="cursor:default;pointer-events: none; "</c:if>
-                                    href="ViewProductController?pageNum=${requestScope.curPage + 1}&userid=${requestScope.user.userID}">&rsaquo;</a></li>
-                        </ul>
+                              <ul class="pagination-container">
+
+                              </ul>                        
                     </div>
+                    
                 </div>
             </div>
         </div>
@@ -338,6 +351,8 @@
 
     <script src="themes/js/bootshop.js"></script>
     <script src="themes/js/jquery.lightbox-0.5.js"></script>
+    
+    <script src="themes/js/searchTbl.js"></script>
 
     <!-- Themes switcher section ============================================================================================= -->
     <div id="secectionBox">
