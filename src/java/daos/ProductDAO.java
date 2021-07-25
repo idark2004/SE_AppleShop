@@ -117,10 +117,11 @@ public class ProductDAO {
         ResultSet rs = null;//doi tuong nhan ket qua
         String sql = "INSERT INTO tblProducts(ProductID,ProductName,productDescription,CategoryID,image) "
                 + "VALUES(?,?,?,?,?)";
+        boolean check = false;
         try {
-            boolean check = false;
+            
             DBConnect db = new DBConnect();
-            c = db.makeConnection(); // tao doi tuong connection qua DBConnection
+            c = DBConnect.makeConnection(); // tao doi tuong connection qua DBConnection
             DBSupport dbs = new DBSupport();
             if (c != null) {
                 ps = c.prepareStatement(sql); // tao truy van
@@ -133,8 +134,7 @@ public class ProductDAO {
                 ps.setString(5, image);
 
                 //gan tham so 1 la bien truyen vao
-                check = ps.executeUpdate() > 0;
-                return true;
+                return check = ps.executeUpdate() > 0;               
 
             }
         } catch (Exception e) {
@@ -152,7 +152,7 @@ public class ProductDAO {
                 c.close();
             }
         }
-        return false;
+        return check;
     }
 
     public ProductDTO getProduct(String pid) throws NamingException, SQLException {

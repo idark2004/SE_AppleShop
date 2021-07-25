@@ -10,15 +10,7 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <script async type="module" >
-        <c:set var="a" value="#{fn:length(requestScope.hotProducts)}"></c:set>
-         if( ${a} ===0)
-         {  
-            location.replace("MainController?action=Product&perform=Index");
-         }  
-        </script>
-
+    <head>        
         <meta charset="utf-8">
         <title>SE15 Shop | Homepage</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -51,7 +43,13 @@
     </head>
    
     <body>
-        
+        <script>
+        <c:set var="a" value="#{fn:length(requestScope.hotProducts)}"></c:set>
+         if( ${a} ===0)
+         {  
+            location.replace("MainController?action=Product&perform=Index");
+         }  
+        </script>
         <div id="header">
             <div class="container">
                 <div id="welcomeLine" class="row">
