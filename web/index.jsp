@@ -259,10 +259,10 @@
                                                     <li class="span3">
                                                         <div class="thumbnail">
                                                             <i class="tag"></i>
-                                                            <a href="ProductController?perform=ViewDetail&ProductID=${requestScope.productID}"><img src="${hotP.image}" alt="${hotP.name}"></a>
+                                                            <a href="MainController?action=Product&perform=ViewDetail&productID=${hotP.productID}"><img src="${hotP.image}" alt="${hotP.name}"></a>
                                                             <div class="caption">
                                                                 <h5>${hotP.name}</h5>
-                                                                <h4 style="font-size: small;"><a class="btn" href="MainController?action=Product&perform=ViewDetail&productID=${product.productID}">VIEW</a> <span class="pull-right">
+                                                                <h4 style="font-size: small;"><a class="btn" href="MainController?action=Product&perform=ViewDetail&productID=${hotP.productID}">VIEW</a> <span class="pull-right">
                                                                         <fmt:formatNumber type="number" maxFractionDigits = "0" value="${hotP.price}" />VND</span></h4>
 
                                                                 </span></h4>

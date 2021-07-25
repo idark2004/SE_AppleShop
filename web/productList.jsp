@@ -292,7 +292,7 @@
                                                     <div class="thumbnail">
                                                         <a href="MainController?action=Product&perform=ViewDetail&productID=${product.productID}"><img src="${product.image}" alt="" /></a>
                                                         <div class="caption">
-                                                            <h5 id="product-name" class="product-name">${product.name}d</h5>
+                                                            <h5 id="product-name" class="product-name">${product.name}</h5>
                                                             <p class="product-price">
                                                                 <fmt:setLocale value="vi_VN" />
                                                                 <fmt:formatNumber value="${product.price}" type="currency" />

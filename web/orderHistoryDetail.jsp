@@ -282,6 +282,9 @@
                                                         <c:if test="${sessionScope.USER.roleID.trim() == 'AD'}">
                                                            hidden 
                                                         </c:if>
+                                                        <c:if test="${requestScope.order.status.trim() == 'Shipping'}">
+                                                           hidden 
+                                                        </c:if>
                                                 >Cancel</option>
                                                 <option value="Shipping"
                                                         <c:if test="${sessionScope.USER.roleID.trim() == 'US'}">
