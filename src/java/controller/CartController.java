@@ -106,7 +106,7 @@ public class CartController extends HttpServlet {
                     if (cart != null) System.out.println("cart <> null");
                     else System.out.println("cart null");
                     if (cart != null) {
-                        newOrder = dao.completeOrder(cart, address, cusName, email, phone, userID, codeSale, payMethod, total);
+                        newOrder = dao.completeOrder(address, cusName, email, phone, userID, codeSale, payMethod, total);
                         System.out.println("Go");
                         String orderID = newOrder.getOrderID();
                         boolean check = dao.addOrderDetail(cart, orderID);

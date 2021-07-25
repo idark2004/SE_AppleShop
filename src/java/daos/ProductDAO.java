@@ -284,7 +284,7 @@ public class ProductDAO {
         }
         return lst;
     }
-
+/*
     public ProductDTO findSpec(String productID, String color, String ram, String storage) throws NamingException, SQLException {
         Connection c = null; //doi tuong ket noi
         PreparedStatement ps = null; //doi tuong truy van
@@ -332,7 +332,7 @@ public class ProductDAO {
         }
         return null;
     }
-
+*/
     public ProductDTO getSpec(String specID) throws NamingException, SQLException {
         Connection c = null; //doi tuong ket noi
         PreparedStatement ps = null; //doi tuong truy van
@@ -384,7 +384,7 @@ public class ProductDAO {
         return null;
     }
 
-    public OrderDTO completeOrder(List<CartItemDTO> cart, String address, String name, String email, String phone, String userID, String codeID, String method, double price) throws SQLException {
+    public OrderDTO completeOrder(String address, String name, String email, String phone, String userID, String codeID, String method, double price) throws SQLException {
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         DateFormat dateFormat1 = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Calendar cal = Calendar.getInstance();

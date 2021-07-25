@@ -5,8 +5,6 @@
  */
 package dtos;
 
-import java.sql.Date;
-
 /**
  *
  * @author ADMIN
