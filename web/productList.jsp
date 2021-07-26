@@ -105,13 +105,10 @@
                                                         <input type="password" id="inputPassword" placeholder="Enter Password" name="password" required>
                                                     </div>
                                                     <div class="control-group">
-                                                        <label class="checkbox">
-                                                            <input type="checkbox"> Remember me
-                                                        </label>
-                                                       
                                                         <input type="hidden" name="perform" value="Log in">
                                                         <button type="submit" class="btn btn-success" name="action" value="User">Sign in</button>
                                                         <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                                                        <a href="forgetPass.jsp">Forget password?</a>
                                                     </div>
                                                 </form>
                                             </div>
