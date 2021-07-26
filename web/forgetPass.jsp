@@ -343,13 +343,15 @@
 </body>
 <script type="text/javascript">
     function ResetPassLoad()	{
-                    var notify;
-                    notify = "${message}";
-                <c:if test="${message == 'There were an error: Could not convert socket to TLS' }">
-                    <c:set scope="page" var="anti" value="Please turn off your antivirus software"></c:set>
-                notify = "${anti}";
-                </c:if>
-                alert(notify);
+                        var notify;
+                        notify = "${message}";
+                    <c:if test="${message == 'There were an error: Could not convert socket to TLS' }">
+                        <c:set scope="page" var="anti" value="Please turn off your antivirus software"></c:set>
+                    notify = "${anti}";
+                    </c:if>
+                    if(notify !== ""){
+                        alert(notify);
+                    }      
                 }
     $(document).ready(function() {
         $("#resetForm").validate({
