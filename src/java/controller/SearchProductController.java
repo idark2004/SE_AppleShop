@@ -42,11 +42,14 @@ public class SearchProductController extends HttpServlet {
             ProductErrorDTO msg = new ProductErrorDTO();
             ProductDAO dao = new ProductDAO();
             List<ProductDTO> list = dao.viewProduct("","True");
-            for(int i=0;i<list.size();i++) {
-                if(!list.get(i).getName().contains(keyWord));
+            for(int i=list.size()-1;i>=0;i--) {
+                if(!list.get(i).getName().trim().contains(keyWord)){
+                    System.out.println(list.get(i).getName().trim());
                 list.remove(list.get(i));
+                }
             }
             request.setAttribute("keyWord",keyWord);
+            System.out.println(keyWord);
             //Pagination
                     String pageNum = request.getParameter("pageNum");
                     int page = 0;

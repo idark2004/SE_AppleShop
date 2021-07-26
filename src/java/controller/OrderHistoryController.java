@@ -46,6 +46,7 @@ public class OrderHistoryController extends HttpServlet {
             System.out.println(user.getUserID());
             OrderDAO dao = new OrderDAO();
             ArrayList<OrderDTO> list = dao.getAllUserOrder(user.getUserID().trim());
+            System.out.println(list);
             //pagination
             String pageNum = request.getParameter("pageNum");
             int page = 0;
@@ -84,9 +85,13 @@ public class OrderHistoryController extends HttpServlet {
                 request.setAttribute("pages", pages);
                 request.setAttribute("curPage", page);
                 request.setAttribute("user", user);
+                if (list.isEmpty()){
+                    request.setAttribute("EMPTY_LIST", "this user has not made an order yet !!");
+                    System.out.println(msg.getMsg());
+                }
             } else{
                 msg.setMsg("this user has not made an order yet !!");
-                request.setAttribute("EMPTY_LIST", msg);
+                request.setAttribute("EMPTY_LIST", "this user has not made an order yet !!");
                 System.out.println(msg.getMsg());
             }
             url = SUCCESS;

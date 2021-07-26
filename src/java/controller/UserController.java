@@ -142,7 +142,7 @@ public class UserController extends HttpServlet {
                             + "\nEmail for Contract: " + userEmail
                             + "\nDescription: " + description;
 
-                    EmailUtility.sendEmail(host, port, email, "Shop Email", pass, email, subject, content);
+                    EmailUtility.sendEmail(host, port, email, "SE_AppleStore", pass, email, subject, content);
                     System.out.println(content);
                     String contactMgs="A mail was sent to our shop .Please wait for our reply";
                     request.setAttribute("cMgs",contactMgs);

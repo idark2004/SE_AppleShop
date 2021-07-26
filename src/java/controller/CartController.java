@@ -294,7 +294,7 @@ public class CartController extends HttpServlet {
 
                 String MailMessage = "Your billing was sent to Email."+email;
                  String subject = "Your billing at SE15AppleShop";
-                  String content = "<h2>Bill Infor</h2>"
+                  String content = "<h2>Bill Info</h2>"
                 +"<table width='100%' border='1' align='center'>"
                 + "<tr align='center'>"
                 + "<td><b>OrderID<b></td>"

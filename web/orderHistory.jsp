@@ -229,6 +229,7 @@
                     </ul>
                     <div class="row">
                         <div class="span9">
+                            <h1 style="font-size: 20px;text-align: center;">${requestScope.EMPTY_LIST}</h1>
                             <table class="table table-striped" id="example">
                                 <thead>
                                     <tr>
@@ -272,7 +273,7 @@
                                     </c:forEach>
                                      </c:when>
                                     <c:otherwise>
-                                        <h2>${requestScope.EMPTY_LIST.msg}</h2>
+                                        <tr><h1 style="font-size: 20px;text-align: center;">${requestScope.EMPTY_LIST}</h1></tr>
                                     </c:otherwise>
                                     </c:choose>
                                   
