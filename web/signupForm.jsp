@@ -216,7 +216,10 @@
                         <div class="well">                            
                             <form action="MainController" class="form-horizontal">
                                 <h4>Your personal information</h4>                            
-
+                                <div class="alert alert-block alert-error fade in">
+                                        <button type="button" class="close" data-dismiss="alert">×</button>
+                                        <strong>Warning:</strong> ${requestScope.EMAIL_ERROR.emailError}
+                                    </div>
                                 <div class="control-group">
                                     <label class="control-label" for="input_email">Email <sup>*</sup></label>
                                     <div class="controls">

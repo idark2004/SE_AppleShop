@@ -13,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import utils.DBSupport;
 
 /**
  *
@@ -43,9 +44,14 @@ public class OrderChangeStatusController extends HttpServlet {
                 Calendar cal = Calendar.getInstance();
                 cal.add(Calendar.DATE, 0);
                 String createDate=(cal.getTime().getMonth()+1)+"/"+cal.getTime().getDate()+"/"+(cal.getTime().getYear()+1900);
+                DBSupport db = new DBSupport();
+                db.increaseCount("orderCount", id);
                 check = oDAO.CompleteStatus(id, status, createDate);
             }
-            else check = oDAO.ChangeStatus(id, status);
+            else {
+                check = oDAO.ChangeStatus(id, status);
+                oDAO.returnQuantity(id);
+            }
             if (check) {
                 url="MainController?action=OrderDetail&orderID="+id;
             }

@@ -19,44 +19,8 @@
         <servlet-class>controller.MainController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>LoginController</servlet-name>
-        <servlet-class>controllers_backup.LoginController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>SignupController</servlet-name>
-        <servlet-class>controllers_backup.SignupController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>UserDetailController</servlet-name>
         <servlet-class>controller.UserDetailController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>UpdateUserController</servlet-name>
-        <servlet-class>controllers_backup.UpdateUserController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ViewProductController</servlet-name>
-        <servlet-class>controllers_backup.ViewProductController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>RemoveCartItemController</servlet-name>
-        <servlet-class>controllers_backup.RemoveCartItemController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ProductDetailController</servlet-name>
-        <servlet-class>controllers_backup.ProductDetailController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>BuyItemController</servlet-name>
-        <servlet-class>controllers_backup.BuyItemController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ViewCartController</servlet-name>
-        <servlet-class>controllers_backup.ViewCartController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>CompleteOrderController</servlet-name>
-        <servlet-class>controllers_backup.CompleteOrderController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CreateSpecController</servlet-name>
@@ -73,14 +37,6 @@
     <servlet>
         <servlet-name>ChangePasswordController</servlet-name>
         <servlet-class>controller.ChangePasswordController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ViewUserListController</servlet-name>
-        <servlet-class>controllers_backup.ViewUserListController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ManageUserDetail</servlet-name>
-        <servlet-class>controllers_backup.ManageUserDetail</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ResetPasswordController</servlet-name>
@@ -138,45 +94,9 @@
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>LoginController</servlet-name>
-        <url-pattern>/LoginController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>SignupController</servlet-name>
-        <url-pattern>/SignupController</url-pattern>
-    </servlet-mapping>
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
-    <servlet-mapping>
-        <servlet-name>UpdateUserController</servlet-name>
-        <url-pattern>/UpdateUserController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ViewProductController</servlet-name>
-        <url-pattern>/ViewProductController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>RemoveCartItemController</servlet-name>
-        <url-pattern>/RemoveCartItemController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ProductDetailController</servlet-name>
-        <url-pattern>/ProductDetailController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>BuyItemController</servlet-name>
-        <url-pattern>/BuyItemController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ViewCartController</servlet-name>
-        <url-pattern>/ViewCartController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>CompleteOrderController</servlet-name>
-        <url-pattern>/CompleteOrderController</url-pattern>
-    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CreateSpecController</servlet-name>
         <url-pattern>/CreateSpecController</url-pattern>
@@ -184,14 +104,6 @@
     <servlet-mapping>
         <servlet-name>ChangePasswordController</servlet-name>
         <url-pattern>/ChangePasswordController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ViewUserListController</servlet-name>
-        <url-pattern>/ViewUserListController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ManageUserDetail</servlet-name>
-        <url-pattern>/ManageUserDetail</url-pattern>
     </servlet-mapping>
     <context-param>
         <param-name>host</param-name>
@@ -214,12 +126,12 @@
         <param-value>ualb tnok quxo nbum</param-value>
     </context-param>
     <servlet-mapping>
-        <servlet-name>ResetPasswordController</servlet-name>
-        <url-pattern>/ResetPasswordController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>SaleCodeController</servlet-name>
         <url-pattern>/SaleCodeController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResetPasswordController</servlet-name>
+        <url-pattern>/ResetPasswordController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>OrderHistoryController</servlet-name>

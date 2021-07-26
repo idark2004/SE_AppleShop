@@ -23,6 +23,7 @@ import javax.naming.NamingException;
  * @author ADMIN
  */
 public class OrderDAO {
+
     public ArrayList<OrderDTO> getAllOrder() throws NamingException, SQLException {
         Connection c = null;
         PreparedStatement ps = null;
@@ -37,10 +38,13 @@ public class OrderDAO {
             if (c != null) {
                 ps = c.prepareStatement(sql);
                 rs = ps.executeQuery();
-                
-                if(rs != null) System.out.println("rs <> null");
-                else System.out.println("rs null");
-                
+
+                if (rs != null) {
+                    System.out.println("rs <> null");
+                } else {
+                    System.out.println("rs null");
+                }
+
                 while (rs.next()) {
                     OrderDTO o = new OrderDTO();
                     o.setOrderID(rs.getString("orderID"));
@@ -52,7 +56,7 @@ public class OrderDAO {
                     o.setAddress(rs.getString("orderAddress"));
                     o.setPayMethod(rs.getString("payMethod"));
                     o.setStatus(rs.getString("orderStatus"));
-                    
+
                     lst.add(o);
                 }
             }
@@ -69,27 +73,27 @@ public class OrderDAO {
         }
         return lst;
     }
-    public boolean ChangeStatus(String oid,String status)throws NamingException, SQLException{
-        boolean check=false; 
+
+    public boolean ChangeStatus(String oid, String status) throws NamingException, SQLException {
+        boolean check = false;
         Connection c = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
 
-        String sql="UPDATE tblOrders " +
-        " SET orderStatus = ?" +
-        " WHERE orderID = ?";
-         try {
+        String sql = "UPDATE tblOrders "
+                + " SET orderStatus = ?"
+                + " WHERE orderID = ?";
+        try {
             c = DBConnect.makeConnection();
-                if (c != null) {
-                    ps = c.prepareStatement(sql);
-                    ps.setString(1, status);
-                    ps.setString(2, oid);
-                    check = ps.executeUpdate()>0;
-                }
-            } catch (Exception e) {
+            if (c != null) {
+                ps = c.prepareStatement(sql);
+                ps.setString(1, status);
+                ps.setString(2, oid);
+                check = ps.executeUpdate() > 0;
+            }
+        } catch (Exception e) {
             e.printStackTrace();
-             } 
-            finally {
+        } finally {
             if (rs != null) {
                 rs.close();
             }
@@ -100,30 +104,30 @@ public class OrderDAO {
                 c.close();
             }
         }
-         return check;
+        return check;
     }
-    public boolean CompleteStatus(String oid,String status, String completeDate)throws NamingException, SQLException{
-        boolean check=false; 
+
+    public boolean CompleteStatus(String oid, String status, String completeDate) throws NamingException, SQLException {
+        boolean check = false;
         Connection c = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
 
-        String sql="UPDATE tblOrders " +
-        " SET orderStatus = ?, completedDate = ?" +
-        " WHERE orderID = ?";
-         try {
+        String sql = "UPDATE tblOrders "
+                + " SET orderStatus = ?, completedDate = ?"
+                + " WHERE orderID = ?";
+        try {
             c = DBConnect.makeConnection();
-                if (c != null) {
-                    ps = c.prepareStatement(sql);
-                    ps.setString(1, status);
-                    ps.setString(2, completeDate);
-                    ps.setString(3, oid);
-                    check = ps.executeUpdate()>0;
-                }
-            } catch (Exception e) {
+            if (c != null) {
+                ps = c.prepareStatement(sql);
+                ps.setString(1, status);
+                ps.setString(2, completeDate);
+                ps.setString(3, oid);
+                check = ps.executeUpdate() > 0;
+            }
+        } catch (Exception e) {
             e.printStackTrace();
-             } 
-            finally {
+        } finally {
             if (rs != null) {
                 rs.close();
             }
@@ -134,8 +138,9 @@ public class OrderDAO {
                 c.close();
             }
         }
-         return check;
+        return check;
     }
+
     public ArrayList<OrderDTO> getAllUserOrder(String userID) throws NamingException, SQLException {
         Connection c = null;
         PreparedStatement ps = null;
@@ -151,10 +156,7 @@ public class OrderDAO {
                 ps = c.prepareStatement(sql);
                 ps.setString(1, userID);
                 rs = ps.executeQuery();
-                
-                
-                
-                
+
                 while (rs.next()) {
                     OrderDTO o = new OrderDTO();
                     o.setOrderID(rs.getString("orderID"));
@@ -165,7 +167,7 @@ public class OrderDAO {
                     o.setPrice(rs.getDouble("orderPrice"));
                     o.setAddress(rs.getString("orderAddress"));
                     o.setPayMethod(rs.getString("payMethod"));
-                    o.setStatus(rs.getString("orderStatus"));                
+                    o.setStatus(rs.getString("orderStatus"));
                     lst.add(o);
                 }
             }
@@ -182,7 +184,7 @@ public class OrderDAO {
         }
         return lst;
     }
-    
+
     public OrderDTO getOrder(String oid) throws NamingException, SQLException {
         Connection c = null; //doi tuong ket noi
         PreparedStatement ps = null; //doi tuong truy van
@@ -236,7 +238,7 @@ public class OrderDAO {
         }
         return null;
     }
-    
+
     public ArrayList<OrderDetailDTO> getAllOrderDetail(String oid) throws NamingException, SQLException {
         Connection c = null;
         PreparedStatement ps = null;
@@ -267,7 +269,7 @@ public class OrderDAO {
                     od.setOrderID(oid);
                     od.setQuantity(rs.getInt("orderQuantity"));
                     od.setProduct(p);
-                    
+
                     lst.add(od);
                 }
             }
@@ -284,7 +286,7 @@ public class OrderDAO {
         }
         return lst;
     }
-    
+
     public BarChartDTO getMonthlyRevenue(int month) throws NamingException, SQLException {
         Connection c = null;
         PreparedStatement ps = null;
@@ -294,7 +296,7 @@ public class OrderDAO {
                 + "FROM tblOrders "
                 + "WHERE MONTH(completedDate) = ? AND orderStatus != 'Cancelled' "
                 + "GROUP BY Month(completedDate)";
-        
+
         try {
             c = DBConnect.makeConnection();
             if (c != null) {
@@ -302,12 +304,12 @@ public class OrderDAO {
                 ps.setInt(1, month);
                 rs = ps.executeQuery();
                 while (rs.next()) {
-                    BarChartDTO data=new BarChartDTO();
+                    BarChartDTO data = new BarChartDTO();
                     data.setRevenue(rs.getInt("price"));
                     data.setMonth(rs.getInt("Months"));
                     return data;
                 }
-                    //System.out.println("Revenue: "+lst.get(i-1).getRevenue());
+                //System.out.println("Revenue: "+lst.get(i-1).getRevenue());
             }
         } finally {
             if (rs != null) {
@@ -322,7 +324,7 @@ public class OrderDAO {
         }
         return null;
     }
-    
+
     public AreaChartDTO getDailyRevenue(int month, int day) throws NamingException, SQLException {
         Connection c = null;
         PreparedStatement ps = null;
@@ -332,7 +334,7 @@ public class OrderDAO {
                 + "FROM tblOrders "
                 + "WHERE orderStatus != 'Cancelled' AND DAY(completedDate)=? AND MONTH(completedDate)=? "
                 + "GROUP BY CAST(completedDate AS DATE)";
-        
+
         try {
             c = DBConnect.makeConnection();
             if (c != null) {
@@ -341,11 +343,11 @@ public class OrderDAO {
                 ps.setInt(2, month);
                 rs = ps.executeQuery();
                 while (rs.next()) {
-                    AreaChartDTO data=new AreaChartDTO();
+                    AreaChartDTO data = new AreaChartDTO();
                     data.setRevenue(rs.getInt("price"));
                     return data;
                 }
-                    //System.out.println("Revenue: "+lst.get(i-1).getRevenue());
+                //System.out.println("Revenue: "+lst.get(i-1).getRevenue());
             }
         } finally {
             if (rs != null) {
@@ -360,7 +362,7 @@ public class OrderDAO {
         }
         return null;
     }
-    
+
     public ArrayList<OrderDTO> getAllOrderID() throws NamingException, SQLException {
         Connection c = null;
         PreparedStatement ps = null;
@@ -375,14 +377,17 @@ public class OrderDAO {
             if (c != null) {
                 ps = c.prepareStatement(sql);
                 rs = ps.executeQuery();
-                
-                if(rs != null) System.out.println("rs <> null");
-                else System.out.println("rs null");
-                
+
+                if (rs != null) {
+                    System.out.println("rs <> null");
+                } else {
+                    System.out.println("rs null");
+                }
+
                 while (rs.next()) {
                     OrderDTO o = new OrderDTO();
                     o.setOrderID(rs.getString("orderID"));
-                    
+
                     lst.add(o);
                 }
             }
@@ -398,5 +403,41 @@ public class OrderDAO {
             }
         }
         return lst;
+    }
+
+    public void returnQuantity(String productID) throws SQLException {
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBConnect.makeConnection();
+            if (conn != null) {
+                String sql = "SELECT specID, orderQuantity "
+                        + "FROM tblOrderDetail "
+                        + "WHERE orderID = ? ";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, productID);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    String updateSql = "UPDATE tblProductSpec "
+                            + " SET specQuantity = specQuantity + ? "
+                            + " WHERE specID = ?";
+                    stm = conn.prepareStatement(updateSql);
+                    stm.setInt(1, rs.getInt("orderQuantity"));
+                    stm.setString(2, rs.getString("specID"));
+                    stm.executeUpdate();
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
     }
 }

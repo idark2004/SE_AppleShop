@@ -217,7 +217,7 @@
                             <li><a href="MainController?action=Product&perform=Index">Home</a> <span class="divider">/</span></li>
                             <li class="active"> SHOPPING CART</li>
                         </ul>
-                        <h3> SHOPPING CART [ <small>${subtotal} Item(s) </small>]<a href="ViewProductController?categoryID=&status=True" class="btn btn-large pull-right"><i class="icon-arrow-left"></i> Continue Shopping </a></h3>
+                        <h3> SHOPPING CART [ <small>${subtotal} Item(s) </small>]<a href="MainController?action=Product&perform=ViewProduct" class="btn btn-large pull-right"><i class="icon-arrow-left"></i> Continue Shopping </a></h3>
                         <hr class="soft" />
                         <c:if test="${sessionScope.USER == null}">
                             <table class="table table-bordered">

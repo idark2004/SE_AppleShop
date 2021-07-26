@@ -144,13 +144,18 @@ public class UserController extends HttpServlet {
 
                     EmailUtility.sendEmail(host, port, email, "SE_AppleStore", pass, email, subject, content);
                     System.out.println(content);
-                    String contactMgs="A mail was sent to our shop .Please wait for our reply";
-                    request.setAttribute("cMgs",contactMgs);
+                    String contactMgs = "A mail was sent to our shop .Please wait for our reply";
+                    request.setAttribute("cMgs", contactMgs);
                     url = "contact.jsp";
                     break;
             }
         } catch (Exception e) {
-            request.setAttribute("ERROR", e.toString());
+            if (e.toString().contains("duplicate")) {
+                error.setEmailError("User already existed!");
+                request.setAttribute("EMAIL_ERROR", error);
+                url = FAIL_SIGNUP;
+            }
+            request.setAttribute(ERROR, e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
