@@ -36,14 +36,14 @@ public class SearchProductController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String keyWord = request.getParameter("keyWord");
+        String keyWord = request.getParameter("keyWord").toLowerCase();
         String url = ERROR;
         try {
             ProductErrorDTO msg = new ProductErrorDTO();
             ProductDAO dao = new ProductDAO();
             List<ProductDTO> list = dao.viewProduct("","True");
             for(int i=list.size()-1;i>=0;i--) {
-                if(!list.get(i).getName().trim().contains(keyWord)){
+                if(!list.get(i).getName().toLowerCase().contains(keyWord.toLowerCase())){
                     System.out.println(list.get(i).getName().trim());
                 list.remove(list.get(i));
                 }

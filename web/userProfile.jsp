@@ -231,7 +231,7 @@
                                         </div>
                                     </div>                                    
                                     <input type="hidden"  name="userID" value="${sessionScope.USER.userID}" >
-                                    <input type="hidden"  name="action" value="User Manage" >
+                                    <input type="hidden"  name="action" value="User" >
                                     <div class="control-group">
                                         <div class="controls">
                                             <button type="submit" class="btn btn-primary" name="perform" value="Update Profile">Save changes</button>

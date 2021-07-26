@@ -302,7 +302,7 @@
 
                               </ul>                        
                     </div>
-                    <p><a href="#" class="btn btn-primary">Manager List</a> <a href="AdminAddUser.jsp" class="btn">Add new manager</a></p>
+                    <p><a href="AdminAddUser.jsp" class="btn">Add new manager</a></p>
 
                 </div>
             </div>
